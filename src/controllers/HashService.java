@@ -15,7 +15,7 @@ public class HashService {
 		return hs;
 	}
 	
-	public String hashPassword(String password, byte[] salt) throws NoSuchAlgorithmException {
+	public String hashPassword(String password, byte[] salt){
 		String algorithm = "SHA-256";
 		String hashedPass = null;
 		try {
@@ -29,7 +29,7 @@ public class HashService {
 			byte[] passwordBytes = md.digest(password.getBytes());
 			StringBuilder sb = new StringBuilder();
 			for (int i = 0; i < passwordBytes.length; i++) {
-				sb.append(String.format("02X", passwordBytes[i]));
+				sb.append(String.format("%02X", passwordBytes[i]));
 			}
 			
 			hashedPass = sb.toString();

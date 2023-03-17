@@ -1,18 +1,17 @@
 package controllers;
 import java.io.*;
-import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
 import entities.User;
 import java.util.regex.*;
 import entities.*;
 
 
-class AccountsController {
+public class AccountsController {
 	private HashMap<String, User> studentsList;
 	private HashMap<String, User> facultyList;
 	private static AccountsController acc = null;
 	
-	private AccountsController() throws NoSuchAlgorithmException {
+	private AccountsController(){
 		HashMap<String,User> studentData = getStudentAccounts();
 		HashMap<String,User> facultyData = getFacultyAccounts();
 
@@ -20,7 +19,7 @@ class AccountsController {
 		this.facultyList = facultyData;
 	}
 	
-	public static AccountsController getInstance() throws NoSuchAlgorithmException {
+	public static AccountsController getInstance(){
 		if (acc == null) {
 			acc = new AccountsController();
 		}
@@ -34,7 +33,7 @@ class AccountsController {
 	
 	private static final Pattern pattern = Pattern.compile("^(.+)@.*$");
 	
-	public HashMap<String, User> getStudentAccounts() throws NoSuchAlgorithmException{
+	public HashMap<String, User> getStudentAccounts(){
 		File file = new File(studentsPath);
 		HashMap<String,User> studentData = new HashMap<>();
 		try {
@@ -71,7 +70,7 @@ class AccountsController {
 		return studentData;
 	}
 	
-	public HashMap<String, User> getFacultyAccounts() throws NoSuchAlgorithmException{
+	public HashMap<String, User> getFacultyAccounts(){
 		File file = new File(facultyPath);
 		HashMap<String,User> facultyData = new HashMap<>();
 		try {
@@ -127,12 +126,13 @@ class AccountsController {
 		});
 	}
 	
-	public boolean checkStudentID(String input) {
-		return this.studentsList.containsKey(input);
+	public User authStudent(String input) {
+		return this.studentsList.containsKey(input) ? this.studentsList.get(input) : null;
 	}
-	public boolean checkFacultyID(String input) {
-		return this.facultyList.containsKey(input);
+	public User authFaculty(String input) {
+		return this.facultyList.containsKey(input) ? this.facultyList.get(input) : null;
 	}
+
 	/*
 	 * checking password has to be a User class method because salt is specific to each account
 	 * upon receiving valid user ID, get Object that user is trying to login to
