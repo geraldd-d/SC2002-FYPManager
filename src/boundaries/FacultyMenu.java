@@ -1,17 +1,18 @@
 package boundaries;
 import java.util.*;
 
+import entities.Faculty;
 import entities.User;
 
-public class FacultyMenu implements BaseMenuLoggedIn{
-	@Override
-	public void display(User user) {
+public class FacultyMenu{
+	public FacultyMenu() {};
+	public void display(Faculty user) {
         Scanner input = new Scanner(System.in);
-        int choice;
+        int choice = 0;
         do {
             System.out.println("FYP Matters");
             System.out.println("---------------------");
-            System.out.println("1. Create new Final Year Projects");
+            System.out.println("1. View your projects");
             System.out.println("2. View information regarding created FYP");
             System.out.println("3. Modify the title of FYP");
             System.out.println("4. Request to transfer stduent to replacement supervisor");
@@ -23,7 +24,7 @@ public class FacultyMenu implements BaseMenuLoggedIn{
 
             switch (choice) { 
                 case 1:
-                    // call create FYP method 
+                    user.getProjects();
                     break;
                 case 2:
                     // call allocation of fyp method 
@@ -45,6 +46,7 @@ public class FacultyMenu implements BaseMenuLoggedIn{
                     break;
                 default:
                     System.out.println("Invalid choice. Please enter a valid option.");
+                    break;
             }
         } while (choice != 7);
 	}

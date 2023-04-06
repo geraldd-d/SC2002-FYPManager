@@ -51,7 +51,6 @@ public class LoginController {
 				System.out.println("Invalid Password.");
 			}
 		} while (!auth);
-		sc.close();
 		return currentUser;
 	}
 	public User handleFacultyLogin() {
@@ -78,7 +77,6 @@ public class LoginController {
 				System.out.println("Invalid Password.");
 			}
 		} while (!auth);
-		sc.close();
 		return currentUser;
 	}
 }

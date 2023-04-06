@@ -1,11 +1,11 @@
 package boundaries;
 import java.util.*;
 
+import entities.Student;
 import entities.User;
 
-public class StudentMenu implements BaseMenuLoggedIn{
-	@Override
-	public void display(User user) {
+public class StudentMenu{
+	public void display(Student user) {
 		{
 	        Scanner input = new Scanner(System.in);
 	        int choice;

@@ -7,8 +7,8 @@ import entities.*;
 
 
 public class AccountsController {
-	private HashMap<String, User> studentsList;
-	private HashMap<String, User> facultyList;
+	protected HashMap<String, User> studentsList;
+	protected HashMap<String, User> facultyList;
 	private static AccountsController acc = null;
 	
 	private AccountsController(){
@@ -42,14 +42,16 @@ public class AccountsController {
 			String line = "";
 			String[] fields;
 			String userID;
+			boolean firstLine = true;
 			while ((line = br.readLine()) != null) {
 				fields = line.split(delimiter);
-				if (fields[0] == "Name") {
+				if (firstLine) {
+					firstLine = false;
 					continue;
 				}
-				String name = fields[0];
-				String email = fields[1];
-				String password = fields[2];
+				String name = fields[0].replaceAll("\0", "");
+				String email = fields[1].replaceAll("\0", "");
+				String password = fields[2].replaceAll("\0", "");
 				Matcher m = pattern.matcher(email);
 				if (m.find()) {
 					userID = m.group(1).toLowerCase();

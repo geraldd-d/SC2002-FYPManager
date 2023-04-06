@@ -48,7 +48,6 @@ public class LoginMenu implements BaseMenu{
                     System.out.println("Invalid choice. Please enter an integer from 1-3.");
             	}
         	} while (choice != 3 && currentUser == null);
-        sc.close();
         System.out.println("Successfully logged in.");
         if (currentUser instanceof Student) {
         	currentUser = (Student) currentUser;
@@ -62,10 +61,13 @@ public class LoginMenu implements BaseMenu{
         	currentUser = (Coordinator) currentUser;
         	// display coordinator menu
         }
-        System.out.println("Welcome, " + currentUser.getname());
+        System.out.println("Welcome, " + currentUser.getName());
+        FacultyMenu fc = new FacultyMenu();
+        fc.display((Faculty)currentUser);
       }
 	
 	public static void main(String[] args) {
+		ProjectsController pcc = ProjectsController.getInstance();
 		LoginMenu lm = LoginMenu.getInstance();
 		lm.display();
 	}

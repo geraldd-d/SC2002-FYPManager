@@ -17,10 +17,10 @@ public abstract class User {
 		this.email = email;
 		this.hashedPassword = hs.hashPassword(password,salt);
 	}
-	public String getuserID() {
+	public String getUserID() {
 		return this.userID;
 	}
-	public String getname() {
+	public String getName() {
 		return this.name;
 	}
 	public String getEmail() {
