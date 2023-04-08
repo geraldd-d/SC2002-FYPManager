@@ -39,28 +39,34 @@ public class ProjectsController {
 	public ArrayList<Project> readProjects() {
 		File file = new File(projectsPath);
 		ArrayList<Project> projects = new ArrayList<Project>();
+		AccountsController acc = AccountsController.getInstance();
 		try {
 			FileReader fr = new FileReader(file);
 			BufferedReader br = new BufferedReader(fr);
 			String line = "";
 			String[] fields;
-			boolean firstLine = true;
 			while ((line = br.readLine()) != null) {
-				if (firstLine) {
-					firstLine = false;
-					continue;
-				}
+				
 				fields = line.split(delimiter);
 				String supervisorName = fields[0];
+				if (supervisorName.equals("Supervisor")) {
+					continue;
+				}
 				String title = fields[1];
+				String studentID = fields[2];
+				String status = fields[3];
 				Faculty supervisor = this.facultyNames.get(supervisorName);
 				if (supervisor == null) {
 					System.out.println(supervisorName);
 					System.out.println("Supervisor not found.");
 				} else {
-					Project p = new Project(title,supervisor);
+					Project p = new Project(title,supervisor.getSupervisorID(),studentID,status);
 					projects.add(p);
 					supervisor.addProject(p);
+					if (!studentID.equals("")) {
+						Student student = acc.getStudent(studentID);
+						student.setRegisteredProject(p);
+					}
 				}
 			}
 			br.close();
@@ -79,7 +85,7 @@ public class ProjectsController {
 	public ArrayList<Project> getAllAvailableProjects() {
         ArrayList<Project> availableProjects = new ArrayList<Project>();
         for (Project project : projectList) {
-            if (!project.getisAllocated()) {
+            if (project.getStatus().equals("Available")) {
                 availableProjects.add(project);
             }
         }

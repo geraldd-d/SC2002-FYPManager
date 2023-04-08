@@ -74,5 +74,6 @@ enum RequestStatus{
 
 enum RequestType{
     Supervisor,
-    Coordinator
+    Coordinator,
+    SVCoord
 }

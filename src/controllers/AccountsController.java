@@ -33,7 +33,7 @@ public class AccountsController {
 	
 	private static final Pattern pattern = Pattern.compile("^(.+)@.*$");
 	
-	public HashMap<String, User> getStudentAccounts(){
+	private HashMap<String, User> getStudentAccounts(){
 		File file = new File(studentsPath);
 		HashMap<String,User> studentData = new HashMap<>();
 		try {
@@ -42,16 +42,14 @@ public class AccountsController {
 			String line = "";
 			String[] fields;
 			String userID;
-			boolean firstLine = true;
 			while ((line = br.readLine()) != null) {
 				fields = line.split(delimiter);
-				if (firstLine) {
-					firstLine = false;
+				String name = fields[0];
+				if (name.equals("Name")) {
 					continue;
 				}
-				String name = fields[0].replaceAll("\0", "");
-				String email = fields[1].replaceAll("\0", "");
-				String password = fields[2].replaceAll("\0", "");
+				String email = fields[1];
+				String password = fields[2];
 				Matcher m = pattern.matcher(email);
 				if (m.find()) {
 					userID = m.group(1).toLowerCase();
@@ -72,7 +70,7 @@ public class AccountsController {
 		return studentData;
 	}
 	
-	public HashMap<String, User> getFacultyAccounts(){
+	private HashMap<String, User> getFacultyAccounts(){
 		File file = new File(facultyPath);
 		HashMap<String,User> facultyData = new HashMap<>();
 		try {
@@ -83,10 +81,10 @@ public class AccountsController {
 			String userID;
 			while ((line = br.readLine()) != null) {
 				fields = line.split(delimiter);
-				if (fields[0] == "Name") {
+				String name = fields[0];
+				if (name.equals("Name")) {
 					continue;
 				}
-				String name = fields[0];
 				String email = fields[1];
 				String password = fields[2];
 				String role = fields[3];
@@ -117,25 +115,19 @@ public class AccountsController {
 		return facultyData;
 	}
 	
-	public void printStudentList() {
-		this.studentsList.entrySet().forEach(user -> {
-			System.out.println(user.getKey() + "  " + user.getValue());
-		});
-	}
-	
-	public void printFacultyList() {
-		this.facultyList.entrySet().forEach(user -> {
-			System.out.println(user.getKey() + "  " + user.getValue());
-		});
-	}
-	
 	public User authStudent(String input) {
 		return this.studentsList.containsKey(input) ? this.studentsList.get(input) : null;
 	}
 	public User authFaculty(String input) {
 		return this.facultyList.containsKey(input) ? this.facultyList.get(input) : null;
 	}
-
+	
+	public Student getStudent(String studentID) {
+		return (Student) this.studentsList.get(studentID);
+	}
+	public Faculty getFaculty(String facultyID) {
+		return (Faculty) this.facultyList.get(facultyID);
+	}
 	/*
 	 * checking password has to be a User class method because salt is specific to each account
 	 * upon receiving valid user ID, get Object that user is trying to login to

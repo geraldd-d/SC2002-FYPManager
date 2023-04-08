@@ -6,16 +6,16 @@ import java.util.UUID;
 public class Project {
 	private String id;
 	private String title;
-	private Faculty supervisor;
-	private ArrayList<Student> students;
-	private boolean isAllocated; 
+	private String supervisorID;
+	private String studentID;
+	private String status; 
 	private Project() {};
-	public Project(String title, Faculty supervisor) {
+	public Project(String title, String supervisorID, String studentID, String status) {
 		this.id = UUID.randomUUID().toString();
 		this.title = title;
-		this.supervisor = supervisor;
-		this.students = new ArrayList<Student>();
-		this.isAllocated = false;
+		this.supervisorID = supervisorID;
+		this.studentID = studentID;
+		this.status = status;
 	}
 
 	// getter 
@@ -25,14 +25,14 @@ public class Project {
 	public String getTitle() {
         return this.title;
     }
-    public Faculty getSupervisor() {
-        return this.supervisor;
+    public String getSupervisorID() {
+        return this.supervisorID;
     }
-	public boolean getisAllocated() {
-		return isAllocated;
+	public String getStatus() {
+		return this.status;
 	}
-	public ArrayList<Student> getStudents(){
-		return this.students;
+	public String getStudentID(){
+		return this.studentID;
 	}
 	
 	// setter
@@ -42,14 +42,14 @@ public class Project {
 	public void setTitle(String title) {
         this.title = title;
     }
-	public void setSupervisor(Faculty supervisor) {
-        this.supervisor = supervisor;
+	public void setSupervisor(String supervisorID) {
+        this.supervisorID = supervisorID;
     }
-	public void setisAllocated(Boolean isAllocated) {
-        this.isAllocated = isAllocated;
+	public void setStatus(String status) {
+        this.status = status;
     }
-	public void setStudents(ArrayList<Student> students) {
-        this.students = students;
+	public void setStudent(String studentID) {
+        this.studentID = studentID;
     }
 
 
