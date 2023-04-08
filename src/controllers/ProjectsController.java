@@ -1,9 +1,11 @@
 package controllers;
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 import entities.*;
+
 
 public class ProjectsController {
 	private static ProjectsController pcc = null;
@@ -31,7 +33,7 @@ public class ProjectsController {
 		});
 		return faculties;
 	}
-	private static String projectsPath = System.getProperty("user.dir") + "\\data\\projectsList.csv";
+	private static String projectsPath = System.getProperty("user.dir") + "//data//projectsList.csv";
 
 	public static final String delimiter = ",";
 	public ArrayList<Project> readProjects() {
@@ -73,4 +75,14 @@ public class ProjectsController {
 		}
 		return projects;
 	}
+
+	public ArrayList<Project> getAllAvailableProjects() {
+        ArrayList<Project> availableProjects = new ArrayList<Project>();
+        for (Project project : projectList) {
+            if (!project.getisAllocated()) {
+                availableProjects.add(project);
+            }
+        }
+        return availableProjects;
+    }
 }

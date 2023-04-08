@@ -26,8 +26,8 @@ public class AccountsController {
 		return acc;
 	}
 	
-	private static String studentsPath = System.getProperty("user.dir") + "\\data\\studentsList.csv";
-	private static String facultyPath = System.getProperty("user.dir") + "\\data\\facultyList.csv";
+	private static String studentsPath = System.getProperty("user.dir") + "//data//studentsList.csv";
+	private static String facultyPath = System.getProperty("user.dir") + "//data//facultyList.csv";
 
 	public static final String delimiter = ",";
 	

@@ -1,13 +1,16 @@
 package boundaries;
+
 import java.util.*;
 
-import entities.Student;
-import entities.User;
+import entities.*;
+import controllers.*;
+
 
 public class StudentMenu{
 	public void display(Student user) {
 		{
 	        Scanner input = new Scanner(System.in);
+			//ViewAvailableProject availableprojects = new ViewAvailableProject(ProjectsController.getInstance().getAllAvailableProjects());
 	        int choice;
 	        do {
 	            System.out.println("FYP Matters");
@@ -24,10 +27,10 @@ public class StudentMenu{
 
 	            switch (choice) {
 	                case 1:
-	                    // call view available projects method 
+						//availableprojects.displayAvailableProjects();
 	                    break;
 	                case 2:
-	                    // call allocation of fyp method 
+	                    // requestFYP
 	                    break;
 	                case 3:
 	                    // call view registered project method
