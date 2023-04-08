@@ -1,8 +1,10 @@
 package entities;
 
 import java.util.ArrayList;
+import controllers.*;
 
 public class Student extends User{
+	HashService hs = HashService.getInstance();
 	private String userID;
 	private String name;
 	private String email;
@@ -32,19 +34,20 @@ public class Student extends User{
 
 	// setter 
 	public void setUserID(String userID){
-		userID = this.userID;
+		this.userID = userID;
 	}
 	public void setName(String name){
-		name = this.name;
+		this.name = name;
 	}
 	public void setEmail(String email){
-		email = this.email;
+		this.email = email;
 	}
 	public void setRegisteredProject(Project registeredProject){
-		registeredProject = this.registeredProject;
+		this.registeredProject = registeredProject;
 	}
 	public void setHistory(ArrayList<Request> requestHistory){
-		requestHistory = this.requestHistory;
+		this.requestHistory = requestHistory;
 	}
+	
 
 }

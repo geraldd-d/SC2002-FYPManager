@@ -34,13 +34,13 @@ public abstract class User {
 
 	// setter 
 	public void setUserID(String userID) {
-		userID = this.userID;
+		this.userID = userID;
 	}
 	public void setName(String name) {
-		name = this.name;
+		this.name = name;
 	}
 	public void setEmail(String email) {
-		email = this.email;
+		this.email = email;
 	}
 
 }

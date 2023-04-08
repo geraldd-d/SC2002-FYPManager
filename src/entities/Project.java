@@ -37,19 +37,19 @@ public class Project {
 	
 	// setter
 	public void setID(String id) {
-        id = this.id;
+        this.id = id;
     }
 	public void setTitle(String title) {
-        title = this.title;
+        this.title = title;
     }
 	public void setSupervisor(Faculty supervisor) {
-        supervisor = this.supervisor;
+        this.supervisor = supervisor;
     }
 	public void setisAllocated(Boolean isAllocated) {
-        isAllocated = this.isAllocated;
+        this.isAllocated = isAllocated;
     }
 	public void setStudents(ArrayList<Student> students) {
-        students = this.students;
+        this.students = students;
     }
 
 

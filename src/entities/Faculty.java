@@ -19,7 +19,7 @@ public class Faculty extends User{
 		super(userID, password, name, email);
 	}
 
-	public String getSupervisorID(){
+	public String getSupervisorID( ){
 		return this.supervisorID;
 	}
 	public void setSupervisorID(String supervisorID) {
@@ -28,9 +28,13 @@ public class Faculty extends User{
 	public ArrayList<Project> getProjects() {
         return projects;
     }
+	public void setProjects(ArrayList<Project> projects) {
+        this.projects = projects;
+    }
 	public void addProject(Project p) {
 		this.projects.add(p);
 	}
+
 	
 }
 

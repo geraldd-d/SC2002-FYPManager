@@ -50,19 +50,21 @@ public class LoginMenu implements BaseMenu{
         	} while (choice != 3 && currentUser == null);
         System.out.println("Successfully logged in.");
         if (currentUser instanceof Student) {
-        	currentUser = (Student) currentUser;
-        	// display student menu
+            currentUser = (Student) currentUser;
+            // display student menu
         }
-        if (currentUser instanceof Faculty) {
-        	currentUser = (Faculty) currentUser;
-        	// display faculty menu
+        else if (currentUser instanceof Faculty) {
+            currentUser = (Faculty) currentUser;
+            // display faculty menu
         }
-        if (currentUser instanceof Coordinator) {
-        	currentUser = (Coordinator) currentUser;
-        	// display coordinator menu
+        else if (currentUser instanceof Coordinator) {
+            currentUser = (Coordinator) currentUser;
+            // display coordinator menu
         }
         System.out.println("Welcome, " + currentUser.getName());
+        StudentMenu sm = new StudentMenu();
         FacultyMenu fc = new FacultyMenu();
+        sm.display((Student)currentUser);
         fc.display((Faculty)currentUser);
       }
 	
