@@ -3,6 +3,7 @@ package controllers;
 import entities.User;
 import java.util.Scanner;
 
+
 public class LoginController {
 	private LoginController() {};
 	private static LoginController lc = null;
@@ -13,15 +14,15 @@ public class LoginController {
 		return lc;
 	}
 	private User checkStudentID(String id) {
-		AccountsController ac = AccountsController.getInstance();
+		AccountsController as = AccountsController.getInstance();
 		User currentUser = null;
-		currentUser = ac.authStudent(id);
+		currentUser = as.authStudent(id);
 		return currentUser;
 	}
 	private User checkFacultyID(String id) {
-		AccountsController ac = AccountsController.getInstance();
+		AccountsController af = AccountsController.getInstance();
 		User currentUser = null;
-		currentUser = ac.authFaculty(id);
+		currentUser = af.authFaculty(id);
 		return currentUser;
 	}
 	private boolean isLoggedIn(User user, String password) {
@@ -53,6 +54,7 @@ public class LoginController {
 		} while (!auth);
 		return currentUser;
 	}
+	
 	public User handleFacultyLogin() {
 		Scanner sc = new Scanner(System.in);
 		String input;
@@ -80,3 +82,5 @@ public class LoginController {
 		return currentUser;
 	}
 }
+
+

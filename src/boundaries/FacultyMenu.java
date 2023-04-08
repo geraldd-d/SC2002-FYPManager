@@ -1,14 +1,14 @@
 package boundaries;
 import java.util.*;
 
-import entities.Faculty;
-import entities.User;
+import entities.*;
+
 
 public class FacultyMenu{
-	public FacultyMenu() {};
 	public void display(Faculty user) {
+
         Scanner input = new Scanner(System.in);
-        int choice = 0;
+        int choice;
         do {
             System.out.println("FYP Matters");
             System.out.println("---------------------");
@@ -47,6 +47,7 @@ public class FacultyMenu{
                     break;
                 case 8:
                     System.out.println("Thank you for using FYP Management System.");
+                    System.exit(0);
                     break;
                 default:
                     System.out.println("Invalid choice. Please enter a valid option.");

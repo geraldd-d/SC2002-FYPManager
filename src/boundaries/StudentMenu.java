@@ -50,6 +50,7 @@ public class StudentMenu{
 						break;
 	                case 8:
 	                    System.out.println("Thank you for using FYP Management System.");
+						System.exit(0);
 	                    break;
 	                default:
 	                    System.out.println("Invalid choice. Please enter a valid option.");
