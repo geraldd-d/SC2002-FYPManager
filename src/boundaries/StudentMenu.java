@@ -21,13 +21,14 @@ public class StudentMenu{
 	            System.out.println("4. Request to change the title of FYP");
 	            System.out.println("5. Deregister from the registered FYP");
 	            System.out.println("6. View request history");
-	            System.out.println("7. Exit");
+				System.out.println("7. Change your Password");
+	            System.out.println("8. Exit");
 	            System.out.print("Enter your choice: ");
 	            choice = input.nextInt();
 
 	            switch (choice) {
 	                case 1:
-						//availableprojects.displayAvailableProjects();
+						// View all the avaiable project ;
 	                    break;
 	                case 2:
 	                    // requestFYP
@@ -44,7 +45,10 @@ public class StudentMenu{
 	                case 6: 
 	                    // call view history method 
 	                    break;
-	                case 7:
+					case 7:
+						// change the password 
+						break;
+	                case 8:
 	                    System.out.println("Thank you for using FYP Management System.");
 	                    break;
 	                default:

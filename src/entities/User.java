@@ -17,6 +17,8 @@ public abstract class User {
 		this.email = email;
 		this.hashedPassword = hs.hashPassword(password,salt);
 	}
+
+	// getter
 	public String getUserID() {
 		return this.userID;
 	}
@@ -29,4 +31,16 @@ public abstract class User {
 	public boolean checkPassword(String password){
 		return hs.hashPassword(password, salt).equals(this.hashedPassword);
 	}
+
+	// setter 
+	public void setUserID(String userID) {
+		userID = this.userID;
+	}
+	public void setName(String name) {
+		name = this.name;
+	}
+	public void setEmail(String email) {
+		email = this.email;
+	}
+
 }

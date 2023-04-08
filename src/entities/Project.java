@@ -18,6 +18,7 @@ public class Project {
 		this.isAllocated = false;
 	}
 
+	// getter 
     public String getID() {
         return this.id;
     }
@@ -30,9 +31,28 @@ public class Project {
 	public boolean getisAllocated() {
 		return isAllocated;
 	}
-	public ArrayList<Student> getStudent(){
+	public ArrayList<Student> getStudents(){
 		return this.students;
 	}
 	
+	// setter
+	public void setID(String id) {
+        id = this.id;
+    }
+	public void setTitle(String title) {
+        title = this.title;
+    }
+	public void setSupervisor(Faculty supervisor) {
+        supervisor = this.supervisor;
+    }
+	public void setisAllocated(Boolean isAllocated) {
+        isAllocated = this.isAllocated;
+    }
+	public void setStudents(ArrayList<Student> students) {
+        students = this.students;
+    }
+
+
+
 }
 

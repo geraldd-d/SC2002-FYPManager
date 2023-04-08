@@ -90,6 +90,7 @@ public class AccountsController {
 				String email = fields[1];
 				String password = fields[2];
 				String role = fields[3];
+				//String supervisorID = fields[4];
 				Matcher m = pattern.matcher(email);
 				if (m.find()) {
 					userID = m.group(1).toLowerCase();

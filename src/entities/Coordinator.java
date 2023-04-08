@@ -2,15 +2,15 @@ package entities;
 
 
 public class Coordinator extends Faculty{
-	private String password;
-	public Coordinator(String userID, String name, String email){
-		super(userID, "password", name, email);
-		this.password = "password";
-	}
+	private String SupervisorID;
 	public Coordinator(String userID,String password, String name, String email){
 		super(userID, password, name, email);
+		this.SupervisorID = SupervisorID;
 	}
-	public String getPassword(){
-		return this.password;
+	public String getSupervisorID(){
+		return SupervisorID;
+	}
+	public void setSupervisorID(String SupervisorID){
+		SupervisorID = this.SupervisorID;
 	}
 }
