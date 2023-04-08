@@ -6,7 +6,6 @@ import controllers.*;
 public class Student extends User{
 	HashService hs = HashService.getInstance();
 	private String userID;
-	private String name;
 	private String email;
 	private Project registeredProject;
 	private ArrayList<Request> requestHistory;
@@ -18,9 +17,6 @@ public class Student extends User{
 	// getter 
 	public String getUserID(){
 		return this.userID;
-	}
-	public String getName(){
-		return this.name;
 	}
 	public String getEmail(){
 		return this.email;
@@ -35,9 +31,6 @@ public class Student extends User{
 	// setter 
 	public void setUserID(String userID){
 		this.userID = userID;
-	}
-	public void setName(String name){
-		this.name = name;
 	}
 	public void setEmail(String email){
 		this.email = email;

@@ -52,23 +52,23 @@ public class LoginMenu implements BaseMenu{
         if (currentUser instanceof Student) {
             currentUser = (Student) currentUser;
             System.out.println("Welcome, " + currentUser.getName());
+            /// display student menu
             StudentMenu sm = new StudentMenu();
             sm.display((Student)currentUser);
-            // display student menu
         }
         else if (currentUser instanceof Faculty) {
             currentUser = (Faculty) currentUser;
             System.out.println("Welcome, " + currentUser.getName());
+            // display faculty menu
             FacultyMenu fc = new FacultyMenu();
             fc.display((Faculty)currentUser);
-            // display faculty menu
         }
         else if (currentUser instanceof Coordinator) {
             currentUser = (Coordinator) currentUser;
             System.out.println("Welcome, " + currentUser.getName());
-            FacultyMenu fc = new FacultyMenu();
-            fc.display((Faculty)currentUser);
             // display coordinator menu
+            FacultyMenu fc = new FacultyMenu();
+            fc.display((Faculty)currentUser);   
         }
       }
 	

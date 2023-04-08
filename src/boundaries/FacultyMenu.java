@@ -15,7 +15,7 @@ public class FacultyMenu{
             System.out.println("1. View your projects");
             System.out.println("2. View information regarding created FYP");
             System.out.println("3. Modify the title of FYP");
-            System.out.println("4. Request to transfer stduent to replacement supervisor");
+            System.out.println("4. Request to transfer student to replacement supervisor");
             System.out.println("5. View pending requests");
             System.out.println("6. View request history");
             System.out.println("7. Change your password");
