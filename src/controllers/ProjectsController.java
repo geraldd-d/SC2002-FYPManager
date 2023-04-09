@@ -31,7 +31,7 @@ public class ProjectsController {
 	
 	private static String projectsPath = System.getProperty("user.dir") + "//data//projectsList.csv";
 
-	private static final String delimiter = ",";
+	private static final String delimiter = ";";
 	private ArrayList<Project> readProjects() {
 		FacultyController fc = FacultyController.getInstance();
 		StudentController sc = StudentController.getInstance();
@@ -47,7 +47,7 @@ public class ProjectsController {
 				
 				fields = line.split(delimiter);
 				String supervisorName = fields[0];
-				if (supervisorName.equals("Supervisor")) {
+				if (supervisorName.equals("Supervisor") || supervisorName.equals("sep=")) {
 					continue;
 				}
 				String title = fields[1];

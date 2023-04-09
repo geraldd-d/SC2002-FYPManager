@@ -8,14 +8,12 @@ public abstract class User {
 	private String hashedPassword;
 	private String name;
 	private String email;
-	private byte[] salt;
 	
 	public User(String userID, String password, String name, String email){
-		this.salt = hs.generateSalt();
+		this.hashedPassword = password;
 		this.userID = userID;
 		this.name = name;
 		this.email = email;
-		this.hashedPassword = hs.hashPassword(password,salt);
 	}
 
 	// getter
@@ -29,8 +27,12 @@ public abstract class User {
 		return this.email;
 	}
 	public boolean checkPassword(String password){
-		return hs.hashPassword(password, salt).equals(this.hashedPassword);
+		return hs.hashPassword(password, userID).equals(this.hashedPassword);
 	}
+	public String getPassword() {
+		return this.hashedPassword;
+	}
+
 
 	// setter 
 	public void setUserID(String userID) {
