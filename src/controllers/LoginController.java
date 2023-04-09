@@ -14,15 +14,15 @@ public class LoginController {
 		return lc;
 	}
 	private User checkStudentID(String id) {
-		AccountsController as = AccountsController.getInstance();
+		StudentController sc = StudentController.getInstance();
 		User currentUser = null;
-		currentUser = as.authStudent(id);
+		currentUser = sc.authStudent(id);
 		return currentUser;
 	}
 	private User checkFacultyID(String id) {
-		AccountsController af = AccountsController.getInstance();
+		FacultyController fc = FacultyController.getInstance();
 		User currentUser = null;
-		currentUser = af.authFaculty(id);
+		currentUser = fc.authFaculty(id);
 		return currentUser;
 	}
 	private boolean isLoggedIn(User user, String password) {

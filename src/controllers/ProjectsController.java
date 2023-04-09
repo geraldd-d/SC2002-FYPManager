@@ -12,11 +12,7 @@ public class ProjectsController {
 	private HashMap<String,Faculty> facultyNames;
 	private static Integer last_index;
 	private ArrayList<Project> projectList;
-	private HashMap<String, User> facultyList;
-	private ProjectsController(HashMap<String, User> facultyList){
-		this.facultyList = facultyList;
-		HashMap<String,Faculty> faculties = getFacultyNames();
-		this.facultyNames = faculties;
+	private ProjectsController(){
 		ArrayList<Project> projects = readProjects();
 		this.projectList = projects;
 		ProjectAccessManager pam = ProjectAccessManager.getInstance(projects);
@@ -24,7 +20,7 @@ public class ProjectsController {
 	
 	public static ProjectsController getInstance(HashMap<String, User> facultyList){
 		if (pcc == null) {
-			pcc = new ProjectsController(facultyList);
+			pcc = new ProjectsController();
 		}
 		return pcc;
 	}
@@ -33,22 +29,15 @@ public class ProjectsController {
 		return pcc;
 	}
 	
-	private HashMap<String,Faculty> getFacultyNames(){
-		HashMap<String,Faculty> faculties = new HashMap<String,Faculty>();
-		facultyList.forEach((key, value)-> {
-			Faculty f = (Faculty) value;
-			faculties.put(f.getName(),f);
-		});
-		return faculties;
-	}
 	private static String projectsPath = System.getProperty("user.dir") + "//data//projectsList.csv";
 
 	private static final String delimiter = ",";
 	private ArrayList<Project> readProjects() {
+		FacultyController fc = FacultyController.getInstance();
+		StudentController sc = StudentController.getInstance();
 		last_index = 0;
 		File file = new File(projectsPath);
 		ArrayList<Project> projects = new ArrayList<Project>();
-		AccountsController acc = AccountsController.getInstance();
 		try {
 			FileReader fr = new FileReader(file);
 			BufferedReader br = new BufferedReader(fr);
@@ -68,7 +57,7 @@ public class ProjectsController {
 				if (projectID > last_index) {
 					last_index = projectID;
 				}
-				Faculty supervisor = this.facultyNames.get(supervisorName);
+				Faculty supervisor = fc.getFacultybyName(supervisorName);
 				if (supervisor == null) {
 					System.out.println(supervisorName);
 					System.out.println("Supervisor not found.");
@@ -77,7 +66,7 @@ public class ProjectsController {
 					projects.add(p);
 					supervisor.addProject(p);
 					if (!studentID.equals("")) {
-						Student student = acc.getStudent(studentID);
+						Student student = sc.getStudentbyID(studentID);
 						student.setRegisteredProject(p);
 					}
 				}

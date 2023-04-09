@@ -17,11 +17,13 @@ public class StudentController {
 		}
 		return sc;
 	}
-	public StudentController getInstance() {
+	public static StudentController getInstance() {
 		return sc;
 	}
 	public Student getStudentbyID(String id) {
 		return (Student) studentData.get(id);
 	}
-	
+	public User authStudent(String input) {
+		return this.studentData.containsKey(input) ? this.studentData.get(input) : null;
+	}
 }

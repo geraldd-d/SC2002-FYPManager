@@ -16,9 +16,11 @@ public class AccountsController {
 		HashMap<String,User> facultyData = getFacultyAccounts();
 		this.studentList = studentData;
 		this.facultyList = facultyData;
-		ProjectsController pcc = ProjectsController.getInstance(facultyData);
 		StudentController sc = StudentController.getInstance(studentData);
 		FacultyController fc = FacultyController.getInstance(facultyData);
+		ProjectsController pcc = ProjectsController.getInstance(facultyData);
+		
+		
 	}
 	
 	public static AccountsController getInstance(){
@@ -117,19 +119,7 @@ public class AccountsController {
 		return facultyData;
 	}
 	
-	public User authStudent(String input) {
-		return this.studentList.containsKey(input) ? this.studentList.get(input) : null;
-	}
-	public User authFaculty(String input) {
-		return this.facultyList.containsKey(input) ? this.facultyList.get(input) : null;
-	}
 	
-	public Student getStudent(String studentID) {
-		return (Student) this.studentList.get(studentID);
-	}
-	public Faculty getFaculty(String facultyID) {
-		return (Faculty) this.facultyList.get(facultyID);
-	}
 	/*
 	 * checking password has to be a User class method because salt is specific to each account
 	 * upon receiving valid user ID, get Object that user is trying to login to
