@@ -10,24 +10,32 @@ import entities.*;
 public class ProjectsController {
 	private static ProjectsController pcc = null;
 	private HashMap<String,Faculty> facultyNames;
-	public ArrayList<Project> projectList;
-	private ProjectsController(){
+	private static Integer last_index;
+	private ArrayList<Project> projectList;
+	private HashMap<String, User> facultyList;
+	private ProjectsController(HashMap<String, User> facultyList){
+		this.facultyList = facultyList;
 		HashMap<String,Faculty> faculties = getFacultyNames();
 		this.facultyNames = faculties;
 		ArrayList<Project> projects = readProjects();
 		this.projectList = projects;
+		ProjectAccessManager pam = ProjectAccessManager.getInstance(projects);
 	}
 	
-	public static ProjectsController getInstance(){
+	public static ProjectsController getInstance(HashMap<String, User> facultyList){
 		if (pcc == null) {
-			pcc = new ProjectsController();
+			pcc = new ProjectsController(facultyList);
 		}
 		return pcc;
 	}
+	
+	public static ProjectsController getInstance() {
+		return pcc;
+	}
+	
 	private HashMap<String,Faculty> getFacultyNames(){
 		HashMap<String,Faculty> faculties = new HashMap<String,Faculty>();
-		AccountsController acc = AccountsController.getInstance();
-		acc.facultyList.forEach((key, value)-> {
+		facultyList.forEach((key, value)-> {
 			Faculty f = (Faculty) value;
 			faculties.put(f.getName(),f);
 		});
@@ -35,8 +43,9 @@ public class ProjectsController {
 	}
 	private static String projectsPath = System.getProperty("user.dir") + "//data//projectsList.csv";
 
-	public static final String delimiter = ",";
-	public ArrayList<Project> readProjects() {
+	private static final String delimiter = ",";
+	private ArrayList<Project> readProjects() {
+		last_index = 0;
 		File file = new File(projectsPath);
 		ArrayList<Project> projects = new ArrayList<Project>();
 		AccountsController acc = AccountsController.getInstance();
@@ -55,12 +64,16 @@ public class ProjectsController {
 				String title = fields[1];
 				String studentID = fields[2];
 				String status = fields[3];
+				Integer projectID = Integer.parseInt(fields[4]);
+				if (projectID > last_index) {
+					last_index = projectID;
+				}
 				Faculty supervisor = this.facultyNames.get(supervisorName);
 				if (supervisor == null) {
 					System.out.println(supervisorName);
 					System.out.println("Supervisor not found.");
 				} else {
-					Project p = new Project(title,supervisor.getSupervisorID(),studentID,status);
+					Project p = new Project(title,supervisor.getSupervisorID(),studentID,status,projectID);
 					projects.add(p);
 					supervisor.addProject(p);
 					if (!studentID.equals("")) {
@@ -91,4 +104,5 @@ public class ProjectsController {
         }
         return availableProjects;
     }
+	
 }

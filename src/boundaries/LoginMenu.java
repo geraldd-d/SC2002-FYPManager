@@ -73,7 +73,6 @@ public class LoginMenu implements BaseMenu{
       }
 	
 	public static void main(String[] args) {
-		ProjectsController pcc = ProjectsController.getInstance();
 		LoginMenu lm = LoginMenu.getInstance();
 		lm.display();
 	}

@@ -7,16 +7,18 @@ import entities.*;
 
 
 public class AccountsController {
-	protected HashMap<String, User> studentsList;
-	protected HashMap<String, User> facultyList;
+	private HashMap<String, User> studentList;
+	private HashMap<String, User> facultyList;
 	private static AccountsController acc = null;
 	
 	private AccountsController(){
 		HashMap<String,User> studentData = getStudentAccounts();
 		HashMap<String,User> facultyData = getFacultyAccounts();
-
-		this.studentsList = studentData;
+		this.studentList = studentData;
 		this.facultyList = facultyData;
+		ProjectsController pcc = ProjectsController.getInstance(facultyData);
+		StudentController sc = StudentController.getInstance(studentData);
+		FacultyController fc = FacultyController.getInstance(facultyData);
 	}
 	
 	public static AccountsController getInstance(){
@@ -116,14 +118,14 @@ public class AccountsController {
 	}
 	
 	public User authStudent(String input) {
-		return this.studentsList.containsKey(input) ? this.studentsList.get(input) : null;
+		return this.studentList.containsKey(input) ? this.studentList.get(input) : null;
 	}
 	public User authFaculty(String input) {
 		return this.facultyList.containsKey(input) ? this.facultyList.get(input) : null;
 	}
 	
 	public Student getStudent(String studentID) {
-		return (Student) this.studentsList.get(studentID);
+		return (Student) this.studentList.get(studentID);
 	}
 	public Faculty getFaculty(String facultyID) {
 		return (Faculty) this.facultyList.get(facultyID);

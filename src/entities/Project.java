@@ -4,23 +4,23 @@ import java.util.ArrayList;
 import java.util.UUID;
 
 public class Project {
-	private String id;
+	private Integer projectID;
 	private String title;
 	private String supervisorID;
 	private String studentID;
 	private String status; 
 	private Project() {};
-	public Project(String title, String supervisorID, String studentID, String status) {
-		this.id = UUID.randomUUID().toString();
+	public Project(String title, String supervisorID, String studentID, String status, Integer projectID) {
 		this.title = title;
 		this.supervisorID = supervisorID;
 		this.studentID = studentID;
 		this.status = status;
+		this.projectID = projectID;
 	}
 
 	// getter 
-    public String getID() {
-        return this.id;
+    public Integer getID() {
+        return this.projectID;
     }
 	public String getTitle() {
         return this.title;
@@ -36,8 +36,8 @@ public class Project {
 	}
 	
 	// setter
-	public void setID(String id) {
-        this.id = id;
+	public void setID(Integer id) {
+        this.projectID = id;
     }
 	public void setTitle(String title) {
         this.title = title;
