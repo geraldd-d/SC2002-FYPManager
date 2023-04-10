@@ -43,6 +43,6 @@ public class CoordinatorMenu {
                 default:
                     System.out.println("Invalid choice. Please enter an integer from 1-3.");
             	}
-        	} while (choice != 3 && currentUser == null);
+        	} while (choice != 3 && coordinator == null);
 	}
 }

@@ -11,7 +11,7 @@ public class Request {
     private RequestStatus status;
     private RequestType requestType;
     private ArrayList<Request> history;
-
+    private Project project;
     public Request(Student requestor, User requestee, RequestType requestType){
         this.requestID = UUID.randomUUID().toString();
         this.requestor = requestor;
@@ -38,6 +38,9 @@ public class Request {
     public RequestType getRequestType(){
         return requestType;
     }
+    public  Project getProject(){
+        return project;
+    }
     public ArrayList<Request> getHistory(){
         return history;
     }
@@ -60,6 +63,9 @@ public class Request {
     public void setRequestType(RequestType requestType){
         this.requestType = requestType;
     }
+    public void setProject(Project project){
+        this.project= project;
+    }
     public void setHistory(ArrayList<Request> history){
         this.history = history;
     }
@@ -70,10 +76,4 @@ enum RequestStatus{
     Pending, 
     Approved, 
     Rejected
-}
-
-enum RequestType{
-    Supervisor,
-    Coordinator,
-    SVCoord
 }

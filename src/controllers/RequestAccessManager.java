@@ -10,4 +10,5 @@ public class RequestAccessManager {
 		return ram;
 	}
 	
+	
 }

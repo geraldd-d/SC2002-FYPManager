@@ -1,21 +1,23 @@
 package entities;
 
-import java.util.ArrayList;
-import java.util.UUID;
+import java.util.*;
 
 public class Project {
 	private Integer projectID;
 	private String title;
 	private String supervisorID;
+	private String supervisorName;
 	private String studentID;
 	private String status; 
-	private Project() {};
-	public Project(String title, String supervisorID, String studentID, String status, Integer projectID) {
+	public Project() {};
+	public Project(String title, String supervisorID, String supervisorName, String studentID, String status, Integer projectID) {
 		this.title = title;
 		this.supervisorID = supervisorID;
 		this.studentID = studentID;
 		this.status = status;
 		this.projectID = projectID;
+		this.supervisorName = supervisorName;
+		//this.code = "P" + String.format("%03d", projectCount);
 	}
 
 	// getter 
@@ -27,6 +29,9 @@ public class Project {
     }
     public String getSupervisorID() {
         return this.supervisorID;
+    }
+	public String getSupervisorName() {
+        return this.supervisorName;
     }
 	public String getStatus() {
 		return this.status;
@@ -42,8 +47,11 @@ public class Project {
 	public void setTitle(String title) {
         this.title = title;
     }
-	public void setSupervisor(String supervisorID) {
+	public void setSupervisorID(String supervisorID) {
         this.supervisorID = supervisorID;
+    }
+	public void setSupervisorName(String supervisorName) {
+        this.supervisorName = supervisorName;
     }
 	public void setStatus(String status) {
         this.status = status;

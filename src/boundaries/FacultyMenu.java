@@ -25,19 +25,20 @@ public class FacultyMenu{
 
             switch (choice) { 
                 case 1:
+                    // view all the projects 
                     user.getProjects();
                     break;
                 case 2:
-                    // call allocation of fyp method 
+                    // call info reqgarding the created FYP
                     break;
                 case 3:
-                    // call view registered project method
+                    // change the title 
                     break;
                 case 4:
-                    // call change the title method 
+                    // request to transfer student
                     break;
                 case 5: 
-                    // call deregister title 
+                    // view pending requests 
                     break;
                 case 6: 
                     // call view history method 

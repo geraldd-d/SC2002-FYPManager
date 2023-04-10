@@ -10,7 +10,6 @@ public class StudentMenu{
 	public void display(Student user) {
 		{
 	        Scanner input = new Scanner(System.in);
-			//ViewAvailableProject availableprojects = new ViewAvailableProject(ProjectsController.getInstance().getAllAvailableProjects());
 	        int choice;
 	        do {
 	            System.out.println("FYP Matters");
@@ -28,22 +27,32 @@ public class StudentMenu{
 
 	            switch (choice) {
 	                case 1:
-						// View all the avaiable project ;
-	                    break;
+					List<Project> availableProjects = StudentController.getInstance().ViewAllAvailableProjects();
+					System.out.println("Available projects:");
+					int len = availableProjects.size();
+					System.out.println("ProjectID. Project Title - Project Supervisor");
+					for( int i = 0;i<len;i++){
+							Project project = availableProjects.get(i);
+							System.out.println(project.getID() + "." +project.getTitle()+ " -  Dr. " + project.getSupervisorName());
+					}
+					break; 
 	                case 2:
-	                    // requestFYP
+						StudentController.getInstance().requestProject(user.getUserID(), user.getHistory());
 	                    break;
 	                case 3:
-	                    // call view registered project method
+						Project registeredProject = StudentController.getInstance().viewRegisteredProject(user);
+						if (registeredProject != null) {
+							System.out.println("Registered project: " + registeredProject.getTitle() + " - Dr. " + registeredProject.getSupervisorName());
+						}
 	                    break;
 	                case 4:
-	                    // call change the title method 
+						StudentController.getInstance().requestNewTitle(user, user.getHistory());
 	                    break;
 	                case 5: 
-	                    // call deregister title 
+						StudentController.getInstance().deregisterProject(user, user.getHistory());
 	                    break;
 	                case 6: 
-	                    // call view history method 
+	                    StudentController.getInstance().viewRequestHistory(user);
 	                    break;
 					case 7:
 						// change the password 

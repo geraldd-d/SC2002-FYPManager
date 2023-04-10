@@ -62,7 +62,7 @@ public class ProjectsController {
 					System.out.println(supervisorName);
 					System.out.println("Supervisor not found.");
 				} else {
-					Project p = new Project(title,supervisor.getSupervisorID(),studentID,status,projectID);
+					Project p = new Project(title,supervisor.getSupervisorID(),supervisorName,studentID,status,projectID);
 					projects.add(p);
 					supervisor.addProject(p);
 					if (!studentID.equals("")) {
@@ -93,5 +93,23 @@ public class ProjectsController {
         }
         return availableProjects;
     }
+
+	public Project getProjectByName(String projectName) {
+		for (Project project : projectList) {
+			if (project.getTitle().equals(projectName)) {
+				return project;
+			}
+		}
+		return null;
+	}
+	public Project getProjectByID(Integer projectID) {
+		for (Project project : projectList) {
+			if (project.getID().equals(projectID)) {
+				return project;
+			}
+		}
+		return null;
+	}
+	
 	
 }
