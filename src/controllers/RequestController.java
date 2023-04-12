@@ -20,24 +20,32 @@ public class RequestController {
         return requestList.add(request);
     }
 
+    public void addToRequestHistory(RequestController requestController, ArrayList<Request> history) {
+        Request request = requestController.getLastRequest(history);
+        if (request == null) {
+            history.add(requestController.getLastRequest());
+        } else {
+            history.add(request);
+        }
+    }
+    
+
+    public Request getLastRequest() {
+        if (!requestList.isEmpty()) {
+            return requestList.get(requestList.size()-1);
+        } else {
+            return null;
+        }
+    }
+
     public Request getLastRequest(ArrayList<Request> history) {
-        if(history.size() > 0) {
+        if (!history.isEmpty()) {
             return history.get(history.size()-1);
         } else {
             return null;
         }
     }
 
-    public void addToRequestHistory(RequestController requestController, ArrayList<Request> history) {
-        Request request = requestController.getLastRequest(history);
-        if (request == null) {
-            //System.out.println("No requests found.");
-            //history.add(request);
-            return;
-        }
-        history.add(request);
-    }
-    
 
     public boolean requestProject(Student student, Project project) {
         if (student.getisAllocated()) {

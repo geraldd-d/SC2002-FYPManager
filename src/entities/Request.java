@@ -71,9 +71,3 @@ public class Request {
     }
 
 }
-
-enum RequestStatus{
-    Pending, 
-    Approved, 
-    Rejected
-}

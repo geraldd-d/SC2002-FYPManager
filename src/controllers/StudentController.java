@@ -125,12 +125,16 @@ public class StudentController {
 			System.out.println("No request history found.");
 			return;
 		}
-		System.out.println("Request History:");
+		
 		for (Request request : history) {
+			if (request == null) {
+				continue;
+			}
+			System.out.println("Request History:");
 			System.out.println("RequestID: " + request.getRequestID());
 			System.out.println("ProjectID: " + request.getProject().getID());
 			System.out.println("Requestor: " + request.getRequestor().getName());
-       		System.out.println("Requestee: " + request.getRequestee().getName());
+			System.out.println("Requestee: " + request.getRequestee().getName());
 			System.out.println("Type: " + request.getRequestType());
 			System.out.println();
 		}
@@ -145,3 +149,11 @@ public class StudentController {
 
 
 }
+
+
+
+
+
+
+    
+    

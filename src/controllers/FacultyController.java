@@ -2,8 +2,8 @@ package controllers;
 
 import java.util.HashMap;
 
-import entities.Faculty;
-import entities.User;
+import entities.*;
+
 
 public class FacultyController {
 	private static FacultyController fc = null;
@@ -41,3 +41,5 @@ public class FacultyController {
 	}
 	
 }
+
+	
