@@ -5,6 +5,9 @@ public class Faculty extends User{
 	private String supervisorID;
 	private String supervisorName;
 	private ArrayList<Project> projects = new ArrayList<Project>();
+	private ArrayList<Request> requestHistory = new ArrayList<Request>();
+	private ArrayList<Request> requestInbox = new ArrayList<Request>();
+
 	
 
 	// not sure if it should be in the controller or enitity 
@@ -36,7 +39,11 @@ public class Faculty extends User{
 	public void addProject(Project p) {
 		this.projects.add(p);
 	}
-
-	
+	public void addHistory(Request r){
+		this.requestHistory.add(r);
+	}
+	public void addInbox(Request r){
+		this.requestInbox.add(r);
+	}
 }
 

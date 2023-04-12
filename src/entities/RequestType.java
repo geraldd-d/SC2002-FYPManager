@@ -1,7 +1,9 @@
 package entities;
 
-public enum RequestType {
-        Supervisor,
-        Coordinator,
-        SVCoord 
+public enum RequestType{
+    Allocation,
+    Deregister,
+    Title,
+    Transfer
 }
+

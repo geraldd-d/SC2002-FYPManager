@@ -128,6 +128,7 @@ public class StudentController {
 		
 		for (Request request : history) {
 			if (request == null) {
+				System.out.println("NULL!");
 				continue;
 			}
 			System.out.println("Request History:");

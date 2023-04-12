@@ -9,6 +9,7 @@ public class FacultyController {
 	private static FacultyController fc = null;
 	private HashMap<String,User> facultyData;
 	private HashMap<String,Faculty> facultyNames;
+	private Coordinator coordinator;
 	private FacultyController(HashMap<String,User> facultyData) {
 		this.facultyData = facultyData;
 		this.facultyNames = getFacultyNames();
@@ -31,6 +32,9 @@ public class FacultyController {
 	private HashMap<String,Faculty> getFacultyNames(){
 		HashMap<String,Faculty> faculties = new HashMap<String,Faculty>();
 		facultyData.forEach((key, value)-> {
+			if (value instanceof Coordinator) {
+				this.coordinator = (Coordinator) value;
+			}
 			Faculty f = (Faculty) value;
 			faculties.put(f.getName(),f);
 		});
@@ -39,7 +43,9 @@ public class FacultyController {
 	public User authFaculty(String input) {
 		return this.facultyData.containsKey(input) ? this.facultyData.get(input) : null;
 	}
-	
+	public Coordinator getCoord() {
+		return this.coordinator;
+	}
 }
 
 	

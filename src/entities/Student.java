@@ -33,6 +33,9 @@ public class Student extends User{
 	public void setHistory(ArrayList<Request> requestHistory){
 		this.requestHistory = requestHistory;
 	}
+	public void addHistory(Request r){
+		this.requestHistory.add(r);
+	}
 	public void setIsAllocated(boolean isAllocated){
 		this.isAllocated = isAllocated;
 	}

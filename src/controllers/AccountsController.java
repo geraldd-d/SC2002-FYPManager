@@ -108,7 +108,7 @@ public class AccountsController {
 					String password;
 					String salt;
 					userID = m.group(1).toLowerCase();
-					if (fields[4].equals(" ")) {
+					if (!fields[4].equals(userID)) {
 						salt = userID;
 						password = hs.hashPassword(fields[2], salt);
 					}
