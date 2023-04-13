@@ -37,6 +37,7 @@ public class StudentController {
 	    currentPage.forEach((project)->project.printAvailableProject());
 	}
 	
+	// Requesting the supervisor to allocate the project 
 	public boolean requestAlloc(Student user, int id) {
 		ProjectsController pc = ProjectsController.getInstance();
 		RequestManager rm = RequestManager.getInstance();
@@ -48,9 +49,40 @@ public class StudentController {
 		return false;
 	}
 	
-
+	// Reuqesting to change the title of the Project
+	public boolean requestNewTitle(Student user){
+		ProjectsController pc = ProjectsController.getInstance();
+		RequestManager rm = RequestManager.getInstance();
+		Project p = pc.getRegisteredProject(user);
+		if(p!= null && p.getStatus().equals("Registered")){
+			rm.addTitleRequest(user, p.getTitle());
+			return true;
+		}
+		return false;
+	}
 	
+	// temporary
+	public boolean viewRegisteredProject(Student user){
+		ProjectsController pc = ProjectsController.getInstance();
+		Project p = pc.getRegisteredProject(user);
+		if(p != null){
+			p.printProject();
+			return true;
+		}
+		return false;
+	}
 
+	// Deregister the registered project 
+	public boolean DeregisterProject(Student user, Project project){
+		ProjectsController pc = ProjectsController.getInstance();
+		RequestManager rm = RequestManager.getInstance();
+		project = pc.getRegisteredProject(user);
+		if(project != null){
+			rm.addDeregRequest(user);
+			return true;
+		}
+		return false;
+	}
 
 
 

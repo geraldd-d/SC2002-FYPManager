@@ -2,6 +2,9 @@ package boundaries;
 
 import java.util.*;
 
+//import javax.lang.model.util.ElementScanner14;
+import java.util.*;
+
 import entities.*;
 import controllers.*;
 
@@ -11,6 +14,7 @@ public class StudentMenu{
 		{
 	        Scanner input = new Scanner(System.in);
 	        StudentController stc = StudentController.getInstance();
+			Project p = new Project();
 	        int choice = 0;
 	        do {
 	            System.out.println("FYP Matters");
@@ -51,6 +55,7 @@ public class StudentMenu{
 	                		try {
 	    	                	System.out.println("Enter project ID that you wish to be allocated for: ");
 	                            proj = input.nextInt();
+								System.out.println("Successfully sent");
 	                        } catch (InputMismatchException e) {
 	                            System.out.println("Invalid choice. Enter a valid project ID");
 	                            input.nextLine();
@@ -60,11 +65,70 @@ public class StudentMenu{
 	                	}
 	                    break;
 	                case 3:
+						if(!user.getisAllocated()){
+							System.out.println("You are not registered for any project.");
+							break;
+						}
+						else{
+							ProjectsController pc = ProjectsController.getInstance();
+							Project regproj = pc.getRegisteredProject(user);
+							if(regproj != null){
+								regproj.printProject();
+								break;
+							}
+						}
 	                    break;
 	                case 4:
+						if(!user.getisAllocated()){
+							System.out.println("You are not registered for any project yet.");
+							break;
+						}
+						validRequest = false;
+						while(!validRequest){
+							String proj;
+							try {
+								System.out.println("The details of your registered project: ");
+								p.printProject();
+								System.out.println("Enter the new title for your project: ");
+								proj = input.nextLine();
+							} catch (InputMismatchException e){
+								System.out.println("Invalid choice");
+								input.nextLine();
+								continue;
+							}
+							if(proj.equals(p.getTitle())){
+								System.out.println("Please enter a different title.");
+								continue;
+							}
+							else{
+								validRequest = stc.requestNewTitle(user);
+							}
+						}
 	                    break;
 	                case 5: 
-	                    break;
+						if(!user.getisAllocated()){
+							System.out.println("You are not registered for any project yet.");
+							break;
+						}
+						else{
+							String sure = input.nextLine();
+							try {
+	    	                	System.out.println("Please confirm again (yes/no): ");
+	                            sure = input.nextLine();
+	                        } catch (InputMismatchException e) {
+	                            System.out.println("Invalid choice. Please enter yes or no.");
+	                            input.nextLine();
+	                            continue;
+	                        }
+							if( sure == "yes"){
+								stc.DeregisterProject(user, p);
+								break;
+							}
+							if (sure == "no"){
+								break;
+							}
+						}
+	                    //break;
 	                case 6: 
 	                	RequestHistoryMenu rhm = RequestHistoryMenu.getInstance();
 	                	rhm.display(user, user.getHistory());

@@ -68,6 +68,7 @@ public class Project {
 	}
 	public void printProject() {
 		System.out.println("Project ID: "+this.projectID);
+		System.out.println("Project Name: "+ this.title);
 		System.out.println("Supervisor: "+this.supervisorName);
 		System.out.println();
 	}

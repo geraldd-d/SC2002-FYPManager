@@ -110,6 +110,16 @@ public class ProjectsController {
 		}
 		return null;
 	}
+	public Project getRegisteredProject(Student user){
+		if(user.getisAllocated()){
+			Project p = user.getRegisteredProject();
+			return p;
+		}
+		else{
+			return null;
+		}
+
+	}
 	
 	
 }
