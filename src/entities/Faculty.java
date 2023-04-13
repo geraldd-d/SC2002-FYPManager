@@ -45,5 +45,11 @@ public class Faculty extends User{
 	public void addInbox(Request r){
 		this.requestInbox.add(r);
 	}
+	public ArrayList<Request> getInbox() {
+		return this.requestInbox;
+	}
+	public ArrayList<Request> getHistory() {
+		return this.requestHistory;
+	}
 }
 

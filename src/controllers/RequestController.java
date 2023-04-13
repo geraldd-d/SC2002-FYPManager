@@ -15,6 +15,7 @@ public class RequestController {
     private RequestController() {
     	ArrayList<Request> requests = readRequests();
     	this.requestList = requests;
+    	RequestManager rm = RequestManager.getInstance(requests);
     }
     public static RequestController getInstance() {
         if (rc == null) {
@@ -42,13 +43,14 @@ public class RequestController {
 				
 				fields = line.split(delimiter);
 				String ID = fields[0];
+				if (ID.equals("ID") || ID.equals("sep=")) {
+					continue;
+				}
 				Integer requestID = Integer.parseInt(ID);
 				if (requestID > last_index) {
 					last_index = requestID;
 				}
-				if (ID.equals("ID") || ID.equals("sep=")) {
-					continue;
-				}
+				
 				String requestor = fields[1];
 				String requestee = fields[2];
 				RequestStatus status = RequestStatus.valueOf(fields[3]);

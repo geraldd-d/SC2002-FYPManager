@@ -1,6 +1,7 @@
 package controllers;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import entities.Request;
 import entities.*;
@@ -62,10 +63,12 @@ public class RequestManager {
 	protected ArrayList<Request> getRequests(){
 		return this.requestList;
 	}
-	public void viewRequests(User user) {
-		if (user instanceof Student) {
-			Student student = (Student) user;
-			// print forEach
-		}
+	public void viewRequests(User user, int page) {
+	    int pageSize = 5;
+	    ArrayList<Request> reqs = user.getHistory();
+	    int startIndex = (page - 1) * pageSize;
+	    int endIndex = Math.min(startIndex + pageSize, reqs.size());
+	    List<Request> currentPage = reqs.subList(startIndex, endIndex);
+	    currentPage.forEach((Request)-> Request.printRequest());
 	}
 }

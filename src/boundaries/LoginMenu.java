@@ -74,6 +74,7 @@ public class LoginMenu implements BaseMenu{
 	
 	public static void main(String[] args) {
 		AccountsController acc = AccountsController.getInstance();
+		RequestController rc = RequestController.getInstance();
 		LoginMenu lm = LoginMenu.getInstance();
 		lm.display();
 	}

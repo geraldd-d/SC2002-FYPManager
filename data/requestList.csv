@@ -1,1 +1,2 @@
-ID,From,To,Status,RequestType,RequestClass,Changes,Replacement
+sep=;
+ID;From;To;Status;RequestType;RequestClass;Changes;Replacement

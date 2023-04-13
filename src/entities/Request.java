@@ -30,7 +30,7 @@ public abstract class Request {
     public RequestStatus getStatus(){
         return status;
     }
-    public  Project getProject(){
+    public Project getProject(){
         return project;
     }
     public void setRequestID(String requestID){
@@ -48,6 +48,5 @@ public abstract class Request {
     public void setProject(Project project){
         this.project= project;
     }
-
-
+    public abstract void printRequest();
 }

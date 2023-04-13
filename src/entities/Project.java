@@ -59,8 +59,18 @@ public class Project {
 	public void setStudent(String studentID) {
         this.studentID = studentID;
     }
-
-
+	public void printAvailableProject() {
+		System.out.println("Project ID: "+this.projectID);
+		System.out.println("Supervisor: "+this.supervisorName);
+		System.out.println("Title: "+this.title);
+		System.out.println("Status: "+this.status);
+		System.out.println();
+	}
+	public void printProject() {
+		System.out.println("Project ID: "+this.projectID);
+		System.out.println("Supervisor: "+this.supervisorName);
+		System.out.println();
+	}
 
 }
 

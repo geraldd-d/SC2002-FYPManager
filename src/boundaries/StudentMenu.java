@@ -10,7 +10,8 @@ public class StudentMenu{
 	public void display(Student user) {
 		{
 	        Scanner input = new Scanner(System.in);
-	        int choice;
+	        StudentController stc = StudentController.getInstance();
+	        int choice = 0;
 	        do {
 	            System.out.println("FYP Matters");
 	            System.out.println("---------------------");
@@ -23,37 +24,51 @@ public class StudentMenu{
 				System.out.println("7. Change your Password");
 	            System.out.println("8. Exit");
 	            System.out.print("Enter your choice: ");
-	            choice = input.nextInt();
-
+	            try {
+	            	choice = input.nextInt();
+	            } catch (InputMismatchException e) {
+	                System.out.println("Invalid choice. Please enter an integer from 1 - 8.");
+	                input.nextLine();
+	                continue;
+	            }
 	            switch (choice) {
 	                case 1:
-					List<Project> availableProjects = StudentController.getInstance().ViewAllAvailableProjects();
-					System.out.println("Available projects:");
-					int len = availableProjects.size();
-					System.out.println("ProjectID. Project Title - Project Supervisor");
-					for( int i = 0;i<len;i++){
-							Project project = availableProjects.get(i);
-							System.out.println(project.getID() + "." +project.getTitle()+ " -  Dr. " + project.getSupervisorName());
-					}
+	                	if (!user.getisAllocated()) {
+	                		ProjectMenu pm = ProjectMenu.getInstance();
+	                		pm.display();
+	                	} else {
+	                		System.out.println("You are already registered for" + user.getRegisteredProject().getTitle());
+	                	}
 					break; 
 	                case 2:
-						StudentController.getInstance().requestProject(user.getUserID(), user.getHistory());
+	                	if (user.getisAllocated()) {
+	                		System.out.println("You are already registered for" + user.getRegisteredProject().getTitle());
+	                		break;
+	                	}
+	                	boolean validRequest = false;
+	                	while (!validRequest) {
+	                		int proj = 0;
+	                		try {
+	    	                	System.out.println("Enter project ID that you wish to be allocated for: ");
+	                            proj = input.nextInt();
+	                        } catch (InputMismatchException e) {
+	                            System.out.println("Invalid choice. Enter a valid project ID");
+	                            input.nextLine();
+	                            continue;
+	                        }
+	                		validRequest = stc.requestAlloc(user, proj);
+	                	}
 	                    break;
 	                case 3:
-						Project registeredProject = StudentController.getInstance().viewRegisteredProject(user);
-						if (registeredProject != null) {
-							System.out.println("Registered project: " + registeredProject.getTitle() + " - Dr. " + registeredProject.getSupervisorName());
-						}
 	                    break;
 	                case 4:
-						StudentController.getInstance().requestNewTitle(user, user.getHistory());
 	                    break;
 	                case 5: 
-						StudentController.getInstance().deregisterProject(user, user.getHistory());
 	                    break;
 	                case 6: 
-	                    StudentController.getInstance().viewRequestHistory(user);
-	                    break;
+	                	RequestHistoryMenu rhm = RequestHistoryMenu.getInstance();
+	                	rhm.display(user, user.getHistory());
+	                	break;
 					case 7:
 						// change the password 
 						break;
@@ -65,7 +80,7 @@ public class StudentMenu{
 	                    System.out.println("Invalid choice. Please enter a valid option.");
 	            }
 
-	        } while (choice != 7);
+	        } while (choice != 8);
 	    }
 		
 	}

@@ -1,5 +1,7 @@
 package entities;
 
+import java.util.ArrayList;
+
 import controllers.HashService;
 
 public abstract class User {
@@ -45,4 +47,6 @@ public abstract class User {
 		this.email = email;
 	}
 
+	public abstract ArrayList<Request> getHistory();
+	
 }
