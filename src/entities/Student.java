@@ -39,6 +39,4 @@ public class Student extends User{
 	public void setIsAllocated(boolean isAllocated){
 		this.isAllocated = isAllocated;
 	}
-	
-
 }

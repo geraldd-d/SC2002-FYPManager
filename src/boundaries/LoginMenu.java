@@ -35,10 +35,12 @@ public class LoginMenu implements BaseMenu{
             }
             switch (choice) {
                 case 1:
-                    currentUser = lc.handleStudentLogin();
+                    StudentLoginMenu slm = StudentLoginMenu.getInstance();
+                    slm.display();
                     break;
                 case 2:
-                    currentUser = lc.handleFacultyLogin();
+                	FacultyLoginMenu flm = FacultyLoginMenu.getInstance();
+                    flm.display();                    
                     break;
                 case 3:
                     System.out.println("Thank you for using FYP Management System.");
@@ -47,29 +49,7 @@ public class LoginMenu implements BaseMenu{
                 default:
                     System.out.println("Invalid choice. Please enter an integer from 1-3.");
             	}
-        	} while (choice != 3 && currentUser == null);
-        System.out.println("Successfully logged in.");
-        if (currentUser instanceof Student) {
-            currentUser = (Student) currentUser;
-            System.out.println("Welcome, " + currentUser.getName());
-            /// display student menu
-            StudentMenu sm = new StudentMenu();
-            sm.display((Student)currentUser);
-        }
-        else if (currentUser instanceof Faculty) {
-            currentUser = (Faculty) currentUser;
-            System.out.println("Welcome, " + currentUser.getName());
-            // display faculty menu
-            FacultyMenu fc = new FacultyMenu();
-            fc.display((Faculty)currentUser);
-        }
-        else if (currentUser instanceof Coordinator) {
-            currentUser = (Coordinator) currentUser;
-            System.out.println("Welcome, " + currentUser.getName());
-            // display coordinator menu
-            FacultyMenu fc = new FacultyMenu();
-            fc.display((Faculty)currentUser);   
-        }
+        	} while (choice != 3);
       }
 	
 	public static void main(String[] args) {

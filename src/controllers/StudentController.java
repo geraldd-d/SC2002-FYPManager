@@ -6,13 +6,13 @@ import entities.*;
 
 public class StudentController {
 	private static StudentController sc = null;
-	private HashMap<String,User> studentData;
+	private static HashMap<String,User> studentData;
 	private StudentController(HashMap<String,User> studentData) {
-		this.studentData = studentData;
+		StudentController.studentData = studentData;
 	};
-	public static StudentController getInstance(HashMap<String,User> studentData) {
-		if (sc == null) {
-			sc = new StudentController(studentData);
+	public static StudentController getInstance(HashMap<String,User> studentsList) {
+		if (sc == null || !studentsList.equals(studentData)) {
+			sc = new StudentController(studentsList);
 		}
 		return sc;
 	}
@@ -21,9 +21,6 @@ public class StudentController {
 	}
 	public Student getStudentbyID(String id) {
 		return (Student) studentData.get(id);
-	}
-	public User authStudent(String input) {
-		return this.studentData.containsKey(input) ? this.studentData.get(input) : null;
 	}
 
 	//View all the available projects 

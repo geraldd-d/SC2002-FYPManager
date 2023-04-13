@@ -5,6 +5,14 @@ import entities.*;
 
 
 public class FacultyMenu{
+	private static FacultyMenu fm = null;
+	private FacultyMenu() {};
+	public static FacultyMenu getInstance() {
+		if (fm == null) {
+			fm = new FacultyMenu();
+		}
+		return fm;
+	}
 	public void display(Faculty user) {
 
         Scanner input = new Scanner(System.in);

@@ -1,2 +1,2 @@
 sep=;
-Request;From;To;Status;Request Type;Change
+ID;From;To;Status;RequestType;RequestClass;Changes;Replacement

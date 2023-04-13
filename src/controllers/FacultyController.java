@@ -7,16 +7,16 @@ import entities.*;
 
 public class FacultyController {
 	private static FacultyController fc = null;
-	private HashMap<String,User> facultyData;
+	private static HashMap<String,User> facultyData;
 	private HashMap<String,Faculty> facultyNames;
 	private Coordinator coordinator;
 	private FacultyController(HashMap<String,User> facultyData) {
-		this.facultyData = facultyData;
+		FacultyController.facultyData = facultyData;
 		this.facultyNames = getFacultyNames();
 	};
-	public static FacultyController getInstance(HashMap<String,User> facultyData) {
-		if (fc == null) {
-			fc = new FacultyController(facultyData);
+	public static FacultyController getInstance(HashMap<String,User> facultyList) {
+		if (fc == null|| !facultyList.equals(facultyData)) {
+			fc = new FacultyController(facultyList);
 		}
 		return fc;
 	}
@@ -40,9 +40,7 @@ public class FacultyController {
 		});
 		return faculties;
 	}
-	public User authFaculty(String input) {
-		return this.facultyData.containsKey(input) ? this.facultyData.get(input) : null;
-	}
+	
 	public Coordinator getCoord() {
 		return this.coordinator;
 	}

@@ -9,20 +9,12 @@ import entities.*;
 
 public class ProjectsController {
 	private static ProjectsController pcc = null;
-	private HashMap<String,Faculty> facultyNames;
 	private static Integer last_index;
 	private ArrayList<Project> projectList;
 	private ProjectsController(){
 		ArrayList<Project> projects = readProjects();
 		this.projectList = projects;
 		ProjectAccessManager pam = ProjectAccessManager.getInstance(projects);
-	}
-	
-	public static ProjectsController getInstance(HashMap<String, User> facultyList){
-		if (pcc == null) {
-			pcc = new ProjectsController();
-		}
-		return pcc;
 	}
 	
 	public static ProjectsController getInstance() {

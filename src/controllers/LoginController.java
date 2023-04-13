@@ -1,5 +1,6 @@
 package controllers;
 
+import entities.Student;
 import entities.User;
 import java.util.Scanner;
 
@@ -13,75 +14,34 @@ public class LoginController {
 		}
 		return lc;
 	}
-	private User checkStudentID(String id) {
+	public User checkStudentID(String id) {
 		StudentController sc = StudentController.getInstance();
 		User currentUser = null;
-		currentUser = sc.authStudent(id);
+		currentUser = sc.getStudentbyID(id);
 		return currentUser;
 	}
-	private User checkFacultyID(String id) {
+	public User checkFacultyID(String id) {
 		FacultyController fc = FacultyController.getInstance();
 		User currentUser = null;
-		currentUser = fc.authFaculty(id);
+		currentUser = fc.getFacultybyID(id);
 		return currentUser;
 	}
-	private boolean isLoggedIn(User user, String password) {
+	public boolean isLoggedIn(User user, String password) {
 		return user.checkPassword(password);
 	}
-	public User handleStudentLogin() {
-		Scanner sc = new Scanner(System.in);
-		String input;
-		User currentUser = null;
-		boolean auth = false;
-		do {
-			System.out.println("Enter UserID (lowercase) or leave empty to return: ");
-			input = sc.nextLine();
-			if(input == "") {
-				return null;
-			}
-			currentUser = checkStudentID(input);
-			if (currentUser == null) {
-				System.out.println("Invalid User.");
-			}
-		} while (currentUser == null);
-		do {
-			System.out.println("Enter Password: ");
-			input = sc.nextLine();
-			auth = isLoggedIn(currentUser, input);
-			if (!auth) {
-				System.out.println("Invalid Password.");
-			}
-		} while (!auth);
-		return currentUser;
-	}
 	
-	public User handleFacultyLogin() {
-		Scanner sc = new Scanner(System.in);
-		String input;
-		User currentUser = null;
-		boolean auth = false;
-		do {
-			System.out.println("Enter UserID (lowercase) or leave empty to return: ");
-			input = sc.nextLine();
-			if(input == "") {
-				return null;
-			}
-			currentUser = checkFacultyID(input);
-			if (currentUser == null) {
-				System.out.println("Invalid User.");
-			}
-		} while (currentUser == null);
-		do {
-			System.out.println("Enter Password: ");
-			input = sc.nextLine();
-			auth = isLoggedIn(currentUser, input);
-			if (!auth) {
-				System.out.println("Invalid Password.");
-			}
-		} while (!auth);
-		return currentUser;
+	public void updatePassword(User user, String oldPass, String newPass) {
+		if (!user.checkPassword(oldPass)) {
+			System.out.println("Error");
+			return;
+		}
+		AccountsController ac = AccountsController.getInstance();
+		if (user instanceof Student) {
+			ac.updateSAccount(user, newPass);
+		} else {
+			ac.updateFAccount(user, newPass);
+		}
 	}
-	
 }
 
 

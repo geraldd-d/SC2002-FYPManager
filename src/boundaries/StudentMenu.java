@@ -10,6 +10,14 @@ import controllers.*;
 
 
 public class StudentMenu{
+	private static StudentMenu sm = null;
+	private StudentMenu() {};
+	public static StudentMenu getInstance() {
+		if (sm == null) {
+			sm = new StudentMenu();
+		}
+		return sm;
+	}
 	public void display(Student user) {
 		{
 	        Scanner input = new Scanner(System.in);
@@ -55,7 +63,6 @@ public class StudentMenu{
 	                		try {
 	    	                	System.out.println("Enter project ID that you wish to be allocated for: ");
 	                            proj = input.nextInt();
-								System.out.println("Successfully sent");
 	                        } catch (InputMismatchException e) {
 	                            System.out.println("Invalid choice. Enter a valid project ID");
 	                            input.nextLine();
@@ -63,6 +70,7 @@ public class StudentMenu{
 	                        }
 	                		validRequest = stc.requestAlloc(user, proj);
 	                	}
+	                	System.out.println("Allocation Request sent");
 	                    break;
 	                case 3:
 						if(!user.getisAllocated()){
@@ -84,11 +92,11 @@ public class StudentMenu{
 							break;
 						}
 						validRequest = false;
+						System.out.println("The details of your registered project: ");
+						p.printProject();
 						while(!validRequest){
 							String proj;
 							try {
-								System.out.println("The details of your registered project: ");
-								p.printProject();
 								System.out.println("Enter the new title for your project: ");
 								proj = input.nextLine();
 							} catch (InputMismatchException e){
@@ -96,14 +104,15 @@ public class StudentMenu{
 								input.nextLine();
 								continue;
 							}
-							if(proj.equals(p.getTitle())){
-								System.out.println("Please enter a different title.");
+							if(proj.equals(p.getTitle()) || proj.length() < 5){
+								System.out.println("Please enter a different/longer title.");
 								continue;
 							}
 							else{
 								validRequest = stc.requestNewTitle(user);
 							}
 						}
+						System.out.println("Title Change Request sent.");
 	                    break;
 	                case 5: 
 						if(!user.getisAllocated()){
@@ -111,30 +120,27 @@ public class StudentMenu{
 							break;
 						}
 						else{
-							String sure = input.nextLine();
-							try {
-	    	                	System.out.println("Please confirm again (yes/no): ");
-	                            sure = input.nextLine();
-	                        } catch (InputMismatchException e) {
-	                            System.out.println("Invalid choice. Please enter yes or no.");
-	                            input.nextLine();
-	                            continue;
-	                        }
-							if( sure == "yes"){
-								stc.DeregisterProject(user, p);
-								break;
+							System.out.println("Please confirm your decision (y/n): ");
+							String d = "";
+							while (!d.equals("y")) {
+								d = input.nextLine();
+								if (d.equals("n")) {
+									break;
+								}
 							}
-							if (sure == "no"){
-								break;
+							if (d.equals("y")) {
+								stc.DeregisterProject(user, user.getRegisteredProject());
+								System.out.println("Deregister Request sent.");
 							}
 						}
-	                    //break;
+	                    break;
 	                case 6: 
 	                	RequestHistoryMenu rhm = RequestHistoryMenu.getInstance();
 	                	rhm.display(user, user.getHistory());
 	                	break;
 					case 7:
-						// change the password 
+						PasswordMenu pm = PasswordMenu.getInstance();
+						pm.display(user);
 						break;
 	                case 8:
 	                    System.out.println("Thank you for using FYP Management System.");

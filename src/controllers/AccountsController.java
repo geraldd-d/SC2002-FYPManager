@@ -19,7 +19,6 @@ public class AccountsController {
 		this.facultyList = facultyData;
 		StudentController sc = StudentController.getInstance(studentData);
 		FacultyController fc = FacultyController.getInstance(facultyData);
-		ProjectsController pcc = ProjectsController.getInstance(facultyData);
 	}
 	
 	public static AccountsController getInstance(){
@@ -211,5 +210,70 @@ public class AccountsController {
 	        e.printStackTrace();
 	    }
 	}
-	
+	protected void updateSAccount(User user, String pw) {
+		HashService hs = HashService.getInstance();
+		try {
+            File inputFile = new File(studentsPath);
+            File tempFile = new File("temp.csv");
+
+            BufferedReader reader = new BufferedReader(new FileReader(inputFile));
+            BufferedWriter writer = new BufferedWriter(new FileWriter(tempFile));
+
+            String currentLine;
+            while ((currentLine = reader.readLine()) != null) {
+                String[] fields = currentLine.split(delimiter);
+                if (fields[0].equals("Name") || fields[0].equals("sep=")) {
+					continue;
+				}
+                if (fields[3].equals(user.getUserID())) {
+                	fields[2] = hs.hashPassword(pw, fields[3]);
+                    currentLine = String.join(delimiter, fields);
+                }
+                writer.write(currentLine + System.getProperty("line.separator"));
+            }
+            writer.close();
+            reader.close();
+            
+            inputFile.delete();
+            tempFile.renameTo(inputFile);
+            
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+		studentList = getStudentAccounts();
+		StudentController sc = StudentController.getInstance(studentList);
+	}
+	protected void updateFAccount(User user, String pw) {
+		HashService hs = HashService.getInstance();
+		try {
+            File inputFile = new File(facultyPath);
+            File tempFile = new File("temp.csv");
+
+            BufferedReader reader = new BufferedReader(new FileReader(inputFile));
+            BufferedWriter writer = new BufferedWriter(new FileWriter(tempFile));
+
+            String currentLine;
+            while ((currentLine = reader.readLine()) != null) {
+                String[] fields = currentLine.split(delimiter);
+                if (fields[0].equals("Name") || fields[0].equals("sep=")) {
+					continue;
+				}
+                if (fields[4].equals(user.getUserID())) {
+                	fields[2] = hs.hashPassword(pw, fields[4]);
+                    currentLine = String.join(delimiter, fields);
+                }
+                writer.write(currentLine + System.getProperty("line.separator"));
+            }
+            writer.close();
+            reader.close();
+            
+            inputFile.delete();
+            tempFile.renameTo(inputFile);
+            
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+		facultyList = getFacultyAccounts();
+		FacultyController fc = FacultyController.getInstance(facultyList);
+	}
 }
