@@ -18,6 +18,9 @@ public class ProjectsController {
 	}
 	
 	public static ProjectsController getInstance() {
+		if (pcc == null) {
+			pcc = new ProjectsController();
+		}
 		return pcc;
 	}
 	

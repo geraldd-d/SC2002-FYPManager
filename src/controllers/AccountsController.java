@@ -19,6 +19,7 @@ public class AccountsController {
 		this.facultyList = facultyData;
 		StudentController sc = StudentController.getInstance(studentData);
 		FacultyController fc = FacultyController.getInstance(facultyData);
+		ProjectsController pc = ProjectsController.getInstance();
 	}
 	
 	public static AccountsController getInstance(){
