@@ -29,7 +29,7 @@ public class FacultyController {
 	public Faculty getFacultybyName(String name) {
 		return (Faculty) facultyNames.get(name);
 	}
-	private HashMap<String,Faculty> getFacultyNames(){
+	public HashMap<String,Faculty> getFacultyNames(){
 		HashMap<String,Faculty> faculties = new HashMap<String,Faculty>();
 		facultyData.forEach((key, value)-> {
 			if (value instanceof Coordinator) {
@@ -40,7 +40,6 @@ public class FacultyController {
 		});
 		return faculties;
 	}
-	
 	public Coordinator getCoord() {
 		return this.coordinator;
 	}

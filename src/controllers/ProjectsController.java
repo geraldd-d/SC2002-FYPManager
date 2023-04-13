@@ -14,7 +14,7 @@ public class ProjectsController {
 	private ProjectsController(){
 		ArrayList<Project> projects = readProjects();
 		this.projectList = projects;
-		ProjectAccessManager pam = ProjectAccessManager.getInstance(projects);
+		ProjectManager pm = ProjectManager.getInstance(projects);
 	}
 	
 	public static ProjectsController getInstance() {
@@ -25,7 +25,7 @@ public class ProjectsController {
 	}
 	
 	private static String projectsPath = System.getProperty("user.dir") + "//data//projectsList.csv";
-
+	
 	private static final String delimiter = ";";
 	private ArrayList<Project> readProjects() {
 		FacultyController fc = FacultyController.getInstance();
@@ -57,7 +57,7 @@ public class ProjectsController {
 					System.out.println(supervisorName);
 					System.out.println("Supervisor not found.");
 				} else {
-					Project p = new Project(title,supervisor.getSupervisorID(),supervisorName,studentID,status,projectID);
+					Project p = new Project(title,supervisor.getUserID(),supervisorName,studentID,status,projectID);
 					projects.add(p);
 					supervisor.addProject(p);
 					if (!studentID.equals("")) {
@@ -78,43 +78,50 @@ public class ProjectsController {
 		}
 		return projects;
 	}
-
-	public ArrayList<Project> getAllAvailableProjects() {
-        ArrayList<Project> availableProjects = new ArrayList<Project>();
-        for (Project project : projectList) {
-            if (project.getStatus().equals("Available")) {
-                availableProjects.add(project);
-            }
-        }
-        return availableProjects;
-    }
-
-	public Project getProjectByName(String projectName) {
-		for (Project project : projectList) {
-			if (project.getTitle().equals(projectName)) {
-				return project;
-			}
-		}
-		return null;
-	}
-	public Project getProjectByID(Integer projectID) {
-		for (Project project : projectList) {
-			if (project.getID().equals(projectID)) {
-				return project;
-			}
-		}
-		return null;
-	}
-	public Project getRegisteredProject(Student user){
-		if(user.getisAllocated()){
-			Project p = user.getRegisteredProject();
-			return p;
-		}
-		else{
-			return null;
-		}
-
+	protected void updateProjects(ArrayList<Project> projects) {
+	    try {
+	    	FacultyController fc = FacultyController.getInstance();
+	    	String tempFilePath = projectsPath + ".tmp";
+	    	File tempFile = new File(tempFilePath);
+	        FileWriter writer = new FileWriter(tempFilePath);
+	        writer.append("sep=;");
+	        writer.append("\n");
+	        writer.append("Supervisor");
+	        writer.append(delimiter);
+	        writer.append("Title");
+	        writer.append(delimiter);
+	        writer.append("StudentID");
+	        writer.append(delimiter);
+	        writer.append("Status");
+	        writer.append(delimiter);
+	        writer.append("ProjectID");
+	        writer.append("\n");
+	        for (Project p : projects) {
+	            writer.append(p.getSupervisorName());
+	            writer.append(delimiter);
+	            writer.append(p.getTitle());
+	            writer.append(delimiter);
+	            writer.append(p.getStudentID());
+	            writer.append(delimiter);
+	            writer.append(p.getStatus());
+	            writer.append(delimiter);
+	            writer.append(String.valueOf(p.getID()));
+	            writer.append("\n");
+	        }
+	        writer.flush();
+	        writer.close();
+	        File origFile = new File(projectsPath);
+	        origFile.delete();
+	        tempFile.renameTo(origFile);
+	    } catch (IOException e) {
+	        e.printStackTrace();
+	    }
 	}
 	
+	public int getNewID() {
+		int id = last_index + 1;
+		last_index = id;
+		return id;
+	}
 	
 }

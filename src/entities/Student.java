@@ -7,7 +7,6 @@ public class Student extends User{
 	HashService hs = HashService.getInstance();
 	private Project registeredProject;
 	private ArrayList<Request> requestHistory;
-	private boolean isAllocated = false;
 
 	public Student(String userID, String password, String name, String email){
 		super(userID, password, name, email);
@@ -23,7 +22,7 @@ public class Student extends User{
 		return this.requestHistory;
 	}
 	public boolean getisAllocated(){
-		return this.isAllocated;
+		return this.registeredProject != null;
 	}
 
 	// setter 
@@ -35,8 +34,5 @@ public class Student extends User{
 	}
 	public void addHistory(Request r){
 		this.requestHistory.add(r);
-	}
-	public void setIsAllocated(boolean isAllocated){
-		this.isAllocated = isAllocated;
 	}
 }

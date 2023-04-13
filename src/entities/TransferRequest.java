@@ -6,7 +6,7 @@ public class TransferRequest extends Request {
 	public TransferRequest(User requestor, User requestee, RequestStatus status, Project project, Faculty replacement) {
 		super(requestor, requestee, status, project);
 		this.replacement = replacement;
-		this.replacementID = replacement.getSupervisorID();
+		this.replacementID = replacement.getUserID();
 	}
 	public String getReplacementID() {
 		return this.getReplacementID();

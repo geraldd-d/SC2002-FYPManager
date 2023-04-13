@@ -49,12 +49,12 @@ public class StudentMenu{
 	                		ProjectMenu pm = ProjectMenu.getInstance();
 	                		pm.display();
 	                	} else {
-	                		System.out.println("You are already registered for" + user.getRegisteredProject().getTitle());
+	                		System.out.println("You are already registered for " + user.getRegisteredProject().getTitle());
 	                	}
 					break; 
 	                case 2:
 	                	if (user.getisAllocated()) {
-	                		System.out.println("You are already registered for" + user.getRegisteredProject().getTitle());
+	                		System.out.println("You are already registered for " + user.getRegisteredProject().getTitle());
 	                		break;
 	                	}
 	                	boolean validRequest = false;
@@ -78,8 +78,7 @@ public class StudentMenu{
 							break;
 						}
 						else{
-							ProjectsController pc = ProjectsController.getInstance();
-							Project regproj = pc.getRegisteredProject(user);
+							Project regproj = user.getRegisteredProject();
 							if(regproj != null){
 								regproj.printProject();
 								break;
@@ -129,7 +128,7 @@ public class StudentMenu{
 								}
 							}
 							if (d.equals("y")) {
-								stc.DeregisterProject(user, user.getRegisteredProject());
+								stc.DeregisterProject(user);
 								System.out.println("Deregister Request sent.");
 							}
 						}

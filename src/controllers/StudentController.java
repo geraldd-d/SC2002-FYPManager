@@ -25,8 +25,8 @@ public class StudentController {
 
 	//View all the available projects 
 	public void ViewAllAvailableProjects(int page) {
-		ProjectsController pc = ProjectsController.getInstance();
-		ArrayList<Project>projects = pc.getAllAvailableProjects();
+		ProjectManager pm = ProjectManager.getInstance();
+		ArrayList<Project>projects = pm.getAllAvailableProjects();
 		int pageSize = 5;
 	    int startIndex = (page - 1) * pageSize;
 	    int endIndex = Math.min(startIndex + pageSize, projects.size());
@@ -36,9 +36,9 @@ public class StudentController {
 	
 	// Requesting the supervisor to allocate the project 
 	public boolean requestAlloc(Student user, int id) {
-		ProjectsController pc = ProjectsController.getInstance();
+		ProjectManager pm = ProjectManager.getInstance();
 		RequestManager rm = RequestManager.getInstance();
-		Project p = pc.getProjectByID(id);
+		Project p = pm.getProjectByID(id);
 		if (p != null && p.getStatus().equals("Available")) {
 			rm.addAllocRequest(user, p);
 			return true;
@@ -48,9 +48,9 @@ public class StudentController {
 	
 	// Reuqesting to change the title of the Project
 	public boolean requestNewTitle(Student user){
-		ProjectsController pc = ProjectsController.getInstance();
+		ProjectManager pm = ProjectManager.getInstance();
 		RequestManager rm = RequestManager.getInstance();
-		Project p = pc.getRegisteredProject(user);
+		Project p = user.getRegisteredProject();
 		if(p!= null && p.getStatus().equals("Registered")){
 			rm.addTitleRequest(user, p.getTitle());
 			return true;
@@ -60,8 +60,7 @@ public class StudentController {
 	
 	// temporary
 	public boolean viewRegisteredProject(Student user){
-		ProjectsController pc = ProjectsController.getInstance();
-		Project p = pc.getRegisteredProject(user);
+		Project p = user.getRegisteredProject();
 		if(p != null){
 			p.printProject();
 			return true;
@@ -70,21 +69,16 @@ public class StudentController {
 	}
 
 	// Deregister the registered project 
-	public boolean DeregisterProject(Student user, Project project){
-		ProjectsController pc = ProjectsController.getInstance();
+	public boolean DeregisterProject(Student user){
+		ProjectManager pm = ProjectManager.getInstance();
 		RequestManager rm = RequestManager.getInstance();
-		project = pc.getRegisteredProject(user);
+		Project project = user.getRegisteredProject();
 		if(project != null){
 			rm.addDeregRequest(user);
 			return true;
 		}
 		return false;
 	}
-
-
-
-
-
 }
 
 

@@ -26,11 +26,13 @@ public class RequestManager {
 	}
 	public void addAllocRequest(Student s,Project p){
 		FacultyController fc = FacultyController.getInstance();
+		ProjectManager pm = ProjectManager.getInstance();
 		Coordinator coord = fc.getCoord();
 		AllocRequest ar = new AllocRequest(s, coord, RequestStatus.Pending, p);
 		this.requestList.add(ar);
 		s.addHistory(ar);
 		coord.addInbox(ar);
+		pm.reserveProject(p);
 	}
 	public void addDeregRequest(Student s){
 		FacultyController fc = FacultyController.getInstance();

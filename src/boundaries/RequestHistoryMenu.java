@@ -33,9 +33,6 @@ public class RequestHistoryMenu{
         	if(page <= numPages) {
         		rm.viewRequests(user, page);
         	}
-        	else {
-        		continue;
-        	}
             try {
             	System.out.println("Enter 0 to return or a valid integer from 1 -" + numPages);
             	page = sc.nextInt();
@@ -44,6 +41,7 @@ public class RequestHistoryMenu{
                 sc.nextLine();
                 continue;
             }
+            System.out.println(page);
         } while(page != 0);
     }
 }

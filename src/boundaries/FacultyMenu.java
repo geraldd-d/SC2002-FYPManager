@@ -1,6 +1,7 @@
 package boundaries;
 import java.util.*;
 
+import controllers.ProjectManager;
 import entities.*;
 
 
@@ -55,6 +56,8 @@ public class FacultyMenu{
                     // Change the password 
                     break;
                 case 8:
+                	ProjectManager pm = ProjectManager.getInstance();
+                	pm.saveChanges();
                     System.out.println("Thank you for using FYP Management System.");
                     System.exit(0);
                     break;

@@ -30,7 +30,7 @@ public class RequestController {
 	private ArrayList<Request> readRequests() {
 		FacultyController fc = FacultyController.getInstance();
 		StudentController sc = StudentController.getInstance();
-		ProjectsController pc = ProjectsController.getInstance();
+		ProjectManager pm = ProjectManager.getInstance();
 		File file = new File(requestPath);
 		ArrayList<Request> requests = new ArrayList<Request>();
 		try {
@@ -77,7 +77,7 @@ public class RequestController {
 					coordinator = (Coordinator )fc.getFacultybyID(requestee);
 					student = sc.getStudentbyID(requestor);
 					if (requestType == RequestType.Allocation) {
-						AllocRequest r = new AllocRequest(student, coordinator, status, pc.getProjectByID(Integer.parseInt(changes)));
+						AllocRequest r = new AllocRequest(student, coordinator, status, pm.getProjectByID(Integer.parseInt(changes)));
 						requests.add(r);
 						coordinator.addInbox(r);
 						student.addHistory(r);
@@ -94,7 +94,7 @@ public class RequestController {
 					supervisor = fc.getFacultybyID(requestor);
 					coordinator = (Coordinator) fc.getFacultybyID(requestee);
 					if (requestType == RequestType.Transfer) {
-						TransferRequest r = new TransferRequest(supervisor, coordinator, status,pc.getProjectByID(Integer.parseInt(changes)), fc.getFacultybyID(replacement));
+						TransferRequest r = new TransferRequest(supervisor, coordinator, status,pm.getProjectByID(Integer.parseInt(changes)), fc.getFacultybyID(replacement));
 						requests.add(r);
 						coordinator.addInbox(r);
 						supervisor.addHistory(r);
