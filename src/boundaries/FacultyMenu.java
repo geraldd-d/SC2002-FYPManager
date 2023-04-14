@@ -27,7 +27,6 @@ public class FacultyMenu{
             System.out.println("FYP Matters");
             System.out.println("---------------------");
             System.out.println("1. View your projects");
-            System.out.println("2. View information regarding created FYP");
             System.out.println("3. Modify the title of FYP");
             System.out.println("4. Request to transfer student to replacement supervisor");
             System.out.println("5. View pending requests");
@@ -50,10 +49,6 @@ public class FacultyMenu{
                     fc.viewOwnProjects(user);
                     break;
                 case 2:
-                    // call info regarding the created FYP WHAT IS INFO HERE?
-                	fc.viewOwnProjects(user);
-                    break;
-                case 3:
                     // change the title
                 	String title;
                 	do {
@@ -86,7 +81,7 @@ public class FacultyMenu{
                 	} while(!valid);
                     
                     break;
-                case 4:
+                case 3:
                     // request to transfer student
                 	do {
                     	String replacement;
@@ -127,27 +122,27 @@ public class FacultyMenu{
                         }
                 	} while(!valid);
                     break;
-                case 5: 
+                case 4: 
                     // view pending requests
                 	RequestPendingMenu rpm = RequestPendingMenu.getInstance();
                 	rpm.display(user,fc.getPendingRequests(user));
                     break;
-                case 6: 
+                case 5: 
                     // call view history method
                 	RequestHistoryMenu rhm = RequestHistoryMenu.getInstance();
                 	rhm.display(user, user.getHistory());
                 	break;
-                case 7:
+                case 6:
                 	// call view inbox method
                 	RequestInboxMenu rim = RequestInboxMenu.getInstance();
                 	rim.display(user, user.getInbox());
                 	break;
-                case 8: 
+                case 7: 
                 	//change password method
                 	PasswordMenu pwm = PasswordMenu.getInstance();
 					pwm.display(user);
                     break;
-                case 9:
+                case 8:
                 	pm.saveChanges();
                     System.out.println("Thank you for using FYP Management System.");
                     System.exit(0);
@@ -156,7 +151,7 @@ public class FacultyMenu{
                     System.out.println("Invalid choice. Please enter a valid option.");
                     break;
             }
-        } while (choice != 9);
+        } while (choice != 8);
 	}
 
 }

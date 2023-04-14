@@ -72,6 +72,12 @@ public class Project {
 		System.out.println("Supervisor: "+this.supervisorName);
 		System.out.println();
 	}
+	public void printActiveProject(){
+		System.out.println("Project ID: "+this.projectID);
+		System.out.println("Project Name: "+ this.title);
+		System.out.println("Status: "+this.status);
+		System.out.println();
+	}
 
 }
 

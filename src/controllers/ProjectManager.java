@@ -124,7 +124,10 @@ public class ProjectManager {
 		ArrayList<Project>projects = user.getProjects();
 		projects.forEach((p)-> p.printProject());
 	}
-	
+	public void viewActiveProjects(Faculty user) {
+		ArrayList<Project>projects = user.getProjects();
+		projects.forEach((p)-> p.printActiveProject());
+	}
 	public void changeTitle(Project p, String t) {
 		p.setTitle(t);
 	}

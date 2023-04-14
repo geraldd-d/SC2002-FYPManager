@@ -47,11 +47,12 @@ public class FacultyController {
 	public void viewOwnProjects(Faculty user) {
 		ProjectManager pm = ProjectManager.getInstance();
 		if (user.getProjects().size()>0) {
-			pm.viewOwnProjects(user);
+			pm.viewActiveProjects(user);
 		} else {
 			System.out.println("You currently have no projects.");
 		}
 	}
+	
 	public void changeTitle(Project p,String s) {
 		ProjectManager pm = ProjectManager.getInstance();
 		pm.changeTitle(p, s);
