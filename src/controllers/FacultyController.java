@@ -1,5 +1,6 @@
 package controllers;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import entities.*;
@@ -42,6 +43,26 @@ public class FacultyController {
 	}
 	public Coordinator getCoord() {
 		return this.coordinator;
+	}
+	public void viewOwnProjects(Faculty user) {
+		ProjectManager pm = ProjectManager.getInstance();
+		if (user.getProjects().size()>0) {
+			pm.viewOwnProjects(user);
+		} else {
+			System.out.println("You currently have no projects.");
+		}
+	}
+	public void changeTitle(Project p,String s) {
+		ProjectManager pm = ProjectManager.getInstance();
+		pm.changeTitle(p, s);
+	}
+	public void transferRequest(Faculty user, Project p, String replacementID) {
+		RequestManager rm = RequestManager.getInstance();
+		rm.addTransferRequest(user, p, replacementID);
+	}
+	public ArrayList<Request> getPendingRequests(Faculty user) {
+		RequestManager rm = RequestManager.getInstance();
+		return rm.getPendingReqs(user);
 	}
 }
 

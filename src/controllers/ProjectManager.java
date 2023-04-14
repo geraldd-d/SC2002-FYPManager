@@ -2,6 +2,7 @@ package controllers;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import entities.Faculty;
 import entities.Project;
@@ -108,7 +109,26 @@ public class ProjectManager {
         }
         return availableProjects;
     }
-
+	
+	//View all the available projects 
+	public void viewAllAvailableProjects(int page) {
+		ArrayList<Project>projects = getAllAvailableProjects();
+		int pageSize = 5;
+		int startIndex = (page - 1) * pageSize;
+		int endIndex = Math.min(startIndex + pageSize, projects.size());
+		List<Project> currentPage = projects.subList(startIndex, endIndex);
+		currentPage.forEach((project)->project.printAvailableProject());
+	}
+	
+	public void viewOwnProjects(Faculty user) {
+		ArrayList<Project>projects = user.getProjects();
+		projects.forEach((p)-> p.printProject());
+	}
+	
+	public void changeTitle(Project p, String t) {
+		p.setTitle(t);
+	}
+	
 	public Project getProjectByName(String projectName) {
 		for (Project project : projects) {
 			if (project.getTitle().equals(projectName)) {

@@ -23,16 +23,6 @@ public class StudentController {
 		return (Student) studentData.get(id);
 	}
 
-	//View all the available projects 
-	public void ViewAllAvailableProjects(int page) {
-		ProjectManager pm = ProjectManager.getInstance();
-		ArrayList<Project>projects = pm.getAllAvailableProjects();
-		int pageSize = 5;
-	    int startIndex = (page - 1) * pageSize;
-	    int endIndex = Math.min(startIndex + pageSize, projects.size());
-	    List<Project> currentPage = projects.subList(startIndex, endIndex);
-	    currentPage.forEach((project)->project.printAvailableProject());
-	}
 	
 	// Requesting the supervisor to allocate the project 
 	public boolean requestAlloc(Student user, int id) {

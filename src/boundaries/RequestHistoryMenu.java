@@ -31,7 +31,7 @@ public class RequestHistoryMenu{
     	int numPages = (int) Math.ceil((float)numRequests/(float)5);
         do {
         	if(page <= numPages) {
-        		rm.viewRequests(user, page);
+        		rm.viewHistory(user, page);
         	}
             try {
             	System.out.println("Enter 0 to return or a valid integer from 1 -" + numPages);

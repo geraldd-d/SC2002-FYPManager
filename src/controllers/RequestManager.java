@@ -65,9 +65,35 @@ public class RequestManager {
 	protected ArrayList<Request> getRequests(){
 		return this.requestList;
 	}
-	public void viewRequests(User user, int page) {
+	public void viewHistory(User user, int page) {
 	    int pageSize = 5;
 	    ArrayList<Request> reqs = user.getHistory();
+	    int startIndex = (page - 1) * pageSize;
+	    int endIndex = Math.min(startIndex + pageSize, reqs.size());
+	    List<Request> currentPage = reqs.subList(startIndex, endIndex);
+	    currentPage.forEach((Request)-> Request.printRequest());
+	}
+	public void viewInbox(Faculty user, int page) {
+	    int pageSize = 5;
+	    ArrayList<Request> reqs = user.getInbox();
+	    int startIndex = (page - 1) * pageSize;
+	    int endIndex = Math.min(startIndex + pageSize, reqs.size());
+	    List<Request> currentPage = reqs.subList(startIndex, endIndex);
+	    currentPage.forEach((Request)-> Request.printRequest());
+	}
+	protected ArrayList<Request> getPendingReqs(Faculty user){
+		ArrayList<Request> reqs = new ArrayList<Request>();
+		ArrayList<Request> inbox = user.getInbox();
+		inbox.forEach((request)->{
+			if (request.getStatus().equals(RequestStatus.Pending)) {
+				reqs.add(request);
+			}
+		});
+		return reqs;
+	}
+	public void viewPending(Faculty user, int page) {
+	    int pageSize = 5;
+	    ArrayList<Request> reqs = getPendingReqs(user);
 	    int startIndex = (page - 1) * pageSize;
 	    int endIndex = Math.min(startIndex + pageSize, reqs.size());
 	    List<Request> currentPage = reqs.subList(startIndex, endIndex);

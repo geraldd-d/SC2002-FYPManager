@@ -49,7 +49,7 @@ public class FacultyLoginMenu {
             CoordinatorMenu cm = CoordinatorMenu.getInstance();
             cm.display((Coordinator)currentUser);
         }
-		if (currentUser instanceof Faculty) {
+        else if (currentUser instanceof Faculty) {
             currentUser = (Faculty) currentUser;
             FacultyMenu fm = FacultyMenu.getInstance();
             fm.display((Faculty)currentUser);

@@ -4,27 +4,25 @@ import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-import controllers.ProjectsController;
 import controllers.RequestManager;
-import controllers.StudentController;
 import entities.Faculty;
 import entities.Request;
 import entities.User;
 
-public class RequestInboxMenu{
-	private RequestInboxMenu() {};
-	private static RequestInboxMenu rim = null;
-	public static RequestInboxMenu getInstance() {
-		if (rim == null) {
-			rim = new RequestInboxMenu();
+public class RequestPendingMenu{
+	private RequestPendingMenu() {};
+	private static RequestPendingMenu rpm = null;
+	public static RequestPendingMenu getInstance() {
+		if (rpm == null) {
+			rpm = new RequestPendingMenu();
 		}
-		return rim;
+		return rpm;
 	}
-	public void display(Faculty user, ArrayList<Request> reqInbox){
+	public void display(User user, ArrayList<Request> pending){
 		Scanner sc = new Scanner(System.in);
 		RequestManager rm = RequestManager.getInstance();
         int page = 1;
-        int numRequests = reqInbox.size();
+        int numRequests = pending.size();
         if (numRequests == 0) {
         	System.out.println("You have no pending requests!");
         	return;
@@ -32,7 +30,7 @@ public class RequestInboxMenu{
     	int numPages = (int) Math.ceil((float)numRequests/(float)5);
         do {
         	if(page <= numPages) {
-        		rm.viewInbox(user, page);
+        		rm.viewPending((Faculty)user, page);
         	}
             try {
             	System.out.println("Enter 0 to return or a valid integer from 1 -" + numPages);
@@ -46,4 +44,3 @@ public class RequestInboxMenu{
         } while(page != 0);
     }
 }
-

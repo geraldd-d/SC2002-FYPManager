@@ -24,13 +24,12 @@ public class ProjectMenu implements BaseMenu{
 	public void display(){
 		Scanner sc = new Scanner(System.in);
         int page = 1;
-        StudentController stc = StudentController.getInstance();
 		ProjectManager pm = ProjectManager.getInstance();
         int numProjects = pm.getAllAvailableProjects().size();
     	int numPages = (int) Math.ceil((float)numProjects/(float)5);
         do {
         	if(page <= numPages) {
-        		stc.ViewAllAvailableProjects(page);
+        		pm.viewAllAvailableProjects(page);
         	}
             try {
             	System.out.println("Enter 0 to return or a valid integer from 1 - " + numPages);
