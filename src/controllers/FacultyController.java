@@ -65,6 +65,11 @@ public class FacultyController {
 		RequestManager rm = RequestManager.getInstance();
 		return rm.getPendingReqs(user);
 	}
+	public void setProjcts(Faculty user, ArrayList<Project> project){
+		user.setProjects(project);
+	}
+	
+
 }
 
 	

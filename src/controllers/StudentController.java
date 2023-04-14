@@ -69,6 +69,11 @@ public class StudentController {
 		}
 		return false;
 	}
+
+	public void setRegisteredProject(Student student, Project project) {
+		student.setRegisteredProject(project);
+	}
+	
 }
 
 

@@ -54,29 +54,32 @@ public class ProjectManager {
 	}
 	public void allocateProject(Student student, int projectID) {
 		FacultyController fc = FacultyController.getInstance();
+		StudentController sc = StudentController.getInstance();
 		Project p = getProjectByID(projectID);
 		p.setStatus("Allocated");
 		p.setStudent(student.getUserID());
-		student.setRegisteredProject(p);
+		sc.setRegisteredProject(student, p);
 		setUnavailable(fc.getFacultybyID(p.getSupervisorID()));
 
 	}
 	public void deregisterProject(Student student) {
 		FacultyController fc = FacultyController.getInstance();
+		StudentController sc = StudentController.getInstance();
 		Project p = student.getRegisteredProject();
 		p.setStatus("Available");
 		p.setStudent("");
-		student.setRegisteredProject(null);
+		sc.setRegisteredProject(student, null);
 		setAvailable(fc.getFacultybyID(p.getSupervisorID()));
 	}
 	
 	public void transferProject(Faculty current, Faculty replacement, Project p) {
+		FacultyController fc = FacultyController.getInstance();
 		p.setSupervisorID(replacement.getUserID());
 		p.setSupervisorName(replacement.getUserID());
 		replacement.addProject(p);
 		ArrayList<Project> projects = current.getProjects();
 		projects.remove(p);
-		current.setProjects(projects);
+		fc.setProjects(current, projects);
 		setAvailable(current);
 		setUnavailable(replacement);
 	}
