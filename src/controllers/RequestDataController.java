@@ -10,28 +10,32 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.*;
 
-public class RequestController {
-	private static RequestController rc = null;
-	private ArrayList<Request> requestList;
-    private RequestController() {
-    	ArrayList<Request> requests = readRequests();
-    	this.requestList = requests;
-    	RequestManager rm = RequestManager.getInstance(requests);
+public class RequestDataController {
+	private final RequestRepository requestRepository;
+	private final StudentService studentService;
+	private final FacultyService facultyService;
+	private final ProjectService projectService;
+	private static RequestDataController rdc = null;
+    private RequestDataController() {
+    	this.facultyService = FacultyService.getInstance();
+		this.studentService = StudentService.getInstance();
+		this.projectService = ProjectService.getInstance();
+		this.requestRepository = RequestRepository.getInstance();
+		readRequests();
     }
-    public static RequestController getInstance() {
-        if (rc == null) {
-            rc = new RequestController();
+    public static RequestDataController getInstance() {
+        if (rdc == null) {
+            rdc = new RequestDataController();
         }
-        return rc;
+        return rdc;
     }
+
     private int last_index = 0;
 	
 	private static String requestPath = System.getProperty("user.dir") + "//data//requestList.csv";
 
 	private static final String delimiter = ";";
-	private ArrayList<Request> readRequests() {
-		FacultyController fc = FacultyController.getInstance();
-		StudentController sc = StudentController.getInstance();
+	private void readRequests() {
 		ProjectManager pm = ProjectManager.getInstance();
 		File file = new File(requestPath);
 		ArrayList<Request> requests = new ArrayList<Request>();
@@ -63,8 +67,8 @@ public class RequestController {
 				Faculty supervisor;
 				switch (requestType) {
 				case Title:
-					supervisor = fc.getFacultybyID(requestee);
-					student = sc.getStudentbyID(requestor);
+					supervisor = facultyService.getFacultybyID(requestee);
+					student = studentService.getStudentbyID(requestor);
 					TitleRequest tr = new TitleRequest(ID, student, supervisor, status, pm.getProjectByID(projectID), changes);
 					requests.add(tr);
 					supervisor.addInbox(tr);

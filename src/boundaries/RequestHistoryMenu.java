@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-import controllers.ProjectsController;
+import controllers.ProjectDataController;
 import controllers.RequestManager;
 import controllers.StudentController;
 import entities.Request;

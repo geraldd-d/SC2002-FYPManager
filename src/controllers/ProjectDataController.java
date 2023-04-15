@@ -7,32 +7,32 @@ import java.util.HashMap;
 import entities.*;
 
 
-public class ProjectsController {
-	private static ProjectsController pcc = null;
+public class ProjectDataController {
+	private static ProjectDataController pcc = null;
+	private final ProjectService projectService;
+	private final StudentService studentService;
+	private final FacultyService facultyService;
+
 	private static Integer last_index;
-	private ArrayList<Project> projectList;
-	private ProjectsController(){
-		ArrayList<Project> projects = readProjects();
-		this.projectList = projects;
-		ProjectManager pm = ProjectManager.getInstance(projects);
+	private ProjectDataController(){
+		this.projectService = ProjectService.getInstance();
+		this.studentService = StudentService.getInstance();
+		this.facultyService = FacultyService.getInstance();
+		readProjects();
 	}
 	
-	public static ProjectsController getInstance() {
+	public static ProjectDataController getInstance() {
 		if (pcc == null) {
-			pcc = new ProjectsController();
+			pcc = new ProjectDataController();
 		}
 		return pcc;
 	}
-	
 	private static String projectsPath = System.getProperty("user.dir") + "//data//projectsList.csv";
 	
 	private static final String delimiter = ";";
-	private ArrayList<Project> readProjects() {
-		FacultyController fc = FacultyController.getInstance();
-		StudentController sc = StudentController.getInstance();
+	private void readProjects() {
 		last_index = 0;
 		File file = new File(projectsPath);
-		ArrayList<Project> projects = new ArrayList<Project>();
 		try {
 			FileReader fr = new FileReader(file);
 			BufferedReader br = new BufferedReader(fr);
@@ -52,18 +52,13 @@ public class ProjectsController {
 				if (projectID > last_index) {
 					last_index = projectID;
 				}
-				Faculty supervisor = fc.getFacultybyName(supervisorName);
+				Faculty supervisor = facultyService.getFacultybyName(supervisorName);
 				if (supervisor == null) {
 					System.out.println(supervisorName);
 					System.out.println("Supervisor not found.");
 				} else {
-					Project p = new Project(title,supervisor.getUserID(),supervisorName,studentID,status,projectID);
-					projects.add(p);
-					supervisor.addProject(p);
-					if (!studentID.equals("")) {
-						Student student = sc.getStudentbyID(studentID);
-						student.setRegisteredProject(p);
-					}
+					String supervisorID = facultyService.getFacultyID(supervisor);
+					projectService.createProject(title, supervisorID, supervisorName, studentID, status, projectID);
 				}
 			}
 			br.close();
@@ -76,11 +71,9 @@ public class ProjectsController {
 			e.printStackTrace();
 			System.exit(0);
 		}
-		return projects;
 	}
 	protected void updateProjects(ArrayList<Project> projects) {
 	    try {
-	    	FacultyController fc = FacultyController.getInstance();
 	    	String tempFilePath = projectsPath + ".tmp";
 	    	File tempFile = new File(tempFilePath);
 	        FileWriter writer = new FileWriter(tempFilePath);

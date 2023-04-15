@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 import controllers.LoginController;
 import controllers.ProjectManager;
-import controllers.ProjectsController;
+import controllers.ProjectDataController;
 import controllers.StudentController;
 import entities.Coordinator;
 import entities.Faculty;
