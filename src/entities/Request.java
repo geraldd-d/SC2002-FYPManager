@@ -9,8 +9,8 @@ public abstract class Request {
     private User requestee;
     private RequestStatus status;
     private Project project;
-    public Request(User requestor, User requestee, RequestStatus status, Project project){
-        this.requestID = UUID.randomUUID().toString();
+    public Request(String id, User requestor, User requestee, RequestStatus status, Project project){
+        this.requestID = id;
         this.requestor = requestor;
         this.requestee = requestee;
         this.status = status;
@@ -30,6 +30,8 @@ public abstract class Request {
     public RequestStatus getStatus(){
         return status;
     }
+    public abstract RequestType getType();
+    public abstract String getChanges();
     public Project getProject(){
         return project;
     }

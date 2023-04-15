@@ -142,6 +142,10 @@ public class StudentMenu{
 						pm.display(user);
 						break;
 	                case 8:
+	                	ProjectManager prm = ProjectManager.getInstance();
+	                	prm.saveChanges();
+	                	RequestManager rqm = RequestManager.getInstance();
+	                	rqm.saveChanges();
 	                    System.out.println("Thank you for using FYP Management System.");
 						System.exit(0);
 	                    break;

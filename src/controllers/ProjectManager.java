@@ -83,6 +83,11 @@ public class ProjectManager {
 		setAvailable(current);
 		setUnavailable(replacement);
 	}
+	
+	public void editProjectTitle(Project p, String title) {
+		p.setTitle(title);
+		return;
+	}
 	protected void setUnavailable(Faculty user) {
 		ArrayList<Project> facProjects = user.getProjects();
 		if (user.getActiveProjects() >= 2){
@@ -130,9 +135,6 @@ public class ProjectManager {
 	public void viewActiveProjects(Faculty user) {
 		ArrayList<Project>projects = user.getProjects();
 		projects.forEach((p)-> p.printActiveProject());
-	}
-	public void changeTitle(Project p, String t) {
-		p.setTitle(t);
 	}
 	
 	public Project getProjectByName(String projectName) {

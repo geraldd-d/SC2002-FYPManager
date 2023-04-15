@@ -8,11 +8,15 @@ import entities.*;
 
 public class RequestManager {
 	private static RequestManager rm = null;
+	private ProjectManager pm;
+	private StudentController sc;
+	private FacultyController fc;
 	private ArrayList<Request> requestList;
 	private RequestManager(ArrayList<Request> requestList) {
 		this.requestList = requestList;
-		StudentController sc = StudentController.getInstance();
-		FacultyController fc = FacultyController.getInstance();
+		pm = ProjectManager.getInstance();
+		sc = StudentController.getInstance();
+		fc = FacultyController.getInstance();
 	}
 
 	public static RequestManager getInstance(ArrayList<Request> requestList) {
@@ -28,7 +32,9 @@ public class RequestManager {
 		FacultyController fc = FacultyController.getInstance();
 		ProjectManager pm = ProjectManager.getInstance();
 		Coordinator coord = fc.getCoord();
-		AllocRequest ar = new AllocRequest(s, coord, RequestStatus.Pending, p);
+		RequestController rc = RequestController.getInstance();
+		String id = String.valueOf(rc.getNewID());
+		AllocRequest ar = new AllocRequest(id, s, coord, RequestStatus.Pending, p);
 		this.requestList.add(ar);
 		s.addHistory(ar);
 		coord.addInbox(ar);
@@ -38,7 +44,9 @@ public class RequestManager {
 		FacultyController fc = FacultyController.getInstance();
 		Coordinator coord = fc.getCoord();
 		Project p = s.getRegisteredProject();
-		DeregRequest dr = new DeregRequest(s, coord, RequestStatus.Pending,p);
+		RequestController rc = RequestController.getInstance();
+		String id = String.valueOf(rc.getNewID());
+		DeregRequest dr = new DeregRequest(id,s, coord, RequestStatus.Pending,p);
 		this.requestList.add(dr);
 		s.addHistory(dr);
 		coord.addInbox(dr);
@@ -46,7 +54,9 @@ public class RequestManager {
 	public void addTransferRequest(Faculty f, Project p, String replacement){
 		FacultyController fc = FacultyController.getInstance();
 		Coordinator coord = fc.getCoord();
-		TransferRequest trr = new TransferRequest(f, coord, RequestStatus.Pending,p,fc.getFacultybyID(replacement));
+		RequestController rc = RequestController.getInstance();
+		String id = String.valueOf(rc.getNewID());
+		TransferRequest trr = new TransferRequest(id,f, coord, RequestStatus.Pending,p,fc.getFacultybyID(replacement));
 		this.requestList.add(trr);
 		f.addHistory(trr);
 		coord.addInbox(trr);
@@ -56,12 +66,35 @@ public class RequestManager {
 		Project p = s.getRegisteredProject();
 		String supervisorid = p.getSupervisorID();
 		Faculty supervisor = fc.getFacultybyID(supervisorid);
-		TitleRequest tr = new TitleRequest(s, supervisor, RequestStatus.Pending, p, title);
+		RequestController rc = RequestController.getInstance();
+		String id = String.valueOf(rc.getNewID());
+		TitleRequest tr = new TitleRequest(id,s, supervisor, RequestStatus.Pending, p, title);
 		this.requestList.add(tr);
 		s.addHistory(tr);
 		supervisor.addInbox(tr);
 	}
-	
+	public void rejectRequest(Request r) {
+		r.setStatus(RequestStatus.Rejected);
+		return;
+	}
+	public void approveAllocation(Request r) {
+		r.setStatus(RequestStatus.Approved);
+		pm.allocateProject((Student)r.getRequestor(), r.getProject().getID());
+	}
+	public void approveDeregistration(Request r) {
+		r.setStatus(RequestStatus.Approved);
+		pm.deregisterProject((Student)r.getRequestor());
+
+	}
+	public void approveTransfer(Request r) {
+		r.setStatus(RequestStatus.Approved);
+		Faculty sub = fc.getFacultybyID(r.getChanges());
+		pm.transferProject((Faculty) r.getRequestor(),sub, r.getProject());
+	}	
+	public void approveTitleChange(Request r) {
+		r.setStatus(RequestStatus.Approved);
+		pm.editProjectTitle(r.getProject(), r.getChanges());
+	}
 	protected ArrayList<Request> getRequests(){
 		return this.requestList;
 	}
@@ -98,5 +131,11 @@ public class RequestManager {
 	    int endIndex = Math.min(startIndex + pageSize, reqs.size());
 	    List<Request> currentPage = reqs.subList(startIndex, endIndex);
 	    currentPage.forEach((Request)-> Request.printRequest());
+	}
+
+	public void saveChanges() {
+		// TODO Auto-generated method stub
+		RequestController rc = RequestController.getInstance();
+	    rc.updateRequests(requestList);
 	}
 }

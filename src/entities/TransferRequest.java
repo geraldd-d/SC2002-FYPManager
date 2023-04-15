@@ -1,10 +1,11 @@
 package entities;
 
 public class TransferRequest extends Request {
+	private RequestType type = RequestType.Transfer;
 	private Faculty replacement;
 	private String replacementID;
-	public TransferRequest(User requestor, User requestee, RequestStatus status, Project project, Faculty replacement) {
-		super(requestor, requestee, status, project);
+	public TransferRequest(String id, User requestor, User requestee, RequestStatus status, Project project, Faculty replacement) {
+		super(id, requestor, requestee, status, project);
 		this.replacement = replacement;
 		this.replacementID = replacement.getUserID();
 	}
@@ -19,5 +20,14 @@ public class TransferRequest extends Request {
 		System.out.println("ProjectID: "+ this.getProject().getID());
 		System.out.println("Replacement: "+ this.getReplacementID());
 		System.out.println("Status: "+ this.getStatus());
+	}
+	@Override
+	public RequestType getType() {
+		// TODO Auto-generated method stub
+		return this.type;
+	}
+	@Override
+	public String getChanges() {
+		return this.replacementID;
 	}
 }

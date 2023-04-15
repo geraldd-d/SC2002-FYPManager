@@ -53,10 +53,6 @@ public class FacultyController {
 		}
 	}
 	
-	public void changeTitle(Project p,String s) {
-		ProjectManager pm = ProjectManager.getInstance();
-		pm.changeTitle(p, s);
-	}
 	public void transferRequest(Faculty user, Project p, String replacementID) {
 		RequestManager rm = RequestManager.getInstance();
 		rm.addTransferRequest(user, p, replacementID);
@@ -65,8 +61,12 @@ public class FacultyController {
 		RequestManager rm = RequestManager.getInstance();
 		return rm.getPendingReqs(user);
 	}
-	public void setProjcts(Faculty user, ArrayList<Project> project){
+	public void setProjects(Faculty user, ArrayList<Project> project){
 		user.setProjects(project);
+	}
+	public void changeTitle(Project p, String title) {
+		// TODO Auto-generated method stub
+		p.setTitle(title);
 	}
 	
 

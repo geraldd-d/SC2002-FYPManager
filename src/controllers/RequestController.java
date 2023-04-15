@@ -6,6 +6,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.*;
 
@@ -23,7 +24,8 @@ public class RequestController {
         }
         return rc;
     }
-    
+    private int last_index = 0;
+	
 	private static String requestPath = System.getProperty("user.dir") + "//data//requestList.csv";
 
 	private static final String delimiter = ";";
@@ -37,7 +39,6 @@ public class RequestController {
 			FileReader fr = new FileReader(file);
 			BufferedReader br = new BufferedReader(fr);
 			String line = "";
-			int last_index = 0;
 			String[] fields;
 			while ((line = br.readLine()) != null) {
 				
@@ -46,59 +47,49 @@ public class RequestController {
 				if (ID.equals("ID") || ID.equals("sep=")) {
 					continue;
 				}
-				Integer requestID = Integer.parseInt(ID);
-				if (requestID > last_index) {
-					last_index = requestID;
+				if (Integer.parseInt(ID) > last_index) {
+					last_index = Integer.parseInt(ID);
 				}
-				
+	
 				String requestor = fields[1];
 				String requestee = fields[2];
 				RequestStatus status = RequestStatus.valueOf(fields[3]);
 				RequestType requestType = RequestType.valueOf(fields[4]);
-				RequestClass requestClass = RequestClass.valueOf(fields[5]);
-				String changes = fields[6];
+				String changes = fields[5];
+				String id = fields[6];
+				int projectID = Integer.parseInt(id);
 				Coordinator coordinator;
 				Student student;
 				Faculty supervisor;
-				switch (requestClass) {
-				case Supervisor:
+				switch (requestType) {
+				case Title:
 					supervisor = fc.getFacultybyID(requestee);
 					student = sc.getStudentbyID(requestor);
-					if (requestType == RequestType.Title) {
-						TitleRequest r = new TitleRequest(student, supervisor, status, student.getRegisteredProject(), changes);
-						requests.add(r);
-						supervisor.addInbox(r);
-						student.addHistory(r);
-					}
-					
+					TitleRequest tr = new TitleRequest(ID, student, supervisor, status, pm.getProjectByID(projectID), changes);
+					requests.add(tr);
+					supervisor.addInbox(tr);
+					student.addHistory(tr);
 					break;
-
-				case Coordinator:
-					coordinator = (Coordinator )fc.getFacultybyID(requestee);
+				case Allocation:
+					coordinator = (Coordinator)fc.getFacultybyID(requestee);
 					student = sc.getStudentbyID(requestor);
-					if (requestType == RequestType.Allocation) {
-						AllocRequest r = new AllocRequest(student, coordinator, status, pm.getProjectByID(Integer.parseInt(changes)));
-						requests.add(r);
-						coordinator.addInbox(r);
-						student.addHistory(r);
-					}
-					if (requestType == RequestType.Deregister) {
-						DeregRequest r = new DeregRequest(student, coordinator, status, student.getRegisteredProject());
-						requests.add(r);
-						coordinator.addInbox(r);
-						student.addHistory(r);
-					}
+					AllocRequest ar = new AllocRequest(ID, student, coordinator, status, pm.getProjectByID(projectID));
+					requests.add(ar);
+					coordinator.addInbox(ar);
+					student.addHistory(ar);
 					break;
-				case SVCoord:
+				case Deregister:
+					coordinator = (Coordinator)fc.getFacultybyID(requestee);
+					student = sc.getStudentbyID(requestor);
+					DeregRequest dr = new DeregRequest(ID, student, coordinator, status, pm.getProjectByID(projectID));
+				case Transfer:
 					String replacement = fields[7];
 					supervisor = fc.getFacultybyID(requestor);
 					coordinator = (Coordinator) fc.getFacultybyID(requestee);
-					if (requestType == RequestType.Transfer) {
-						TransferRequest r = new TransferRequest(supervisor, coordinator, status,pm.getProjectByID(Integer.parseInt(changes)), fc.getFacultybyID(replacement));
-						requests.add(r);
-						coordinator.addInbox(r);
-						supervisor.addHistory(r);
-					}
+					TransferRequest r = new TransferRequest(ID, supervisor, coordinator, status,pm.getProjectByID(projectID), fc.getFacultybyID(replacement));
+					requests.add(r);
+					coordinator.addInbox(r);
+					supervisor.addHistory(r);
 					break;
 				default:
 					System.out.println("Erroneous request type found.");
@@ -117,4 +108,57 @@ public class RequestController {
 		}
 		return requests;
 	}
+	protected void updateRequests(ArrayList<Request> requests) {
+	    try {
+	    	FacultyController fc = FacultyController.getInstance();
+	    	String tempFilePath = requestPath + ".tmp";
+	    	File tempFile = new File(tempFilePath);
+	        FileWriter writer = new FileWriter(tempFilePath);
+	        writer.append("sep=;");
+	        writer.append("\n");
+	        writer.append("ID");
+	        writer.append(delimiter);
+	        writer.append("From");
+	        writer.append(delimiter);
+	        writer.append("To");
+	        writer.append(delimiter);
+	        writer.append("Status");
+	        writer.append(delimiter);
+	        writer.append("RequestType");
+	        writer.append(delimiter);
+	        writer.append("Changes");
+	        writer.append(delimiter);
+	        writer.append("ProjectID");
+	        writer.append("\n");
+	        for (Request r : requests) {
+	            writer.append(r.getRequestID());
+	            writer.append(delimiter);
+	            writer.append(r.getRequestor().getUserID());
+	            writer.append(delimiter);
+	            writer.append(r.getRequestee().getUserID());
+	            writer.append(delimiter);
+	            writer.append(String.valueOf(r.getStatus()));
+	            writer.append(delimiter);
+	            writer.append(String.valueOf(r.getType()));
+	            writer.append(delimiter);
+	            writer.append(String.valueOf(r.getChanges()));
+	            writer.append(delimiter);
+	            writer.append(String.valueOf(r.getProject().getID()));
+	            writer.append("\n");
+	        }
+	        writer.flush();
+	        writer.close();
+	        File origFile = new File(requestPath);
+	        origFile.delete();
+	        tempFile.renameTo(origFile);
+	    } catch (IOException e) {
+	        e.printStackTrace();
+	    }
+	}
+	public int getNewID() {
+		int id = last_index + 1;
+		last_index = id;
+		return id;
+	}
+	
 }
