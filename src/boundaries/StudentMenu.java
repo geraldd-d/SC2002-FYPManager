@@ -32,6 +32,7 @@ public class StudentMenu{
 	 */
 	public void display(Student user) {
 		{
+        	StudentProjectManager spm = StudentProjectManager.getInstance();
 	        Scanner input = new Scanner(System.in);
 	        StudentController stc = StudentController.getInstance();
 			Project p = new Project();
@@ -71,6 +72,7 @@ public class StudentMenu{
 	                	}
 	                	boolean validRequest = false;
 	                	while (!validRequest) {
+	                		spm.viewAvailable();
 	                		input.nextLine();
 	                		int proj = 0;
 	                		try {
@@ -157,7 +159,6 @@ public class StudentMenu{
 						pm.display(user);
 						break;
 	                case 8:
-	                	StudentProjectManager spm = StudentProjectManager.getInstance();
 	                	StudentRequestManager srm = StudentRequestManager.getInstance();
 	                	spm.saveChanges();
 	                	srm.saveChanges();

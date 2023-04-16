@@ -62,7 +62,6 @@ public class PasswordMenu {
 			}
 		} while (!authenticated);
 		do {
-			sc.nextLine();
 			System.out.println("Enter new password: ");
 			String newPW = sc.nextLine();
 			System.out.println("Confirm new password again: ");

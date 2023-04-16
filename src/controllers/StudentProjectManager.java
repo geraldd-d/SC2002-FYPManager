@@ -62,7 +62,10 @@ public class StudentProjectManager implements IStudentProjectManager{
 		currentPage.forEach((project)->project.printAvailableProject());
 	}
 
-	
+	public void viewAvailable() {
+		ArrayList<Project>projects = getAllAvailableProjects();
+		projects.forEach((project)->project.printAvailableProject());
+	}
 	/** 
 	 * @param p
 	 */
