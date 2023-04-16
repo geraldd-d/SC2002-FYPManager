@@ -54,7 +54,7 @@ public class CoordinatorProjectsMenu {
             		cc.viewAllReservedProjects(coordinator);
             		break;
             	case 4:
-            		cc.viewAllUnavailableProjects(coordinator);
+            		cc.viewAllAllocatedProjects(coordinator);
             		break;
             	case 5:
             		cc.viewOwnProjects(coordinator);
@@ -65,6 +65,6 @@ public class CoordinatorProjectsMenu {
                     System.out.println("Invalid choice. Please enter a valid option.");
                     break;
             }
-        } while (choice != 5);
+        } while (choice != 6);
 	}
 }
