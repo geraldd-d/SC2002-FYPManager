@@ -1,8 +1,10 @@
 package entities;
 
 public class AllocRequest extends Request {
-	public AllocRequest(int requestID, User requestor, User requestee, RequestStatus status, Project project) {
-		super(requestID, requestor, requestee, status, project);
+	private RequestType type = RequestType.Allocation;
+	public AllocRequest(String id, User requestor, User requestee, RequestStatus status, Project project) {
+		super(id, requestor, requestee, status, project);
+		
 	}
 	public void printRequest() {
 		System.out.println("Allocation Request");
@@ -15,8 +17,9 @@ public class AllocRequest extends Request {
 	}
 	@Override
 	public RequestType getType() {
-		return RequestType.Allocation;
+		return this.type;
 	}
+	@Override
 	public String getChanges() {
 		return "";
 	}

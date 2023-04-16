@@ -15,13 +15,13 @@ public class LoginController {
 		return lc;
 	}
 	public User checkStudentID(String id) {
-		StudentController sc = StudentController.getInstance();
+		StudentService sc = StudentService.getInstance();
 		User currentUser = null;
 		currentUser = sc.getStudentbyID(id);
 		return currentUser;
 	}
 	public User checkFacultyID(String id) {
-		FacultyController fc = FacultyController.getInstance();
+		FacultyService fc = FacultyService.getInstance();
 		User currentUser = null;
 		currentUser = fc.getFacultybyID(id);
 		return currentUser;
@@ -35,11 +35,13 @@ public class LoginController {
 			System.out.println("Error");
 			return;
 		}
-		AccountsController ac = AccountsController.getInstance();
+		
 		if (user instanceof Student) {
-			ac.updateSAccount(user, newPass);
+			StudentService sc = StudentService.getInstance();
+			sc.updateStudent(user.getUserID(), newPass);
 		} else {
-			ac.updateFAccount(user, newPass);
+			FacultyService fc = FacultyService.getInstance();
+			fc.updateFaculty(user.getUserID(), newPass);
 		}
 	}
 }

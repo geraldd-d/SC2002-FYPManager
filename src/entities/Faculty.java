@@ -39,6 +39,5 @@ public class Faculty extends User{
 	public ArrayList<Request> getHistory() {
 		return this.requestHistory;
 	}
-	
 }
 

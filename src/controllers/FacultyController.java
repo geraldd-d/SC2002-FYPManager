@@ -1,78 +1,77 @@
 package controllers;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
-import entities.*;
-
+import entities.Coordinator;
+import entities.Faculty;
+import entities.Project;
+import entities.ProjectStatus;
+import entities.Request;
+import entities.Student;
 
 public class FacultyController {
 	private static FacultyController fc = null;
-	private static HashMap<String,User> facultyData;
-	private HashMap<String,Faculty> facultyNames;
-	private Coordinator coordinator;
-	private FacultyController(HashMap<String,User> facultyData) {
-		FacultyController.facultyData = facultyData;
-		this.facultyNames = getFacultyNames();
+	private final FacultyService facultyService;
+	private final FacultyProjectService facultyProjectService;
+	private final FacultyRequestService facultyRequestService;
+	private FacultyController() {
+		ServiceController svc = ServiceController.getInstance();
+		this.facultyService = svc.getFacultyService();
+		this.facultyProjectService = FacultyProjectService.getInstance();
+		this.facultyRequestService = FacultyRequestService.getInstance();
 	};
-	public static FacultyController getInstance(HashMap<String,User> facultyList) {
-		if (fc == null|| !facultyList.equals(facultyData)) {
-			fc = new FacultyController(facultyList);
+	public static FacultyController getInstance() {
+		if (fc == null) {
+			fc = new FacultyController();
 		}
 		return fc;
 	}
-	public static FacultyController getInstance() {
-		return fc;
+	
+	public void viewOwnProjects(Faculty user) {
+		if (user.getProjects().size()>0) {
+			facultyProjectService.viewOwnProjects(user);
+		} else {
+			System.out.println("You currently have no projects.");
+		}
+	}
+	public void createProject(String title,Faculty supervisor){
+		String id = supervisor.getUserID();
+		int numActive = facultyService.getActiveProjects(id);
+		ProjectStatus status;
+		if (numActive >= 2) {
+			status = ProjectStatus.Unavailable;
+		} else {
+			status = ProjectStatus.Available;
+		}
+		String studentid = "";
+		facultyProjectService.addProject(title, id, supervisor.getName(), studentid, status);
+	}
+	public void changeTitle(Project p,String s) {
+		facultyProjectService.editProjectTitle(p, s);
+	}
+	public void requestTransfer(Faculty user, Project p, String replacementID) {
+		Faculty f = facultyService.getFacultybyID(replacementID);
+		Coordinator c = facultyService.getCoordinator();
+		facultyRequestService.addTransferRequest(user, c, p, f);
 	}
 	public Faculty getFacultybyID(String id) {
-		return (Faculty) facultyData.get(id);
-	}
-	public Faculty getFacultybyName(String name) {
-		return (Faculty) facultyNames.get(name);
-	}
-	public HashMap<String,Faculty> getFacultyNames(){
-		HashMap<String,Faculty> faculties = new HashMap<String,Faculty>();
-		facultyData.forEach((key, value)-> {
-			if (value instanceof Coordinator) {
-				this.coordinator = (Coordinator) value;
-			}
-			Faculty f = (Faculty) value;
-			faculties.put(f.getName(),f);
-		});
-		return faculties;
-	}
-	public Coordinator getCoord() {
-		return this.coordinator;
-	}
-	public void viewOwnProjects(Faculty user) {
-		FacultyProjectManager fpm = FacultyProjectManager.getInstance();
-		if (user.getProjects().size()>0) {
-			fpm.viewOwnProjects(user);
-		} else {
-			System.out.println("You currently have no projects.");
-		}
-	}
-	public void viewActiveProjects(Faculty user) {
-		FacultyProjectManager fpm = FacultyProjectManager.getInstance();
-		if (user.getProjects().size()>0) {
-			fpm.viewActiveProjects(user);
-		} else {
-			System.out.println("You currently have no projects.");
-		}
+		return facultyService.getFacultybyID(id);
 	}
 
-	public void changeTitle(Project p,String s) {
-		FacultyProjectManager fpm = FacultyProjectManager.getInstance();
-		fpm.changeTitle(p, s);
+	public void viewPendingReqs(Faculty f, int page) {
+		facultyRequestService.viewPending(f, page);
 	}
-	public void transferRequest(Faculty user, Project p, String replacementID) {
-		FacultyRequestManager frm = FacultyRequestManager.getInstance();
-		frm.addTransferRequest(user, p, replacementID);
+	public ArrayList<Request> getPendingReqs(Faculty user){
+		return facultyRequestService.getPendingReqs(user);
 	}
-	public ArrayList<Request> getPendingRequests(Faculty user) {
-		FacultyRequestManager frm = FacultyRequestManager.getInstance();
-		return frm.getPendingReqs(user);
+	public void saveChanges() {
+		facultyRequestService.saveChanges();
+		facultyProjectService.saveChanges();
+	}
+	public ArrayList<Request> getFacultyInbox(Faculty f){
+		return facultyService.getFacultyInbox(f);
+	}
+	public ArrayList<Request> getFacultyRequests(Faculty f){
+		return facultyService.getFacultyRequests(f);
 	}
 }
-
-	

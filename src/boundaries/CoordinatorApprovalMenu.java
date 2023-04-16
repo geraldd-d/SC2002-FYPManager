@@ -3,7 +3,7 @@ package boundaries;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-import controllers.CoordinatorController;
+import controllers.CoordController;
 import entities.ApprovalType;
 import entities.Coordinator;
 import entities.Request;
@@ -19,7 +19,7 @@ public class CoordinatorApprovalMenu {
 	}
 	public void display(Coordinator coordinator){
 		Scanner sc = new Scanner(System.in);
-		CoordinatorController cc = CoordinatorController.getInstance();
+		CoordController cc = CoordController.getInstance();
     	int requestID = -1;
         do {
             cc.viewPending(coordinator);
@@ -35,16 +35,15 @@ public class CoordinatorApprovalMenu {
         	if (requestID == 0) {
         		break;
         	}
-        	if (cc.getPendingRequestbyID(coordinator,requestID) == null) {
+        	if (cc.getPendingRequestbyID(requestID) == null) {
                 System.out.println("Pending request not found in the database.");
         		continue;
         	} else {
-        		Request r = cc.getPendingRequestbyID(coordinator, requestID);
+        		Request r = cc.getPendingRequestbyID(requestID);
         		String approval;
         		boolean valid = false;
         		do {
         			try {
-        				sc.nextLine();
         				System.out.println("Enter APPROVE or REJECT: ");
         				approval = sc.nextLine();
             		    ApprovalType apt = ApprovalType.valueOf(approval);
@@ -54,9 +53,9 @@ public class CoordinatorApprovalMenu {
             		}
         			valid = true;
         			if (ApprovalType.valueOf(approval).equals(ApprovalType.APPROVE)){
-        				cc.approveRequest(coordinator, r);
+        				cc.approveRequest(r);
         			} else {
-        				cc.rejectRequest(coordinator, r);
+        				cc.rejectRequest(r);
         			}
         		} while (!valid);
         	}

@@ -39,7 +39,7 @@ public class Project {
 	public String getStudentID(){
 		return this.studentID;
 	}
-
+	
 	// setter
 	public void setID(Integer id) {
         this.projectID = id;
@@ -56,10 +56,9 @@ public class Project {
 	public void setStatus(ProjectStatus status) {
         this.status = status;
     }
-	public void setStudentID(String studentID) {
+	public void setStudent(String studentID) {
         this.studentID = studentID;
     }
-	
 	public void printAvailableProject() {
 		System.out.println("Project ID: "+this.projectID);
 		System.out.println("Supervisor: "+this.supervisorName);
@@ -73,7 +72,6 @@ public class Project {
 		System.out.println("Supervisor: "+this.supervisorName);
 		System.out.println();
 	}
-
 	public void printActiveProject(){
 		System.out.println("Project ID: "+this.projectID);
 		System.out.println("Project Name: "+ this.title);

@@ -1,47 +1,52 @@
 package controllers;
 
-import java.util.*;
+import java.util.ArrayList;
 
-import entities.*;
+import entities.Project;
+import entities.ProjectStatus;
+import entities.Request;
+import entities.RequestStatus;
+import entities.Student;
 
 public class StudentController {
 	private static StudentController sc = null;
-	private static HashMap<String,User> studentData;
-	private StudentController(HashMap<String,User> studentData) {
-		StudentController.studentData = studentData;
+	private final StudentService studentService;
+	private final StudentProjectService studentProjectService;
+	private final StudentRequestService studentRequestService;
+	private StudentController() {
+		this.studentService = StudentService.getInstance();
+		this.studentProjectService = StudentProjectService.getInstance();
+		this.studentRequestService = StudentRequestService.getInstance();
 	};
-	public static StudentController getInstance(HashMap<String,User> studentsList) {
-		if (sc == null || !studentsList.equals(studentData)) {
-			sc = new StudentController(studentsList);
+	public static StudentController getInstance() {
+		if (sc == null) {
+			sc = new StudentController();
 		}
 		return sc;
 	}
-	public static StudentController getInstance() {
-		return sc;
+	//View all the available projects 
+	public void viewAllAvailableProjects(Student s,int page) {
+		if (!studentService.isAllocated(s)) {
+			studentProjectService.viewAllAvailableProjects(page);
+		}
 	}
-	public Student getStudentbyID(String id) {
-		return (Student) studentData.get(id);
-	}
-
 	
 	// Requesting the supervisor to allocate the project 
 	public boolean requestAlloc(Student user, int id) {
-		ProjectManager pm = ProjectManager.getInstance();
-		StudentRequestManager srm = StudentRequestManager.getInstance();
-		Project p = pm.getProjectByID(id);
+		Project p = studentProjectService.getProjectbyID(id);
 		if (p != null && p.getStatus().equals(ProjectStatus.Available)) {
-			srm.addAllocationRequest(user, p);
+			studentRequestService.addAllocationRequest(user, p);
 			return true;
 		}
 		return false;
 	}
 	
 	// Reuqesting to change the title of the Project
-	public boolean requestNewTitle(Student user){
-		StudentRequestManager srm = StudentRequestManager.getInstance();
-		Project p = user.getRegisteredProject();
+	public boolean requestNewTitle(Student user, String title){
+		String id = studentService.getStudentID(user);
+		Project p = studentService.getStudentProject(id);
 		if(p!= null && p.getStatus().equals(ProjectStatus.Allocated)){
-			srm.addTitleRequest(user, p, p.getTitle());
+			studentRequestService.addTitleRequest(user, p, title);
 			return true;
 		}
 		return false;
@@ -49,7 +54,8 @@ public class StudentController {
 	
 	// temporary
 	public boolean viewRegisteredProject(Student user){
-		Project p = user.getRegisteredProject();
+		String id = studentService.getStudentID(user);
+		Project p = studentService.getStudentProject(id);
 		if(p != null){
 			p.printProject();
 			return true;
@@ -58,22 +64,13 @@ public class StudentController {
 	}
 
 	// Deregister the registered project 
-	public boolean DeregisterProject(Student user){
-		ProjectManager pm = ProjectManager.getInstance();
-		StudentRequestManager srm = StudentRequestManager.getInstance();
-		Project project = user.getRegisteredProject();
-		if(project != null){
-			srm.addDeregistrationRequest(user,project);
+	public boolean requestDeregister(Student user){
+		String id = studentService.getStudentID(user);
+		Project p = studentService.getStudentProject(id);
+		if(p!= null && p.getStatus().equals(ProjectStatus.Allocated)){
+			studentRequestService.addDeregistrationRequest(user, p);
 			return true;
 		}
 		return false;
 	}
 }
-
-
-
-
-
-
-    
-    

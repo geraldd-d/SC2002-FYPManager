@@ -4,9 +4,10 @@ import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-
-import controllers.CoordinatorController;
+import controllers.CoordController;
 import controllers.FacultyController;
+import controllers.FacultyService;
+import controllers.ProjectService;
 import entities.Coordinator;
 import entities.Faculty;
 import entities.Project;
@@ -22,7 +23,7 @@ public class CoordinatorProjectsMenu {
 	}
 	public void display(Coordinator coordinator){
 		Scanner sc = new Scanner(System.in);
-		CoordinatorController cc = CoordinatorController.getInstance();
+		CoordController cc = CoordController.getInstance();
         int choice = 0;
         do {
         	boolean valid = false;
@@ -54,7 +55,7 @@ public class CoordinatorProjectsMenu {
             		cc.viewAllReservedProjects(coordinator);
             		break;
             	case 4:
-            		cc.viewAllAllocatedProjects(coordinator);
+            		cc.viewAllUnavailableProjects(coordinator);
             		break;
             	case 5:
             		cc.viewOwnProjects(coordinator);
@@ -65,6 +66,6 @@ public class CoordinatorProjectsMenu {
                     System.out.println("Invalid choice. Please enter a valid option.");
                     break;
             }
-        } while (choice != 6);
+        } while (choice != 5);
 	}
 }

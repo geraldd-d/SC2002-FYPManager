@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-import controllers.CoordProjectManager;
-import controllers.CoordRequestManager;
-import controllers.CoordinatorController;
+import controllers.CoordController;
 import controllers.FacultyController;
+import controllers.FacultyService;
+import controllers.ProjectService;
 import entities.Coordinator;
 import entities.Faculty;
 import entities.Project;
@@ -23,9 +23,9 @@ public class CoordinatorMenu {
 	}
 	public void display(Coordinator coordinator){
 		Scanner sc = new Scanner(System.in);
+		ProjectService psc = ProjectService.getInstance();
+		CoordController cc = CoordController.getInstance();
 		FacultyController fc = FacultyController.getInstance();
-		CoordProjectManager cprm = CoordProjectManager.getInstance();
-		CoordinatorController cc = CoordinatorController.getInstance();
         int choice = 0;
         do {
         	boolean valid = false;
@@ -58,16 +58,18 @@ public class CoordinatorMenu {
                     break;
                 case 2:
                 	String title;
-                    System.out.println("Enter new title:");
-                    title = sc.nextLine();
-                    while (title.length() < 5) {
-                        System.out.println("New title is too short.");
+                	boolean created = false;
+                	do {
                         System.out.println("Enter new title:");
                         title = sc.nextLine();
-                        }
-                    cprm.addProject(coordinator, title);
-                    break;
-                     
+                        while (title.length() < 5) {
+                            System.out.println("New title is too short.");
+                        	System.out.println("Enter new title:");
+                            title = sc.nextLine();
+                        	}
+                        fc.createProject(title, coordinator);
+                        created = true;
+                        } while (!created);
                 case 3:
                     // change the title
                 	String newtitle;
@@ -83,8 +85,8 @@ public class CoordinatorMenu {
                         if (id == 0) {
                         	break;
                         }
-                        if (projects.contains(cprm.getProjectByID(id))) {
-                        	Project p = cprm.getProjectByID(id);
+                        if (projects.contains(psc.getProjectbyID(id))) {
+                        	Project p = psc.getProjectbyID(id);
                         	valid = true;
                         	System.out.println("Enter new title:");
                         	title = sc.nextLine();
@@ -116,8 +118,8 @@ public class CoordinatorMenu {
                         if (id == 0) {
                         	break;
                         }
-                        if (projects.contains(cprm.getProjectByID(id))) {
-                        	Project p = cprm.getProjectByID(id);
+                        if (projects.contains(psc.getProjectbyID(id))) {
+                        	Project p = psc.getProjectbyID(id);
                         	valid = true;
                         	boolean matched = false;
                         	while (!matched) {
@@ -163,11 +165,9 @@ public class CoordinatorMenu {
 					pwm.display(coordinator);
                     break;
                 case 9:
-                	CoordRequestManager crrm = CoordRequestManager.getInstance();
-                	cprm.saveChanges();
-                	crrm.saveChanges();
-                    System.out.println("Logging out...");
-                    LoginMenu lm = LoginMenu.getInstance();
+                	fc.saveChanges();
+                    System.out.println("Thank you for using FYP Management System.");
+                    System.exit(0);
                     break;
                 default:
                     System.out.println("Invalid choice. Please enter a valid option.");
