@@ -6,6 +6,9 @@ import controllers.LoginController;
 import entities.Student;
 import entities.User;
 
+/**
+ * This class is the boundary for the StudentLoginMenu class.
+ */
 public class StudentLoginMenu {
 	private static StudentLoginMenu slm = null;
 	private StudentLoginMenu() {};

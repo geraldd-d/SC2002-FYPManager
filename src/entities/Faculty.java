@@ -1,6 +1,9 @@
 package entities;
 import java.util.ArrayList;
 
+/**
+ * This class represents a faculty member.
+ */
 public class Faculty extends User{
 	private ArrayList<Project> projects = new ArrayList<Project>();
 	private ArrayList<Request> requestHistory = new ArrayList<Request>();

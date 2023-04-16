@@ -1,5 +1,8 @@
 package entities;
 
+/**
+ * This class is a child class of Request. It is used to create Transfer Requests.
+ */
 public class TransferRequest extends Request {
 	private Faculty replacement;
 	private String replacementID;

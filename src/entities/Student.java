@@ -3,6 +3,9 @@ package entities;
 import java.util.ArrayList;
 import controllers.*;
 
+/**
+ * This class represents a student in the FYPManager.
+ */
 public class Student extends User{
 	HashService hs = HashService.getInstance();
 	private Project registeredProject;

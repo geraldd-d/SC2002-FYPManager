@@ -6,7 +6,9 @@ import java.util.HashMap;
 
 import entities.*;
 
-
+/**
+ * This class is the controller for the Project class.
+ */
 public class ProjectsController {
 	private static ProjectsController pcc = null;
 	private static Integer last_index;
@@ -17,9 +19,9 @@ public class ProjectsController {
 		ProjectManager.getInstance(projects);
 	}
 	
-	
-	/** 
-	 * @return ProjectsController
+	/**
+	 * This method is used to get the instance of the ProjectsController. It is a singleton class.
+	 * @return The instance of the ProjectsController class.
 	 */
 	public static ProjectsController getInstance() {
 		if (pcc == null) {
@@ -31,9 +33,10 @@ public class ProjectsController {
 	private static String projectsPath = System.getProperty("user.dir") + "//data//projectsList.csv";
 	
 	private static final String delimiter = ";";
-	
-	/** 
-	 * @return ArrayList<Project>
+
+	/**
+	 * This method is used to read the projects from the file.
+	 * @return The list of projects in the system.
 	 */
 	private ArrayList<Project> readProjects() {
 		FacultyController fc = FacultyController.getInstance();
@@ -86,9 +89,10 @@ public class ProjectsController {
 		}
 		return projects;
 	}
-	
-	/** 
-	 * @param projects
+
+	/**
+	 * This method is used to update the projects in the file.
+	 * @param projects The list of projects to be updated.
 	 */
 	protected void updateProjects(ArrayList<Project> projects) {
 	    try {
@@ -130,9 +134,9 @@ public class ProjectsController {
 	    }
 	}
 	
-	
-	/** 
-	 * @return int
+	/**
+	 * This method is used to get the next ID for a new project.
+	 * @return The next ID for a new request.
 	 */
 	public int getNewID() {
 		int id = last_index + 1;

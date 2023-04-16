@@ -10,6 +10,9 @@ import entities.ProjectStatus;
 import entities.Student;
 import entities.User;
 
+/**
+ * This class is the manager for the Project class.
+ */
 public class ProjectManager {
 	private ArrayList<Project> projects;
 	private static ProjectManager pm = null;
@@ -21,9 +24,10 @@ public class ProjectManager {
 		capProjects();
 	};
 	
-	/** 
-	 * @param p
-	 * @return ProjectManager
+	/**
+	 * This method is used to get the instance of the ProjectManager class. It is a singleton class.
+	 * @param p The list of projects in the system.
+	 * @return The instance of the ProjectManager class.
 	 */
 	public static ProjectManager getInstance(ArrayList<Project> p) {
 		if (pm == null) {
@@ -31,13 +35,18 @@ public class ProjectManager {
 		}
 		return pm;
 	}
-	
-	/** 
-	 * @return ProjectManager
+
+	/**
+	 * This method is used to get the instance of the ProjectManager class. It is a singleton class.
+	 * @return The instance of the ProjectManager class.
 	 */
 	public static ProjectManager getInstance() {
 		return pm;
 	}
+
+	/**
+	 * This method is used to set a cap on the number of projects a faculty can supervise.
+	 */
 	public void capProjects() {
 		FacultyController fc = FacultyController.getInstance();
 		projects.forEach((p)->{
@@ -48,14 +57,18 @@ public class ProjectManager {
 		});
 	}
 	
+	/**
+	 * This method is used to save the changes made to the projects.
+	 */
 	public void saveChanges() {
 	    ProjectsController pc = ProjectsController.getInstance();
 	    pc.updateProjects(projects);
 	}
-	
-	/** 
-	 * @param projectID
-	 * @return Project
+
+	/**
+	 * This method is used to get the projects by their ID.
+	 * @param projectID The ID of the project to be retrieved.
+	 * @return The project with the given ID.
 	 */
 	public Project getProjectByID(Integer projectID) {
 		for (Project project : projects) {

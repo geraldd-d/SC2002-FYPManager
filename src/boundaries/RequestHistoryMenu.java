@@ -10,6 +10,9 @@ import controllers.StudentController;
 import entities.Request;
 import entities.User;
 
+/**
+ * This class is the boundary for the RequestHistoryMenu class.
+ */
 public class RequestHistoryMenu{
 	private RequestHistoryMenu() {};
 	private static RequestHistoryMenu rhm = null;

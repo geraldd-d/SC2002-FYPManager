@@ -5,6 +5,9 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 import controllers.*;
 
+/**
+ * This class is the boundary for the LoginMenu class.
+ */
 public class LoginMenu implements BaseMenu{
 	private LoginMenu() {};
 	private static LoginMenu lm = null;

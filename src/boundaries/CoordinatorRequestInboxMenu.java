@@ -6,6 +6,9 @@ import java.util.Scanner;
 import controllers.CoordinatorController;
 import entities.Coordinator;
 
+/**
+ * This class is the boundary for the CoordinatorRequestInboxMenu class.
+ */
 public class CoordinatorRequestInboxMenu {
 	private CoordinatorRequestInboxMenu() {
 		CoordinatorController cc = CoordinatorController.getInstance();

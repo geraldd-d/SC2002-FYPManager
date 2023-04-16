@@ -5,6 +5,9 @@ import java.util.List;
 
 import entities.*;
 
+/**
+ * This class is the manager class for the requests.
+ */
 public class RequestManager {
 	private static RequestManager rm = null;
 	private ArrayList<Request> requestList;
@@ -17,10 +20,10 @@ public class RequestManager {
 		StudentRequestManager spm = StudentRequestManager.getInstance(requestList);
 	}
 
-	
-	/** 
-	 * @param requestList
-	 * @return RequestManager
+	/**
+	 * This method is used to get the instance of the RequestManager. It is a singleton class.
+	 * @param requestList The list of requests in the system.
+	 * @return The instance of the RequestManager class.
 	 */
 	public static RequestManager getInstance(ArrayList<Request> requestList) {
 		if (rm == null) {
@@ -28,18 +31,18 @@ public class RequestManager {
 		}
 		return rm;
 	}
-	
-	/** 
-	 * @return RequestManager
+	/**
+	 * This method is used to get the instance of the RequestManager. It is a singleton class.
+	 * @return The instance of the RequestManager class.
 	 */
 	public static RequestManager getInstance() {
 		return rm;
 	}
 
-	
-	/** 
-	 * @param user
-	 * @param page
+	/**
+	 * This method is used to view the history of the user
+	 * @param user The user whose history is to be viewed.
+	 * @param page The page number of the history to be viewed.
 	 */
 	public void viewHistory(User user, int page) {
 		int pageSize = 5;

@@ -6,6 +6,9 @@ import entities.Faculty;
 import entities.Project;
 import entities.ProjectStatus;
 
+/**
+ * This class is the manager for the faculty projects. It implements the IFacultyProjectManager interface.
+ */
 public class FacultyProjectManager implements IFacultyProjectManager{
 	private static FacultyProjectManager fpm = null;
 	private ArrayList<Project> projects;

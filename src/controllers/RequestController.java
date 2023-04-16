@@ -10,6 +10,9 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.*;
 
+/**
+ * This class is the controller for the Request class.
+ */
 public class RequestController {
 	private static RequestController rc = null;
 	private ArrayList<Request> requestList;
@@ -18,11 +21,12 @@ public class RequestController {
     	this.requestList = requests;
     	RequestManager rm = RequestManager.getInstance(requests);
     }
-    
-	/** 
-	 * @return RequestController
+	
+	/**
+	 * This method is used to get the instance of the RequestController. It is a singleton class.
+	 * @return The instance of the RequestController class.
 	 */
-	public static RequestController getInstance() {
+    public static RequestController getInstance() {
         if (rc == null) {
             rc = new RequestController();
         }
@@ -37,6 +41,11 @@ public class RequestController {
 	private static String requestPath = System.getProperty("user.dir") + "//data//requestList.csv";
     private int last_index = 0;
 	private static final String delimiter = ";";
+	
+	/**
+	 * This method is used to read the requests from the file.
+	 * @return The list of requests in the system.
+	 */
 	private ArrayList<Request> readRequests() {
 		FacultyController fc = FacultyController.getInstance();
 		StudentController sc = StudentController.getInstance();
@@ -120,6 +129,11 @@ public class RequestController {
 		}
 		return requests;
 	}
+
+	/**
+	 * This method is used to update the requests in the file.
+	 * @param requests The list of requests in the system.
+	 */
 	protected void updateRequests(ArrayList<Request> requests) {
 	    try {
 	    	String tempFilePath = requestPath + ".tmp";
@@ -167,10 +181,10 @@ public class RequestController {
 	    }
 	}
 	
-	/** 
-	 * @return int
+	/**
+	 * This method is used to get the next ID for a new request.
+	 * @return The next ID for a new request.
 	 */
-	
 	public int getNewID() {
 		int id = last_index + 1;
 		last_index = id;

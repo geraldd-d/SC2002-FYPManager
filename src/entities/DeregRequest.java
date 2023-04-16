@@ -1,5 +1,8 @@
 package entities;
 
+/**
+ * This class is used to represent a deregistration request.
+ */
 public class DeregRequest extends Request {
 	public DeregRequest(int requestID, User requestor, User requestee, RequestStatus status, Project project) {
 		super(requestID, requestor, requestee, status, project);

@@ -1,5 +1,8 @@
 package entities;
 
+/**
+ * This class is a child class of Request. It is used to create Title Change Requests.
+ */
 public class TitleRequest extends Request {
 	private String title;
 	public TitleRequest(int requestID, User requestor, User requestee, RequestStatus status, Project project, String title) {

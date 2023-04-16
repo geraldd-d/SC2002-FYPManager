@@ -6,6 +6,9 @@ import java.util.Scanner;
 import controllers.*;
 import entities.*;
 
+/**
+ * This class is the boundary for the ProjectMenu class.
+ */
 public class ProjectMenu implements BaseMenu{
 	private ProjectMenu() {
 	};

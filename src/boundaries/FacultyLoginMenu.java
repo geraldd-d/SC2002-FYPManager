@@ -7,6 +7,9 @@ import entities.Coordinator;
 import entities.Faculty;
 import entities.User;
 
+/**
+ * This class is the boundary for the FacultyLoginMenu class.
+ */
 public class FacultyLoginMenu {
 	private static FacultyLoginMenu flm = null;
 	private FacultyLoginMenu() {};

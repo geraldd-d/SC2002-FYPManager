@@ -8,6 +8,9 @@ import entities.Faculty;
 import entities.Student;
 import entities.User;
 
+/**
+ * This class is the boundary for the PasswordMenu class.
+ */
 public class PasswordMenu {
 	private static PasswordMenu pm = null;
 	private PasswordMenu() {};

@@ -2,6 +2,9 @@ package entities;
 
 import java.util.*;
 
+/*
+ * This class represents a FYP of the system.
+ */
 public class Project {
 	private Integer projectID;
 	private String title;

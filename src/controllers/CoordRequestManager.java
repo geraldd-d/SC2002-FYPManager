@@ -10,6 +10,9 @@ import entities.Request;
 import entities.RequestStatus;
 import entities.Student;
 
+/**
+ * This class is the manager for the requests made by the coordinator. It implements the ICoordRequestManager interface.
+ */
 public class CoordRequestManager implements ICoordRequestManager {
 	private static CoordRequestManager crsc = null;
 	private ArrayList<Request> requests;

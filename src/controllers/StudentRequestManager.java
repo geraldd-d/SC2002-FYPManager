@@ -13,6 +13,9 @@ import entities.RequestStatus;
 import entities.Student;
 import entities.TitleRequest;
 
+/**
+ * This class manages the requests made by students. It implements the IStudentRequestManager interface.
+ */
 public class StudentRequestManager implements IStudentRequestManager{
 	private static StudentRequestManager srm = null;
 	private ArrayList<Request> requests;

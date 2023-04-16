@@ -10,6 +10,9 @@ import entities.Faculty;
 import entities.Request;
 import entities.User;
 
+/**
+ * This class is the boundary for the RequestPendingMenu class.
+ */
 public class RequestPendingMenu{
 	private RequestPendingMenu() {};
 	private static RequestPendingMenu rpm = null;

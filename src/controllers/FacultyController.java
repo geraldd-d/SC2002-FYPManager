@@ -5,20 +5,26 @@ import java.util.HashMap;
 
 import entities.*;
 
-
+/**
+ * This class is the controller for the Faculty class.
+ */
 public class FacultyController {
 	private static FacultyController fc = null;
 	private static HashMap<String,User> facultyData;
 	private HashMap<String,Faculty> facultyNames;
 	private Coordinator coordinator;
+	/**
+	 * This is the constructor for the FacultyController class.
+	 * @param facultyData The list of faculty in the system.
+	 */
 	private FacultyController(HashMap<String,User> facultyData) {
 		FacultyController.facultyData = facultyData;
 		this.facultyNames = getFacultyNames();
 	};
-	
-	/** 
-	 * @param facultyList
-	 * @return FacultyController
+	/**
+	 * This method is used to get the instance of the FacultyController class. It is a singleton class.
+	 * @param facultyList The list of faculty in the system.
+	 * @return The instance of the FacultyController class.
 	 */
 	public static FacultyController getInstance(HashMap<String,User> facultyList) {
 		if (fc == null|| !facultyList.equals(facultyData)) {
@@ -26,32 +32,32 @@ public class FacultyController {
 		}
 		return fc;
 	}
-	
-	/** 
-	 * @return FacultyController
+	/**
+	 * This method is used to get the instance of the FacultyController class. It is a singleton class.
+	 * @return The instance of the FacultyController class.
 	 */
 	public static FacultyController getInstance() {
 		return fc;
 	}
-	
-	/** 
-	 * @param id
-	 * @return Faculty
+	/**
+	 * This method is used to get a faculty by their ID.
+	 * @param id The ID of the faculty.
+	 * @return The faculty with the given ID.
 	 */
 	public Faculty getFacultybyID(String id) {
 		return (Faculty) facultyData.get(id);
 	}
-	
-	/** 
-	 * @param name
-	 * @return Faculty
+	/**
+	 * This method is used to get a faculty by their name.
+	 * @param name The name of the faculty.
+	 * @return The faculty with the given name.
 	 */
 	public Faculty getFacultybyName(String name) {
 		return (Faculty) facultyNames.get(name);
 	}
-	
-	/** 
-	 * @return HashMap<String, Faculty>
+	/**
+	 * This method is used to get a hashmap of all the faculty in the system.
+	 * @return A hashmap of all the faculty in the system.
 	 */
 	public HashMap<String,Faculty> getFacultyNames(){
 		HashMap<String,Faculty> faculties = new HashMap<String,Faculty>();
@@ -64,16 +70,16 @@ public class FacultyController {
 		});
 		return faculties;
 	}
-	
-	/** 
-	 * @return Coordinator
+	/**
+	 * This method is used to get the coordinator of the system.
+	 * @return The coordinator of the system.
 	 */
 	public Coordinator getCoord() {
 		return this.coordinator;
 	}
-	
-	/** 
-	 * @param user
+	/**
+	 * This method is used to get all the owned projects of a faculty.
+	 * @param user The faculty member.
 	 */
 	public void viewOwnProjects(Faculty user) {
 		FacultyProjectManager fpm = FacultyProjectManager.getInstance();
@@ -83,9 +89,9 @@ public class FacultyController {
 			System.out.println("You currently have no projects.");
 		}
 	}
-	
-	/** 
-	 * @param user
+	/**
+	 * This method is used to get all the active projects of a faculty.
+	 * @param user The faculty member.
 	 */
 	public void viewActiveProjects(Faculty user) {
 		FacultyProjectManager fpm = FacultyProjectManager.getInstance();
@@ -96,29 +102,29 @@ public class FacultyController {
 		}
 	}
 
-	
-	/** 
-	 * @param p
-	 * @param s
+	/**
+	 * This method is used to change the title of a faculty project.
+	 * @param p The project to be changed.
+	 * @param s The new title.
 	 */
 	public void changeTitle(Project p,String s) {
 		FacultyProjectManager fpm = FacultyProjectManager.getInstance();
 		fpm.changeTitle(p, s);
 	}
-	
-	/** 
-	 * @param user
-	 * @param p
-	 * @param replacementID
+	/**
+	 * This method is to create a new transfer request.
+	 * @param user The faculty member.
+	 * @param p The project to be transferred.
+	 * @param replacementID The ID of the replacement faculty member.
 	 */
 	public void transferRequest(Faculty user, Project p, String replacementID) {
 		FacultyRequestManager frm = FacultyRequestManager.getInstance();
 		frm.addTransferRequest(user, p, replacementID);
 	}
-	
-	/** 
-	 * @param user
-	 * @return ArrayList<Request>
+	/**
+	 * This method is to get all the pending requests of a faculty member.
+	 * @param user The faculty member.
+	 * @return An arraylist of all the pending requests of the faculty member.
 	 */
 	public ArrayList<Request> getPendingRequests(Faculty user) {
 		FacultyRequestManager frm = FacultyRequestManager.getInstance();

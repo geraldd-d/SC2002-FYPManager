@@ -1,5 +1,8 @@
 package entities;
 
+/**
+ * This class is a child class of Request. It is used to create Allocation Requests.
+ */
 public class AllocRequest extends Request {
 	public AllocRequest(int requestID, User requestor, User requestee, RequestStatus status, Project project) {
 		super(requestID, requestor, requestee, status, project);

@@ -7,7 +7,9 @@ import controllers.FacultyRequestManager;
 import controllers.ProjectManager;
 import entities.*;
 
-
+/**
+ * This class is the boundary for the FacultyMenu class.
+ */
 public class FacultyMenu{
 	private static FacultyMenu fm = null;
 	private FacultyMenu() {};

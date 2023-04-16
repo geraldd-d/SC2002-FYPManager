@@ -6,12 +6,15 @@ import java.security.MessageDigest;
 import java.lang.StringBuilder;
 import java.nio.charset.StandardCharsets;
 
+/**
+ * This class is used to hash the password of the user.
+ */
 public class HashService {
 	private static HashService hs = null;
 	private HashService() {};
-	
-	/** 
-	 * @return HashService
+	/**
+	 * This method is used to get the instance of the HashService class. It is a singleton class.
+	 * @return The instance of the HashService class.
 	 */
 	public static HashService getInstance() {
 		if (hs == null) {
@@ -20,11 +23,11 @@ public class HashService {
 		return hs;
 	}
 	
-	
-	/** 
-	 * @param password
-	 * @param userID
-	 * @return String
+	/**
+	 * This method is used to hash the password of the user.
+	 * @param password The password of the user.
+	 * @param userID The ID of the user.
+	 * @return The hashed password of the user.
 	 */
 	public String hashPassword(String password, String userID){
 		String algorithm = "SHA-256";
@@ -50,9 +53,10 @@ public class HashService {
 		}
 		return hashedPass;
 	}
-	
-	/** 
-	 * @return byte[]
+
+	/**
+	 * This method is used to generate a salt for the password.
+	 * @return The salt for the password.
 	 */
 	public byte[] generateSalt() {
 		byte[] bytes = new byte[10];

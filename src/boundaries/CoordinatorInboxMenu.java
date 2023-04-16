@@ -8,6 +8,9 @@ import controllers.CoordinatorController;
 import entities.Coordinator;
 import entities.Request;
 
+/**
+ * This class is the boundary for the CoordinatorInboxMenu class.
+ */
 public class CoordinatorInboxMenu {
 	private CoordinatorInboxMenu() {
 		CoordinatorController cc = CoordinatorController.getInstance();

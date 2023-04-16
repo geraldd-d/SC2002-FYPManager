@@ -12,6 +12,9 @@ import entities.TitleRequest;
 import entities.TransferRequest;
 import entities.User;
 
+/**
+ * This class is the manager for the faculty requests. It implements the IFacultyRequestManager interface.
+ */
 public class FacultyRequestManager implements IFacultyRequestManager {
 	private static FacultyRequestManager frm = null;
 	private ArrayList<Request> requests;

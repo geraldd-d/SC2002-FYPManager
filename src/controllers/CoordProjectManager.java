@@ -7,6 +7,9 @@ import entities.Project;
 import entities.ProjectStatus;
 import entities.Student;
 
+/**
+ * This class is the manager for the coordinator projects. It implements the ICoordProjectManager interface.
+ */
 public class CoordProjectManager implements ICoordProjectManager{
 	private static CoordProjectManager cpm = null;
 	private ArrayList<Project> projects;

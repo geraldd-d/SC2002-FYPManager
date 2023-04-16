@@ -8,7 +8,9 @@ import java.util.*;
 import entities.*;
 import controllers.*;
 
-
+/**
+ * This class is the boundary for the student menu.
+ */
 public class StudentMenu{
 	private static StudentMenu sm = null;
 	private StudentMenu() {

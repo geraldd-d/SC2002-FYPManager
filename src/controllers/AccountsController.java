@@ -6,7 +6,9 @@ import entities.User;
 import java.util.regex.*;
 import entities.*;
 
-
+/**
+ * This class is the controller for the User class.
+ */
 public class AccountsController {
 	private HashMap<String, User> studentList;
 	private HashMap<String, User> facultyList;
@@ -22,14 +24,9 @@ public class AccountsController {
 		ProjectsController pc = ProjectsController.getInstance();
 	}
 	
-	
-	
-	
-	/** 
-	 * 
-	 * this the account controller
-	 * 
-	 * @return AccountsController
+	/**
+	 * This method is used to get the instance of the AccountsController class. It is a singleton class.
+	 * @return
 	 */
 	public static AccountsController getInstance(){
 		if (acc == null) {
@@ -45,10 +42,9 @@ public class AccountsController {
 	
 	private static final Pattern pattern = Pattern.compile("^(.+)@.*$");
 	
-	
-	
-	/** 
-	 * @return HashMap<String, User>
+	/**
+	 * This method is used to get the student accounts from the file.
+	 * @return The list of student accounts in the system.
 	 */
 	private HashMap<String, User> getStudentAccounts(){
 		HashService hs = HashService.getInstance();
@@ -98,12 +94,9 @@ public class AccountsController {
 		return studentData;
 	}
 	
-	
-	/** 
-	 * 
-	 * mapping to get the faculty accounts from the CSV file
-	 * 
-	 * @return HashMap<String, User>
+	/**
+	 * This method is used to get the faculty accounts from the file.
+	 * @return The list of faculty accounts in the system.
 	 */
 	private HashMap<String, User> getFacultyAccounts(){
 		File file = new File(facultyPath);
@@ -159,15 +152,11 @@ public class AccountsController {
 		updateFaculty(facultyPath, facultyData);
 		return facultyData;
 	}
-	
-	
-	/** 
-	 * 
-	 * updating the student
-	 * 
-	 * @param filepath
-	 * @param accounts
-	 */ 
+	/**
+	 * This method is used to update the student accounts in the file.
+	 * @param filepath The path of the file.
+	 * @param accounts The hashmap of student accounts.
+	 */
 	private void updateStudents(String filepath, HashMap<String, User> accounts) {
 	    try {
 	    	String tempFilePath = filepath + ".tmp";
@@ -202,14 +191,10 @@ public class AccountsController {
 	        e.printStackTrace();
 	    }
 	}
-
-	
-	/** 
-	 * 
-	 * updating the faculty 
-	 * 
-	 * @param filepath
-	 * @param accounts
+	/**
+	 * This method is used to update the faculty accounts in the file.
+	 * @param filepath The path of the file.
+	 * @param accounts The hashmap of faculty accounts.
 	 */
 	private void updateFaculty(String filepath, HashMap<String, User> accounts) {
 	    try {
@@ -250,14 +235,10 @@ public class AccountsController {
 	        e.printStackTrace();
 	    }
 	}
-	
-	
-	/** 
-	 * 
-	 * updating student account
-	 * 
-	 * @param user
-	 * @param pw
+	/**
+	 * This method is used to update the student account in the file.
+	 * @param user The student account.
+	 * @param pw The new password.
 	 */
 	protected void updateSAccount(User user, String pw) {
 		HashService hs = HashService.getInstance();
@@ -292,13 +273,10 @@ public class AccountsController {
 		studentList = getStudentAccounts();
 		StudentController sc = StudentController.getInstance(studentList);
 	}
-	
-	/** 
-	 * 
-	 * updating faculty account
-	 * 
-	 * @param user
-	 * @param pw
+	/**
+	 * This method is used to update the faculty account in the file.
+	 * @param user The faculty account.
+	 * @param pw The new password.
 	 */
 	protected void updateFAccount(User user, String pw) {
 		HashService hs = HashService.getInstance();

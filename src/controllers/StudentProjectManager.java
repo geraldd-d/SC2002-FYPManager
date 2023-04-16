@@ -6,6 +6,9 @@ import java.util.List;
 import entities.Project;
 import entities.ProjectStatus;
 
+/**
+ * This class is used to manage the projects of a student. It implements the IStudentProjectManager interface.
+ */
 public class StudentProjectManager implements IStudentProjectManager{
 	private static StudentProjectManager spm = null;
 	private ArrayList<Project> projects;

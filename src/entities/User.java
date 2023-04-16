@@ -4,6 +4,9 @@ import java.util.ArrayList;
 
 import controllers.HashService;
 
+/**
+ * This abstract class is the parent class of all users. It contains the attributes and methods that are common to all users.
+ */
 public abstract class User {
 	HashService hs = HashService.getInstance();
 	private String userID;

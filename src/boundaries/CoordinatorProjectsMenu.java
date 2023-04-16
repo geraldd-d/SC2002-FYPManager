@@ -11,6 +11,9 @@ import entities.Coordinator;
 import entities.Faculty;
 import entities.Project;
 
+/**
+ * This class is the boundary for the CoordinatorProjectsMenu class.
+ */
 public class CoordinatorProjectsMenu {
 	private CoordinatorProjectsMenu() {
 		CoordinatorController cc = CoordinatorController.getInstance();

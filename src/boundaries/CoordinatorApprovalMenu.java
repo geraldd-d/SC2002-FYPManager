@@ -8,6 +8,9 @@ import entities.ApprovalType;
 import entities.Coordinator;
 import entities.Request;
 
+/**
+ * This class is the boundary for the CoordinatorApprovalMenu class.
+ */
 public class CoordinatorApprovalMenu {
 	private CoordinatorApprovalMenu() {};
 	private static CoordinatorApprovalMenu cam = null;
