@@ -18,7 +18,10 @@ public class CoordinatorInboxMenu {
 	};
 	private static CoordinatorInboxMenu crm = null;
 	
-	// it is the corrdinator indox where she receives all the requests
+	
+	/** 
+	 * @return CoordinatorInboxMenu
+	 */
 	public static CoordinatorInboxMenu getInstance() {
 		if (crm == null) {
 			crm = new CoordinatorInboxMenu();
