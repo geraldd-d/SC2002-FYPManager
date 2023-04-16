@@ -13,6 +13,8 @@ public class CoordinatorApprovalMenu {
 	private static CoordinatorApprovalMenu cam = null;
 	
 	/** 
+	 * 
+	 * 
 	 * @return CoordinatorApprovalMenu
 	 */
 	public static CoordinatorApprovalMenu getInstance() {
