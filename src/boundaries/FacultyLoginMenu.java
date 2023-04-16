@@ -23,6 +23,8 @@ public class FacultyLoginMenu {
 		String input;
 		User currentUser = null;
 		boolean auth = false;
+		int attempts = 0;
+		int capacity = 5;
 		do {
 			System.out.println("Enter UserID (lowercase) or leave empty to return: ");
 			input = sc.nextLine();
@@ -33,16 +35,29 @@ public class FacultyLoginMenu {
 			currentUser = lc.checkFacultyID(input);
 			if (currentUser == null) {
 				System.out.println("Invalid User.");
+				attempts++;
+				System.out.println((capacity - attempts) + " attempts remaining");
 			}
-		} while (currentUser == null);
+		} while (currentUser == null && attempts < 5);
+		if (attempts >= 5) {
+			System.out.println("Maximum number of attempts reached. Shutting down...");
+			System.exit(0);
+		}
+		attempts = 0;
 		do {
 			System.out.println("Enter Password: ");
 			input = sc.nextLine();
 			auth = lc.isLoggedIn(currentUser, input);
 			if (!auth) {
 				System.out.println("Invalid Password.");
+				attempts++;
+				System.out.println((capacity - attempts) + " attempts remaining");
 			}
-		} while (!auth);
+		} while (!auth && attempts < 5);
+		if (attempts >= 5) {
+			System.out.println("Maximum number of attempts reached. Shutting down...");
+			System.exit(0);
+		}
         System.out.println("Welcome, " + currentUser.getName());
         if (currentUser instanceof Coordinator) {
             currentUser = (Coordinator) currentUser;

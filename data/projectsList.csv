@@ -1,6 +1,6 @@
 sep=;
 Supervisor;Title;StudentID;Status;ProjectID
-A S Madhukumar;Machine Learning-based Interference Mitigation in a Multi-tier Networks;;Reserved;1
+A S Madhukumar;Machine Learning-based Interference Mitigation in a Multi-tier Networks;eli34;Allocated;1
 A S Madhukumar;Deep Learning-Driven Edge Caching for 5G-and-Beyond Industrial IoT Networks;;Reserved;2
 Alexei Sourin;Sonification of geometry 1;;Available;3
 Arvind Easwaran;Edge/Cloud Resource Management for Time-Sensitive Applications (2);;Available;4
@@ -16,4 +16,3 @@ Douglas Leslie Maskell;An AI based Li-ion fast battery charger for power tools;;
 Douglas Leslie Maskell;A Li-ion fast battery charger;;Available;14
 Dusit Niyato;Metaverse for virtual education 1;;Available;15
 Ke Yiping, Kelly;Graph-based Deep Models for Image Semantic Segmentation;;Available;16
-A S Madhukumar;testing;;Available;17

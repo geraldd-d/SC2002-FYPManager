@@ -51,19 +51,27 @@ public class PasswordMenu {
 			}
 		} while (!authenticated);
 		do {
+			sc.nextLine();
 			System.out.println("Enter new password: ");
 			String newPW = sc.nextLine();
 			System.out.println("Confirm new password again: ");
 			input = sc.nextLine();
-			if (newPW.length() < 8) {
+			if (newPW.length() < 8 ) {
 				System.out.println("Password is not long enough. 8 characters minimum.");
 				continue;
 			}
+			if (user.checkPassword(newPW)) {
+				System.out.println("You may not use the same password as your old one.");
+				continue;
+			}
+			
 			if (input.equals(newPW)) {
 	        	lc.updatePassword(user,oldPW,newPW);
 	        	matched = true;
 	        	lm.display();
 	        	return;
+	        } else {
+	        	System.out.println("Passwords did not match.");
 	        }
 		} while (!matched);
         

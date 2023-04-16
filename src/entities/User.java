@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import controllers.HashService;
 
 public abstract class User {
+	HashService hs = HashService.getInstance();
 	private String userID;
 	private String hashedPassword;
 	private String name;
@@ -28,7 +29,7 @@ public abstract class User {
 		return this.email;
 	}
 	public boolean checkPassword(String password){
-		return HashService.hashPassword(password, userID).equals(this.hashedPassword);
+		return hs.hashPassword(password, userID).equals(this.hashedPassword);
 	}
 	public String getPassword() {
 		return this.hashedPassword;
@@ -44,13 +45,6 @@ public abstract class User {
 	}
 	public void setEmail(String email) {
 		this.email = email;
-	}
-	public void updatePassword(String newPassword) {
-		String hashed = HashService.hashPassword(newPassword, this.userID);
-		setPassword(hashed);
-	}
-	private void setPassword(String password) {
-		this.hashedPassword = password;
 	}
 
 	public abstract ArrayList<Request> getHistory();

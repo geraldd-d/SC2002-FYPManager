@@ -53,11 +53,8 @@ public class LoginMenu implements BaseMenu{
       }
 	
 	public static void main(String[] args) {
-		ServiceController.getInstance();
-		StudentService.getInstance();
-		FacultyService.getInstance();
-		ProjectDataController.getInstance();
-		RequestDataController.getInstance();
+		AccountsController acc = AccountsController.getInstance();
+		RequestController rc = RequestController.getInstance();
 		LoginMenu lm = LoginMenu.getInstance();
 		lm.display();
 	}

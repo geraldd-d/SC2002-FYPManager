@@ -4,8 +4,7 @@ import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-import controllers.CoordController;
-import controllers.ProjectService;
+import controllers.CoordinatorController;
 import controllers.StudentController;
 import entities.Coordinator;
 import entities.Project;
@@ -13,7 +12,9 @@ import entities.Request;
 import entities.Student;
 
 public class CoordinatorRequestMenu {
-	private CoordinatorRequestMenu() {};
+	private CoordinatorRequestMenu() {
+		CoordinatorController cc = CoordinatorController.getInstance();
+	};
 	private static CoordinatorRequestMenu crm = null;
 	public static CoordinatorRequestMenu getInstance() {
 		if (crm == null) {
@@ -23,7 +24,7 @@ public class CoordinatorRequestMenu {
 	}
 	public void display(Coordinator coordinator){
 		Scanner sc = new Scanner(System.in);
-		CoordController cc = CoordController.getInstance();
+		CoordinatorController cc = CoordinatorController.getInstance();
 		ArrayList<Request> requests = cc.getrequests();
         int page = 1;
         int numRequests = requests.size();
@@ -43,3 +44,4 @@ public class CoordinatorRequestMenu {
         } while(page != 0);
     }
 }
+

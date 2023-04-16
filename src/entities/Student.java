@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import controllers.*;
 
 public class Student extends User{
+	HashService hs = HashService.getInstance();
 	private Project registeredProject;
 	private ArrayList<Request> requestHistory;
 

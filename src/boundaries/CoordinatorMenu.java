@@ -4,16 +4,20 @@ import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-import controllers.CoordController;
+import controllers.CoordProjectManager;
+import controllers.CoordRequestManager;
+import controllers.CoordinatorController;
 import controllers.FacultyController;
-import controllers.FacultyService;
-import controllers.ProjectService;
 import entities.Coordinator;
 import entities.Faculty;
 import entities.Project;
+import entities.Request;
+import entities.RequestStatus;
 
 public class CoordinatorMenu {
-	private CoordinatorMenu() {};
+	private CoordinatorMenu() {
+		CoordinatorController cc = CoordinatorController.getInstance();
+	};
 	private static CoordinatorMenu cm = null;
 	public static CoordinatorMenu getInstance() {
 		if (cm == null) {
@@ -23,10 +27,16 @@ public class CoordinatorMenu {
 	}
 	public void display(Coordinator coordinator){
 		Scanner sc = new Scanner(System.in);
-		ProjectService psc = ProjectService.getInstance();
-		CoordController cc = CoordController.getInstance();
 		FacultyController fc = FacultyController.getInstance();
+		CoordProjectManager cprm = CoordProjectManager.getInstance();
+		CoordinatorController cc = CoordinatorController.getInstance();
         int choice = 0;
+        boolean alert = false;
+        for (Request r: coordinator.getInbox()) {
+        	if (r.getStatus().equals(RequestStatus.Pending)) {
+        		alert = true;
+        	}
+        }
         do {
         	boolean valid = false;
         	int id = -1;
@@ -36,7 +46,11 @@ public class CoordinatorMenu {
             System.out.println("2. Create a new project");
             System.out.println("3. Modify the title of FYP");
             System.out.println("4. Transfer student to replacement supervisor");
-            System.out.println("5. View your request inbox");
+            if (alert) {
+            	System.out.println("5. View your request inbox (NEW)");
+            } else {
+            	System.out.println("5. View your request inbox");
+            }
             System.out.println("6. Address requests");
             System.out.println("7. View all requests");
             System.out.println("8. Change your password");
@@ -58,21 +72,21 @@ public class CoordinatorMenu {
                     break;
                 case 2:
                 	String title;
-                	boolean created = false;
-                	do {
+                	sc.nextLine();
+                    System.out.println("Enter new title:");
+                    title = sc.nextLine();
+                    while (title.length() < 5) {
+                    	sc.nextLine();
+                        System.out.println("New title is too short.");
                         System.out.println("Enter new title:");
                         title = sc.nextLine();
-                        while (title.length() < 5) {
-                            System.out.println("New title is too short.");
-                        	System.out.println("Enter new title:");
-                            title = sc.nextLine();
-                        	}
-                        fc.createProject(title, coordinator);
-                        created = true;
-                        } while (!created);
+                        }
+                    cprm.addProject(coordinator, title);
+                    break;
+                     
                 case 3:
                     // change the title
-                	String newtitle;
+                	
                 	do {
                         System.out.println("Enter Project ID to change title or enter 0 to return:");
                         try {
@@ -85,17 +99,19 @@ public class CoordinatorMenu {
                         if (id == 0) {
                         	break;
                         }
-                        if (projects.contains(psc.getProjectbyID(id))) {
-                        	Project p = psc.getProjectbyID(id);
+                        if (projects.contains(cprm.getProjectByID(id))) {
+                        	Project p = cprm.getProjectByID(id);
                         	valid = true;
+                        	sc.nextLine();
+                        	String newtitle = "";
                         	System.out.println("Enter new title:");
-                        	title = sc.nextLine();
-                        	while (title.length() < 5) {
+                        	while (newtitle.length() < 5) {
+                        		sc.nextLine();
                             	System.out.println("New title is too short.");
                         		System.out.println("Enter new title:");
-                            	title = sc.nextLine();
+                            	newtitle = sc.nextLine();
                         	}
-                        	fc.changeTitle(p, title);
+                        	fc.changeTitle(p, newtitle);
                         }
                         else {
                         	System.out.println("Project not found.");
@@ -107,6 +123,7 @@ public class CoordinatorMenu {
                     // request to transfer student
                 	do {
                     	String replacement;
+                    	sc.nextLine();
                         System.out.println("Enter Project ID to change title or enter 0 to return:");
                         try {
                         	id = sc.nextInt();
@@ -118,23 +135,26 @@ public class CoordinatorMenu {
                         if (id == 0) {
                         	break;
                         }
-                        if (projects.contains(psc.getProjectbyID(id))) {
-                        	Project p = psc.getProjectbyID(id);
+                        if (projects.contains(cprm.getProjectByID(id))) {
+                        	Project p = cprm.getProjectByID(id);
                         	valid = true;
                         	boolean matched = false;
                         	while (!matched) {
+                        		sc.nextLine();
                         		System.out.println("Enter replacement supervisor ID:");
                             	replacement = sc.nextLine();
                             	Faculty f = fc.getFacultybyID(replacement);
-                            	if (f != null && f.getActiveProjects() < 2) {
+                            	if (f != null && f.getActiveProjects() < 2 && !f.getUserID().equals(coordinator.getUserID())) {
                             		matched = true;
                                 	cc.requestTransfer(coordinator, p, replacement);
                             	}
                             	else {
                             		if (f == null) {
                             			System.out.println("Supervisor not found.");
-                            		} else {
+                            		} else if (f.getActiveProjects() >= 2) {
                             			System.out.println("Supervisor has too many active projects.");
+                            		} else {
+                            			System.out.println("You cannot transfer a project to yourself.");
                             		}
                             	}
                         	}
@@ -165,9 +185,11 @@ public class CoordinatorMenu {
 					pwm.display(coordinator);
                     break;
                 case 9:
-                	fc.saveChanges();
-                    System.out.println("Thank you for using FYP Management System.");
-                    System.exit(0);
+                	CoordRequestManager crrm = CoordRequestManager.getInstance();
+                	cprm.saveChanges();
+                	crrm.saveChanges();
+                    System.out.println("Logging out...");
+                    LoginMenu lm = LoginMenu.getInstance();
                     break;
                 default:
                     System.out.println("Invalid choice. Please enter a valid option.");

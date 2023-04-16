@@ -4,9 +4,8 @@ import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-import controllers.ProjectDataController;
+import controllers.ProjectsController;
 import controllers.RequestManager;
-import controllers.RequestService;
 import controllers.StudentController;
 import entities.Request;
 import entities.User;
@@ -22,7 +21,7 @@ public class RequestHistoryMenu{
 	}
 	public void display(User user, ArrayList<Request> reqHist){
 		Scanner sc = new Scanner(System.in);
-		RequestService rsc = RequestService.getInstance();
+		RequestManager rm = RequestManager.getInstance();
         int page = 1;
         int numRequests = reqHist.size();
         if (numRequests == 0) {
@@ -32,7 +31,7 @@ public class RequestHistoryMenu{
     	int numPages = (int) Math.ceil((float)numRequests/(float)5);
         do {
         	if(page <= numPages) {
-        		rsc.viewHistory(user, page);
+        		rm.viewHistory(user, page);
         	}
             try {
             	System.out.println("Enter 0 to return or a valid integer from 1 -" + numPages);
@@ -42,6 +41,7 @@ public class RequestHistoryMenu{
                 sc.nextLine();
                 continue;
             }
+            System.out.println(page);
         } while(page != 0);
     }
 }
