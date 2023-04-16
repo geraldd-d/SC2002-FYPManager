@@ -41,8 +41,17 @@ public class StudentService {
 	public void setStudentProject(String userID, Project p) {
 		studentRepository.setStudentProject(userID, p);
 	}
-	public HashMap<String, User> getStudentList() {
+	protected HashMap<String, User> getStudentList() {
 		return studentRepository.getStudentList();
+	}
+	public void addHistory(Student s, Request r) {
+		studentRepository.addHistory(s, r);
+	}
+	public String getStudentID(Student s) {
+		return studentRepository.getStudentID(s);
+	}
+	public boolean isAllocated(Student s) {
+		return studentRepository.isAllocated(s);
 	}
 }
 

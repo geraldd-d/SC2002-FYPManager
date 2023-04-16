@@ -10,13 +10,11 @@ import entities.*;
 public class ProjectDataController {
 	private static ProjectDataController pcc = null;
 	private final ProjectService projectService;
-	private final StudentService studentService;
 	private final FacultyService facultyService;
 
 	private static Integer last_index;
 	private ProjectDataController(){
 		this.projectService = ProjectService.getInstance();
-		this.studentService = StudentService.getInstance();
 		this.facultyService = FacultyService.getInstance();
 		readProjects();
 	}
@@ -47,7 +45,7 @@ public class ProjectDataController {
 				}
 				String title = fields[1];
 				String studentID = fields[2];
-				String status = fields[3];
+				ProjectStatus status = ProjectStatus.valueOf(fields[3]);
 				Integer projectID = Integer.parseInt(fields[4]);
 				if (projectID > last_index) {
 					last_index = projectID;
@@ -96,7 +94,7 @@ public class ProjectDataController {
 	            writer.append(delimiter);
 	            writer.append(p.getStudentID());
 	            writer.append(delimiter);
-	            writer.append(p.getStatus());
+	            writer.append(p.getStatus().toString());
 	            writer.append(delimiter);
 	            writer.append(String.valueOf(p.getID()));
 	            writer.append("\n");

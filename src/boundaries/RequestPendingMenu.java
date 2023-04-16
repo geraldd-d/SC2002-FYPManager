@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+import controllers.FacultyRequestService;
 import controllers.RequestManager;
 import entities.Faculty;
 import entities.Request;
@@ -18,9 +19,9 @@ public class RequestPendingMenu{
 		}
 		return rpm;
 	}
-	public void display(User user, ArrayList<Request> pending){
+	public void display(Faculty user, ArrayList<Request> pending){
 		Scanner sc = new Scanner(System.in);
-		RequestManager rm = RequestManager.getInstance();
+		FacultyRequestService frsc = FacultyRequestService.getInstance();
         int page = 1;
         int numRequests = pending.size();
         if (numRequests == 0) {
@@ -30,7 +31,7 @@ public class RequestPendingMenu{
     	int numPages = (int) Math.ceil((float)numRequests/(float)5);
         do {
         	if(page <= numPages) {
-        		rm.viewPending((Faculty)user, page);
+        		frsc.viewPending(user, page);
         	}
             try {
             	System.out.println("Enter 0 to return or a valid integer from 1 -" + numPages);

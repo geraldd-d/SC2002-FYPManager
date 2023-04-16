@@ -15,8 +15,8 @@ public class TransferRequest extends Request {
 	public void printRequest() {
 		System.out.println("Transfer Request");
 		System.out.println("----------------");
-		System.out.println("Requestor: "+ this.getRequestor());
-		System.out.println("Requestee: "+ this.getRequestor());
+		System.out.println("Requestor: "+ this.getRequestor().getName());
+		System.out.println("Requestee: "+ this.getRequestee().getName());
 		System.out.println("ProjectID: "+ this.getProject().getID());
 		System.out.println("Replacement: "+ this.getReplacementID());
 		System.out.println("Status: "+ this.getStatus());

@@ -6,6 +6,7 @@ import java.util.List;
 
 import entities.Faculty;
 import entities.Project;
+import entities.ProjectStatus;
 import entities.Student;
 import entities.User;
 
@@ -22,7 +23,7 @@ public class ProjectRepository {
 		return prp;
 	}
 	
-	public Project createProject(String title,String supervisorID,String supervisorName,String studentID,String status,Integer projectID) {
+	public Project createProject(String title,String supervisorID,String supervisorName,String studentID,ProjectStatus status,Integer projectID) {
 		Project p = new Project(title, supervisorID, supervisorName, studentID, status, projectID);
 		projectList.add(p);
 		return p;
@@ -31,21 +32,21 @@ public class ProjectRepository {
 		p.setTitle(title);
 	}
 	public void setProjectUnavailable(Project p) {
-		p.setStatus("Unavailable");
+		p.setStatus(ProjectStatus.Unavailable);
 	}
 	public void setProjectAvailable(Project p) {
-		p.setStatus("Available");
+		p.setStatus(ProjectStatus.Available);
 	}
 	public void reserveProject(Project p) {
-		p.setStatus("Reserved");
+		p.setStatus(ProjectStatus.Reserved);
 	}
 
 	public void allocateProject(String studentID, Project p) {
-		p.setStatus("Allocated");
+		p.setStatus(ProjectStatus.Allocated);
 		p.setStudent(studentID);
 	}
 	public void deregisterProject(Project p) {
-		p.setStatus("Available");
+		p.setStatus(ProjectStatus.Available);
 		p.setStudent("");
 	}
 	
@@ -61,31 +62,43 @@ public class ProjectRepository {
 	public ArrayList<Project> getAllAvailableProjects() {
         ArrayList<Project> availableProjects = new ArrayList<Project>();
         for (Project project : projectList) {
-            if (project.getStatus().equals("Available")) {
+            if (project.getStatus().equals(ProjectStatus.Available)) {
                 availableProjects.add(project);
+                System.out.println("test");
             }
         }
         return availableProjects;
     }
-	
-	//View all the available projects 
-	public void viewAllAvailableProjects(int page) {
-		ArrayList<Project>projects = getAllAvailableProjects();
-		int pageSize = 5;
-		int startIndex = (page - 1) * pageSize;
-		int endIndex = Math.min(startIndex + pageSize, projects.size());
-		List<Project> currentPage = projects.subList(startIndex, endIndex);
-		currentPage.forEach((project)->project.printAvailableProject());
-	}
-	
-	public void viewOwnProjects(Faculty user) {
-		ArrayList<Project>projects = user.getProjects();
-		projects.forEach((p)-> p.printProject());
-	}
-	public void viewActiveProjects(Faculty user) {
-		ArrayList<Project>projects = user.getProjects();
-		projects.forEach((p)-> p.printActiveProject());
-	}
+	public ArrayList<Project> getAllUnavailableProjects() {
+        ArrayList<Project> unavailableProjects = new ArrayList<Project>();
+        for (Project project : projectList) {
+            if (project.getStatus().equals(ProjectStatus.Unavailable)) {
+                unavailableProjects.add(project);
+            }
+        }
+        return unavailableProjects;
+    }
+
+	public ArrayList<Project> getAllReservedProjects() {
+        ArrayList<Project> reservedProjects = new ArrayList<Project>();
+        for (Project project : projectList) {
+            if (project.getStatus().equals(ProjectStatus.Reserved)) {
+            	reservedProjects.add(project);
+            }
+        }
+        return reservedProjects;
+    }
+
+	public ArrayList<Project> getAllAllocatedProjects() {
+        ArrayList<Project> allocatedProjects = new ArrayList<Project>();
+        for (Project project : projectList) {
+            if (project.getStatus().equals(ProjectStatus.Allocated)) {
+            	allocatedProjects.add(project);
+            }
+        }
+        return allocatedProjects;
+    }
+
 
 	public Project getProjectByID(Integer projectID) {
 		for (Project project : projectList) {
@@ -94,6 +107,9 @@ public class ProjectRepository {
 			}
 		}
 		return null;
+	}
+	public Integer getProjectID(Project p) {
+		return p.getID();
 	}
 	protected ArrayList<Project> getAllProjects(){
 		return this.projectList;

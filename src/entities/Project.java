@@ -8,9 +8,9 @@ public class Project {
 	private String supervisorID;
 	private String supervisorName;
 	private String studentID;
-	private String status; 
+	private ProjectStatus status; 
 	public Project() {};
-	public Project(String title, String supervisorID, String supervisorName, String studentID, String status, Integer projectID) {
+	public Project(String title, String supervisorID, String supervisorName, String studentID, ProjectStatus status, Integer projectID) {
 		this.title = title;
 		this.supervisorID = supervisorID;
 		this.studentID = studentID;
@@ -33,7 +33,7 @@ public class Project {
 	public String getSupervisorName() {
         return this.supervisorName;
     }
-	public String getStatus() {
+	public ProjectStatus getStatus() {
 		return this.status;
 	}
 	public String getStudentID(){
@@ -53,7 +53,7 @@ public class Project {
 	public void setSupervisorName(String supervisorName) {
         this.supervisorName = supervisorName;
     }
-	public void setStatus(String status) {
+	public void setStatus(ProjectStatus status) {
         this.status = status;
     }
 	public void setStudent(String studentID) {

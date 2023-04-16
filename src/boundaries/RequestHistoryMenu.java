@@ -6,6 +6,7 @@ import java.util.Scanner;
 
 import controllers.ProjectDataController;
 import controllers.RequestManager;
+import controllers.RequestService;
 import controllers.StudentController;
 import entities.Request;
 import entities.User;
@@ -21,7 +22,7 @@ public class RequestHistoryMenu{
 	}
 	public void display(User user, ArrayList<Request> reqHist){
 		Scanner sc = new Scanner(System.in);
-		RequestManager rm = RequestManager.getInstance();
+		RequestService rsc = RequestService.getInstance();
         int page = 1;
         int numRequests = reqHist.size();
         if (numRequests == 0) {
@@ -31,7 +32,7 @@ public class RequestHistoryMenu{
     	int numPages = (int) Math.ceil((float)numRequests/(float)5);
         do {
         	if(page <= numPages) {
-        		rm.viewHistory(user, page);
+        		rsc.viewHistory(user, page);
         	}
             try {
             	System.out.println("Enter 0 to return or a valid integer from 1 -" + numPages);
@@ -41,7 +42,6 @@ public class RequestHistoryMenu{
                 sc.nextLine();
                 continue;
             }
-            System.out.println(page);
         } while(page != 0);
     }
 }

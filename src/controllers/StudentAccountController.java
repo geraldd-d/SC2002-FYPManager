@@ -71,9 +71,8 @@ public class StudentAccountController {
 			e.printStackTrace();
 			System.exit(0);
 		}
-		updateStudents(studentsPath, studentRepository.getStudentList());
 	}
-	private void updateStudents(String filepath, HashMap<String, User> accounts) {
+	protected void updateStudents(String filepath, HashMap<String, User> accounts) {
 	    try {
 	    	String tempFilePath = filepath + ".tmp";
 	    	File tempFile = new File(tempFilePath);

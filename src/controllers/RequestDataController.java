@@ -11,7 +11,7 @@ import java.io.IOException;
 import java.util.*;
 
 public class RequestDataController {
-	private final RequestRepository requestRepository;
+	private final RequestService requestService;
 	private final StudentService studentService;
 	private final FacultyService facultyService;
 	private final ProjectService projectService;
@@ -20,7 +20,7 @@ public class RequestDataController {
     	this.facultyService = FacultyService.getInstance();
 		this.studentService = StudentService.getInstance();
 		this.projectService = ProjectService.getInstance();
-		this.requestRepository = RequestRepository.getInstance();
+		this.requestService = RequestService.getInstance();
 		readRequests();
     }
     public static RequestDataController getInstance() {
@@ -36,7 +36,6 @@ public class RequestDataController {
 
 	private static final String delimiter = ";";
 	private void readRequests() {
-		ProjectManager pm = ProjectManager.getInstance();
 		File file = new File(requestPath);
 		ArrayList<Request> requests = new ArrayList<Request>();
 		try {
@@ -61,7 +60,8 @@ public class RequestDataController {
 				RequestType requestType = RequestType.valueOf(fields[4]);
 				String changes = fields[5];
 				String id = fields[6];
-				int projectID = Integer.parseInt(id);
+				Integer projectID = Integer.parseInt(id);
+				Project p = projectService.getProjectbyID(projectID);
 				Coordinator coordinator;
 				Student student;
 				Faculty supervisor;
@@ -69,31 +69,24 @@ public class RequestDataController {
 				case Title:
 					supervisor = facultyService.getFacultybyID(requestee);
 					student = studentService.getStudentbyID(requestor);
-					TitleRequest tr = new TitleRequest(ID, student, supervisor, status, pm.getProjectByID(projectID), changes);
-					requests.add(tr);
-					supervisor.addInbox(tr);
-					student.addHistory(tr);
+					requestService.createTitleRequest(ID, student, supervisor, status, p, changes);
 					break;
 				case Allocation:
-					coordinator = (Coordinator)fc.getFacultybyID(requestee);
-					student = sc.getStudentbyID(requestor);
-					AllocRequest ar = new AllocRequest(ID, student, coordinator, status, pm.getProjectByID(projectID));
-					requests.add(ar);
-					coordinator.addInbox(ar);
-					student.addHistory(ar);
+					coordinator = (Coordinator) facultyService.getFacultybyID(requestee);
+					student = studentService.getStudentbyID(requestor);
+					requestService.createAllocationRequest(ID, student, coordinator, status, p);
 					break;
 				case Deregister:
-					coordinator = (Coordinator)fc.getFacultybyID(requestee);
-					student = sc.getStudentbyID(requestor);
-					DeregRequest dr = new DeregRequest(ID, student, coordinator, status, pm.getProjectByID(projectID));
+					coordinator = (Coordinator) facultyService.getFacultybyID(requestee);
+					student = studentService.getStudentbyID(requestor);
+					requestService.createDeregistrationRequest(ID, student, coordinator, status, p);
+					break;
 				case Transfer:
 					String replacement = fields[7];
-					supervisor = fc.getFacultybyID(requestor);
-					coordinator = (Coordinator) fc.getFacultybyID(requestee);
-					TransferRequest r = new TransferRequest(ID, supervisor, coordinator, status,pm.getProjectByID(projectID), fc.getFacultybyID(replacement));
-					requests.add(r);
-					coordinator.addInbox(r);
-					supervisor.addHistory(r);
+					supervisor = facultyService.getFacultybyID(requestor);
+					coordinator = (Coordinator) facultyService.getFacultybyID(requestee);
+					Faculty subs = facultyService.getFacultybyID(replacement);
+					requestService.createTransferRequest(ID, supervisor, coordinator, status, p, subs);
 					break;
 				default:
 					System.out.println("Erroneous request type found.");
@@ -110,11 +103,9 @@ public class RequestDataController {
 			e.printStackTrace();
 			System.exit(0);
 		}
-		return requests;
 	}
 	protected void updateRequests(ArrayList<Request> requests) {
 	    try {
-	    	FacultyController fc = FacultyController.getInstance();
 	    	String tempFilePath = requestPath + ".tmp";
 	    	File tempFile = new File(tempFilePath);
 	        FileWriter writer = new FileWriter(tempFilePath);

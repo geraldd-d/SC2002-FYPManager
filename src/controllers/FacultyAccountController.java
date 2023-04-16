@@ -19,20 +19,19 @@ public class FacultyAccountController {
 	private static FacultyAccountController fac = null;
 	private final FacultyRepository facultyRepository;
 	private FacultyAccountController() {
+		this.facultyRepository= FacultyRepository.getInstance();
 		readFacultyAccounts();
-		FacultyService ffc = FacultyService.getInstance();
-		this.facultyRepository = FacultyRepository.getInstance();
 	}
 	public static FacultyAccountController getInstance(){
-		if (ffc == null) {
-			ffc = new FacultyAccountController();
+		if (fac == null) {
+			fac = new FacultyAccountController();
 		}
-		return ffc;
+		return fac;
 	}
 	private static String facultyPath = System.getProperty("user.dir") + "//data//facultyList.csv";
 	private static final String delimiter = ";";
 	private static final Pattern pattern = Pattern.compile("^(.+)@.*$");
-	private void readStudentAccounts() {
+	private void readFacultyAccounts() {
 		File file = new File(facultyPath);
 		try {
 			FileReader fr = new FileReader(file);
@@ -75,9 +74,8 @@ public class FacultyAccountController {
 			e.printStackTrace();
 			System.exit(0);
 		}
-		updateFaculty(facultyPath, facultyRepository.getFacultyList());
 	}
-	private void updateFaculty(String filepath, HashMap<String, User> accounts) {
+	protected void updateFaculty(String filepath, HashMap<String, User> accounts) {
 	    try {
 	    	String tempFilePath = filepath + ".tmp";
 	    	File tempFile = new File(tempFilePath);

@@ -59,4 +59,22 @@ public class RequestRepository {
 	public Project getProject(Request r) {
 		return r.getProject();
 	}
+	public ArrayList<Request> getPendingRequests(){
+		ArrayList<Request> pending = new ArrayList<Request>();
+		requestList.forEach((request)->{
+			if (request.getStatus().equals(RequestStatus.Pending)) {
+				pending.add(request);
+			}
+		});
+		return pending;
+	}
+	public Request getPendingRequestbyID(int requestID){
+		ArrayList<Request> pending = getPendingRequests();
+		for (Request r : pending) {
+			if (r.getRequestID().equals(requestID)) {
+				return r;
+			}
+		}
+		return null;
+	}
 }
