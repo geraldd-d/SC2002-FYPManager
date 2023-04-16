@@ -47,7 +47,7 @@ public class StudentMenu{
 	                case 1:
 	                	if (!user.getisAllocated()) {
 	                		ProjectMenu pm = ProjectMenu.getInstance();
-	                		pm.display(user);
+	                		pm.display();
 	                	} else {
 	                		System.out.println("You are already registered for " + user.getRegisteredProject().getTitle());
 	                	}
@@ -68,9 +68,9 @@ public class StudentMenu{
 	                            input.nextLine();
 	                            continue;
 	                        }
-	                		System.out.println("Sending Allocation Request...");
 	                		validRequest = stc.requestAlloc(user, proj);
 	                	}
+	                	System.out.println("Allocation Request sent");
 	                    break;
 	                case 3:
 						if(!user.getisAllocated()){
@@ -92,9 +92,7 @@ public class StudentMenu{
 						}
 						validRequest = false;
 						System.out.println("The details of your registered project: ");
-						Project regproj = user.getRegisteredProject();
-						regproj.printProject();
-						input.nextLine();
+						p.printProject();
 						while(!validRequest){
 							String proj;
 							try {
@@ -110,13 +108,10 @@ public class StudentMenu{
 								continue;
 							}
 							else{
-								System.out.println("Sending Title Change Request...");
-								validRequest = stc.requestNewTitle(user, proj);
-								if (!validRequest) {
-									System.out.println("Invalid Request");
-								}
+								validRequest = stc.requestNewTitle(user);
 							}
 						}
+						System.out.println("Title Change Request sent.");
 	                    break;
 	                case 5: 
 						if(!user.getisAllocated()){
@@ -124,18 +119,17 @@ public class StudentMenu{
 							break;
 						}
 						else{
+							System.out.println("Please confirm your decision (y/n): ");
 							String d = "";
-							input.nextLine();
-							while (!d.equals("y") && !d.equals("n")) {
-								System.out.println("Please confirm your decision (y/n): ");
+							while (!d.equals("y")) {
 								d = input.nextLine();
-								if (d.equals("n") || d.equals("y")) {
+								if (d.equals("n")) {
 									break;
 								}
 							}
 							if (d.equals("y")) {
-								System.out.println("Sending Deregistration Request...");
-								stc.requestDeregister(user);
+								stc.DeregisterProject(user);
+								System.out.println("Deregister Request sent.");
 							}
 						}
 	                    break;
@@ -148,11 +142,14 @@ public class StudentMenu{
 						pm.display(user);
 						break;
 	                case 8:
-	                	//save changes code
-	                    System.out.println("Logging out...");
-						LoginMenu lm = LoginMenu.getInstance();
-						lm.display();
-						break;
+	                	StudentProjectManager spm = StudentProjectManager.getInstance();
+	                	StudentRequestManager srm = StudentRequestManager.getInstance();
+	                	spm.saveChanges();
+	                	srm.saveChanges();
+	                    System.out.println("Thank you for using FYP Management System.");
+	                    LoginMenu lm = LoginMenu.getInstance();
+	                    lm.display();
+	                    break;
 	                default:
 	                    System.out.println("Invalid choice. Please enter a valid option.");
 	            }

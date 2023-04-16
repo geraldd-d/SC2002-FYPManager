@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-import controllers.FacultyRequestService;
+import controllers.FacultyRequestManager;
 import controllers.RequestManager;
 import entities.Faculty;
 import entities.Request;
@@ -21,27 +21,13 @@ public class RequestPendingMenu{
 	}
 	public void display(Faculty user, ArrayList<Request> pending){
 		Scanner sc = new Scanner(System.in);
-		FacultyRequestService frsc = FacultyRequestService.getInstance();
+		FacultyRequestManager frm = FacultyRequestManager.getInstance();
         int page = 1;
         int numRequests = pending.size();
         if (numRequests == 0) {
         	System.out.println("You have no pending requests!");
         	return;
         }
-    	int numPages = (int) Math.ceil((float)numRequests/(float)5);
-        do {
-        	if(page <= numPages) {
-        		frsc.viewPending(user, page);
-        	}
-            try {
-            	System.out.println("Enter 0 to return or a valid integer from 1 -" + numPages);
-            	page = sc.nextInt();
-            } catch (InputMismatchException e) {
-                System.out.println("Invalid choice. Enter 0 to return or a valid integer from 1 -" + numPages);
-                sc.nextLine();
-                continue;
-            }
-            System.out.println(page);
-        } while(page != 0);
+		frm.viewPending(user);
     }
 }

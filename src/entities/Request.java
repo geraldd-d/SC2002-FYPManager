@@ -4,20 +4,20 @@ import java.util.ArrayList;
 import java.util.UUID;
 
 public abstract class Request {
-    private String requestID;
+    private int requestID;
     private User requestor;
     private User requestee;
     private RequestStatus status;
     private Project project;
-    public Request(String id, User requestor, User requestee, RequestStatus status, Project project){
-        this.requestID = id;
+    public Request(int ID, User requestor, User requestee, RequestStatus status, Project project){
+        this.requestID = ID;
         this.requestor = requestor;
         this.requestee = requestee;
         this.status = status;
         this.project = project;
     }
 
-    public String getRequestID(){
+    public int getRequestID(){
         return requestID;
     }
     public User getRequestor(){
@@ -26,16 +26,14 @@ public abstract class Request {
     public User getRequestee(){
         return requestee;
     }
- 
+    public abstract String getChanges();
     public RequestStatus getStatus(){
         return status;
     }
-    public abstract RequestType getType();
-    public abstract String getChanges();
     public Project getProject(){
         return project;
     }
-    public void setRequestID(String requestID){
+    public void setRequestID(int requestID){
         this.requestID = requestID;
     }
     public void setRequestor(Student requestor){
@@ -51,4 +49,7 @@ public abstract class Request {
         this.project= project;
     }
     public abstract void printRequest();
+
+	public abstract RequestType getType();
+
 }

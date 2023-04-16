@@ -2,10 +2,9 @@ package boundaries;
 import java.util.*;
 
 import controllers.FacultyController;
-import controllers.FacultyProjectService;
-import controllers.FacultyService;
+import controllers.FacultyProjectManager;
+import controllers.FacultyRequestManager;
 import controllers.ProjectManager;
-import controllers.ProjectService;
 import entities.*;
 
 
@@ -19,9 +18,10 @@ public class FacultyMenu{
 		return fm;
 	}
 	public void display(Faculty user) {
-		FacultyController fc = FacultyController.getInstance();
-		ProjectService psc = ProjectService.getInstance();
+
         Scanner input = new Scanner(System.in);
+        FacultyProjectManager fpm = FacultyProjectManager.getInstance();
+        FacultyController fc = FacultyController.getInstance();
         int choice = 0;
         do {
         	boolean valid = false;
@@ -29,14 +29,13 @@ public class FacultyMenu{
             System.out.println("FYP Matters");
             System.out.println("---------------------");
             System.out.println("1. View your projects");
-            System.out.println("2. Create a new project");
-            System.out.println("3. Modify the title of FYP");
-            System.out.println("4. Request to transfer student to replacement supervisor");
-            System.out.println("5. View pending requests");
-            System.out.println("6. View request history");
-            System.out.println("7. View request inbox");
-            System.out.println("8. Change your password");
-            System.out.println("9. Exit");
+            System.out.println("2. Modify the title of FYP");
+            System.out.println("3. Request to transfer student to replacement supervisor");
+            System.out.println("4. View pending requests");
+            System.out.println("5. View request history");
+            System.out.println("6. View request inbox");
+            System.out.println("7. Change your password");
+            System.out.println("8. Exit");
             System.out.print("Enter your choice: ");
             try {
             	choice = input.nextInt();
@@ -49,27 +48,11 @@ public class FacultyMenu{
             switch (choice) { 
                 case 1:
                     // view all the projects 
-                    fc.viewOwnProjects(user);
+                    fc.viewActiveProjects(user);
                     break;
                 case 2:
-                	String title;
-                	boolean created = false;
-                	do {
-                    	input.nextLine();
-                        System.out.println("Enter new title:");
-                        title = input.nextLine();
-                        while (title.length() < 5) {
-                            System.out.println("New title is too short.");
-                        	System.out.println("Enter new title:");
-                            title = input.nextLine();
-                        	}
-                        fc.createProject(title, user);
-                        created = true;
-                        } while (!created);
-                	break;
-                case 3:
                     // change the title
-                	String newtitle;
+                	String title;
                 	do {
                         System.out.println("Enter Project ID to change title or enter 0 to return:");
                         try {
@@ -82,18 +65,17 @@ public class FacultyMenu{
                         if (id == 0) {
                         	break;
                         }
-                        if (user.getProjects().contains(psc.getProjectbyID(id))) {
-                        	Project p = psc.getProjectbyID(id);
+                        if (user.getProjects().contains(fpm.getProjectByID(id))) {
+                        	Project p = fpm.getProjectByID(id);
                         	valid = true;
-                        	input.nextLine();
                         	System.out.println("Enter new title:");
-                        	newtitle = input.nextLine();
-                        	while (newtitle.length() < 5) {
+                        	title = input.nextLine();
+                        	while (title.length() < 5) {
                             	System.out.println("New title is too short.");
                         		System.out.println("Enter new title:");
-                        		newtitle = input.nextLine();
+                            	title = input.nextLine();
                         	}
-                        	fc.changeTitle(p, newtitle);
+                        	fc.changeTitle(p, title);
                         }
                         else {
                         	System.out.println("Project not found.");
@@ -101,11 +83,10 @@ public class FacultyMenu{
                 	} while(!valid);
                     
                     break;
-                case 4:
+                case 3:
                     // request to transfer student
                 	do {
                     	String replacement;
-                    	input.nextLine();
                         System.out.println("Enter Project ID to change title or enter 0 to return:");
                         try {
                         	id = input.nextInt();
@@ -117,8 +98,8 @@ public class FacultyMenu{
                         if (id == 0) {
                         	break;
                         }
-                        if (user.getProjects().contains(psc.getProjectbyID(id))) {
-                        	Project p = psc.getProjectbyID(id);
+                        if (user.getProjects().contains(fpm.getProjectByID(id))) {
+                        	Project p = fpm.getProjectByID(id);
                         	valid = true;
                         	boolean matched = false;
                         	while (!matched) {
@@ -127,7 +108,7 @@ public class FacultyMenu{
                             	Faculty f = fc.getFacultybyID(replacement);
                             	if (f != null && f.getActiveProjects() < 2) {
                             		matched = true;
-                                	fc.requestTransfer(user, p, replacement);
+                                	fc.transferRequest(user, p, replacement);
                             	}
                             	else {
                             		if (f == null) {
@@ -143,37 +124,38 @@ public class FacultyMenu{
                         }
                 	} while(!valid);
                     break;
-                case 5: 
+                case 4: 
                     // view pending requests
                 	RequestPendingMenu rpm = RequestPendingMenu.getInstance();
-                	rpm.display(user,fc.getPendingReqs(user));
+                	rpm.display(user,fc.getPendingRequests(user));
                     break;
-                case 6: 
+                case 5: 
                     // call view history method
                 	RequestHistoryMenu rhm = RequestHistoryMenu.getInstance();
-                	rhm.display(user, fc.getFacultyRequests(user));
+                	rhm.display(user, user.getHistory());
                 	break;
-                case 7:
+                case 6:
                 	// call view inbox method
                 	RequestInboxMenu rim = RequestInboxMenu.getInstance();
-                	rim.display(user, fc.getFacultyInbox(user));
+                	rim.display(user, user.getInbox());
                 	break;
-                case 8: 
+                case 7: 
                 	//change password method
                 	PasswordMenu pwm = PasswordMenu.getInstance();
 					pwm.display(user);
                     break;
-                case 9:
-                	fc.saveChanges();
-                    System.out.println("Logging out...");
-                    LoginMenu lm = LoginMenu.getInstance();
-                    lm.display();
+                case 8:
+                	FacultyRequestManager frm = FacultyRequestManager.getInstance();
+                	fpm.saveChanges();
+                	frm.saveChanges();
+                    System.out.println("Thank you for using FYP Management System.");
+                    System.exit(0);
                     break;
                 default:
                     System.out.println("Invalid choice. Please enter a valid option.");
                     break;
             }
-        } while (choice != 9);
+        } while (choice != 8);
 	}
 
 }

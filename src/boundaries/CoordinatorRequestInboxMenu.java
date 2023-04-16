@@ -3,7 +3,7 @@ package boundaries;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-import controllers.CoordController;
+import controllers.CoordinatorController;
 import entities.Coordinator;
 
 public class CoordinatorRequestInboxMenu {
@@ -17,7 +17,7 @@ public class CoordinatorRequestInboxMenu {
 	}
 	public void display(Coordinator coordinator){
 		Scanner sc = new Scanner(System.in);
-		CoordController cc = CoordController.getInstance();
+		CoordinatorController cc = CoordinatorController.getInstance();
         int choice = 0;
         do {
         	boolean valid = false;
