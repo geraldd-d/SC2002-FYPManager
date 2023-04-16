@@ -18,31 +18,64 @@ public abstract class User {
 		this.email = email;
 	}
 
+	
+	/** 
+	 * @return String
+	 */
 	// getter
 	public String getUserID() {
 		return this.userID;
 	}
+	
+	/** 
+	 * @return String
+	 */
 	public String getName() {
 		return this.name;
 	}
+	
+	/** 
+	 * @return String
+	 */
 	public String getEmail() {
 		return this.email;
 	}
+	
+	/** 
+	 * @param password
+	 * @return boolean
+	 */
 	public boolean checkPassword(String password){
 		return hs.hashPassword(password, userID).equals(this.hashedPassword);
 	}
+	
+	/** 
+	 * @return String
+	 */
 	public String getPassword() {
 		return this.hashedPassword;
 	}
 
 
+	
+	/** 
+	 * @param userID
+	 */
 	// setter 
 	public void setUserID(String userID) {
 		this.userID = userID;
 	}
+	
+	/** 
+	 * @param name
+	 */
 	public void setName(String name) {
 		this.name = name;
 	}
+	
+	/** 
+	 * @param email
+	 */
 	public void setEmail(String email) {
 		this.email = email;
 	}

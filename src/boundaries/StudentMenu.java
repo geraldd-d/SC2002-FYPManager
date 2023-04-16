@@ -14,12 +14,20 @@ public class StudentMenu{
 	private StudentMenu() {
         StudentController stc = StudentController.getInstance();
 	};
+	
+	/** 
+	 * @return StudentMenu
+	 */
 	public static StudentMenu getInstance() {
 		if (sm == null) {
 			sm = new StudentMenu();
 		}
 		return sm;
 	}
+	
+	/** 
+	 * @param user
+	 */
 	public void display(Student user) {
 		{
 	        Scanner input = new Scanner(System.in);

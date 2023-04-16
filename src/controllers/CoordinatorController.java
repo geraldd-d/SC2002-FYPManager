@@ -11,12 +11,20 @@ import entities.RequestType;
 public class CoordinatorController {
 	private static CoordinatorController cc = null;
 	private CoordinatorController() {};
+	
+	/** 
+	 * @return CoordinatorController
+	 */
 	public static CoordinatorController getInstance() {
 		if (cc == null) {
 			cc = new CoordinatorController();
 		}
 		return cc;
 	}
+	
+	/** 
+	 * @param coordinator
+	 */
 	public void viewPending(Coordinator coordinator) {
 		CoordRequestManager crm = CoordRequestManager.getInstance();
 		ArrayList<Request> pending = crm.getPendingReqs(coordinator);
@@ -27,14 +35,28 @@ public class CoordinatorController {
 			crm.viewPending(coordinator);
 		}
 	}
+	
+	/** 
+	 * @param coordinator
+	 * @param page
+	 */
 	public void viewInbox(Coordinator coordinator, int page) {
 		CoordRequestManager crm = CoordRequestManager.getInstance();
 		crm.viewInbox(coordinator, page);
 	}
+	
+	/** 
+	 * @param coordinator
+	 * @param page
+	 */
 	public void viewAllRequests(Coordinator coordinator, int page) {
 		CoordRequestManager crm = CoordRequestManager.getInstance();
 		crm.viewAllRequests(page);
 	}
+	
+	/** 
+	 * @param c
+	 */
 	public void viewAllAvailableProjects(Coordinator c) {
 		CoordProjectManager cpm = CoordProjectManager.getInstance();
 		ArrayList<Project>projects = cpm.getAllAvailableProjects();
@@ -44,6 +66,10 @@ public class CoordinatorController {
 		}
 		projects.forEach((p)-> p.printProject());
 	}
+	
+	/** 
+	 * @param c
+	 */
 	public void viewAllUnavailableProjects(Coordinator c) {
 		CoordProjectManager cpm = CoordProjectManager.getInstance();
 		ArrayList<Project>projects = cpm.getAllUnavailableProjects();
@@ -53,6 +79,10 @@ public class CoordinatorController {
 		}
 		projects.forEach((p)-> p.printProject());
 	}
+	
+	/** 
+	 * @param c
+	 */
 	public void viewAllReservedProjects(Coordinator c) {
 		CoordProjectManager cpm = CoordProjectManager.getInstance();
 		ArrayList<Project>projects = cpm.getAllReservedProjects();
@@ -62,6 +92,10 @@ public class CoordinatorController {
 		}
 		projects.forEach((p)-> p.printProject());
 	}
+	
+	/** 
+	 * @param c
+	 */
 	public void viewAllAllocatedProjects(Coordinator c) {
 		CoordProjectManager cpm = CoordProjectManager.getInstance();
 		ArrayList<Project>projects = cpm.getAllAllocatedProjects();
@@ -71,10 +105,19 @@ public class CoordinatorController {
 		}
 		projects.forEach((p)-> p.printProject());
 	}
+	
+	/** 
+	 * @param c
+	 */
 	public void viewOwnProjects(Coordinator c) {
 		CoordProjectManager cpm = CoordProjectManager.getInstance();
 		cpm.viewOwnProjects(c);
 	}
+	
+	/** 
+	 * @param c
+	 * @param r
+	 */
 	public void approveRequest(Coordinator c, Request r) {
 		CoordRequestManager crm = CoordRequestManager.getInstance();
 		RequestType rt = r.getType();
@@ -93,10 +136,21 @@ public class CoordinatorController {
 			break;
 		}
 	}
+	
+	/** 
+	 * @param coordinator
+	 * @param r
+	 */
 	public void rejectRequest(Coordinator coordinator, Request r) {
 		CoordRequestManager crm = CoordRequestManager.getInstance();
 		crm.rejectRequest(r);
 	}
+	
+	/** 
+	 * @param coordinator
+	 * @param p
+	 * @param replacementID
+	 */
 	public void requestTransfer(Coordinator coordinator, Project p, String replacementID) {
 		FacultyController fc = FacultyController.getInstance();
 		CoordProjectManager cpm = CoordProjectManager.getInstance();
@@ -107,10 +161,20 @@ public class CoordinatorController {
 			System.out.println("Replacement Supervisor is already at maximum project capacity");
 		}
 	}
+	
+	/** 
+	 * @param c
+	 * @param id
+	 * @return Request
+	 */
 	public Request getPendingRequestbyID(Coordinator c, int id) {
 		CoordRequestManager crm = CoordRequestManager.getInstance();
 		return crm.getPendingRequestbyID(c,id);
 	}
+	
+	/** 
+	 * @return ArrayList<Request>
+	 */
 	public ArrayList<Request> getrequests() {
 		CoordRequestManager crm = CoordRequestManager.getInstance();
 		ArrayList<Request> requests = crm.getRequests();

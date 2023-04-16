@@ -11,12 +11,20 @@ public class CoordinatorRequestInboxMenu {
 		CoordinatorController cc = CoordinatorController.getInstance();
 	};
 	private static CoordinatorRequestInboxMenu crim = null;
+	
+	/** 
+	 * @return CoordinatorRequestInboxMenu
+	 */
 	public static CoordinatorRequestInboxMenu getInstance() {
 		if (crim == null) {
 			crim = new CoordinatorRequestInboxMenu();
 		}
 		return crim;
 	}
+	
+	/** 
+	 * @param coordinator
+	 */
 	public void display(Coordinator coordinator){
 		Scanner sc = new Scanner(System.in);
 		CoordinatorController cc = CoordinatorController.getInstance();

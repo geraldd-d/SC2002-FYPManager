@@ -19,13 +19,21 @@ public class CoordinatorMenu {
 		CoordinatorController cc = CoordinatorController.getInstance();
 	};
 	private static CoordinatorMenu cm = null;
-	public static CoordinatorMenu getInstance() {
+	
+    /** 
+     * @return CoordinatorMenu
+     */
+    public static CoordinatorMenu getInstance() {
 		if (cm == null) {
 			cm = new CoordinatorMenu();
 		}
 		return cm;
 	}
-	public void display(Coordinator coordinator){
+	
+    /** 
+     * @param coordinator
+     */
+    public void display(Coordinator coordinator){
 		Scanner sc = new Scanner(System.in);
 		FacultyController fc = FacultyController.getInstance();
 		CoordProjectManager cprm = CoordProjectManager.getInstance();

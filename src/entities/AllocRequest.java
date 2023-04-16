@@ -13,10 +13,18 @@ public class AllocRequest extends Request {
 		System.out.println("Status: "+ this.getStatus());
 		System.out.println();
 	}
+	
+	/** 
+	 * @return RequestType
+	 */
 	@Override
 	public RequestType getType() {
 		return RequestType.Allocation;
 	}
+	
+	/** 
+	 * @return String
+	 */
 	public String getChanges() {
 		return "";
 	}

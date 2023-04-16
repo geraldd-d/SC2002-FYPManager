@@ -16,20 +16,37 @@ public class CoordRequestManager implements ICoordRequestManager {
 	private CoordRequestManager(ArrayList<Request> requests) {
 		this.requests = requests;
 	}
+	
+	/** 
+	 * @param requests
+	 * @return CoordRequestManager
+	 */
 	public static CoordRequestManager getInstance(ArrayList<Request> requests) {
 		if (crsc == null) {
 			crsc = new CoordRequestManager(requests);
 		}
 		return crsc;
 	}
+	
+	/** 
+	 * @return CoordRequestManager
+	 */
 	public static CoordRequestManager getInstance() {
 		return crsc;
 	}
+	
+	/** 
+	 * @param r
+	 */
 	@Override
 	public void rejectRequest(Request r) {
 		r.setStatus(RequestStatus.Rejected);
 	}
 
+	
+	/** 
+	 * @param r
+	 */
 	@Override
 	public void approveAllocation(Request r) {
 		FacultyController fc = FacultyController.getInstance();
@@ -47,6 +64,10 @@ public class CoordRequestManager implements ICoordRequestManager {
 		cpm.allocateProject(requestor, p);
 	}
 
+	
+	/** 
+	 * @param r
+	 */
 	@Override
 	public void approveDeregistration(Request r) {
 		CoordProjectManager cpm = CoordProjectManager.getInstance();
@@ -56,6 +77,10 @@ public class CoordRequestManager implements ICoordRequestManager {
 		cpm.deregisterProject(requestor, p);
 	}
 
+	
+	/** 
+	 * @param r
+	 */
 	@Override
 	public void approveTransfer(Request r) {
 		FacultyController fc = FacultyController.getInstance();
@@ -80,6 +105,10 @@ public class CoordRequestManager implements ICoordRequestManager {
 		rc.updateRequests(requests);
 	}
 
+	
+	/** 
+	 * @param r
+	 */
 	@Override
 	public void approveTitleChange(Request r) {
 		r.setStatus(RequestStatus.Approved);
@@ -88,6 +117,10 @@ public class CoordRequestManager implements ICoordRequestManager {
 		p.setTitle(title);
 	}
 
+	
+	/** 
+	 * @param page
+	 */
 	public void viewAllRequests(int page) {
 		int pageSize = 5;
 		int startIndex = (page - 1) * pageSize;
@@ -95,6 +128,11 @@ public class CoordRequestManager implements ICoordRequestManager {
 		List<Request> currentPage = requests.subList(startIndex, endIndex);
 		currentPage.forEach((request)->request.printRequest());
 	}
+	
+	/** 
+	 * @param coordinator
+	 * @param page
+	 */
 	public void viewInbox(Coordinator coordinator, int page) {
 		ArrayList<Request> requests = coordinator.getInbox();
 		int pageSize = 5;
@@ -103,12 +141,21 @@ public class CoordRequestManager implements ICoordRequestManager {
 		List<Request> currentPage = requests.subList(startIndex, endIndex);
 		currentPage.forEach((request)->request.printRequest());
 	}
+	
+	/** 
+	 * @param c
+	 */
 	@Override
 	public void viewPending(Coordinator c) {
 		ArrayList<Request> requests = getPendingReqs(c);
 		requests.forEach((request)->request.printRequest());
 	}
 
+	
+	/** 
+	 * @param user
+	 * @return ArrayList<Request>
+	 */
 	@Override
 	public ArrayList<Request> getPendingReqs(Faculty user) {
 		ArrayList<Request> reqs = new ArrayList<Request>();
@@ -120,6 +167,12 @@ public class CoordRequestManager implements ICoordRequestManager {
 		});
 		return reqs;
 	}
+	
+	/** 
+	 * @param user
+	 * @param id
+	 * @return Request
+	 */
 	public Request getPendingRequestbyID(Faculty user, int id) {
 		ArrayList<Request> pending = getPendingReqs(user);
 		for (Request r : pending) {
@@ -129,6 +182,10 @@ public class CoordRequestManager implements ICoordRequestManager {
 		}
 		return null;
 	}
+	
+	/** 
+	 * @return ArrayList<Request>
+	 */
 	public ArrayList<Request> getRequests() {
 		return requests;
 	}

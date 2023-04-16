@@ -8,7 +8,11 @@ import controllers.*;
 public class LoginMenu implements BaseMenu{
 	private LoginMenu() {};
 	private static LoginMenu lm = null;
-	public static LoginMenu getInstance() {
+	
+    /** 
+     * @return LoginMenu
+     */
+    public static LoginMenu getInstance() {
 		if (lm == null) {
 			lm = new LoginMenu();
 		}
@@ -52,7 +56,11 @@ public class LoginMenu implements BaseMenu{
         	} while (choice != 3);
       }
 	
-	public static void main(String[] args) {
+	
+    /** 
+     * @param args
+     */
+    public static void main(String[] args) {
 		AccountsController acc = AccountsController.getInstance();
 		RequestController rc = RequestController.getInstance();
 		LoginMenu lm = LoginMenu.getInstance();

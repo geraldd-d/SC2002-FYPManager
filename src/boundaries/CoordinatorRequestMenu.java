@@ -16,12 +16,20 @@ public class CoordinatorRequestMenu {
 		CoordinatorController cc = CoordinatorController.getInstance();
 	};
 	private static CoordinatorRequestMenu crm = null;
+	
+	/** 
+	 * @return CoordinatorRequestMenu
+	 */
 	public static CoordinatorRequestMenu getInstance() {
 		if (crm == null) {
 			crm = new CoordinatorRequestMenu();
 		}
 		return crm;
 	}
+	
+	/** 
+	 * @param coordinator
+	 */
 	public void display(Coordinator coordinator){
 		Scanner sc = new Scanner(System.in);
 		CoordinatorController cc = CoordinatorController.getInstance();

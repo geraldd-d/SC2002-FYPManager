@@ -13,15 +13,29 @@ public class CoordProjectManager implements ICoordProjectManager{
 	private CoordProjectManager(ArrayList<Project> projects) {
 		this.projects = projects;
 	};
+	
+	/** 
+	 * @param projects
+	 * @return CoordProjectManager
+	 */
 	public static CoordProjectManager getInstance(ArrayList<Project> projects) {
 		if (cpm == null) {
 			cpm = new CoordProjectManager(projects);
 		}
 		return cpm;
 	}
+	
+	/** 
+	 * @return CoordProjectManager
+	 */
 	public static CoordProjectManager getInstance() {
 		return cpm;
 	}
+	
+	/** 
+	 * @param student
+	 * @param p
+	 */
 	@Override
 	public void allocateProject(Student student, Project p) {
 		FacultyController fc = FacultyController.getInstance();
@@ -31,6 +45,11 @@ public class CoordProjectManager implements ICoordProjectManager{
 		setUnavailable(fc.getFacultybyID(p.getSupervisorID()));
 	}
 	
+	
+	/** 
+	 * @param student
+	 * @param p
+	 */
 	@Override
 	public void deregisterProject(Student student, Project p) {
 		FacultyController fc = FacultyController.getInstance();
@@ -39,6 +58,13 @@ public class CoordProjectManager implements ICoordProjectManager{
 		student.setRegisteredProject(null);
 		setAvailable(fc.getFacultybyID(p.getSupervisorID()));
 	}
+	
+	/** 
+	 * @param current
+	 * @param replacementID
+	 * @param replacementName
+	 * @param p
+	 */
 	@Override
 	public void transferProject(Faculty current, String replacementID, String replacementName, Project p) {
 		FacultyController fc = FacultyController.getInstance();
@@ -52,6 +78,11 @@ public class CoordProjectManager implements ICoordProjectManager{
 		setAvailable(current);
 		setUnavailable(replacement);
 	}
+	
+	/** 
+	 * @param user
+	 * @param title
+	 */
 	@Override
 	public void addProject(Faculty user, String title) {
 		FacultyController fc = FacultyController.getInstance();
@@ -67,23 +98,41 @@ public class CoordProjectManager implements ICoordProjectManager{
 		projects.add(p);
 	}
 
+	
+	/** 
+	 * @param user
+	 */
 	@Override
 	public void viewOwnProjects(Faculty user) {
 		ArrayList<Project>projects = user.getProjects();
 		projects.forEach((p)-> p.printProject());
 	}
 
+	
+	/** 
+	 * @param user
+	 */
 	@Override
 	public void viewActiveProjects(Faculty user) {
 		ArrayList<Project>projects = user.getProjects();
 		projects.forEach((p)-> p.printActiveProject());
 	}
 
+	
+	/** 
+	 * @param p
+	 * @param t
+	 */
 	@Override
 	public void changeTitle(Project p, String t) {
 		p.setTitle(t);
 	}
 
+	
+	/** 
+	 * @param projectID
+	 * @return Project
+	 */
 	@Override
 	public Project getProjectByID(Integer projectID) {
 		for (Project project : projects) {
@@ -99,6 +148,10 @@ public class CoordProjectManager implements ICoordProjectManager{
 		ProjectsController pc = ProjectsController.getInstance();
 	    pc.updateProjects(projects);
 	}
+	
+	/** 
+	 * @return ArrayList<Project>
+	 */
 	@Override
 	public ArrayList<Project> getAllAvailableProjects() {
         ArrayList<Project> availableProjects = new ArrayList<Project>();
@@ -109,6 +162,10 @@ public class CoordProjectManager implements ICoordProjectManager{
         }
         return availableProjects;
     }
+	
+	/** 
+	 * @return ArrayList<Project>
+	 */
 	@Override
 	public ArrayList<Project> getAllUnavailableProjects() {
         ArrayList<Project> unavailableProjects = new ArrayList<Project>();
@@ -119,6 +176,10 @@ public class CoordProjectManager implements ICoordProjectManager{
         }
         return unavailableProjects;
     }
+	
+	/** 
+	 * @return ArrayList<Project>
+	 */
 	@Override
 	public ArrayList<Project> getAllReservedProjects() {
         ArrayList<Project> reservedProjects = new ArrayList<Project>();
@@ -129,6 +190,10 @@ public class CoordProjectManager implements ICoordProjectManager{
         }
         return reservedProjects;
     }
+	
+	/** 
+	 * @return ArrayList<Project>
+	 */
 	@Override
 	public ArrayList<Project> getAllAllocatedProjects() {
         ArrayList<Project> allocatedProjects = new ArrayList<Project>();
@@ -140,6 +205,10 @@ public class CoordProjectManager implements ICoordProjectManager{
         return allocatedProjects;
     }
 	
+	
+	/** 
+	 * @param user
+	 */
 	protected void setUnavailable(Faculty user) {
 		ArrayList<Project> facProjects = user.getProjects();
 		if (user.getActiveProjects() >= 2){
@@ -150,6 +219,10 @@ public class CoordProjectManager implements ICoordProjectManager{
 			}
 		}
 	}
+	
+	/** 
+	 * @param user
+	 */
 	protected void setAvailable(Faculty user) {
 		ArrayList<Project> facProjects = user.getProjects();
 		if (user.getActiveProjects() <= 1){

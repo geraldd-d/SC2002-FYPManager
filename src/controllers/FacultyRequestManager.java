@@ -18,15 +18,30 @@ public class FacultyRequestManager implements IFacultyRequestManager {
 	private FacultyRequestManager(ArrayList<Request> requests) {
 		this.requests = requests;
 	}
+	
+	/** 
+	 * @param requests
+	 * @return FacultyRequestManager
+	 */
 	public static FacultyRequestManager getInstance(ArrayList<Request> requests) {
 		if (frm == null) {
 			frm = new FacultyRequestManager(requests);
 		}
 		return frm;
 	}
+	
+	/** 
+	 * @return FacultyRequestManager
+	 */
 	public static FacultyRequestManager getInstance() {
 		return frm;
 	}
+	
+	/** 
+	 * @param f
+	 * @param p
+	 * @param replacement
+	 */
 	@Override
 	public void addTransferRequest(Faculty f, Project p, String replacement) {
 		RequestController rc = RequestController.getInstance();
@@ -43,6 +58,11 @@ public class FacultyRequestManager implements IFacultyRequestManager {
 		requests.add(tr);
 	}
 
+	
+	/** 
+	 * @param user
+	 * @param page
+	 */
 	@Override
 	public void viewHistory(Faculty user, int page) {
 		ArrayList<Request> requests = user.getHistory();
@@ -53,6 +73,11 @@ public class FacultyRequestManager implements IFacultyRequestManager {
 		currentPage.forEach((request)->request.printRequest());
 	}
 
+	
+	/** 
+	 * @param user
+	 * @param page
+	 */
 	@Override
 	public void viewInbox(Faculty user,int page) {
 		ArrayList<Request> requests = user.getInbox();
@@ -63,12 +88,21 @@ public class FacultyRequestManager implements IFacultyRequestManager {
 		currentPage.forEach((request)->request.printRequest());
 	}
 
+	
+	/** 
+	 * @param user
+	 */
 	@Override
 	public void viewPending(Faculty user) {
 		ArrayList<Request> requests = getPendingReqs(user);
 		requests.forEach((request)->request.printRequest());
 	}
 
+	
+	/** 
+	 * @param user
+	 * @return ArrayList<Request>
+	 */
 	@Override
 	public ArrayList<Request> getPendingReqs(Faculty user) {
 		ArrayList<Request> reqs = new ArrayList<Request>();
@@ -87,6 +121,10 @@ public class FacultyRequestManager implements IFacultyRequestManager {
 		rc.updateRequests(requests);
 	}
 
+	
+	/** 
+	 * @param r
+	 */
 	@Override
 	public void approveTitleChange(Request r) {
 		r.setStatus(RequestStatus.Approved);
@@ -95,10 +133,20 @@ public class FacultyRequestManager implements IFacultyRequestManager {
 		p.setTitle(title);
 	}
 
+	
+	/** 
+	 * @param r
+	 */
 	@Override
 	public void rejectRequest(TitleRequest r) {
 		r.setStatus(RequestStatus.Rejected);
 	}
+	
+	/** 
+	 * @param f
+	 * @param r
+	 * @return boolean
+	 */
 	private boolean checkPending(Faculty f, Request r) {
 		ArrayList<Request> requests = f.getHistory();
 		for (Request req : requests) {

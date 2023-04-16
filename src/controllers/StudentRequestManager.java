@@ -19,12 +19,21 @@ public class StudentRequestManager implements IStudentRequestManager{
 	private StudentRequestManager(ArrayList<Request> requests) {
 		this.requests = requests;
 	}
+	
+	/** 
+	 * @param requests
+	 * @return StudentRequestManager
+	 */
 	public static StudentRequestManager getInstance(ArrayList<Request> requests) {
 		if (srm == null) {
 			srm = new StudentRequestManager(requests);
 		}
 		return srm;
 	}
+	
+	/** 
+	 * @return StudentRequestManager
+	 */
 	public static StudentRequestManager getInstance() {
 		return srm;
 	}
@@ -34,6 +43,11 @@ public class StudentRequestManager implements IStudentRequestManager{
 		rc.updateRequests(requests);
 	}
 
+	
+	/** 
+	 * @param user
+	 * @param page
+	 */
 	@Override
 	public void viewHistory(Student user, int page) {
 		int pageSize = 5;
@@ -44,6 +58,11 @@ public class StudentRequestManager implements IStudentRequestManager{
 	    currentPage.forEach((Request)-> Request.printRequest());
 	}
 
+	
+	/** 
+	 * @param s
+	 * @param p
+	 */
 	@Override
 	public void addAllocationRequest(Student s, Project p) {
 		RequestController rc = RequestController.getInstance();
@@ -60,6 +79,11 @@ public class StudentRequestManager implements IStudentRequestManager{
 		c.addInbox(ar);
 	}
 
+	
+	/** 
+	 * @param s
+	 * @param p
+	 */
 	@Override
 	public void addDeregistrationRequest(Student s, Project p) {
 		RequestController rc = RequestController.getInstance();
@@ -76,6 +100,12 @@ public class StudentRequestManager implements IStudentRequestManager{
 		c.addInbox(dr);
 	}
 
+	
+	/** 
+	 * @param s
+	 * @param p
+	 * @param title
+	 */
 	@Override
 	public void addTitleRequest(Student s, Project p, String title) {
 		RequestController rc = RequestController.getInstance();
@@ -91,6 +121,12 @@ public class StudentRequestManager implements IStudentRequestManager{
 		s.addHistory(tr);
 		supervisor.addInbox(tr);
 	}
+	
+	/** 
+	 * @param s
+	 * @param r
+	 * @return boolean
+	 */
 	private boolean checkPending(Student s, Request r) {
 		ArrayList<Request> requests = s.getHistory();
 		for (Request req : requests) {

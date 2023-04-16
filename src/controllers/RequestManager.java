@@ -17,16 +17,30 @@ public class RequestManager {
 		StudentRequestManager spm = StudentRequestManager.getInstance(requestList);
 	}
 
+	
+	/** 
+	 * @param requestList
+	 * @return RequestManager
+	 */
 	public static RequestManager getInstance(ArrayList<Request> requestList) {
 		if (rm == null) {
 			rm = new RequestManager(requestList);
 		}
 		return rm;
 	}
+	
+	/** 
+	 * @return RequestManager
+	 */
 	public static RequestManager getInstance() {
 		return rm;
 	}
 
+	
+	/** 
+	 * @param user
+	 * @param page
+	 */
 	public void viewHistory(User user, int page) {
 		int pageSize = 5;
 	    ArrayList<Request> reqs = user.getHistory();

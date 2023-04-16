@@ -10,6 +10,10 @@ public class ProjectMenu implements BaseMenu{
 	private ProjectMenu() {
 	};
 	private static ProjectMenu pm = null;
+	
+	/** 
+	 * @return ProjectMenu
+	 */
 	public static ProjectMenu getInstance() {
 		if (pm == null) {
 			pm = new ProjectMenu();

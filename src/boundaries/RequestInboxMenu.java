@@ -15,12 +15,21 @@ import entities.User;
 public class RequestInboxMenu{
 	private RequestInboxMenu() {};
 	private static RequestInboxMenu rim = null;
+	
+	/** 
+	 * @return RequestInboxMenu
+	 */
 	public static RequestInboxMenu getInstance() {
 		if (rim == null) {
 			rim = new RequestInboxMenu();
 		}
 		return rim;
 	}
+	
+	/** 
+	 * @param user
+	 * @param reqInbox
+	 */
 	public void display(Faculty user, ArrayList<Request> reqInbox){
 		Scanner sc = new Scanner(System.in);
 		FacultyRequestManager frm = FacultyRequestManager.getInstance();

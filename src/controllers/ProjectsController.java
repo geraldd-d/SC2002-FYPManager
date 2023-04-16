@@ -17,6 +17,10 @@ public class ProjectsController {
 		ProjectManager.getInstance(projects);
 	}
 	
+	
+	/** 
+	 * @return ProjectsController
+	 */
 	public static ProjectsController getInstance() {
 		if (pcc == null) {
 			pcc = new ProjectsController();
@@ -27,6 +31,10 @@ public class ProjectsController {
 	private static String projectsPath = System.getProperty("user.dir") + "//data//projectsList.csv";
 	
 	private static final String delimiter = ";";
+	
+	/** 
+	 * @return ArrayList<Project>
+	 */
 	private ArrayList<Project> readProjects() {
 		FacultyController fc = FacultyController.getInstance();
 		StudentController sc = StudentController.getInstance();
@@ -78,6 +86,10 @@ public class ProjectsController {
 		}
 		return projects;
 	}
+	
+	/** 
+	 * @param projects
+	 */
 	protected void updateProjects(ArrayList<Project> projects) {
 	    try {
 	    	FacultyController fc = FacultyController.getInstance();
@@ -118,6 +130,10 @@ public class ProjectsController {
 	    }
 	}
 	
+	
+	/** 
+	 * @return int
+	 */
 	public int getNewID() {
 		int id = last_index + 1;
 		last_index = id;

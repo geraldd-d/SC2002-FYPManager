@@ -12,15 +12,28 @@ public class StudentProjectManager implements IStudentProjectManager{
 	private StudentProjectManager(ArrayList<Project> projects) {
 		this.projects = projects;
 	}
+	
+	/** 
+	 * @param projects
+	 * @return StudentProjectManager
+	 */
 	public static StudentProjectManager getInstance(ArrayList<Project> projects) {
 		if (spm == null) {
 			spm = new StudentProjectManager(projects);
 		}
 		return spm;
 	}
+	
+	/** 
+	 * @return StudentProjectManager
+	 */
 	public static StudentProjectManager getInstance() {
 		return spm;
 	}
+	
+	/** 
+	 * @return ArrayList<Project>
+	 */
 	@Override
 	public ArrayList<Project> getAllAvailableProjects(){
 		ArrayList<Project> availableProjects = new ArrayList<Project>();
@@ -32,6 +45,10 @@ public class StudentProjectManager implements IStudentProjectManager{
         return availableProjects;
 	}
 
+	
+	/** 
+	 * @param page
+	 */
 	@Override
 	public void viewAllAvailableProjects(int page) {
 		ArrayList<Project>projects = getAllAvailableProjects();
@@ -42,6 +59,10 @@ public class StudentProjectManager implements IStudentProjectManager{
 		currentPage.forEach((project)->project.printAvailableProject());
 	}
 
+	
+	/** 
+	 * @param p
+	 */
 	@Override
 	public void reserveProject(Project p) {
 		if (p.getStatus().equals(ProjectStatus.Available)) {

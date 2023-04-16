@@ -11,12 +11,20 @@ import entities.Request;
 public class CoordinatorApprovalMenu {
 	private CoordinatorApprovalMenu() {};
 	private static CoordinatorApprovalMenu cam = null;
+	
+	/** 
+	 * @return CoordinatorApprovalMenu
+	 */
 	public static CoordinatorApprovalMenu getInstance() {
 		if (cam == null) {
 			cam = new CoordinatorApprovalMenu();
 		}
 		return cam;
 	}
+	
+	/** 
+	 * @param coordinator
+	 */
 	public void display(Coordinator coordinator){
 		Scanner sc = new Scanner(System.in);
 		CoordinatorController cc = CoordinatorController.getInstance();

@@ -12,10 +12,18 @@ public class DeregRequest extends Request {
 		System.out.println("ProjectID: "+ this.getProject().getID());
 		System.out.println("Status: "+ this.getStatus());
 	}
+	
+	/** 
+	 * @return RequestType
+	 */
 	@Override
 	public RequestType getType() {
 		return RequestType.Deregister;
 	}
+	
+	/** 
+	 * @return String
+	 */
 	public String getChanges() {
 		return "";
 	}

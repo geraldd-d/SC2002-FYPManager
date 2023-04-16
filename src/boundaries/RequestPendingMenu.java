@@ -13,12 +13,21 @@ import entities.User;
 public class RequestPendingMenu{
 	private RequestPendingMenu() {};
 	private static RequestPendingMenu rpm = null;
+	
+	/** 
+	 * @return RequestPendingMenu
+	 */
 	public static RequestPendingMenu getInstance() {
 		if (rpm == null) {
 			rpm = new RequestPendingMenu();
 		}
 		return rpm;
 	}
+	
+	/** 
+	 * @param user
+	 * @param pending
+	 */
 	public void display(Faculty user, ArrayList<Request> pending){
 		Scanner sc = new Scanner(System.in);
 		FacultyRequestManager frm = FacultyRequestManager.getInstance();

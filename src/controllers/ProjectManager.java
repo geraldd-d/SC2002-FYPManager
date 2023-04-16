@@ -20,12 +20,21 @@ public class ProjectManager {
 		StudentProjectManager spm = StudentProjectManager.getInstance(projects);
 		capProjects();
 	};
+	
+	/** 
+	 * @param p
+	 * @return ProjectManager
+	 */
 	public static ProjectManager getInstance(ArrayList<Project> p) {
 		if (pm == null) {
 			pm = new ProjectManager(p);
 		}
 		return pm;
 	}
+	
+	/** 
+	 * @return ProjectManager
+	 */
 	public static ProjectManager getInstance() {
 		return pm;
 	}
@@ -43,6 +52,11 @@ public class ProjectManager {
 	    ProjectsController pc = ProjectsController.getInstance();
 	    pc.updateProjects(projects);
 	}
+	
+	/** 
+	 * @param projectID
+	 * @return Project
+	 */
 	public Project getProjectByID(Integer projectID) {
 		for (Project project : projects) {
 			if (project.getID().equals(projectID)) {

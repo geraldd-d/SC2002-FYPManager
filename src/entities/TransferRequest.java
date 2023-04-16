@@ -8,6 +8,10 @@ public class TransferRequest extends Request {
 		this.replacement = replacement;
 		this.replacementID = replacement.getUserID();
 	}
+	
+	/** 
+	 * @return String
+	 */
 	public String getReplacementID() {
 		return this.replacementID;
 	}
@@ -20,10 +24,18 @@ public class TransferRequest extends Request {
 		System.out.println("Replacement: "+ this.getReplacementID());
 		System.out.println("Status: "+ this.getStatus());
 	}
+	
+	/** 
+	 * @return RequestType
+	 */
 	@Override
 	public RequestType getType() {
 		return RequestType.Transfer;
 	}
+	
+	/** 
+	 * @return String
+	 */
 	public String getChanges() {
 		return this.replacementID;
 	}

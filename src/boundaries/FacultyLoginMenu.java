@@ -10,6 +10,10 @@ import entities.User;
 public class FacultyLoginMenu {
 	private static FacultyLoginMenu flm = null;
 	private FacultyLoginMenu() {};
+	
+	/** 
+	 * @return FacultyLoginMenu
+	 */
 	public static FacultyLoginMenu getInstance() {
 		if (flm == null) {
 			flm = new FacultyLoginMenu();

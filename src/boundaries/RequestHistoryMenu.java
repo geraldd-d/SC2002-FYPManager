@@ -13,12 +13,21 @@ import entities.User;
 public class RequestHistoryMenu{
 	private RequestHistoryMenu() {};
 	private static RequestHistoryMenu rhm = null;
+	
+	/** 
+	 * @return RequestHistoryMenu
+	 */
 	public static RequestHistoryMenu getInstance() {
 		if (rhm == null) {
 			rhm = new RequestHistoryMenu();
 		}
 		return rhm;
 	}
+	
+	/** 
+	 * @param user
+	 * @param reqHist
+	 */
 	public void display(User user, ArrayList<Request> reqHist){
 		Scanner sc = new Scanner(System.in);
 		RequestManager rm = RequestManager.getInstance();

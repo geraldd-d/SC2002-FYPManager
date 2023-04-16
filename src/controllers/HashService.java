@@ -9,6 +9,10 @@ import java.nio.charset.StandardCharsets;
 public class HashService {
 	private static HashService hs = null;
 	private HashService() {};
+	
+	/** 
+	 * @return HashService
+	 */
 	public static HashService getInstance() {
 		if (hs == null) {
 			hs = new HashService();
@@ -16,6 +20,12 @@ public class HashService {
 		return hs;
 	}
 	
+	
+	/** 
+	 * @param password
+	 * @param userID
+	 * @return String
+	 */
 	public String hashPassword(String password, String userID){
 		String algorithm = "SHA-256";
 		String hashedPass = null;
@@ -40,6 +50,10 @@ public class HashService {
 		}
 		return hashedPass;
 	}
+	
+	/** 
+	 * @return byte[]
+	 */
 	public byte[] generateSalt() {
 		byte[] bytes = new byte[10];
 		SecureRandom random = new SecureRandom();

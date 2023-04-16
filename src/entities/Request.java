@@ -17,34 +17,74 @@ public abstract class Request {
         this.project = project;
     }
 
+    
+    /** 
+     * @return int
+     */
     public int getRequestID(){
         return requestID;
     }
+    
+    /** 
+     * @return User
+     */
     public User getRequestor(){
         return requestor;
     }
+    
+    /** 
+     * @return User
+     */
     public User getRequestee(){
         return requestee;
     }
     public abstract String getChanges();
+    
+    /** 
+     * @return RequestStatus
+     */
     public RequestStatus getStatus(){
         return status;
     }
+    
+    /** 
+     * @return Project
+     */
     public Project getProject(){
         return project;
     }
+    
+    /** 
+     * @param requestID
+     */
     public void setRequestID(int requestID){
         this.requestID = requestID;
     }
+    
+    /** 
+     * @param requestor
+     */
     public void setRequestor(Student requestor){
         this.requestor = requestor;
     }
+    
+    /** 
+     * @param requestee
+     */
     public void setRequestee(User requestee){
         this.requestee = requestee;
     }
+    
+    /** 
+     * @param status
+     */
     public void setStatus(RequestStatus status){
         this.status = status;
     }
+    
+    /** 
+     * @param project
+     */
     public void setProject(Project project){
         this.project= project;
     }

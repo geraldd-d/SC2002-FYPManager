@@ -11,12 +11,20 @@ import entities.User;
 public class PasswordMenu {
 	private static PasswordMenu pm = null;
 	private PasswordMenu() {};
+	
+	/** 
+	 * @return PasswordMenu
+	 */
 	public static PasswordMenu getInstance() {
 		if (pm == null) {
 			pm = new PasswordMenu();
 		}
 		return pm;
 	}
+	
+	/** 
+	 * @param user
+	 */
 	public void display(User user) {
 		LoginMenu lm = LoginMenu.getInstance();
 		LoginController lc = LoginController.getInstance();

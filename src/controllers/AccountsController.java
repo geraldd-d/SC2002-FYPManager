@@ -22,6 +22,15 @@ public class AccountsController {
 		ProjectsController pc = ProjectsController.getInstance();
 	}
 	
+	
+	
+	
+	/** 
+	 * 
+	 * this the account controller
+	 * 
+	 * @return AccountsController
+	 */
 	public static AccountsController getInstance(){
 		if (acc == null) {
 			acc = new AccountsController();
@@ -36,6 +45,11 @@ public class AccountsController {
 	
 	private static final Pattern pattern = Pattern.compile("^(.+)@.*$");
 	
+	
+	
+	/** 
+	 * @return HashMap<String, User>
+	 */
 	private HashMap<String, User> getStudentAccounts(){
 		HashService hs = HashService.getInstance();
 		File file = new File(studentsPath);
@@ -84,6 +98,13 @@ public class AccountsController {
 		return studentData;
 	}
 	
+	
+	/** 
+	 * 
+	 * mapping to get the faculty accounts from the CSV file
+	 * 
+	 * @return HashMap<String, User>
+	 */
 	private HashMap<String, User> getFacultyAccounts(){
 		File file = new File(facultyPath);
 		HashService hs = HashService.getInstance();
@@ -138,6 +159,15 @@ public class AccountsController {
 		updateFaculty(facultyPath, facultyData);
 		return facultyData;
 	}
+	
+	
+	/** 
+	 * 
+	 * updating the student
+	 * 
+	 * @param filepath
+	 * @param accounts
+	 */ 
 	private void updateStudents(String filepath, HashMap<String, User> accounts) {
 	    try {
 	    	String tempFilePath = filepath + ".tmp";
@@ -172,6 +202,15 @@ public class AccountsController {
 	        e.printStackTrace();
 	    }
 	}
+
+	
+	/** 
+	 * 
+	 * updating the faculty 
+	 * 
+	 * @param filepath
+	 * @param accounts
+	 */
 	private void updateFaculty(String filepath, HashMap<String, User> accounts) {
 	    try {
 	    	String tempFilePath = filepath + ".tmp";
@@ -211,6 +250,15 @@ public class AccountsController {
 	        e.printStackTrace();
 	    }
 	}
+	
+	
+	/** 
+	 * 
+	 * updating student account
+	 * 
+	 * @param user
+	 * @param pw
+	 */
 	protected void updateSAccount(User user, String pw) {
 		HashService hs = HashService.getInstance();
 		try {
@@ -244,6 +292,14 @@ public class AccountsController {
 		studentList = getStudentAccounts();
 		StudentController sc = StudentController.getInstance(studentList);
 	}
+	
+	/** 
+	 * 
+	 * updating faculty account
+	 * 
+	 * @param user
+	 * @param pw
+	 */
 	protected void updateFAccount(User user, String pw) {
 		HashService hs = HashService.getInstance();
 		try {

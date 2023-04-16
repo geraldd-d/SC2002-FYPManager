@@ -9,6 +9,10 @@ import entities.User;
 public class StudentLoginMenu {
 	private static StudentLoginMenu slm = null;
 	private StudentLoginMenu() {};
+	
+	/** 
+	 * @return StudentLoginMenu
+	 */
 	public static StudentLoginMenu getInstance() {
 		if (slm == null) {
 			slm = new StudentLoginMenu();

@@ -6,6 +6,10 @@ public class TitleRequest extends Request {
 		super(requestID, requestor, requestee, status, project);
 		this.title = title;
 	}
+	
+	/** 
+	 * @return String
+	 */
 	public String getTitle() {
 		return this.title;
 	}
@@ -18,10 +22,18 @@ public class TitleRequest extends Request {
 		System.out.println("New Title: "+ this.getTitle());
 		System.out.println("Status: "+ this.getStatus());
 	}
+	
+	/** 
+	 * @return RequestType
+	 */
 	@Override
 	public RequestType getType() {
 		return RequestType.Title;
 	}
+	
+	/** 
+	 * @return String
+	 */
 	public String getChanges() {
 		return this.title;
 	}

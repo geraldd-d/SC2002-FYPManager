@@ -12,15 +12,29 @@ public class FacultyProjectManager implements IFacultyProjectManager{
 	private FacultyProjectManager(ArrayList<Project> projects) {
 		this.projects = projects;
 	}
+	
+	/** 
+	 * @param projects
+	 * @return FacultyProjectManager
+	 */
 	public static FacultyProjectManager getInstance(ArrayList<Project> projects) {
 		if (fpm == null) {
 			fpm = new FacultyProjectManager(projects);
 		}
 		return fpm;
 	}
+	
+	/** 
+	 * @return FacultyProjectManager
+	 */
 	public static FacultyProjectManager getInstance() {
 		return fpm;
 	}
+	
+	/** 
+	 * @param user
+	 * @param title
+	 */
 	@Override
 	public void addProject(Faculty user, String title) {
 		FacultyController fc = FacultyController.getInstance();
@@ -36,23 +50,41 @@ public class FacultyProjectManager implements IFacultyProjectManager{
 		projects.add(p);
 	}
 
+	
+	/** 
+	 * @param user
+	 */
 	@Override
 	public void viewOwnProjects(Faculty user) {
 		ArrayList<Project>projects = user.getProjects();
 		projects.forEach((p)-> p.printProject());
 	}
 
+	
+	/** 
+	 * @param user
+	 */
 	@Override
 	public void viewActiveProjects(Faculty user) {
 		ArrayList<Project>projects = user.getProjects();
 		projects.forEach((p)-> p.printActiveProject());
 	}
 
+	
+	/** 
+	 * @param p
+	 * @param t
+	 */
 	@Override
 	public void changeTitle(Project p, String t) {
 		p.setTitle(t);
 	}
 
+	
+	/** 
+	 * @param projectID
+	 * @return Project
+	 */
 	@Override
 	public Project getProjectByID(Integer projectID) {
 		for (Project project : projects) {
@@ -62,7 +94,6 @@ public class FacultyProjectManager implements IFacultyProjectManager{
 		}
 		return null;
 	}
-
 	@Override
 	public void saveChanges() {
 		ProjectsController pc = ProjectsController.getInstance();

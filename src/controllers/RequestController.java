@@ -18,12 +18,21 @@ public class RequestController {
     	this.requestList = requests;
     	RequestManager rm = RequestManager.getInstance(requests);
     }
-    public static RequestController getInstance() {
+    
+	/** 
+	 * @return RequestController
+	 */
+	public static RequestController getInstance() {
         if (rc == null) {
             rc = new RequestController();
         }
         return rc;
     }
+ 
+ /** 
+  * @param readRequests(
+  * @return ArrayList<Request>
+  */
     
 	private static String requestPath = System.getProperty("user.dir") + "//data//requestList.csv";
     private int last_index = 0;
@@ -157,6 +166,11 @@ public class RequestController {
 	        e.printStackTrace();
 	    }
 	}
+	
+	/** 
+	 * @return int
+	 */
+	
 	public int getNewID() {
 		int id = last_index + 1;
 		last_index = id;
