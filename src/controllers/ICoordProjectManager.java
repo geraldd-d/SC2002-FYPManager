@@ -1,5 +1,7 @@
 package controllers;
 
+import java.util.ArrayList;
+
 import entities.Faculty;
 import entities.Project;
 import entities.Student;
@@ -14,4 +16,8 @@ public interface ICoordProjectManager {
 	public Project getProjectByID(Integer projectID);
 	public void saveChanges();
 	void changeTitle(Project p, String t);
+	public ArrayList<Project> getAllAvailableProjects();
+	public ArrayList<Project> getAllUnavailableProjects();
+	public ArrayList<Project> getAllReservedProjects();
+	public ArrayList<Project> getAllAllocatedProjects();
 }

@@ -166,8 +166,8 @@ public class CoordinatorMenu {
                 	CoordRequestManager crrm = CoordRequestManager.getInstance();
                 	cprm.saveChanges();
                 	crrm.saveChanges();
-                    System.out.println("Thank you for using FYP Management System.");
-                    System.exit(0);
+                    System.out.println("Logging out...");
+                    LoginMenu lm = LoginMenu.getInstance();
                     break;
                 default:
                     System.out.println("Invalid choice. Please enter a valid option.");

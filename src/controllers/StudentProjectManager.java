@@ -21,7 +21,7 @@ public class StudentProjectManager implements IStudentProjectManager{
 	public static StudentProjectManager getInstance() {
 		return spm;
 	}
-
+	@Override
 	public ArrayList<Project> getAllAvailableProjects(){
 		ArrayList<Project> availableProjects = new ArrayList<Project>();
         for (Project project : projects) {

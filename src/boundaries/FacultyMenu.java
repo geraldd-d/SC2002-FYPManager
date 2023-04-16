@@ -148,8 +148,8 @@ public class FacultyMenu{
                 	FacultyRequestManager frm = FacultyRequestManager.getInstance();
                 	fpm.saveChanges();
                 	frm.saveChanges();
-                    System.out.println("Thank you for using FYP Management System.");
-                    System.exit(0);
+                	System.out.println("Logging out...");
+                    LoginMenu lm = LoginMenu.getInstance();
                     break;
                 default:
                     System.out.println("Invalid choice. Please enter a valid option.");

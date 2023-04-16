@@ -99,6 +99,47 @@ public class CoordProjectManager implements ICoordProjectManager{
 		ProjectsController pc = ProjectsController.getInstance();
 	    pc.updateProjects(projects);
 	}
+	@Override
+	public ArrayList<Project> getAllAvailableProjects() {
+        ArrayList<Project> availableProjects = new ArrayList<Project>();
+        for (Project project : projects) {
+            if (project.getStatus().equals(ProjectStatus.Available)) {
+                availableProjects.add(project);
+            }
+        }
+        return availableProjects;
+    }
+	@Override
+	public ArrayList<Project> getAllUnavailableProjects() {
+        ArrayList<Project> unavailableProjects = new ArrayList<Project>();
+        for (Project project : projects) {
+            if (project.getStatus().equals(ProjectStatus.Unavailable)) {
+                unavailableProjects.add(project);
+            }
+        }
+        return unavailableProjects;
+    }
+	@Override
+	public ArrayList<Project> getAllReservedProjects() {
+        ArrayList<Project> reservedProjects = new ArrayList<Project>();
+        for (Project project : projects) {
+            if (project.getStatus().equals(ProjectStatus.Reserved)) {
+            	reservedProjects.add(project);
+            }
+        }
+        return reservedProjects;
+    }
+	@Override
+	public ArrayList<Project> getAllAllocatedProjects() {
+        ArrayList<Project> allocatedProjects = new ArrayList<Project>();
+        for (Project project : projects) {
+            if (project.getStatus().equals(ProjectStatus.Allocated)) {
+            	allocatedProjects.add(project);
+            }
+        }
+        return allocatedProjects;
+    }
+	
 	protected void setUnavailable(Faculty user) {
 		ArrayList<Project> facProjects = user.getProjects();
 		if (user.getActiveProjects() >= 2){
@@ -119,43 +160,5 @@ public class CoordProjectManager implements ICoordProjectManager{
 			}
 		}
 	}
-	public ArrayList<Project> getAllAvailableProjects() {
-        ArrayList<Project> availableProjects = new ArrayList<Project>();
-        for (Project project : projects) {
-            if (project.getStatus().equals(ProjectStatus.Available)) {
-                availableProjects.add(project);
-            }
-        }
-        return availableProjects;
-    }
-	public ArrayList<Project> getAllUnavailableProjects() {
-        ArrayList<Project> unavailableProjects = new ArrayList<Project>();
-        for (Project project : projects) {
-            if (project.getStatus().equals(ProjectStatus.Unavailable)) {
-                unavailableProjects.add(project);
-            }
-        }
-        return unavailableProjects;
-    }
 
-	public ArrayList<Project> getAllReservedProjects() {
-        ArrayList<Project> reservedProjects = new ArrayList<Project>();
-        for (Project project : projects) {
-            if (project.getStatus().equals(ProjectStatus.Reserved)) {
-            	reservedProjects.add(project);
-            }
-        }
-        return reservedProjects;
-    }
-
-	public ArrayList<Project> getAllAllocatedProjects() {
-        ArrayList<Project> allocatedProjects = new ArrayList<Project>();
-        for (Project project : projects) {
-            if (project.getStatus().equals(ProjectStatus.Allocated)) {
-            	allocatedProjects.add(project);
-            }
-        }
-        return allocatedProjects;
-    }
-	
 }

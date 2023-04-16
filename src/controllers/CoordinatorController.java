@@ -17,6 +17,24 @@ public class CoordinatorController {
 		}
 		return cc;
 	}
+	public void viewPending(Coordinator coordinator) {
+		CoordRequestManager crm = CoordRequestManager.getInstance();
+		ArrayList<Request> pending = crm.getPendingReqs(coordinator);
+		if (pending.size() == 0) {
+			System.out.println("You have no pending requests.");
+		}
+		else {
+			crm.viewPending(coordinator);
+		}
+	}
+	public void viewInbox(Coordinator coordinator, int page) {
+		CoordRequestManager crm = CoordRequestManager.getInstance();
+		crm.viewInbox(coordinator, page);
+	}
+	public void viewAllRequests(Coordinator coordinator, int page) {
+		CoordRequestManager crm = CoordRequestManager.getInstance();
+		crm.viewAllRequests(page);
+	}
 	public void viewAllAvailableProjects(Coordinator c) {
 		CoordProjectManager cpm = CoordProjectManager.getInstance();
 		ArrayList<Project>projects = cpm.getAllAvailableProjects();
@@ -79,16 +97,6 @@ public class CoordinatorController {
 		CoordRequestManager crm = CoordRequestManager.getInstance();
 		crm.rejectRequest(r);
 	}
-	public void viewPending(Coordinator coordinator) {
-		CoordRequestManager crm = CoordRequestManager.getInstance();
-		ArrayList<Request> pending = crm.getPendingReqs(coordinator);
-		if (pending.size() == 0) {
-			System.out.println("You have no pending requests.");
-		}
-		else {
-			crm.viewPending(coordinator);
-		}
-	}
 	public void requestTransfer(Coordinator coordinator, Project p, String replacement) {
 		FacultyController fc = FacultyController.getInstance();
 		CoordProjectManager cpm = CoordProjectManager.getInstance();
@@ -98,14 +106,6 @@ public class CoordinatorController {
 		} else {
 			System.out.println("Replacement Supervisor is already at maximum project capacity");
 		}
-	}
-	public void viewInbox(Coordinator coordinator, int page) {
-		CoordRequestManager crm = CoordRequestManager.getInstance();
-		crm.viewInbox(coordinator, page);
-	}
-	public void viewAllRequests(Coordinator coordinator, int page) {
-		CoordRequestManager crm = CoordRequestManager.getInstance();
-		crm.viewAllRequests(page);
 	}
 	public Request getPendingRequestbyID(Coordinator c, int id) {
 		CoordRequestManager crm = CoordRequestManager.getInstance();

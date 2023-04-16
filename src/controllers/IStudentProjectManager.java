@@ -8,4 +8,5 @@ public interface IStudentProjectManager {
 	public void viewAllAvailableProjects(int page);
 	public void reserveProject(Project p);
     public void saveChanges();
+	public ArrayList<Project> getAllAvailableProjects();
 }

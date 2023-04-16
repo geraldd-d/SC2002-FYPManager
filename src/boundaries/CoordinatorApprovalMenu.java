@@ -44,6 +44,7 @@ public class CoordinatorApprovalMenu {
         		boolean valid = false;
         		do {
         			try {
+        				sc.nextLine();
         				System.out.println("Enter APPROVE or REJECT: ");
         				approval = sc.nextLine();
             		    ApprovalType apt = ApprovalType.valueOf(approval);
