@@ -4,7 +4,6 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import controllers.CoordController;
-import controllers.CoordRequestService;
 import entities.ApprovalType;
 import entities.Coordinator;
 import entities.Request;
@@ -21,7 +20,6 @@ public class CoordinatorApprovalMenu {
 	public void display(Coordinator coordinator){
 		Scanner sc = new Scanner(System.in);
 		CoordController cc = CoordController.getInstance();
-		CoordRequestService crsc = CoordRequestService.getInstance();
     	int requestID = -1;
         do {
             cc.viewPending(coordinator);
@@ -37,13 +35,12 @@ public class CoordinatorApprovalMenu {
         	if (requestID == 0) {
         		break;
         	}
-        	if (crsc.getPendingRequestbyID(requestID) == null) {
+        	if (cc.getPendingRequestbyID(requestID) == null) {
                 System.out.println("Pending request not found in the database.");
         		continue;
         	} else {
-        		Request r = crsc.getPendingRequestbyID(requestID);
+        		Request r = cc.getPendingRequestbyID(requestID);
         		String approval;
-        		String confirmation;
         		boolean valid = false;
         		do {
         			try {

@@ -8,14 +8,11 @@ import entities.Project;
 public class StudentProjectService implements IStudentProjectService{
 	private final ProjectDataController projectDataController;
 	private final ProjectRepository projectRepository;
-	private final StudentService studentService;
-	private final FacultyService facultyService;
 	private static StudentProjectService spsc = null;
 	private StudentProjectService(){
-		this.facultyService = FacultyService.getInstance();
-		this.studentService = StudentService.getInstance();
-		this.projectDataController = ProjectDataController.getInstance();
-		this.projectRepository = ProjectRepository.getInstance();
+		ServiceController svc = ServiceController.getInstance();
+		this.projectDataController = svc.getProjectDataController();
+		this.projectRepository = svc.getProjectRepository();
 	};
 	public static StudentProjectService getInstance() {
 		if (spsc == null) {

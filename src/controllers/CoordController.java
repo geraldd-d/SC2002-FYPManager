@@ -7,6 +7,7 @@ import entities.Coordinator;
 import entities.Faculty;
 import entities.Project;
 import entities.Request;
+import entities.RequestType;
 import entities.TransferRequest;
 
 public class CoordController {
@@ -15,7 +16,8 @@ public class CoordController {
 	private final CoordProjectService coordProjectService;
 	private final CoordRequestService coordRequestService;
 	private CoordController() {
-		this.facultyService = FacultyService.getInstance();
+		ServiceController svc = ServiceController.getInstance();
+		this.facultyService = svc.getFacultyService();
 		this.coordProjectService = CoordProjectService.getInstance();
 		this.coordRequestService = CoordRequestService.getInstance();
 	};
@@ -69,7 +71,21 @@ public class CoordController {
 		return requests;
 	}
 	public void approveRequest(Request r) {
-		
+		RequestType rt = r.getType();
+		switch (rt) {
+		case Allocation:
+			coordRequestService.approveAllocation(r);
+			break;
+		case Deregister:
+			coordRequestService.approveDeregistration(r);
+			break;
+		case Title:
+			coordRequestService.approveTitleChange(r);
+			break;
+		case Transfer:
+			coordRequestService.approveTransfer(r);
+			break;
+		}
 	}
 	public void rejectRequest(Request r) {
 		coordRequestService.rejectRequest(r);
@@ -97,5 +113,8 @@ public class CoordController {
 	}
 	public void viewAllRequests(Coordinator coordinator, int page) {
 		coordRequestService.viewAllRequests(page);
+	}
+	public Request getPendingRequestbyID(int id) {
+		return coordRequestService.getPendingRequestbyID(id);
 	}
 }

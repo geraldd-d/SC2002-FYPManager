@@ -9,14 +9,13 @@ import entities.ProjectStatus;
 public class FacultyProjectService implements IFacultyProjectService{
 	private final ProjectDataController projectDataController;
 	private final ProjectRepository projectRepository;
-	private final StudentService studentService;
 	private final FacultyService facultyService;
 	private static FacultyProjectService fpsc = null;
 	private FacultyProjectService(){
-		this.facultyService = FacultyService.getInstance();
-		this.studentService = StudentService.getInstance();
-		this.projectDataController = ProjectDataController.getInstance();
-		this.projectRepository = ProjectRepository.getInstance();
+		ServiceController svc = ServiceController.getInstance();
+		this.facultyService = svc.getFacultyService();
+		this.projectDataController = svc.getProjectDataController();
+		this.projectRepository = svc.getProjectRepository();
 	};
 	public static FacultyProjectService getInstance() {
 		if (fpsc == null) {

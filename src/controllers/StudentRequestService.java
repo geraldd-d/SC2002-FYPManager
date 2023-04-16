@@ -12,21 +12,19 @@ import entities.Request;
 import entities.RequestStatus;
 import entities.Student;
 import entities.TitleRequest;
-import entities.TransferRequest;
 
 public class StudentRequestService implements IStudentRequestService {
 	private final RequestDataController requestDataController;
 	private final RequestRepository requestRepository;
 	private final StudentService studentService;
 	private final FacultyService facultyService;
-	private final StudentProjectService studentProjectService;
 	private static StudentRequestService srsc = null;
 	private StudentRequestService(){
-		this.facultyService = FacultyService.getInstance();
-		this.studentService = StudentService.getInstance();
-		this.requestDataController = RequestDataController.getInstance();
-		this.requestRepository = RequestRepository.getInstance();
-		this.studentProjectService = StudentProjectService.getInstance();
+		ServiceController svc = ServiceController.getInstance();
+		this.facultyService = svc.getFacultyService();
+		this.studentService = svc.getStudentService();
+		this.requestDataController = svc.getRequestDataController();
+		this.requestRepository = svc.getRequestRepository();
 	};
 	public static StudentRequestService getInstance() {
 		if (srsc == null) {

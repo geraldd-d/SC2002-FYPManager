@@ -25,7 +25,6 @@ public class CoordinatorMenu {
 		Scanner sc = new Scanner(System.in);
 		ProjectService psc = ProjectService.getInstance();
 		CoordController cc = CoordController.getInstance();
-		FacultyService fs = FacultyService.getInstance();
 		FacultyController fc = FacultyController.getInstance();
         int choice = 0;
         do {
@@ -126,7 +125,7 @@ public class CoordinatorMenu {
                         	while (!matched) {
                         		System.out.println("Enter replacement supervisor ID:");
                             	replacement = sc.nextLine();
-                            	Faculty f = fs.getFacultybyID(replacement);
+                            	Faculty f = fc.getFacultybyID(replacement);
                             	if (f != null && f.getActiveProjects() < 2) {
                             		matched = true;
                                 	cc.requestTransfer(coordinator, p, replacement);

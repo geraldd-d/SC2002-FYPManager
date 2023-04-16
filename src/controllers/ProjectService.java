@@ -12,9 +12,10 @@ public class ProjectService {
 	private final FacultyService facultyService;
 	private static ProjectService psc = null;
 	private ProjectService() {
-		this.facultyService = FacultyService.getInstance();
-		this.studentService = StudentService.getInstance();
-		this.projectRepository = ProjectRepository.getInstance();
+		ServiceController svc = ServiceController.getInstance();
+		this.facultyService = svc.getFacultyService();
+		this.studentService = svc.getStudentService();
+		this.projectRepository = svc.getProjectRepository();
 		capProjects();
 	};
 	public static ProjectService getInstance() {

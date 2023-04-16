@@ -19,13 +19,12 @@ public class RequestService {
 	private final RequestRepository requestRepository;
 	private final StudentService studentService;
 	private final FacultyService facultyService;
-	private final ProjectService projectService;
 	private static RequestService rsc = null;
 	private RequestService() {
-		this.facultyService = FacultyService.getInstance();
-		this.studentService = StudentService.getInstance();
-		this.projectService = ProjectService.getInstance();
-		this.requestRepository = RequestRepository.getInstance();
+		ServiceController svc = ServiceController.getInstance();
+		this.facultyService = svc.getFacultyService();
+		this.studentService = svc.getStudentService();
+		this.requestRepository = svc.getRequestRepository();
 	}
 	public static RequestService getInstance() {
 		if (rsc == null) {

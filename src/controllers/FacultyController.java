@@ -15,7 +15,8 @@ public class FacultyController {
 	private final FacultyProjectService facultyProjectService;
 	private final FacultyRequestService facultyRequestService;
 	private FacultyController() {
-		this.facultyService = FacultyService.getInstance();
+		ServiceController svc = ServiceController.getInstance();
+		this.facultyService = svc.getFacultyService();
 		this.facultyProjectService = FacultyProjectService.getInstance();
 		this.facultyRequestService = FacultyRequestService.getInstance();
 	};
@@ -53,6 +54,9 @@ public class FacultyController {
 		Coordinator c = facultyService.getCoordinator();
 		facultyRequestService.addTransferRequest(user, c, p, f);
 	}
+	public Faculty getFacultybyID(String id) {
+		return facultyService.getFacultybyID(id);
+	}
 
 	public void viewPendingReqs(Faculty f, int page) {
 		facultyRequestService.viewPending(f, page);
@@ -63,5 +67,11 @@ public class FacultyController {
 	public void saveChanges() {
 		facultyRequestService.saveChanges();
 		facultyProjectService.saveChanges();
+	}
+	public ArrayList<Request> getFacultyInbox(Faculty f){
+		return facultyService.getFacultyInbox(f);
+	}
+	public ArrayList<Request> getFacultyRequests(Faculty f){
+		return facultyService.getFacultyRequests(f);
 	}
 }

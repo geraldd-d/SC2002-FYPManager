@@ -21,7 +21,6 @@ public class FacultyMenu{
 	public void display(Faculty user) {
 		FacultyController fc = FacultyController.getInstance();
 		ProjectService psc = ProjectService.getInstance();
-		FacultyService fs = FacultyService.getInstance();
         Scanner input = new Scanner(System.in);
         int choice = 0;
         do {
@@ -125,7 +124,7 @@ public class FacultyMenu{
                         	while (!matched) {
                         		System.out.println("Enter replacement supervisor ID:");
                             	replacement = input.nextLine();
-                            	Faculty f = fs.getFacultybyID(replacement);
+                            	Faculty f = fc.getFacultybyID(replacement);
                             	if (f != null && f.getActiveProjects() < 2) {
                             		matched = true;
                                 	fc.requestTransfer(user, p, replacement);
@@ -152,12 +151,12 @@ public class FacultyMenu{
                 case 6: 
                     // call view history method
                 	RequestHistoryMenu rhm = RequestHistoryMenu.getInstance();
-                	rhm.display(user, fs.getFacultyRequests(user));
+                	rhm.display(user, fc.getFacultyRequests(user));
                 	break;
                 case 7:
                 	// call view inbox method
                 	RequestInboxMenu rim = RequestInboxMenu.getInstance();
-                	rim.display(user, fs.getFacultyInbox(user));
+                	rim.display(user, fc.getFacultyInbox(user));
                 	break;
                 case 8: 
                 	//change password method

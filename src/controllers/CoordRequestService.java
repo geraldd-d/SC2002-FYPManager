@@ -12,7 +12,7 @@ import entities.Student;
 import entities.TransferRequest;
 import entities.User;
 
-public class CoordRequestService implements ICoordRequestService, IFacultyRequestService{
+public class CoordRequestService implements ICoordRequestService{
 	private final RequestDataController requestDataController;
 	private final RequestRepository requestRepository;
 	private final StudentService studentService;
@@ -20,10 +20,11 @@ public class CoordRequestService implements ICoordRequestService, IFacultyReques
 	private final CoordProjectService coordProjectService;
 	private static CoordRequestService crsc = null;
 	private CoordRequestService(){
-		this.facultyService = FacultyService.getInstance();
-		this.studentService = StudentService.getInstance();
-		this.requestDataController = RequestDataController.getInstance();
-		this.requestRepository = RequestRepository.getInstance();
+		ServiceController svc = ServiceController.getInstance();
+		this.facultyService = svc.getFacultyService();
+		this.studentService = svc.getStudentService();
+		this.requestDataController = svc.getRequestDataController();
+		this.requestRepository = svc.getRequestRepository();
 		this.coordProjectService = CoordProjectService.getInstance();
 	};
 	public static CoordRequestService getInstance() {
@@ -31,22 +32,6 @@ public class CoordRequestService implements ICoordRequestService, IFacultyReques
 			crsc = new CoordRequestService();
 		}
 		return crsc;
-	}
-	public void viewHistory(Faculty user, int page) {
-	    int pageSize = 5;
-	    ArrayList<Request> reqs = user.getHistory();
-	    int startIndex = (page - 1) * pageSize;
-	    int endIndex = Math.min(startIndex + pageSize, reqs.size());
-	    List<Request> currentPage = reqs.subList(startIndex, endIndex);
-	    currentPage.forEach((Request)-> Request.printRequest());
-	}
-	public void viewInbox(Faculty user, int page) {
-	    int pageSize = 5;
-	    ArrayList<Request> reqs = user.getInbox();
-	    int startIndex = (page - 1) * pageSize;
-	    int endIndex = Math.min(startIndex + pageSize, reqs.size());
-	    List<Request> currentPage = reqs.subList(startIndex, endIndex);
-	    currentPage.forEach((Request)-> Request.printRequest());
 	}
 	public ArrayList<Request> getInbox(Coordinator c){
 		return c.getInbox();
@@ -91,11 +76,17 @@ public class CoordRequestService implements ICoordRequestService, IFacultyReques
 
 	@Override
 	public void approveAllocation(Request r) {
-		requestRepository.approveRequest(r);
 		Project p = requestRepository.getProject(r);
+		String id = p.getSupervisorID();
+		Faculty supervisor = facultyService.getFacultybyID(id);
+		if (supervisor.getActiveProjects() >= 2) {
+			System.out.println("Supervisor already has the maximum number of projects.");
+			return;
+		}
+		requestRepository.approveRequest(r);
 		Student requestor = (Student) r.getRequestor();
-		String id = studentService.getStudentID(requestor);
-		coordProjectService.allocateProject(id, p);
+		String studentID = studentService.getStudentID(requestor);
+		coordProjectService.allocateProject(studentID, p);
 	}
 
 	@Override
@@ -109,13 +100,17 @@ public class CoordRequestService implements ICoordRequestService, IFacultyReques
 
 	@Override
 	public void approveTransfer(Request r) {
-		requestRepository.approveRequest(r);
 		Project p = requestRepository.getProject(r);
 		Faculty requestor = (Faculty) r.getRequestor();
 		String requestorID = facultyService.getFacultyID(requestor);
 		String replacementID = r.getChanges();
 		Faculty replacement = facultyService.getFacultybyID(replacementID);
 		String replacementName = facultyService.getFacultyName(replacement);
+		if (replacement.getActiveProjects() >= 2) {
+			System.out.println("Supervisor already has the maximum number of projects.");
+			return;
+		}
+		requestRepository.approveRequest(r);
 		coordProjectService.transferProject(requestorID, replacementID, replacementName, p);
 	}
 	public void viewAllRequests(int page) {
@@ -136,5 +131,13 @@ public class CoordRequestService implements ICoordRequestService, IFacultyReques
 	}
 	public ArrayList<Request> getRequests(){
 		return requestRepository.getRequests();
+	}
+	public void viewInbox(Coordinator coordinator, int page) {
+		ArrayList<Request> requests = getInbox(coordinator);
+		int pageSize = 5;
+		int startIndex = (page - 1) * pageSize;
+		int endIndex = Math.min(startIndex + pageSize, requests.size());
+		List<Request> currentPage = requests.subList(startIndex, endIndex);
+		currentPage.forEach((request)->request.printRequest());
 	}
 }

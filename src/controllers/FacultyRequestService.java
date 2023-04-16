@@ -19,10 +19,11 @@ public class FacultyRequestService implements IFacultyRequestService{
 	private final FacultyProjectService facultyProjectService;
 	private static FacultyRequestService frsc = null;
 	private FacultyRequestService(){
-		this.facultyService = FacultyService.getInstance();
-		this.studentService = StudentService.getInstance();
-		this.requestDataController = RequestDataController.getInstance();
-		this.requestRepository = RequestRepository.getInstance();
+		ServiceController svc = ServiceController.getInstance();
+		this.facultyService = svc.getFacultyService();
+		this.studentService = svc.getStudentService();
+		this.requestDataController = svc.getRequestDataController();
+		this.requestRepository = svc.getRequestRepository();
 		this.facultyProjectService = FacultyProjectService.getInstance();
 	};
 	public static FacultyRequestService getInstance() {
