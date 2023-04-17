@@ -16,9 +16,10 @@ public class FacultyProjectManager implements IFacultyProjectManager{
 		this.projects = projects;
 	}
 	
-	/** 
+	/**
+	 * This method is used to get the instance of the FacultyProjectManager class. It is a singleton class. 
 	 * @param projects
-	 * @return FacultyProjectManager
+	 * @return The instance of the FacultyProjectManager class.
 	 */
 	public static FacultyProjectManager getInstance(ArrayList<Project> projects) {
 		if (fpm == null) {
@@ -27,8 +28,9 @@ public class FacultyProjectManager implements IFacultyProjectManager{
 		return fpm;
 	}
 	
-	/** 
-	 * @return FacultyProjectManager
+	/**
+	 * This method is used to get the instance of the FacultyProjectManager class. It is a singleton class. 
+	 * @return FacultyProjectManager The instance of the FacultyProjectManager class.
 	 */
 	public static FacultyProjectManager getInstance() {
 		return fpm;

@@ -125,6 +125,12 @@ public class FacultyController {
 		frm.addTransferRequest(user, p, replacementID);
 	}
 	
+	
+	/** 
+	 * This method is used to view history of the user.
+	 * @param user The user whose history needs to be viewed.
+	 * @param page The page which has the history.
+	 */
 	public void viewHistory(User user, int page) {
 		int pageSize = 5;
 	    ArrayList<Request> reqs = user.getHistory();

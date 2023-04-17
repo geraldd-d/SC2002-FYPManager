@@ -16,10 +16,11 @@ public class CoordProjectManager implements ICoordProjectManager{
 	private CoordProjectManager(ArrayList<Project> projects) {
 		this.projects = projects;
 	};
-	
+
 	/** 
-	 * @param projects
-	 * @return CoordProjectManager
+	 * This method is used to get the instance of the CoordProjectManager class. It is a singleton class.
+	 * @param projects The list of project in the system.
+	 * @return The instance of the CoordProjectManager class.
 	 */
 	public static CoordProjectManager getInstance(ArrayList<Project> projects) {
 		if (cpm == null) {
@@ -29,15 +30,17 @@ public class CoordProjectManager implements ICoordProjectManager{
 	}
 	
 	/** 
-	 * @return CoordProjectManager
+	 * This method is used to get the instance of the CoordProjectManager class. It is a singleton class.
+	 * @return The instance of the CoordProjectManager class.
 	 */
 	public static CoordProjectManager getInstance() {
 		return cpm;
 	}
 	
 	/** 
-	 * @param student
-	 * @param p
+	 * This method is used to allocate projects to the students. 
+	 * @param student The student who has requested for the project to be allocated.
+	 * @param p The project that is requested to be allocated.
 	 */
 	@Override
 	public void allocateProject(Student student, Project p) {
@@ -50,8 +53,9 @@ public class CoordProjectManager implements ICoordProjectManager{
 	
 	
 	/** 
-	 * @param student
-	 * @param p
+	 * This method is used to deregister students from the registered projects
+	 * @param student The student who has requested to deregister the project.
+	 * @param p The project which is deregistered. 
 	 */
 	@Override
 	public void deregisterProject(Student student, Project p) {
@@ -63,10 +67,11 @@ public class CoordProjectManager implements ICoordProjectManager{
 	}
 	
 	/** 
-	 * @param current
-	 * @param replacementID
-	 * @param replacementName
-	 * @param p
+	 * This method is used to transfer a student with registered projects to replacement supervisor.
+	 * @param current The current supervisor of the project and student who wants to transfer the student.
+	 * @param replacementID The replacement supervisor's ID who would replace the current supervisor.
+	 * @param replacementName The replacement supervisor's name who would replace the current supervisor.
+	 * @param p The project which is going to be transferred.
 	 */
 	@Override
 	public void transferProject(Faculty current, String replacementID, String replacementName, Project p) {
@@ -83,8 +88,9 @@ public class CoordProjectManager implements ICoordProjectManager{
 	}
 	
 	/** 
-	 * @param user
-	 * @param title
+	 * This method is used to add/create projects by coordinator/supervisor.
+	 * @param user The supervisor who is going to create/add the project.
+	 * @param title The title of the new project created/added. 
 	 */
 	@Override
 	public void addProject(Faculty user, String title) {
@@ -102,7 +108,8 @@ public class CoordProjectManager implements ICoordProjectManager{
 
 	
 	/** 
-	 * @param user
+	 * This method is used to view the user's own projects.
+	 * @param user The user whose projects are going to be viewed. 
 	 */
 	@Override
 	public void viewOwnProjects(Faculty user) {
@@ -112,7 +119,8 @@ public class CoordProjectManager implements ICoordProjectManager{
 
 	
 	/** 
-	 * @param user
+	 * This method is used to view the user's active projects.
+	 * @param user The user whose active projects are going to be viewed.
 	 */
 	@Override
 	public void viewActiveProjects(Faculty user) {
@@ -122,8 +130,9 @@ public class CoordProjectManager implements ICoordProjectManager{
 
 	
 	/** 
-	 * @param p
-	 * @param t
+	 * This method is used to change the title of a particular project under the supervisor/coordinator.
+	 * @param p The project whose title is going to be changed. 
+	 * @param t The new title of the project.
 	 */
 	@Override
 	public void changeTitle(Project p, String t) {
@@ -132,8 +141,9 @@ public class CoordProjectManager implements ICoordProjectManager{
 
 	
 	/** 
-	 * @param projectID
-	 * @return Project
+	 * This method is used to get projects by their ID. 
+	 * @param projectID The projectID which is used to get the project.
+	 * @return Projec The project according to it's projectID.
 	 */
 	@Override
 	public Project getProjectByID(Integer projectID) {
@@ -144,6 +154,9 @@ public class CoordProjectManager implements ICoordProjectManager{
 		}
 		return null;
 	}
+	/** 
+	* This method is used to saveChanges in a project. 
+	*/
 
 	@Override
 	public void saveChanges() {
@@ -152,7 +165,8 @@ public class CoordProjectManager implements ICoordProjectManager{
 	}
 	
 	/** 
-	 * @return ArrayList<Project>
+	 * This method is used to bring a list of available projects.
+	 * @return ArrayList<Project> The list of projects which are available.
 	 */
 	@Override
 	public ArrayList<Project> getAllAvailableProjects() {
@@ -166,7 +180,8 @@ public class CoordProjectManager implements ICoordProjectManager{
     }
 	
 	/** 
-	 * @return ArrayList<Project>
+	 * This method is used to bring a list of unavailable projects.
+	 * @return ArrayList<Project> The list of projects which are unavailable
 	 */
 	@Override
 	public ArrayList<Project> getAllUnavailableProjects() {
@@ -180,7 +195,8 @@ public class CoordProjectManager implements ICoordProjectManager{
     }
 	
 	/** 
-	 * @return ArrayList<Project>
+	 * This method is used to bring a list of reserved projects.
+	 * @return ArrayList<Project> The list of projects which are reserved.
 	 */
 	@Override
 	public ArrayList<Project> getAllReservedProjects() {
@@ -194,7 +210,8 @@ public class CoordProjectManager implements ICoordProjectManager{
     }
 	
 	/** 
-	 * @return ArrayList<Project>
+	 * This method is used to bring a list of allocated projects.
+	 * @return ArrayList<Project>  The list of projects which are allocated.
 	 */
 	@Override
 	public ArrayList<Project> getAllAllocatedProjects() {
@@ -209,7 +226,8 @@ public class CoordProjectManager implements ICoordProjectManager{
 	
 	
 	/** 
-	 * @param user
+	 * This method is used to set projects as unavailable.
+	 * @param user The Supervisor/Coordinator whose projects are going to be available. 
 	 */
 	protected void setUnavailable(Faculty user) {
 		ArrayList<Project> facProjects = user.getProjects();
@@ -222,8 +240,9 @@ public class CoordProjectManager implements ICoordProjectManager{
 		}
 	}
 	
-	/** 
-	 * @param user
+	/**
+	 *  This method is used to set projects as available.
+	 * @param user The Supervisor/Coordinator whose projects are going to be available.
 	 */
 	protected void setAvailable(Faculty user) {
 		ArrayList<Project> facProjects = user.getProjects();

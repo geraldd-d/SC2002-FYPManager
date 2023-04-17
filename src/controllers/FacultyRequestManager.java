@@ -19,10 +19,11 @@ public class FacultyRequestManager implements IFacultyRequestManager {
 	private FacultyRequestManager(ArrayList<Request> requests) {
 		this.requests = requests;
 	}
-	
+
 	/** 
+	 * This method is used to get the instance of the FacultyRequestManager class. It is a singleton class. 
 	 * @param requests
-	 * @return FacultyRequestManager
+	 * @return The instance of the FacultyRequestManager class.
 	 */
 	public static FacultyRequestManager getInstance(ArrayList<Request> requests) {
 		if (frm == null) {
@@ -32,16 +33,18 @@ public class FacultyRequestManager implements IFacultyRequestManager {
 	}
 	
 	/** 
-	 * @return FacultyRequestManager
+	 * This method is used to get the instance of the FacultyRequestManager class. It is a singleton class. 
+	 * @return The instance of the FacultyRequestManager class.
 	 */
 	public static FacultyRequestManager getInstance() {
 		return frm;
 	}
 	
 	/** 
-	 * @param f
-	 * @param p
-	 * @param replacement
+	 * This method is used to add transfer request in the request history.
+	 * @param f The faculty whose has request history would be updated.
+	 * @param p The project whose transfer has been requested 
+	 * @param replacement The replacement supervisor who will replace the current supervisor.
 	 */
 	@Override
 	public void addTransferRequest(Faculty f, Project p, String replacement) {
@@ -61,8 +64,9 @@ public class FacultyRequestManager implements IFacultyRequestManager {
 
 	
 	/** 
-	 * @param user
-	 * @param page
+	 * This method allows the user to view history on a particular page. 
+	 * @param user The user whose history is viewed.
+	 * @param page The page which is viewed.
 	 */
 	@Override
 	public void viewHistory(Faculty user, int page) {
@@ -76,8 +80,9 @@ public class FacultyRequestManager implements IFacultyRequestManager {
 
 	
 	/** 
-	 * @param user
-	 * @param page
+	 * This method is used to view the inbox. 
+	 * @param user The user who is going to view the inbox.
+	 * @param page The page which is being viewed in the Inbox.
 	 */
 	@Override
 	public void viewInbox(Faculty user,int page) {
@@ -91,7 +96,8 @@ public class FacultyRequestManager implements IFacultyRequestManager {
 
 	
 	/** 
-	 * @param user
+	 * The method used to view pending request.
+	 * @param user The coordinator who is viewing the pending request.
 	 */
 	@Override
 	public void viewPending(Faculty user) {
@@ -101,8 +107,9 @@ public class FacultyRequestManager implements IFacultyRequestManager {
 
 	
 	/** 
-	 * @param user
-	 * @return ArrayList<Request>
+	 * This method is used to get a list of pending requests.
+	 * @param user The user who is going to view the list of pending requests.
+	 * @return The list which contains the pending requests.
 	 */
 	@Override
 	public ArrayList<Request> getPendingReqs(Faculty user) {
@@ -116,6 +123,9 @@ public class FacultyRequestManager implements IFacultyRequestManager {
 		return reqs;
 	}
 
+	/**
+	 * This method is used to save the changes. 
+	 */
 	@Override
 	public void saveChanges() {
 		RequestController rc = RequestController.getInstance();
@@ -124,7 +134,8 @@ public class FacultyRequestManager implements IFacultyRequestManager {
 
 	
 	/** 
-	 * @param r
+	 * This method is used to approve title change request.
+	 * @param r The request made for title change.
 	 */
 	@Override
 	public void approveTitleChange(Request r) {
@@ -136,16 +147,19 @@ public class FacultyRequestManager implements IFacultyRequestManager {
 
 	
 	/** 
-	 * @param r
+	 * This method is used to reject request.
+	 * @param r The request which is going to be rejected.
 	 */
 	@Override
 	public void rejectRequest(TitleRequest r) {
 		r.setStatus(RequestStatus.Rejected);
 	}
+
 	/** 
-	 * @param user
-	 * @param id
-	 * @return Request
+	 * This method is used to get the pending request by their ID.
+	 * @param user The user whose pending requests are called.
+	 * @param id The projectID which will bring the project.
+	 * @return The pending requests of user.
 	 */
 	@Override
 	public Request getPendingRequestbyID(Faculty user, int id) {
@@ -158,9 +172,10 @@ public class FacultyRequestManager implements IFacultyRequestManager {
 		return null;
 	}
 	/** 
-	 * @param f
-	 * @param r
-	 * @return boolean
+	 * This method is used to check the pending request.
+	 * @param f The supervisor who will the view the pending request.
+	 * @param r The request which is pending
+	 * @return Yes or No, if the request is pending.
 	 */
 	private boolean checkPending(Faculty f, Request r) {
 		ArrayList<Request> requests = f.getHistory();

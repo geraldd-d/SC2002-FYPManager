@@ -25,8 +25,9 @@ public class StudentRequestManager implements IStudentRequestManager{
 	}
 	
 	/** 
-	 * @param requests
-	 * @return StudentRequestManager
+	 * This method is used to get the instance of the StudentRequestManager class. It is a singleton class.
+	 * @param requests The list of requests
+	 * @return The instance of the StudentRequestManager class.
 	 */
 	public static StudentRequestManager getInstance(ArrayList<Request> requests) {
 		if (srm == null) {
@@ -36,11 +37,16 @@ public class StudentRequestManager implements IStudentRequestManager{
 	}
 	
 	/** 
-	 * @return StudentRequestManager
+	 * This method is used to get the instance of the StudentRequestManager class. It is a singleton class.
+	 * @return The instance of the StudentRequestManager class.
 	 */
 	public static StudentRequestManager getInstance() {
 		return srm;
 	}
+
+	/**
+	 * The method used to save changes
+	 */
 	@Override
 	public void saveChanges() {
 		RequestController rc = RequestController.getInstance();
@@ -49,8 +55,9 @@ public class StudentRequestManager implements IStudentRequestManager{
 	
 	
 	/** 
-	 * @param user
-	 * @param page
+	 * This method allows the user to view history on a particular page. 
+	 * @param user The user whose history is viewed.
+	 * @param page The page which is viewed.
 	 */
 	@Override
 	public void viewHistory(Student user, int page) {
@@ -64,8 +71,9 @@ public class StudentRequestManager implements IStudentRequestManager{
 
 	
 	/** 
-	 * @param s
-	 * @param p
+	 * This method is used to add allocation request in student request history.
+	 * @param s The student whose request history would be updated.
+	 * @param p The project which has been requested for allocation.
 	 */
 	@Override
 	public void addAllocationRequest(Student s, Project p) {
@@ -81,8 +89,9 @@ public class StudentRequestManager implements IStudentRequestManager{
 
 	
 	/** 
-	 * @param s
-	 * @param p
+	 * This method is used to add deregistration request in student request history.
+	 * @param s The student whose request history would be updated.
+	 * @param p The project which has been requested for deregistration.
 	 */
 	@Override
 	public void addDeregistrationRequest(Student s, Project p) {
@@ -98,9 +107,10 @@ public class StudentRequestManager implements IStudentRequestManager{
 
 	
 	/** 
-	 * @param s
-	 * @param p
-	 * @param title
+	 * This method is used to add title change request in student request history.
+	 * @param s The student whose request history would be updated.
+	 * @param p The project which has been requested for change of title.
+	 * @param title The new title of the registered project.
 	 */
 	@Override
 	public void addTitleRequest(Student s, Project p, String title) {
@@ -115,9 +125,10 @@ public class StudentRequestManager implements IStudentRequestManager{
 	}
 	
 	/** 
-	 * @param s
-	 * @param r
-	 * @return boolean
+	 * This method is used to check pending requests.
+	 * @param s The student who is checking for pending requests.
+	 * @param r The RequestType of request.
+	 * @return Yes or no, if there is pending request.
 	 */
 	public boolean checkPending(Student s, RequestType rt) {
 		ArrayList<Request> requests = s.getHistory();
@@ -128,6 +139,12 @@ public class StudentRequestManager implements IStudentRequestManager{
 		}
 		return false;
 	}
+	
+	/**
+	 * This method is used to check for deregistration. 
+	 * @param s The student who is checking for the deregistration of the registered project.
+	 * @return yes or no, if the project is deregistered or not.
+	 */
 	public boolean checkDeregister(Student s) {
 		ArrayList<Request> requests = s.getHistory();
 		for (Request req : requests) {
@@ -137,6 +154,13 @@ public class StudentRequestManager implements IStudentRequestManager{
 		}
 		return false;
 	}
+	
+	/** 
+	 * This method is used to get pending request.
+	 * @param s The student to call pending request
+	 * @param rt The requestType of the request
+	 * @return The request made by student and if it is pending or not.
+	 */
 	public Request getPending(Student s, RequestType rt) {
 		ArrayList<Request> requests = s.getHistory();
 		for (Request req : requests) {
@@ -147,6 +171,12 @@ public class StudentRequestManager implements IStudentRequestManager{
 		return null;
 	}
 	
+	
+	/** 
+	 * This method is used to bring request by ID.
+	 * @param id The ID used to bring request.
+	 * @return The request which is called by ID.
+	 */
 	public Request getRequestByID(int id) {
 		for (Request req : requests) {
 				if (req.getRequestID() == id) {

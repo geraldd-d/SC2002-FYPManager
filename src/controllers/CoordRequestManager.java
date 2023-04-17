@@ -20,10 +20,12 @@ public class CoordRequestManager implements ICoordRequestManager {
 	private CoordRequestManager(ArrayList<Request> requests) {
 		this.requests = requests;
 	}
+
 	
-	/** 
-	 * @param requests
-	 * @return CoordRequestManager
+	/**
+	 * This method is used to get the instance of the CoordRequestManager class. It is a singleton class.  
+	 * @param requests The list of request in the system.
+	 * @return The instance of the CoordRequestManager class.
 	 */
 	public static CoordRequestManager getInstance(ArrayList<Request> requests) {
 		if (crsc == null) {
@@ -33,14 +35,16 @@ public class CoordRequestManager implements ICoordRequestManager {
 	}
 	
 	/** 
-	 * @return CoordRequestManager
+	 * This method is used to get the instance of the CoordRequestManager class. It is a singleton class. 
+	 * @return The instance of the CoordRequestManager class.
 	 */
 	public static CoordRequestManager getInstance() {
 		return crsc;
 	}
 	
 	/** 
-	 * @param r
+	 * This method is used to reject request.
+	 * @param r The request which is going to be rejected.
 	 */
 	@Override
 	public void rejectRequest(Request r) {
@@ -49,7 +53,8 @@ public class CoordRequestManager implements ICoordRequestManager {
 
 	
 	/** 
-	 * @param r
+	 * This methode is used to approve allocation request.
+	 * @param r The allocation request which is going to be approved. 
 	 */
 	@Override
 	public void approveAllocation(Request r) {
@@ -68,8 +73,8 @@ public class CoordRequestManager implements ICoordRequestManager {
 	}
 
 	
-	/** approve deregistration request and reject all other pending requests for that project.
-	 * @param r
+	/** This method is used to approve deregistration request and reject all other pending requests for that project.
+	 * @param r This is the request which will be approved for deregisteration.
 	 */
 	@Override
 	public void approveDeregistration(Request r) {
@@ -87,7 +92,8 @@ public class CoordRequestManager implements ICoordRequestManager {
 
 	
 	/** 
-	 * @param r
+	 * This method is used to approve transfer request.
+	 * @param r The request made for transfer.
 	 */
 	@Override
 	public void approveTransfer(Request r) {
@@ -106,6 +112,9 @@ public class CoordRequestManager implements ICoordRequestManager {
 		r.setStatus(RequestStatus.Approved);
 	}
 
+	/**
+	 * This method is used to save the changes. 
+	 */
 	@Override
 	public void saveChanges() {
 		RequestController rc = RequestController.getInstance();
@@ -114,7 +123,8 @@ public class CoordRequestManager implements ICoordRequestManager {
 
 	
 	/** 
-	 * @param r
+	 * This method is used to approve title change request.
+	 * @param r The request made for title change.
 	 */
 	@Override
 	public void approveTitleChange(Request r) {
@@ -126,7 +136,8 @@ public class CoordRequestManager implements ICoordRequestManager {
 
 	
 	/** 
-	 * @param page
+	 * This method is made to view all request.
+	 * @param page The page which contains all the requests.
 	 */
 	public void viewAllRequests(int page) {
 		int pageSize = 5;
@@ -137,8 +148,9 @@ public class CoordRequestManager implements ICoordRequestManager {
 	}
 	
 	/** 
-	 * @param coordinator
-	 * @param page
+	 * This method is used to view the inbox. 
+	 * @param coordinator The coordinator who is going to view the inbox.
+	 * @param page The page which is being viewed in the Inbox.
 	 */
 	public void viewInbox(Coordinator coordinator, int page) {
 		ArrayList<Request> requests = coordinator.getInbox();
@@ -150,7 +162,8 @@ public class CoordRequestManager implements ICoordRequestManager {
 	}
 	
 	/** 
-	 * @param c
+	 * The method used to view pending request/
+	 * @param c The coordinator who is viewing the pending request.
 	 */
 	@Override
 	public void viewPending(Coordinator c) {
@@ -160,8 +173,9 @@ public class CoordRequestManager implements ICoordRequestManager {
 
 	
 	/** 
-	 * @param user
-	 * @return ArrayList<Request>
+	 * This method is used to get a list of pending requests.
+	 * @param user The user who is going to view the list of pending requests.
+	 * @return The list which contains the pending requests.
 	 */
 	@Override
 	public ArrayList<Request> getPendingReqs(Faculty user) {
@@ -176,9 +190,10 @@ public class CoordRequestManager implements ICoordRequestManager {
 	}
 	
 	/** 
-	 * @param user
-	 * @param id
-	 * @return Request
+	 * This method is used to get the pending request by their ID.
+	 * @param user The user whose pending requests are called.
+	 * @param id The projectID which will bring the project.
+	 * @return The pending requests of user.
 	 */
 	public Request getPendingRequestbyID(Faculty user, int id) {
 		ArrayList<Request> pending = getPendingReqs(user);
@@ -191,12 +206,19 @@ public class CoordRequestManager implements ICoordRequestManager {
 	}
 	
 	/** 
-	 * @return ArrayList<Request>
+	 * This method is used to get requests.
+	 * @return The requests which are called.
 	 */
 	public ArrayList<Request> getRequests() {
 		return requests;
 	}
 	
+	
+	/** 
+	 * This method allows the user to view history on a particular page. 
+	 * @param user The user whose history is viewed.
+	 * @param page The page which is viewed.
+	 */
 	public void viewHistory(User user, int page) {
 		int pageSize = 5;
 	    ArrayList<Request> reqs = user.getHistory();

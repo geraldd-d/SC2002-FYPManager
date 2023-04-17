@@ -18,7 +18,7 @@ public class Project {
 		this.status = status;
 		this.projectID = projectID;
 		this.supervisorName = supervisorName;
-		//this.code = "P" + String.format("%03d", projectCount);
+		
 	}
 
 	
@@ -64,7 +64,6 @@ public class Project {
 	public String getStudentID(){
 		return this.studentID;
 	}
-
 	
 	/** 
 	 * @param id
@@ -108,7 +107,6 @@ public class Project {
 	public void setStudentID(String studentID) {
         this.studentID = studentID;
     }
-	
 
 	public void printProject() {
 		System.out.println("Project ID: "+this.projectID);
@@ -118,4 +116,3 @@ public class Project {
 		System.out.println();
 	}
 }
-

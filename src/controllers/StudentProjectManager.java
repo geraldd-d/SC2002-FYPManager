@@ -15,10 +15,11 @@ public class StudentProjectManager implements IStudentProjectManager{
 	private StudentProjectManager(ArrayList<Project> projects) {
 		this.projects = projects;
 	}
-	
+
 	/** 
+	 * This method is used to get the instance of the StudentProjectManager class. It is a singleton class.
 	 * @param projects
-	 * @return StudentProjectManager
+	 * @return The instance of the StudentProjectManager class.
 	 */
 	public static StudentProjectManager getInstance(ArrayList<Project> projects) {
 		if (spm == null) {
@@ -28,7 +29,8 @@ public class StudentProjectManager implements IStudentProjectManager{
 	}
 	
 	/** 
-	 * @return StudentProjectManager
+	 * This method is used to get the instance of the StudentProjectManager class. It is a singleton class.
+	 * @return The instance of the StudentProjectManager class.
 	 */
 	public static StudentProjectManager getInstance() {
 		return spm;
