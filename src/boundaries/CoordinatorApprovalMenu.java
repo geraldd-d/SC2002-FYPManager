@@ -56,13 +56,14 @@ public class CoordinatorApprovalMenu {
         		String approval;
         		boolean valid = false;
         		do {
+        			sc.nextLine();
         			try {
-        				sc.nextLine();
         				System.out.println("Enter APPROVE or REJECT: ");
         				approval = sc.nextLine();
             		    ApprovalType apt = ApprovalType.valueOf(approval);
             		} catch ( IllegalArgumentException e ) {
             		    System.err.println( "Invalid option.");
+            		    sc.nextLine();
             		    continue;
             		}
         			valid = true;

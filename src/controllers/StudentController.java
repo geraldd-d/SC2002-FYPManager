@@ -53,6 +53,7 @@ public class StudentController {
 		Project p = pm.getProjectByID(id);
 		if (p != null && p.getStatus().equals(ProjectStatus.Available)) {
 			srm.addAllocationRequest(user, p);
+			p.setStatus(ProjectStatus.Reserved);
 			return true;
 		}
 		return false;

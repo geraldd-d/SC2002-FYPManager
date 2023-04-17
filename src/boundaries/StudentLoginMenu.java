@@ -51,8 +51,12 @@ public class StudentLoginMenu {
 		}
 		attempts = 0;
 		do {
-			System.out.println("Enter Password: ");
+			System.out.println("Enter Password or leave empty to return: ");
 			input = sc.nextLine();
+			if(input.equals("")) {
+				lm.display();
+				return;
+			}
 			auth = lc.isLoggedIn(currentUser, input);
 			if (!auth) {
 				System.out.println("Invalid Password.");

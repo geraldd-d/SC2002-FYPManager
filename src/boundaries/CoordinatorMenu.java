@@ -84,15 +84,16 @@ public class CoordinatorMenu {
                 case 2:
                 	String title;
                 	sc.nextLine();
-                    System.out.println("Enter new title:");
+                    System.out.println("Enter Project title:");
                     title = sc.nextLine();
                     while (title.length() < 5) {
                     	sc.nextLine();
                         System.out.println("New title is too short.");
-                        System.out.println("Enter new title:");
+                        System.out.println("Enter Project title:");
                         title = sc.nextLine();
                         }
                     cprm.addProject(coordinator, title);
+                    System.out.println("New project " + title + " created.");
                     break;
                      
                 case 3:

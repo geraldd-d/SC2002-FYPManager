@@ -31,10 +31,14 @@ public class ProjectMenu implements BaseMenu{
     	int numPages = (int) Math.ceil((float)numProjects/(float)5);
         do {
         	if(page <= numPages) {
+        		System.out.println();
         		spm.viewAllAvailableProjects(page);
+            	System.out.println("\u001b[7mPage " + page + " of " + numPages + "\u001b[0m");
+        	} else {
+        		System.out.println("Invalid page number.");
         	}
             try {
-            	System.out.println("Enter 0 to return or a valid integer from 1 - " + numPages);
+            	System.out.println("Enter 0 to return or a valid page number");
             	page = sc.nextInt();
             } catch (InputMismatchException e) {
                 System.out.println("Invalid choice.");

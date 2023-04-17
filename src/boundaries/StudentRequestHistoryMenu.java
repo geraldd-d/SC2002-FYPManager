@@ -43,15 +43,14 @@ public class StudentRequestHistoryMenu{
     	int numPages = (int) Math.ceil((float)numRequests/(float)5);
         do {
         	if(page <= numPages) {
-            	System.out.println("Page " + page + " of " + numPages);
-            	System.out.println();
         		srm.viewHistory((Student) user, page);
+            	System.out.println("\u001b[7mPage " + page + " of " + numPages + "\u001b[0m");
         	}
             try {
             	System.out.println("Enter 0 to return or a valid integer from 1 -" + numPages);
             	page = sc.nextInt();
             } catch (InputMismatchException e) {
-                System.out.println("Invalid choice. Enter 0 to return or a valid integer from 1 - " + numPages);
+                System.out.println("Invalid choice. Enter 0 to return or a valid page number");
                 sc.nextLine();
                 continue;
             }
