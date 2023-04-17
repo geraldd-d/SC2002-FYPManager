@@ -68,12 +68,12 @@ public class FacultyMenu{
             System.out.println("\u2551 1. View your projects                  \u2551"); // menu options
             System.out.println("\u2551 2. Modify the title of FYP             \u2551");
             System.out.println("\u2551 3. Request to transfer student         \u2551");
+            System.out.println("\u2551 4. Create new project                  \u2551");
             if (alert) {
-                System.out.println("\u2551 4. View pending requests \u001b[33mNEW\u001b[0m           \u2551");
+                System.out.println("\u2551 5. View pending requests \u001b[33mNEW\u001b[0m           \u2551");
             } else {
-            	System.out.println("\u2551 4. View pending requests               \u2551");
+            	System.out.println("\u2551 5. View pending requests               \u2551");
             }
-            System.out.println("\u2551 5. View request history                \u2551");
             System.out.println("\u2551 6. View request inbox                  \u2551");
             System.out.println("\u2551 7. Address requests                    \u2551");
             System.out.println("\u2551 8. Change your password                \u2551");
@@ -149,8 +149,8 @@ public class FacultyMenu{
                     	String replacement;
                     	input.nextLine();
                     	fc.viewActiveProjects(user);
-                        System.out.println("Enter Project ID to transfer student or 0 to return:");
                         try {
+                            System.out.println("Enter Project ID to transfer student or 0 to return:");
                         	id = input.nextInt();
                         } catch (InputMismatchException e) {
                             System.err.println("Enter valid integer.");
@@ -194,20 +194,61 @@ public class FacultyMenu{
                         }
                 	} while(!valid);
                     break;
-                case 4: 
+                case 4:
+                	// create new project
+                	String projecttitle;
+                	input.nextLine();
+                    System.out.println("Enter title of new project or leave empty to return: ");
+                    projecttitle = input.nextLine();
+                    if (projecttitle.equals("")) {
+                    	break;
+                    }
+                    while (projecttitle.length() < 5) {
+                        System.out.println("New title is too short.");
+                        System.out.println("Enter Project title:");
+                        title = input.nextLine();
+                        }
+                    fpm.addProject(user, projecttitle);
+                    System.out.println("New project " + projecttitle + " created.");
+                    break;
+                case 5: 
                     // view pending requests
                 	RequestPendingMenu rpm = RequestPendingMenu.getInstance();
                 	rpm.display(user,frm.getPendingReqs(user));
                     break;
-                case 5: 
-                    // call view history method
-                	FacultyRequestHistoryMenu rhm = FacultyRequestHistoryMenu.getInstance();
-                	rhm.display(user, user.getHistory());
-                	break;
-                case 6:
-                	// call view inbox method
-                	RequestInboxMenu rim = RequestInboxMenu.getInstance();
-                	rim.display(user, user.getInbox());
+                case 6: 
+                	int option = 0;
+                	do {
+                		System.out.println("1. View request history.");
+                        System.out.println("2. View incoming requests.");
+                        System.out.println("3. Back");
+                        System.out.println("Enter your choice: ");
+                    	try {
+                        	option = input.nextInt();
+                        } catch (InputMismatchException e) {
+                            System.err.println("Enter valid integer.");
+                            input.nextLine();
+                            continue;
+                        }
+                    	switch (option) {
+                    		case 1:	
+                                // call view history method
+                    			FacultyRequestHistoryMenu rhm = FacultyRequestHistoryMenu.getInstance();
+                    			rhm.display(user, user.getHistory());
+                    			break;
+                    		case 2:
+                            	// call view inbox method
+                    			RequestInboxMenu rim = RequestInboxMenu.getInstance();
+                            	rim.display(user, user.getInbox());
+                            	break;
+                    		case 3:
+                    			break;
+                    		default:
+                    			System.err.println("Invalid option.");
+                    			break;
+                    	}
+                	} while (option != 3);
+                	
                 	break;
                 case 7:
                 	FacultyApprovalMenu fam = FacultyApprovalMenu.getInstance();

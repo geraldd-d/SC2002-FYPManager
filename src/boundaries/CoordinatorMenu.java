@@ -51,21 +51,49 @@ public class CoordinatorMenu {
         do {
         	boolean valid = false;
         	int id = -1;
-            System.out.println("FYP Matters");
-            System.out.println("---------------------");
-            System.out.println("1. View projects");
-            System.out.println("2. Create a new project");
-            System.out.println("3. Modify the title of FYP");
-            System.out.println("4. Transfer student to replacement supervisor");
-            if (alert) {
-            	System.out.println("5. View your request inbox (NEW)");
-            } else {
-            	System.out.println("5. View your request inbox");
-            }
-            System.out.println("6. Address requests");
-            System.out.println("7. View all requests");
-            System.out.println("8. Change your password");
-            System.out.println("9. Exit");
+        	int width = 42;
+        	// Create the top border of the box
+        	System.out.print("\u2554"); // top-left corner
+        	for (int i = 0; i < width - 2; i++) {
+        	    System.out.print("\u2550"); // horizontal line
+        	}
+        	System.out.println("\u2557"); // top-right corner
+
+        	// Create the sides of the box
+        	System.out.print("\u2551"); // left vertical line
+        	System.out.print("   Coordinator Menu");
+        	for (int i = 0; i < width - "Coordinator Menu".length() - 5; i++) {
+        	    System.out.print(" ");
+        	}
+        	System.out.println("\u2551"); // right vertical line
+
+        	System.out.print("\u2551"); // left vertical line
+        	for (int i = 0; i < width - 2; i++) {
+        	    System.out.print("\u2500"); // horizontal line
+        	}
+        	System.out.println("\u2551"); // right vertical line
+
+        	System.out.println("\u2551 1. View projects                       \u2551"); // menu options
+        	System.out.println("\u2551 2. Create a new project                \u2551");
+        	System.out.println("\u2551 3. Modify the title of FYP             \u2551");
+        	System.out.println("\u2551 4. Transfer student to replacement     \u2551");
+        	System.out.println("\u2551    supervisor                          \u2551");
+        	if (alert) {
+        	    System.out.println("\u2551 5. View your request inbox (NEW)       \u2551");
+        	} else {
+        	    System.out.println("\u2551 5. View your request inbox             \u2551");
+        	}
+        	System.out.println("\u2551 6. Address requests                    \u2551");
+        	System.out.println("\u2551 7. View all requests                   \u2551");
+        	System.out.println("\u2551 8. Change your password                \u2551");
+        	System.out.println("\u2551 9. Exit                                \u2551");
+
+        	// Create the bottom border of the box
+        	System.out.print("\u255A"); // bottom-left corner
+        	for (int i = 0; i < width - 2; i++) {
+        	    System.out.print("\u2550"); // horizontal line
+        	}
+        	System.out.println("\u255D"); // bottom-right corner
             System.out.print("Enter your choice: ");
             try {
             	choice = sc.nextInt();
@@ -102,30 +130,35 @@ public class CoordinatorMenu {
                 case 3:
                     // change the title
                 	
+                	String newtitle;
                 	do {
                 		sc.nextLine();
-                        System.out.println("Enter Project ID to change title or enter 0 to return:");
+                        fc.viewOwnProjects(coordinator);
                         try {
+                            System.out.println("Enter Project ID to change title or enter 0 to return:");
                         	id = sc.nextInt();
                         } catch (InputMismatchException e) {
-                            System.out.println("Enter valid integer.");
+                            System.err.println("Enter valid integer.");
                             sc.nextLine();
                             continue;
                         }
                         if (id == 0) {
                         	break;
                         }
-                        if (projects.contains(cprm.getProjectByID(id))) {
+                        if (coordinator.getProjects().contains(cprm.getProjectByID(id))) {
                         	Project p = cprm.getProjectByID(id);
                         	valid = true;
                         	sc.nextLine();
-                        	String newtitle = "";
                         	System.out.println("Enter new title:");
-                        	while (newtitle.length() < 5) {
-                        		sc.nextLine();
-                            	System.out.println("New title is too short.");
+                        	newtitle = sc.nextLine();
+                        	while (newtitle.length() < 5 || newtitle.equals(p.getTitle())) {
+                        		if (newtitle.equals(p.getTitle())) {
+                            		System.out.println("You cannot rename a project with the same name.");
+                            	} else {
+                                	System.out.println("New title is too short.");
+                            	}
                         		System.out.println("Enter new title:");
-                            	newtitle = sc.nextLine();
+                        		newtitle = sc.nextLine();
                         	}
                         	fc.changeTitle(p, newtitle);
                         }
@@ -206,6 +239,7 @@ public class CoordinatorMenu {
                 	crrm.saveChanges();
                     System.out.println("Logging out...");
                     LoginMenu lm = LoginMenu.getInstance();
+                    lm.display();
                     break;
                 default:
                     System.out.println("Invalid choice. Please enter a valid option.");
