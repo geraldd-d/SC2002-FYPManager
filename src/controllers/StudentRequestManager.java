@@ -128,7 +128,15 @@ public class StudentRequestManager implements IStudentRequestManager{
 		}
 		return false;
 	}
-	
+	public boolean checkDeregister(Student s) {
+		ArrayList<Request> requests = s.getHistory();
+		for (Request req : requests) {
+			if (req.getType().equals(RequestType.Deregister) && req.getStatus().equals(RequestStatus.Approved)) {
+				return true;
+			}
+		}
+		return false;
+	}
 	public Request getPending(Student s, RequestType rt) {
 		ArrayList<Request> requests = s.getHistory();
 		for (Request req : requests) {

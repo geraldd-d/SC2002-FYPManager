@@ -68,7 +68,7 @@ public class CoordRequestManager implements ICoordRequestManager {
 	}
 
 	
-	/** 
+	/** approve deregistration request and reject all other pending requests for that project.
 	 * @param r
 	 */
 	@Override

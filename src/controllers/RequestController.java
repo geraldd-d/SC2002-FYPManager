@@ -82,7 +82,7 @@ public class RequestController {
 				case Title:
 					supervisor = fc.getFacultybyID(requestee);
 					student = sc.getStudentbyID(requestor);
-					TitleRequest tr = new TitleRequest(requestID, student, supervisor, status, student.getRegisteredProject(), projectID);
+					TitleRequest tr = new TitleRequest(requestID, student, supervisor, status, pm.getProjectByID(Integer.parseInt(projectID)), projectID);
 					requests.add(tr);
 					supervisor.addInbox(tr);
 					student.addHistory(tr);
@@ -98,7 +98,7 @@ public class RequestController {
 				case Deregister:
 					coordinator = (Coordinator)fc.getFacultybyID(requestee);
 					student = sc.getStudentbyID(requestor);
-					DeregRequest dr = new DeregRequest(requestID, student, coordinator, status, student.getRegisteredProject());
+					DeregRequest dr = new DeregRequest(requestID, student, coordinator, status, pm.getProjectByID(Integer.parseInt(projectID)));
 					requests.add(dr);
 					coordinator.addInbox(dr);
 					student.addHistory(dr);
