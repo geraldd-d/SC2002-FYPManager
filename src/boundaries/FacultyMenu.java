@@ -141,10 +141,16 @@ public class FacultyMenu{
                     break;
                 case 3:
                     // request to transfer student
+                	if (user.getActiveProjects() == 0) {
+                		System.err.println("You do not have any projects to transfer");
+                		System.out.println();
+                		break;
+                	}
                 	do {
                     	String replacement;
                     	input.nextLine();
-                        System.out.println("Enter Project ID to change title or enter 0 to return:");
+                    	fc.viewActiveProjects(user);
+                        System.out.println("Enter Project ID to transfer student or 0 to return:");
                         try {
                         	id = input.nextInt();
                         } catch (InputMismatchException e) {
@@ -163,6 +169,7 @@ public class FacultyMenu{
                         	}
                         	valid = true;
                         	boolean matched = false;
+                        	input.nextLine();
                         	while (!matched) {
                         		System.out.println("Enter replacement supervisor ID:");
                             	replacement = input.nextLine();
@@ -170,6 +177,7 @@ public class FacultyMenu{
                             	if (f != null && f.getActiveProjects() < 2) {
                             		matched = true;
                                 	fc.transferRequest(user, p, replacement);
+                                	System.out.println("Transfer Request sent succesfully");
                             	}
                             	else {
                             		if (f == null) {
@@ -201,7 +209,9 @@ public class FacultyMenu{
                 	rim.display(user, user.getInbox());
                 	break;
                 case 7:
-                	
+                	FacultyApprovalMenu fam = FacultyApprovalMenu.getInstance();
+                	fam.display(user);
+                	break;
                 case 8: 
                 	//change password method
                 	PasswordMenu pwm = PasswordMenu.getInstance();

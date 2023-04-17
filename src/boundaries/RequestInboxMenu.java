@@ -36,7 +36,7 @@ public class RequestInboxMenu{
         int page = 1;
         int numRequests = reqInbox.size();
         if (numRequests == 0) {
-        	System.out.println("You have no pending requests!");
+        	System.out.println("You have no incoming requests!");
         	return;
         }
     	int numPages = (int) Math.ceil((float)numRequests/(float)5);

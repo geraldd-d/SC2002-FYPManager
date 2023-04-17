@@ -40,6 +40,10 @@ public class FacultyApprovalMenu {
 		FacultyRequestManager frm = FacultyRequestManager.getInstance();
 		int requestID = -1;
         do {
+        	if (frm.getPendingReqs(user).size() == 0) {
+        		System.out.println("No requests to address.");
+        		return;
+        	}
             frm.viewPending(user);
             try {
         		System.out.println("Enter request ID or 0 to return: ");
