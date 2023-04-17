@@ -62,8 +62,11 @@ public class PasswordMenu {
 			}
 		} while (!authenticated);
 		do {
-			System.out.println("Enter new password: ");
+			System.out.println("Enter new password or leave blank to return: ");
 			String newPW = sc.nextLine();
+			if (newPW.equals("")) {
+				break;
+			}
 			System.out.println("Confirm new password again: ");
 			input = sc.nextLine();
 			if (newPW.length() < 8 ) {
@@ -77,6 +80,7 @@ public class PasswordMenu {
 			
 			if (input.equals(newPW)) {
 	        	lc.updatePassword(user,oldPW,newPW);
+	        	System.out.println("Password changed successfully.");
 	        	matched = true;
 	        	lm.display();
 	        	return;
