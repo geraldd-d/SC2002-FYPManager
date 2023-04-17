@@ -1,7 +1,5 @@
 package entities;
 
-import java.util.ArrayList;
-
 /**
  * This class represents a course coordinator.
  */

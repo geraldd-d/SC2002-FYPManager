@@ -40,7 +40,6 @@ public class FacultyProjectManager implements IFacultyProjectManager{
 	 */
 	@Override
 	public void addProject(Faculty user, String title) {
-		FacultyController fc = FacultyController.getInstance();
 		ProjectsController pc = ProjectsController.getInstance();
 		ProjectStatus status;
 		if (user.getActiveProjects() < 2) {

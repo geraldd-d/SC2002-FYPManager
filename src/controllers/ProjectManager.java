@@ -1,14 +1,12 @@
 package controllers;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
+
 
 import entities.Faculty;
 import entities.Project;
 import entities.ProjectStatus;
-import entities.Student;
-import entities.User;
+
 
 /**
  * This class is the manager for the Project class.
@@ -18,9 +16,9 @@ public class ProjectManager {
 	private static ProjectManager pm = null;
 	private ProjectManager(ArrayList<Project> p) {
 		this.projects = p;
-		CoordProjectManager cpm = CoordProjectManager.getInstance(projects);
-		FacultyProjectManager fpm = FacultyProjectManager.getInstance(projects);
-		StudentProjectManager spm = StudentProjectManager.getInstance(projects);
+		CoordProjectManager.getInstance(projects);
+		FacultyProjectManager.getInstance(projects);
+		StudentProjectManager.getInstance(projects);
 		capProjects();
 	};
 	

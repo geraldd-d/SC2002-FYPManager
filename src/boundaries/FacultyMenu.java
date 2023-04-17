@@ -30,6 +30,7 @@ public class FacultyMenu{
     public void display(Faculty user) {
 
         Scanner input = new Scanner(System.in);
+    	FacultyRequestManager frm = FacultyRequestManager.getInstance();
         FacultyProjectManager fpm = FacultyProjectManager.getInstance();
         FacultyController fc = FacultyController.getInstance();
         int choice = 0;
@@ -139,11 +140,11 @@ public class FacultyMenu{
                 case 4: 
                     // view pending requests
                 	RequestPendingMenu rpm = RequestPendingMenu.getInstance();
-                	rpm.display(user,fc.getPendingRequests(user));
+                	rpm.display(user,frm.getPendingReqs(user));
                     break;
                 case 5: 
                     // call view history method
-                	RequestHistoryMenu rhm = RequestHistoryMenu.getInstance();
+                	FacultyRequestHistoryMenu rhm = FacultyRequestHistoryMenu.getInstance();
                 	rhm.display(user, user.getHistory());
                 	break;
                 case 6:
@@ -157,7 +158,6 @@ public class FacultyMenu{
 					pwm.display(user);
                     break;
                 case 8:
-                	FacultyRequestManager frm = FacultyRequestManager.getInstance();
                 	fpm.saveChanges();
                 	frm.saveChanges();
                 	System.out.println("Logging out...");

@@ -1,13 +1,11 @@
 package entities;
 
 import java.util.ArrayList;
-import controllers.*;
 
 /**
  * This class represents a student in the FYPManager.
  */
 public class Student extends User{
-	HashService hs = HashService.getInstance();
 	private Project registeredProject;
 	private ArrayList<Request> requestHistory;
 
@@ -16,8 +14,6 @@ public class Student extends User{
 		this.requestHistory = new ArrayList<Request>();
 		//this.isAllocated = isAllocated;
 	}
-
-	
 	/** 
 	 * @return Project
 	 */

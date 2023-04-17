@@ -2,7 +2,6 @@ package controllers;
 
 import java.io.*;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import entities.*;
 
@@ -94,7 +93,6 @@ public class ProjectsController {
 	 */
 	protected void updateProjects(ArrayList<Project> projects) {
 	    try {
-	    	FacultyController fc = FacultyController.getInstance();
 	    	String tempFilePath = projectsPath + ".tmp";
 	    	File tempFile = new File(tempFilePath);
 	        FileWriter writer = new FileWriter(tempFilePath);

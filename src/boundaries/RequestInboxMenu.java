@@ -5,12 +5,9 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import controllers.FacultyRequestManager;
-import controllers.ProjectsController;
-import controllers.RequestManager;
-import controllers.StudentController;
 import entities.Faculty;
 import entities.Request;
-import entities.User;
+
 
 /**
  * This class is the boundary for the RequestInboxMenu class.

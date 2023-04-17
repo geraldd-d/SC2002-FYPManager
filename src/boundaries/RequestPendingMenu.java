@@ -5,7 +5,6 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import controllers.FacultyRequestManager;
-import controllers.RequestManager;
 import entities.Faculty;
 import entities.Request;
 import entities.User;
@@ -34,12 +33,12 @@ public class RequestPendingMenu{
 	public void display(Faculty user, ArrayList<Request> pending){
 		Scanner sc = new Scanner(System.in);
 		FacultyRequestManager frm = FacultyRequestManager.getInstance();
-        int page = 1;
         int numRequests = pending.size();
         if (numRequests == 0) {
         	System.out.println("You have no pending requests!");
         	return;
+        } else {
+        	frm.viewPending(user);
         }
-		frm.viewPending(user);
     }
 }

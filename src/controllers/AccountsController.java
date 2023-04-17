@@ -1,6 +1,5 @@
 package controllers;
 import java.io.*;
-import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import entities.User;
 import java.util.regex.*;
@@ -19,9 +18,9 @@ public class AccountsController {
 		HashMap<String,User> facultyData = getFacultyAccounts();
 		this.studentList = studentData;
 		this.facultyList = facultyData;
-		StudentController sc = StudentController.getInstance(studentData);
-		FacultyController fc = FacultyController.getInstance(facultyData);
-		ProjectsController pc = ProjectsController.getInstance();
+		StudentController.getInstance(studentData);
+		FacultyController.getInstance(facultyData);
+		ProjectsController.getInstance();
 	}
 	
 	/**
@@ -47,7 +46,6 @@ public class AccountsController {
 	 * @return The list of student accounts in the system.
 	 */
 	private HashMap<String, User> getStudentAccounts(){
-		HashService hs = HashService.getInstance();
 		File file = new File(studentsPath);
 		HashMap<String,User> studentData = new HashMap<>();
 		try {
@@ -66,11 +64,9 @@ public class AccountsController {
 				Matcher m = pattern.matcher(email);
 				if (m.find()) {
 					String password;
-					String salt;
 					userID = m.group(1).toLowerCase();
 					if (fields[3].equals(" ")) {
-						salt = userID;
-						password = hs.hashPassword(fields[2], userID);
+						password = HashService.hashPassword(fields[2], userID);
 					}
 					else {
 						password = fields[2];
@@ -100,7 +96,6 @@ public class AccountsController {
 	 */
 	private HashMap<String, User> getFacultyAccounts(){
 		File file = new File(facultyPath);
-		HashService hs = HashService.getInstance();
 		HashMap<String,User> facultyData = new HashMap<>();
 		try {
 			FileReader fr = new FileReader(file);
@@ -124,7 +119,7 @@ public class AccountsController {
 					userID = m.group(1).toLowerCase();
 					if (!fields[4].equals(userID)) {
 						salt = userID;
-						password = hs.hashPassword(fields[2], salt);
+						password = HashService.hashPassword(fields[2], salt);
 					}
 					else {
 						password = fields[2];
@@ -241,7 +236,6 @@ public class AccountsController {
 	 * @param pw The new password.
 	 */
 	protected void updateSAccount(User user, String pw) {
-		HashService hs = HashService.getInstance();
 		try {
             File inputFile = new File(studentsPath);
             File tempFile = new File("temp.csv");
@@ -256,7 +250,7 @@ public class AccountsController {
 					continue;
 				}
                 if (fields[3].equals(user.getUserID())) {
-                	fields[2] = hs.hashPassword(pw, fields[3]);
+                	fields[2] = HashService.hashPassword(pw, fields[3]);
                     currentLine = String.join(delimiter, fields);
                 }
                 writer.write(currentLine + System.getProperty("line.separator"));
@@ -271,7 +265,7 @@ public class AccountsController {
             e.printStackTrace();
         }
 		studentList = getStudentAccounts();
-		StudentController sc = StudentController.getInstance(studentList);
+		StudentController.getInstance(studentList);
 	}
 	/**
 	 * This method is used to update the faculty account in the file.
@@ -279,7 +273,6 @@ public class AccountsController {
 	 * @param pw The new password.
 	 */
 	protected void updateFAccount(User user, String pw) {
-		HashService hs = HashService.getInstance();
 		try {
             File inputFile = new File(facultyPath);
             File tempFile = new File("temp.csv");
@@ -294,7 +287,7 @@ public class AccountsController {
 					continue;
 				}
                 if (fields[4].equals(user.getUserID())) {
-                	fields[2] = hs.hashPassword(pw, fields[4]);
+                	fields[2] = HashService.hashPassword(pw, fields[4]);
                     currentLine = String.join(delimiter, fields);
                 }
                 writer.write(currentLine + System.getProperty("line.separator"));
@@ -309,6 +302,6 @@ public class AccountsController {
             e.printStackTrace();
         }
 		facultyList = getFacultyAccounts();
-		FacultyController fc = FacultyController.getInstance(facultyList);
+		FacultyController.getInstance(facultyList);
 	}
 }

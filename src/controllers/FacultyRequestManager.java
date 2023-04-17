@@ -7,10 +7,8 @@ import entities.Faculty;
 import entities.Project;
 import entities.Request;
 import entities.RequestStatus;
-import entities.Student;
 import entities.TitleRequest;
 import entities.TransferRequest;
-import entities.User;
 
 /**
  * This class is the manager for the faculty requests. It implements the IFacultyRequestManager interface.

@@ -82,4 +82,6 @@ public class StudentProjectManager implements IStudentProjectManager{
 		ProjectsController pc = ProjectsController.getInstance();
 	    pc.updateProjects(projects);
 	}
+	
+	
 }

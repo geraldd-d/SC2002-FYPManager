@@ -6,7 +6,6 @@ import entities.Faculty;
 import entities.Project;
 import entities.Request;
 import entities.TitleRequest;
-import entities.User;
 
 /**
  * This interface is the interface for the FacultyRequestManager class.

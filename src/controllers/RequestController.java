@@ -17,7 +17,9 @@ public class RequestController {
 	private static RequestController rc = null;
     private RequestController() {
     	ArrayList<Request> requests = readRequests();
-    	RequestManager.getInstance(requests);
+    	CoordRequestManager.getInstance(requests);
+		FacultyRequestManager.getInstance(requests);
+		StudentRequestManager.getInstance(requests);
     }
 	
 	/**

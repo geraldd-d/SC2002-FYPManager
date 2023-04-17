@@ -93,7 +93,6 @@ public class StudentController {
 	 * @return True if the student was deregistered, false otherwise.
 	 */
 	public boolean DeregisterProject(Student user){
-		ProjectManager pm = ProjectManager.getInstance();
 		StudentRequestManager srm = StudentRequestManager.getInstance();
 		Project project = user.getRegisteredProject();
 		if(project != null){

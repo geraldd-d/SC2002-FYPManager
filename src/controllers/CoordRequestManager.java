@@ -9,6 +9,7 @@ import entities.Project;
 import entities.Request;
 import entities.RequestStatus;
 import entities.Student;
+import entities.User;
 
 /**
  * This class is the manager for the requests made by the coordinator. It implements the ICoordRequestManager interface.
@@ -54,7 +55,6 @@ public class CoordRequestManager implements ICoordRequestManager {
 	public void approveAllocation(Request r) {
 		FacultyController fc = FacultyController.getInstance();
 		CoordProjectManager cpm = CoordProjectManager.getInstance();
-		StudentController sc = StudentController.getInstance();
 		Project p = r.getProject();
 		String id = p.getSupervisorID();
 		Faculty supervisor = fc.getFacultybyID(id);
@@ -88,7 +88,6 @@ public class CoordRequestManager implements ICoordRequestManager {
 	public void approveTransfer(Request r) {
 		FacultyController fc = FacultyController.getInstance();
 		CoordProjectManager cpm = CoordProjectManager.getInstance();
-		StudentController sc = StudentController.getInstance();
 		Project p = r.getProject();
 		Faculty requestor = (Faculty) r.getRequestor();
 		String replacementID = r.getChanges();
@@ -98,7 +97,7 @@ public class CoordRequestManager implements ICoordRequestManager {
 			System.out.println("Supervisor already has the maximum number of projects.");
 			return;
 		}
-		cpm.transferProject(replacement, replacementID, replacementName, p);
+		cpm.transferProject(requestor, replacementID, replacementName, p);
 		r.setStatus(RequestStatus.Approved);
 	}
 
@@ -191,6 +190,15 @@ public class CoordRequestManager implements ICoordRequestManager {
 	 */
 	public ArrayList<Request> getRequests() {
 		return requests;
+	}
+	
+	public void viewHistory(User user, int page) {
+		int pageSize = 5;
+	    ArrayList<Request> reqs = user.getHistory();
+	    int startIndex = (page - 1) * pageSize;
+	    int endIndex = Math.min(startIndex + pageSize, reqs.size());
+	    List<Request> currentPage = reqs.subList(startIndex, endIndex);
+	    currentPage.forEach((Request)-> Request.printRequest());
 	}
 
 }

@@ -1,7 +1,5 @@
 package entities;
 
-import java.util.*;
-
 /*
  * This class represents a FYP of the system.
  */

@@ -8,7 +8,6 @@ import controllers.HashService;
  * This abstract class is the parent class of all users. It contains the attributes and methods that are common to all users.
  */
 public abstract class User {
-	HashService hs = HashService.getInstance();
 	private String userID;
 	private String hashedPassword;
 	private String name;
@@ -49,7 +48,7 @@ public abstract class User {
 	 * @return boolean
 	 */
 	public boolean checkPassword(String password){
-		return hs.hashPassword(password, userID).equals(this.hashedPassword);
+		return HashService.hashPassword(password, userID).equals(this.hashedPassword);
 	}
 	
 	/** 

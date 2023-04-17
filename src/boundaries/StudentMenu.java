@@ -6,6 +6,7 @@ import java.util.*;
 import java.util.*;
 
 import entities.*;
+import util.Cls;
 import controllers.*;
 
 /**
@@ -13,9 +14,7 @@ import controllers.*;
  */
 public class StudentMenu{
 	private static StudentMenu sm = null;
-	private StudentMenu() {
-        StudentController stc = StudentController.getInstance();
-	};
+	private StudentMenu() {};
 	
 	/** 
 	 * @return StudentMenu
@@ -60,6 +59,7 @@ public class StudentMenu{
 	                case 1:
 	                	if (!user.getisAllocated()) {
 	                		ProjectMenu pm = ProjectMenu.getInstance();
+	                		Cls.clear();
 	                		pm.display();
 	                	} else {
 	                		System.out.println("You are already registered for " + user.getRegisteredProject().getTitle());
@@ -151,7 +151,7 @@ public class StudentMenu{
 						}
 	                    break;
 	                case 6: 
-	                	FacultyRequestHistoryMenu rhm = FacultyRequestHistoryMenu.getInstance();
+	                	StudentRequestHistoryMenu rhm = StudentRequestHistoryMenu.getInstance();
 	                	rhm.display(user, user.getHistory());
 	                	break;
 					case 7:

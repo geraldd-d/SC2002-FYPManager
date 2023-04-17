@@ -1,8 +1,5 @@
 package entities;
 
-import java.util.ArrayList;
-import java.util.UUID;
-
 /**
  * This abstract class is the parent class of all requests. It contains the attributes and methods that are common to all requests.
  */

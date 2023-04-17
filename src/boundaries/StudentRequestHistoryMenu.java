@@ -8,7 +8,6 @@ import java.util.Scanner;
 import controllers.StudentRequestManager;
 import entities.Request;
 import entities.Student;
-import entities.User;
 
 /**
  * This class is the boundary for the StudentRequestHistoryMenu class.
@@ -44,17 +43,18 @@ public class StudentRequestHistoryMenu{
     	int numPages = (int) Math.ceil((float)numRequests/(float)5);
         do {
         	if(page <= numPages) {
+            	System.out.println("Page " + page + " of " + numPages);
+            	System.out.println();
         		srm.viewHistory((Student) user, page);
         	}
             try {
             	System.out.println("Enter 0 to return or a valid integer from 1 -" + numPages);
             	page = sc.nextInt();
             } catch (InputMismatchException e) {
-                System.out.println("Invalid choice. Enter 0 to return or a valid integer from 1 -" + numPages);
+                System.out.println("Invalid choice. Enter 0 to return or a valid integer from 1 - " + numPages);
                 sc.nextLine();
                 continue;
             }
-            System.out.println(page);
         } while(page != 0);
     }
 }

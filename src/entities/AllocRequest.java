@@ -14,6 +14,7 @@ public class AllocRequest extends Request {
 		System.out.println("Requestee: "+ this.getRequestee().getName());
 		System.out.println("ProjectID: "+ this.getProject().getID());
 		System.out.println("Status: "+ this.getStatus());
+		System.out.println("Request ID: " + this.getRequestID());
 		System.out.println();
 	}
 	

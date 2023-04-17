@@ -2,7 +2,6 @@ package controllers;
 
 import entities.Student;
 import entities.User;
-import java.util.Scanner;
 
 /**
  * This class is the controller for the Login class.

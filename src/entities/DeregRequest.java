@@ -10,10 +10,11 @@ public class DeregRequest extends Request {
 	public void printRequest() {
 		System.out.println("Deregistration Request");
 		System.out.println("----------------------");
-		System.out.println("Requestor: "+ this.getRequestor());
-		System.out.println("Requestee: "+ this.getRequestor());
+		System.out.println("Requestor: "+ this.getRequestor().getName());
+		System.out.println("Requestee: "+ this.getRequestee().getName());
 		System.out.println("ProjectID: "+ this.getProject().getID());
 		System.out.println("Status: "+ this.getStatus());
+		System.out.println("Request ID: " + this.getRequestID());
 	}
 	
 	/** 
