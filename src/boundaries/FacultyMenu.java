@@ -173,7 +173,7 @@ public class FacultyMenu{
                         		System.out.println("Enter replacement supervisor ID:");
                             	replacement = input.nextLine();
                             	Faculty f = fc.getFacultybyID(replacement);
-                            	if (f != null && f.getActiveProjects() < 2) {
+                            	if (f != null && f.getActiveProjects() < 2 && !f.getUserID().equals(user.getUserID())) {
                             		matched = true;
                                 	fc.transferRequest(user, p, replacement);
                                 	System.out.println("Transfer Request sent succesfully");
@@ -181,8 +181,10 @@ public class FacultyMenu{
                             	else {
                             		if (f == null) {
                             			System.err.println("Supervisor not found.");
-                            		} else {
+                            		} else if (f.getActiveProjects() > 2){
                             			System.err.println("Supervisor has too many active projects.");
+                            		} else {
+                            			System.err.println("You may not transfer a project to yourself.");
                             		}
                             	}
                         	}

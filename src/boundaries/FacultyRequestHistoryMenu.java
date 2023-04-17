@@ -44,6 +44,7 @@ public class FacultyRequestHistoryMenu{
         do {
         	if(page <= numPages) {
         		rm.viewHistory(user, page);
+            	System.out.println("\u001b[7mPage " + page + " of " + numPages + "\u001b[0m");
         	}
             try {
             	System.out.println("Enter 0 to return or a valid integer from 1 -" + numPages);

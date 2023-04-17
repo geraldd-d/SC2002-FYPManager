@@ -62,13 +62,14 @@ public class StudentController {
 	/**
 	 * This method is used to request a new title for the registered project.
 	 * @param user The student requesting the new title.
+	 * @param title New title to be implemented.
 	 * @return True if the request was successful, false otherwise.
 	 */
-	public boolean requestNewTitle(Student user){
+	public boolean requestNewTitle(Student user, String title){
 		StudentRequestManager srm = StudentRequestManager.getInstance();
 		Project p = user.getRegisteredProject();
 		if(p!= null && p.getStatus().equals(ProjectStatus.Allocated)){
-			srm.addTitleRequest(user, p, p.getTitle());
+			srm.addTitleRequest(user, p, title);
 			return true;
 		}
 		return false;

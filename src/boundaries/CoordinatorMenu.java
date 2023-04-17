@@ -170,7 +170,7 @@ public class CoordinatorMenu {
                             		} else if (f.getActiveProjects() >= 2) {
                             			System.out.println("Supervisor has too many active projects.");
                             		} else {
-                            			System.out.println("You cannot transfer a project to yourself.");
+                            			System.out.println("You may not transfer a project to yourself.");
                             		}
                             	}
                         	}

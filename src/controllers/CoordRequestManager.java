@@ -77,6 +77,11 @@ public class CoordRequestManager implements ICoordRequestManager {
 		r.setStatus(RequestStatus.Approved);
 		Project p = r.getProject();
 		Student requestor = (Student) r.getRequestor();
+		for (Request request : requests) {
+			if (request.getStatus().equals(RequestStatus.Pending) && request.getProject().equals(p)) {
+				rejectRequest(request);
+			}
+		}
 		cpm.deregisterProject(requestor, p);
 	}
 
