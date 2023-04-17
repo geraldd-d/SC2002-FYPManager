@@ -151,7 +151,7 @@ public class StudentMenu{
 						}
 	                    break;
 	                case 6: 
-	                	RequestHistoryMenu rhm = RequestHistoryMenu.getInstance();
+	                	FacultyRequestHistoryMenu rhm = FacultyRequestHistoryMenu.getInstance();
 	                	rhm.display(user, user.getHistory());
 	                	break;
 					case 7:

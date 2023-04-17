@@ -4,25 +4,24 @@ import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-import controllers.ProjectsController;
-import controllers.RequestManager;
-import controllers.StudentController;
+import controllers.FacultyRequestManager;
+import entities.Faculty;
 import entities.Request;
 import entities.User;
 
 /**
- * This class is the boundary for the RequestHistoryMenu class.
+ * This class is the boundary for the FacultyRequestHistoryMenu class.
  */
-public class RequestHistoryMenu{
-	private RequestHistoryMenu() {};
-	private static RequestHistoryMenu rhm = null;
+public class FacultyRequestHistoryMenu{
+	private FacultyRequestHistoryMenu() {};
+	private static FacultyRequestHistoryMenu rhm = null;
 	
 	/** 
 	 * @return RequestHistoryMenu
 	 */
-	public static RequestHistoryMenu getInstance() {
+	public static FacultyRequestHistoryMenu getInstance() {
 		if (rhm == null) {
-			rhm = new RequestHistoryMenu();
+			rhm = new FacultyRequestHistoryMenu();
 		}
 		return rhm;
 	}
@@ -31,9 +30,10 @@ public class RequestHistoryMenu{
 	 * @param user
 	 * @param reqHist
 	 */
-	public void display(User user, ArrayList<Request> reqHist){
+	public void display(Faculty user, ArrayList<Request> reqHist){
 		Scanner sc = new Scanner(System.in);
-		RequestManager rm = RequestManager.getInstance();
+		FacultyRequestManager rm = FacultyRequestManager.getInstance();
+	
         int page = 1;
         int numRequests = reqHist.size();
         if (numRequests == 0) {
@@ -53,7 +53,6 @@ public class RequestHistoryMenu{
                 sc.nextLine();
                 continue;
             }
-            System.out.println(page);
         } while(page != 0);
     }
 }

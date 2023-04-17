@@ -15,11 +15,9 @@ import java.util.*;
  */
 public class RequestController {
 	private static RequestController rc = null;
-	private ArrayList<Request> requestList;
     private RequestController() {
     	ArrayList<Request> requests = readRequests();
-    	this.requestList = requests;
-    	RequestManager rm = RequestManager.getInstance(requests);
+    	RequestManager.getInstance(requests);
     }
 	
 	/**

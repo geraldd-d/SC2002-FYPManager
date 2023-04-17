@@ -12,10 +12,8 @@ import entities.*;
 public class ProjectsController {
 	private static ProjectsController pcc = null;
 	private static Integer last_index;
-	private ArrayList<Project> projectList;
 	private ProjectsController(){
 		ArrayList<Project> projects = readProjects();
-		this.projectList = projects;
 		ProjectManager.getInstance(projects);
 	}
 	

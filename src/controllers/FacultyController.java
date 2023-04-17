@@ -2,6 +2,7 @@ package controllers;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import entities.*;
 
@@ -121,14 +122,14 @@ public class FacultyController {
 		FacultyRequestManager frm = FacultyRequestManager.getInstance();
 		frm.addTransferRequest(user, p, replacementID);
 	}
-	/**
-	 * This method is to get all the pending requests of a faculty member.
-	 * @param user The faculty member.
-	 * @return An arraylist of all the pending requests of the faculty member.
-	 */
-	public ArrayList<Request> getPendingRequests(Faculty user) {
-		FacultyRequestManager frm = FacultyRequestManager.getInstance();
-		return frm.getPendingReqs(user);
+	
+	public void viewHistory(User user, int page) {
+		int pageSize = 5;
+	    ArrayList<Request> reqs = user.getHistory();
+	    int startIndex = (page - 1) * pageSize;
+	    int endIndex = Math.min(startIndex + pageSize, reqs.size());
+	    List<Request> currentPage = reqs.subList(startIndex, endIndex);
+	    currentPage.forEach((Request)-> Request.printRequest());
 	}
 }
 
