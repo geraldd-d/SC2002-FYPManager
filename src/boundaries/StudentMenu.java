@@ -93,38 +93,49 @@ public class StudentMenu{
 	                		System.out.println("You are already registered for " + user.getRegisteredProject().getTitle());
 	                	} else {
 	                		applied = srm.getPending(user, RequestType.Allocation).getProject();
-	                		System.out.println("You already have a pending allocation request for " + applied.getTitle());
+	                		System.err.println("You already have a pending allocation request for " + applied.getTitle());
 	                	}
 					break; 
 	                case 2:
 	                	if (user.getisAllocated()) {
-	                		System.out.println("You are already registered for " + user.getRegisteredProject().getTitle());
+	                		System.err.println("You are already registered for " + user.getRegisteredProject().getTitle());
 	                		break;
 	                	}
 	                	if (srm.checkPending(user, RequestType.Allocation)) {
-	                		System.out.println("You already have a pending allocation request for " + applied.getTitle());
+	                		System.err.println("You already have a pending allocation request for " + applied.getTitle());
 	                		break;
 	                	}
 	                	boolean validRequest = false;
 	                	while (!validRequest) {
+	                		System.out.println("\u001b[21mAll Available Projects\u001b[0m");
+	                		System.out.println();
 	                		spm.viewAvailable();
 	                		input.nextLine();
 	                		int proj = 0;
 	                		try {
 	    	                	System.out.println("Enter project ID that you wish to be allocated for: ");
 	                            proj = input.nextInt();
+	                            if (proj == 0) {
+	                            	break;
+	                            }
 	                        } catch (InputMismatchException e) {
-	                            System.out.println("Invalid choice. Enter a valid project ID");
+	                            System.err.println("Invalid choice. Enter a valid project ID.");
 	                            input.nextLine();
 	                            continue;
 	                        }
 	                		validRequest = stc.requestAlloc(user, proj);
+	                		if (!validRequest) {
+	                            System.err.println("Invalid choice. Enter a valid project ID.");
+	                		}
+	                		else {
+	                			System.out.println("Allocation Request Sent.");
+	                		}
 	                	}
-	                	System.out.println("Allocation Request Sent.");
+	                
 	                    break;
 	                case 3:
 						if(!user.getisAllocated()){
-							System.out.println("You are not registered for any project.");
+							System.err.println("You are not registered for any project.");
 							break;
 						}
 						else{
@@ -137,7 +148,7 @@ public class StudentMenu{
 	                    break;
 	                case 4:
 						if(!user.getisAllocated()){
-							System.out.println("You are not registered for any project yet.");
+							System.err.println("You are not registered for any project yet.");
 							break;
 						}
 						validRequest = false;
@@ -145,7 +156,7 @@ public class StudentMenu{
 						p = user.getRegisteredProject();
 						p.printProject();
 						if (srm.checkPending(user, RequestType.Title)){
-							System.out.println("You already have a pending title change request.");
+							System.err.println("You already have a pending title change request.");
 							break;
 						}
 						while(!validRequest){
@@ -155,12 +166,12 @@ public class StudentMenu{
 								System.out.println("Enter the new title for your project: ");
 								proj = input.nextLine();
 							} catch (InputMismatchException e){
-								System.out.println("Invalid choice");
+								System.err.println("Invalid choice");
 								input.nextLine();
 								continue;
 							}
 							if(proj.equals(p.getTitle()) || proj.length() < 5){
-								System.out.println("Please enter a different/longer title.");
+								System.err.println("Please enter a different/longer title.");
 								continue;
 							}
 							else{
@@ -171,7 +182,7 @@ public class StudentMenu{
 	                    break;
 	                case 5: 
 						if(!user.getisAllocated()){
-							System.out.println("You are not registered for any project yet.");
+							System.err.println("You are not registered for any project yet.");
 							break;
 						}
 						else{

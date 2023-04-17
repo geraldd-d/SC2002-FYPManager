@@ -59,12 +59,12 @@ public class StudentProjectManager implements IStudentProjectManager{
 		int startIndex = (page - 1) * pageSize;
 		int endIndex = Math.min(startIndex + pageSize, projects.size());
 		List<Project> currentPage = projects.subList(startIndex, endIndex);
-		currentPage.forEach((project)->project.printAvailableProject());
+		currentPage.forEach((project)->project.printProject());
 	}
 
 	public void viewAvailable() {
 		ArrayList<Project>projects = getAllAvailableProjects();
-		projects.forEach((project)->project.printAvailableProject());
+		projects.forEach((project)->project.printProject());
 	}
 	/** 
 	 * @param p

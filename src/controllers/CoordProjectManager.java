@@ -117,7 +117,7 @@ public class CoordProjectManager implements ICoordProjectManager{
 	@Override
 	public void viewActiveProjects(Faculty user) {
 		ArrayList<Project>projects = user.getProjects();
-		projects.forEach((p)-> p.printActiveProject());
+		projects.forEach((p)-> p.printProject());
 	}
 
 	

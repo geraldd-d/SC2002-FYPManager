@@ -138,4 +138,13 @@ public class StudentRequestManager implements IStudentRequestManager{
 		}
 		return null;
 	}
+	
+	public Request getRequestByID(int id) {
+		for (Request req : requests) {
+				if (req.getRequestID() == id) {
+					return req;
+				}
+		}
+		return null;
+	}
 }

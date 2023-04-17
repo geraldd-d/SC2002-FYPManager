@@ -109,26 +109,13 @@ public class Project {
         this.studentID = studentID;
     }
 	
-	public void printAvailableProject() {
-		System.out.println("Project ID: "+this.projectID);
-		System.out.println("Supervisor: "+this.supervisorName);
-		System.out.println("Title: "+this.title);
-		System.out.println("Status: "+this.status);
-		System.out.println();
-	}
+
 	public void printProject() {
 		System.out.println("Project ID: "+this.projectID);
 		System.out.println("Project Name: "+ this.title);
 		System.out.println("Supervisor: "+this.supervisorName);
-		System.out.println();
-	}
-
-	public void printActiveProject(){
-		System.out.println("Project ID: "+this.projectID);
-		System.out.println("Project Name: "+ this.title);
 		System.out.println("Status: "+this.status);
 		System.out.println();
 	}
-
 }
 
