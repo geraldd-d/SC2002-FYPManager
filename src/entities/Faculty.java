@@ -14,7 +14,8 @@ public class Faculty extends User{
 	}
 	
 	/** 
-	 * @return Integer
+	 * The method return the active projects 
+	 * @return The number of active projects.
 	 */
 	public Integer getActiveProjects() {
 		int num = 0;
@@ -27,13 +28,15 @@ public class Faculty extends User{
 	}
 	
 	/** 
-	 * @return ArrayList<Project>
+	 * The method calls the projects
+	 * @return The list of Projects.
 	 */
 	public ArrayList<Project> getProjects() {
         return projects;
     }
 	
 	/** 
+	 * This method sets the current project to the above mentioned project.
 	 * @param projects
 	 */
 	public void setProjects(ArrayList<Project> projects) {
@@ -41,35 +44,40 @@ public class Faculty extends User{
     }
 	
 	/** 
-	 * @param p
+	 * The method add projects.
+	 * @param p The project which is added.
 	 */
 	public void addProject(Project p) {
 		this.projects.add(p);
 	}
 	
 	/** 
-	 * @param r
+	 * The method updates history with new requests
+	 * @param r The request which are added to history
 	 */
 	public void addHistory(Request r){
 		this.requestHistory.add(r);
 	}
 	
 	/** 
-	 * @param r
+	 * The method which adds requests to inbox.
+	 * @param r The request which is added to the inbox.
 	 */
 	public void addInbox(Request r){
 		this.requestInbox.add(r);
 	}
 	
 	/** 
-	 * @return ArrayList<Request>
+	 * The method calls the inbox
+	 * @return the list of requests in the inbox.
 	 */
 	public ArrayList<Request> getInbox() {
 		return this.requestInbox;
 	}
 	
 	/** 
-	 * @return ArrayList<Request>
+	 * This method calls the requests in history
+	 * @return The list of reuquests in history.
 	 */
 	public ArrayList<Request> getHistory() {
 		return this.requestHistory;

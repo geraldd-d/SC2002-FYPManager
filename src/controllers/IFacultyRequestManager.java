@@ -55,5 +55,11 @@ public interface IFacultyRequestManager {
 	 * @param r The request to be rejected
 	 */
 	public void rejectRequest(TitleRequest r);
+	/**
+	 * This method is used to get the pending request by ID.
+	 * @param user The user who is viewing the request by ID.
+	 * @param id The ID which is used to call request.
+	 * @return Yes or no, if there are pending requests.
+	 */
 	public Request getPendingRequestbyID(Faculty user, int id);
 }

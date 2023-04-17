@@ -37,8 +37,9 @@ public class FacultyProjectManager implements IFacultyProjectManager{
 	}
 	
 	/** 
-	 * @param user
-	 * @param title
+	 * This method is used to add projects by the user. 
+	 * @param user The user who will add projects.
+	 * @param title The title of the project added.
 	 */
 	@Override
 	public void addProject(Faculty user, String title) {
@@ -56,7 +57,8 @@ public class FacultyProjectManager implements IFacultyProjectManager{
 
 	
 	/** 
-	 * @param user
+	 * This method is used to view the user's own project'
+	 * @param user The user whose projects will be viewed.
 	 */
 	@Override
 	public void viewOwnProjects(Faculty user) {
@@ -66,7 +68,8 @@ public class FacultyProjectManager implements IFacultyProjectManager{
 
 	
 	/** 
-	 * @param user
+	 * This method is used to view the all the user's active projects.
+	 * @param user The user whose active projects are viewed.
 	 */
 	@Override
 	public void viewActiveProjects(Faculty user) {
@@ -80,8 +83,9 @@ public class FacultyProjectManager implements IFacultyProjectManager{
 
 	
 	/** 
-	 * @param p
-	 * @param t
+	 * This method is used to change the title of projects
+	 * @param p The project whose title will be changed
+	 * @param t The new title of the project
 	 */
 	@Override
 	public void changeTitle(Project p, String t) {
@@ -90,8 +94,9 @@ public class FacultyProjectManager implements IFacultyProjectManager{
 
 	
 	/** 
-	 * @param projectID
-	 * @return Project
+	 * This method is used to get project by its projectID.
+	 * @param projectID The projectID od the project
+	 * @return The project according to the projectID.
 	 */
 	@Override
 	public Project getProjectByID(Integer projectID) {

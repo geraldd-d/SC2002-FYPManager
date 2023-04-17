@@ -11,14 +11,23 @@ public class TransferRequest extends Request {
 	}
 	
 	/** 
+	 * This method return the replacement supervisor's ID.
 	 * @return String
 	 */
 	public String getReplacementID() {
 		return this.replacementID;
 	}
+	
+	/** 
+	 * This returns the replcament.
+	 * @return Faculty
+	 */
 	public Faculty getReplacement() {
 		return this.getReplacement();
 	}
+	/**
+	 * This method prints the request details
+	 */
 	public void printRequest() {
 		System.out.println("Transfer Request");
 		System.out.println("----------------");
@@ -31,6 +40,7 @@ public class TransferRequest extends Request {
 	}
 	
 	/** 
+	 * This method returns the requestType.
 	 * @return RequestType
 	 */
 	@Override
@@ -39,6 +49,7 @@ public class TransferRequest extends Request {
 	}
 	
 	/** 
+	 * This returns the replacement ID.
 	 * @return String
 	 */
 	public String getChanges() {

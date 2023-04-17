@@ -15,6 +15,7 @@ public class Student extends User{
 		//this.isAllocated = isAllocated;
 	}
 	/** 
+	 * This method return the registered project.
 	 * @return Project
 	 */
 	// getter 
@@ -23,6 +24,7 @@ public class Student extends User{
 	}
 	
 	/** 
+	 *  This method return the history.
 	 * @return ArrayList<Request>
 	 */
 	public ArrayList<Request> getHistory(){
@@ -30,6 +32,7 @@ public class Student extends User{
 	}
 	
 	/** 
+	 *  This method return the allocation status.
 	 * @return boolean
 	 */
 	public boolean getisAllocated(){
@@ -38,6 +41,7 @@ public class Student extends User{
 
 	
 	/** 
+	 * This method sets the registered project as the current registered project.
 	 * @param registeredProject
 	 */
 	// setter 
@@ -46,6 +50,7 @@ public class Student extends User{
 	}
 	
 	/** 
+	 * This method sets the history as the current history.
 	 * @param requestHistory
 	 */
 	public void setHistory(ArrayList<Request> requestHistory){
@@ -53,6 +58,7 @@ public class Student extends User{
 	}
 	
 	/** 
+	 * This method adds the current history to request history.
 	 * @param r
 	 */
 	public void addHistory(Request r){

@@ -11,11 +11,15 @@ public class TitleRequest extends Request {
 	}
 	
 	/** 
+	 * This method return the title.
 	 * @return String
 	 */
 	public String getTitle() {
 		return this.title;
 	}
+	/**
+	 * This method prints the request and its details
+	 */
 	public void printRequest() {
 		System.out.println("Title Change Request");
 		System.out.println("--------------------");
@@ -29,7 +33,8 @@ public class TitleRequest extends Request {
 	}
 	
 	/** 
-	 * @return RequestType
+	 * This method return the request type.
+	 * @return ReuestType
 	 */
 	@Override
 	public RequestType getType() {
@@ -37,7 +42,8 @@ public class TitleRequest extends Request {
 	}
 	
 	/** 
-	 * @return String
+	 * This returns the changed title.
+	 * @return The changed title
 	 */
 	public String getChanges() {
 		return this.title;

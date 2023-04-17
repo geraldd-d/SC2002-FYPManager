@@ -19,6 +19,7 @@ public abstract class Request {
 
     
     /** 
+     * This method return requestID
      * @return int
      */
     public int getRequestID(){
@@ -26,6 +27,7 @@ public abstract class Request {
     }
     
     /** 
+     * This method returns requestor or the user who is making a request.
      * @return User
      */
     public User getRequestor(){
@@ -33,21 +35,27 @@ public abstract class Request {
     }
     
     /** 
+     * This returns the requestee or who the request has been made to.
      * @return User
      */
     public User getRequestee(){
         return requestee;
     }
+    /**
+     * This method gets the changes. 
+     */
     public abstract String getChanges();
     
     /** 
+     * This method return the status of the request.
      * @return RequestStatus
      */
     public RequestStatus getStatus(){
         return status;
     }
     
-    /** 
+    /**
+     * This methods returns the project
      * @return Project
      */
     public Project getProject(){
@@ -55,6 +63,7 @@ public abstract class Request {
     }
     
     /** 
+     * This method return the requestID
      * @param requestID
      */
     public void setRequestID(int requestID){
@@ -62,6 +71,7 @@ public abstract class Request {
     }
     
     /** 
+     * This method sets requestor as the current requestor.
      * @param requestor
      */
     public void setRequestor(Student requestor){
@@ -69,6 +79,7 @@ public abstract class Request {
     }
     
     /** 
+     * This method sets requestee as the current requestee.
      * @param requestee
      */
     public void setRequestee(User requestee){
@@ -76,6 +87,7 @@ public abstract class Request {
     }
     
     /** 
+     * This method sets status as the current status.
      * @param status
      */
     public void setStatus(RequestStatus status){
@@ -83,13 +95,20 @@ public abstract class Request {
     }
     
     /** 
+     * This method sets project as the current project.
      * @param project
      */
     public void setProject(Project project){
         this.project= project;
     }
+    /**
+     * This method prints the request with its details
+     */
     public abstract void printRequest();
 
+    /**
+     * This method calls the request type of the request.
+     */
 	public abstract RequestType getType();
 
 }

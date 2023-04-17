@@ -19,7 +19,8 @@ public class AllocRequest extends Request {
 	}
 	
 	/** 
-	 * @return RequestType
+	 * This method returns the type of request.
+	 * @return The type of request
 	 */
 	@Override
 	public RequestType getType() {
@@ -27,7 +28,8 @@ public class AllocRequest extends Request {
 	}
 	
 	/** 
-	 * @return String
+	 * This method return space.
+	 * @return The space between words.
 	 */
 	public String getChanges() {
 		return "";

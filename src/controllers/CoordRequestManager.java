@@ -162,7 +162,7 @@ public class CoordRequestManager implements ICoordRequestManager {
 	}
 	
 	/** 
-	 * The method used to view pending request/
+	 * The method used to view pending request.
 	 * @param c The coordinator who is viewing the pending request.
 	 */
 	@Override
