@@ -15,6 +15,7 @@ public class FacultyMenu{
 	private FacultyMenu() {};
 	
     /** 
+     * This method is used to get the instance of the FacultyMenu class. It is a singleton class.
      * @return FacultyMenu
      */
     public static FacultyMenu getInstance() {
@@ -25,6 +26,7 @@ public class FacultyMenu{
 	}
 	
     /** 
+     * displays the faculty menu
      * @param user
      */
     public void display(Faculty user) {
@@ -65,19 +67,17 @@ public class FacultyMenu{
             }
             System.out.println("\u2551"); 
 
-            System.out.println("\u2551 1. View your projects                  \u2551"); // menu options
-            System.out.println("\u2551 2. Modify the title of FYP             \u2551");
-            System.out.println("\u2551 3. Request to transfer student         \u2551");
-            System.out.println("\u2551 4. Create new project                  \u2551");
+            System.out.println("\u2551 1. Create / Update / View Projects     \u2551"); // menu options
+            System.out.println("\u2551 2. Request to transfer student         \u2551");
             if (alert) {
-                System.out.println("\u2551 5. View pending requests \u001b[33mNEW\u001b[0m           \u2551");
+                System.out.println("\u2551 3. View pending requests \u001b[33mNEW\u001b[0m           \u2551");
             } else {
-            	System.out.println("\u2551 5. View pending requests               \u2551");
+            	System.out.println("\u2551 3. View pending requests               \u2551");
             }
-            System.out.println("\u2551 6. View request inbox                  \u2551");
-            System.out.println("\u2551 7. Address requests                    \u2551");
-            System.out.println("\u2551 8. Change your password                \u2551");
-            System.out.println("\u2551 9. Exit                                \u2551");
+            System.out.println("\u2551 4. View request inbox                  \u2551");
+            System.out.println("\u2551 5. Address requests                    \u2551");
+            System.out.println("\u2551 6. Change your password                \u2551");
+            System.out.println("\u2551 7. Exit                                \u2551");
 
             
             System.out.print("\u255A"); 
@@ -96,50 +96,122 @@ public class FacultyMenu{
 
             switch (choice) { 
                 case 1:
-                    // view all the projects 
-                    fc.viewOwnProjects(user);
-                    break;
-                case 2:
-                    // change the title
-                	String title;
+                	sc.nextLine();
+                	int input = 0;
                 	do {
-                		sc.nextLine();
-                        fc.viewOwnProjects(user);
-                        System.out.println("Enter Project ID to change title or enter 0 to return:");
-                        try {
-                        	id = sc.nextInt();
+                		int breadth = 30;
+
+                		// Create the top border of the box
+                		System.out.print("\u2554"); // top-left corner
+                		for (int i = 0; i < breadth - 2; i++) {
+                		    System.out.print("\u2550"); // horizontal line
+                		}
+                		System.out.println("\u2557"); // top-right corner
+
+                		// Create the sides of the box
+                		System.out.print("\u2551"); // left vertical line
+                		System.out.print("  Project Management Menu");
+                		for (int i = 0; i < breadth - "Project Management Menu".length() - 4; i++) {
+                		    System.out.print(" ");
+                		}
+                		System.out.println("\u2551"); // right vertical line
+
+                		System.out.print("\u2551"); // left vertical line
+                		for (int i = 0; i < breadth - 2; i++) {
+                		    System.out.print("\u2500"); // horizontal line
+                		}
+                		System.out.println("\u2551"); // right vertical line
+
+                		System.out.println("\u2551 1. Create a project        \u2551"); // menu options
+                		System.out.println("\u2551 2. View your own projects  \u2551");
+                		System.out.println("\u2551 3. Modify project title    \u2551");
+                		System.out.println("\u2551 4. Back                    \u2551");
+
+                		// Create the bottom border of the box
+                		System.out.print("\u255A"); // bottom-left corner
+                		for (int i = 0; i < breadth - 2; i++) {
+                		    System.out.print("\u2550"); // horizontal line
+                		}
+                		System.out.println("\u255D"); // bottom-right corner
+                		System.out.println("Enter your choice: ");
+                		try {
+                        	input = sc.nextInt();
                         } catch (InputMismatchException e) {
-                            System.err.println("Enter valid integer.");
+                            System.out.println("Invalid choice. Please enter an integer from 1-8.");
                             sc.nextLine();
                             continue;
                         }
-                        if (id == 0) {
-                        	break;
-                        }
-                        if (user.getProjects().contains(fpm.getProjectByID(id))) {
-                        	Project p = fpm.getProjectByID(id);
-                        	valid = true;
-                        	sc.nextLine();
-                        	System.out.println("Enter new title:");
-                        	title = sc.nextLine();
-                        	while (title.length() < 5 || title.equals(p.getTitle())) {
-                        		if (title.equals(p.getTitle())) {
-                            		System.out.println("You cannot rename a project with the same name.");
-                            	} else {
-                                	System.out.println("New title is too short.");
-                            	}
-                        		System.out.println("Enter new title:");
-                            	title = sc.nextLine();
-                        	}
-                        	fc.changeTitle(p, title);
-                        }
-                        else {
-                        	System.out.println("Project not found.");
-                        }
-                	} while(!valid);
-                    
-                    break;
-                case 3:
+                		switch(input) {
+                			case 1: 
+                				// create new project
+                            	String projectTitle;
+                            	sc.nextLine();
+                                System.out.println("Enter title of new project or leave empty to return: ");
+                                projectTitle = sc.nextLine();
+                                if (projectTitle.equals("")) {
+                                	break;
+                                }
+                                while (projectTitle.length() < 8) {
+                                    System.out.println("New title is too short.");
+                                    System.out.println("Enter Project title:");
+                                    projectTitle = sc.nextLine();
+                                    }
+                                fpm.addProject(user, projectTitle);
+                                System.out.println("New project " + projectTitle + " created.");
+                                break;
+                			case 2:
+                				// view own projects
+                				fc.viewOwnProjects(user);
+                				break;
+                			case 3:
+                				// modify title
+                				String title;
+                            	do {
+                            		sc.nextLine();
+                                    fc.viewOwnProjects(user);
+                                    System.out.println("Enter Project ID to change title or enter 0 to return:");
+                                    try {
+                                    	id = sc.nextInt();
+                                    } catch (InputMismatchException e) {
+                                        System.err.println("Enter valid integer.");
+                                        sc.nextLine();
+                                        continue;
+                                    }
+                                    if (id == 0) {
+                                    	break;
+                                    }
+                                    if (user.getProjects().contains(fpm.getProjectByID(id))) {
+                                    	Project p = fpm.getProjectByID(id);
+                                    	valid = true;
+                                    	sc.nextLine();
+                                    	System.out.println("Enter new title:");
+                                    	title = sc.nextLine();
+                                    	while (title.length() < 5 || title.equals(p.getTitle())) {
+                                    		if (title.equals(p.getTitle())) {
+                                        		System.out.println("You cannot rename a project with the same name.");
+                                        	} else {
+                                            	System.out.println("New title is too short.");
+                                        	}
+                                    		System.out.println("Enter new title:");
+                                        	title = sc.nextLine();
+                                    	}
+                                    	fc.changeTitle(p, title);
+                                    	System.out.println("Title changed Successfully");
+                                    }
+                                    else {
+                                    	System.out.println("Project not found.");
+                                    }
+                            	} while(!valid);
+                            	break;
+                			case 4:
+                				break;
+                            default:
+                            	System.err.println("Enter a valid choice from 1-4.");
+                            	break;
+                			}	
+                		} while (input != 4);
+                	break;
+                case 2:
                     // request to transfer student
                 	if (user.getActiveProjects() == 0) {
                 		System.err.println("You do not have any projects to transfer");
@@ -194,29 +266,12 @@ public class FacultyMenu{
                         }
                 	} while(!valid);
                     break;
-                case 4:
-                	// create new project
-                	String projectTitle;
-                	sc.nextLine();
-                    System.out.println("Enter title of new project or leave empty to return: ");
-                    projectTitle = sc.nextLine();
-                    if (projectTitle.equals("")) {
-                    	break;
-                    }
-                    while (projectTitle.length() < 5) {
-                        System.out.println("New title is too short.");
-                        System.out.println("Enter Project title:");
-                        title = sc.nextLine();
-                        }
-                    fpm.addProject(user, projectTitle);
-                    System.out.println("New project " + projectTitle + " created.");
-                    break;
-                case 5: 
+                case 3: 
                     // view pending requests
                 	RequestPendingMenu rpm = RequestPendingMenu.getInstance();
                 	rpm.display(user,frm.getPendingReqs(user));
                     break;
-                case 6: 
+                case 4: 
                 	int option = 0;
                 	do {
                 		System.out.println("1. View request history.");
@@ -250,17 +305,17 @@ public class FacultyMenu{
                 	} while (option != 3);
                 	
                 	break;
-                case 7:
+                case 5:
                 	// address requests
                 	FacultyApprovalMenu fam = FacultyApprovalMenu.getInstance();
                 	fam.display(user);
                 	break;
-                case 8: 
+                case 6: 
                 	//change password method
                 	PasswordMenu pwm = PasswordMenu.getInstance();
 					pwm.display(user);
                     break;
-                case 9:
+                case 7:
                 	// logout and save changes
                 	fpm.saveChanges();
                 	frm.saveChanges();
@@ -272,7 +327,7 @@ public class FacultyMenu{
                     System.out.println("Invalid choice. Please enter a valid option.");
                     break;
             }
-        } while (choice != 9);
+        } while (choice != 7);
 	}
 
 }
