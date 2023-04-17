@@ -142,7 +142,21 @@ public class FacultyRequestManager implements IFacultyRequestManager {
 	public void rejectRequest(TitleRequest r) {
 		r.setStatus(RequestStatus.Rejected);
 	}
-	
+	/** 
+	 * @param user
+	 * @param id
+	 * @return Request
+	 */
+	@Override
+	public Request getPendingRequestbyID(Faculty user, int id) {
+		ArrayList<Request> pending = getPendingReqs(user);
+		for (Request r : pending) {
+			if (r.getRequestID() == id) {
+				return r;
+			}
+		}
+		return null;
+	}
 	/** 
 	 * @param f
 	 * @param r

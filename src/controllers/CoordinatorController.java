@@ -174,13 +174,4 @@ public class CoordinatorController {
 		CoordRequestManager crm = CoordRequestManager.getInstance();
 		return crm.getPendingRequestbyID(c,id);
 	}
-	
-	/** 
-	 * @return ArrayList<Request>
-	 */
-	public ArrayList<Request> getrequests() {
-		CoordRequestManager crm = CoordRequestManager.getInstance();
-		ArrayList<Request> requests = crm.getRequests();
-		return requests;
-	}
 }

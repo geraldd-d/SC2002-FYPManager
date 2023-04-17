@@ -55,4 +55,5 @@ public interface IFacultyRequestManager {
 	 * @param r The request to be rejected
 	 */
 	public void rejectRequest(TitleRequest r);
+	public Request getPendingRequestbyID(Faculty user, int id);
 }

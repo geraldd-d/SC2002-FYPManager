@@ -75,8 +75,9 @@ public class FacultyMenu{
             }
             System.out.println("\u2551 5. View request history                \u2551");
             System.out.println("\u2551 6. View request inbox                  \u2551");
-            System.out.println("\u2551 7. Change your password                \u2551");
-            System.out.println("\u2551 8. Exit                                \u2551");
+            System.out.println("\u2551 7. Address requests                    \u2551");
+            System.out.println("\u2551 8. Change your password                \u2551");
+            System.out.println("\u2551 9. Exit                                \u2551");
 
             // Create the bottom border of the box
             System.out.print("\u255A"); // bottom-left corner
@@ -193,12 +194,14 @@ public class FacultyMenu{
                 	RequestInboxMenu rim = RequestInboxMenu.getInstance();
                 	rim.display(user, user.getInbox());
                 	break;
-                case 7: 
+                case 7:
+                	
+                case 8: 
                 	//change password method
                 	PasswordMenu pwm = PasswordMenu.getInstance();
 					pwm.display(user);
                     break;
-                case 8:
+                case 9:
                 	fpm.saveChanges();
                 	frm.saveChanges();
                 	System.out.println("Logging out...");

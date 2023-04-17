@@ -46,7 +46,7 @@ public class StudentRequestManager implements IStudentRequestManager{
 		RequestController rc = RequestController.getInstance();
 		rc.updateRequests(requests);
 	}
-
+	
 	
 	/** 
 	 * @param user
@@ -127,5 +127,15 @@ public class StudentRequestManager implements IStudentRequestManager{
 			}
 		}
 		return false;
+	}
+	
+	public Request getPending(Student s, RequestType rt) {
+		ArrayList<Request> requests = s.getHistory();
+		for (Request req : requests) {
+			if (req.getType().equals(rt) && req.getStatus().equals(RequestStatus.Pending)) {
+				return req;
+			}
+		}
+		return null;
 	}
 }
