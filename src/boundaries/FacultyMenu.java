@@ -85,7 +85,7 @@ public class FacultyMenu{
                 System.out.print("\u2550"); // horizontal line
             }
             System.out.println("\u255D"); // bottom-right corner
-
+            System.out.println("Enter your choice:");
             try {
             	choice = input.nextInt();
             } catch (InputMismatchException e) {
@@ -97,13 +97,14 @@ public class FacultyMenu{
             switch (choice) { 
                 case 1:
                     // view all the projects 
-                    fc.viewActiveProjects(user);
+                    fc.viewOwnProjects(user);
                     break;
                 case 2:
                     // change the title
                 	String title;
                 	do {
                 		input.nextLine();
+                        fc.viewOwnProjects(user);
                         System.out.println("Enter Project ID to change title or enter 0 to return:");
                         try {
                         	id = input.nextInt();
@@ -118,10 +119,15 @@ public class FacultyMenu{
                         if (user.getProjects().contains(fpm.getProjectByID(id))) {
                         	Project p = fpm.getProjectByID(id);
                         	valid = true;
+                        	input.nextLine();
                         	System.out.println("Enter new title:");
                         	title = input.nextLine();
-                        	while (title.length() < 5) {
-                            	System.out.println("New title is too short.");
+                        	while (title.length() < 5 || title.equals(p.getTitle())) {
+                        		if (title.equals(p.getTitle())) {
+                            		System.out.println("You cannot rename a project with the same name.");
+                            	} else {
+                                	System.out.println("New title is too short.");
+                            	}
                         		System.out.println("Enter new title:");
                             	title = input.nextLine();
                         	}

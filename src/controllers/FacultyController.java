@@ -85,9 +85,10 @@ public class FacultyController {
 	public void viewOwnProjects(Faculty user) {
 		FacultyProjectManager fpm = FacultyProjectManager.getInstance();
 		if (user.getProjects().size()>0) {
+			System.out.println("\u001b[21mYour Projects\u001b[0m");
 			fpm.viewOwnProjects(user);
 		} else {
-			System.out.println("You currently have no projects.");
+			System.err.println("You currently have no projects.");
 		}
 	}
 	/**
@@ -96,10 +97,11 @@ public class FacultyController {
 	 */
 	public void viewActiveProjects(Faculty user) {
 		FacultyProjectManager fpm = FacultyProjectManager.getInstance();
-		if (user.getProjects().size()>0) {
+		if (user.getActiveProjects()>0) {
+			System.out.println("\u001b[21mYour Active Projects\u001b[0m");
 			fpm.viewActiveProjects(user);
 		} else {
-			System.out.println("You currently have no projects.");
+			System.out.println("You currently have no active projects.");
 		}
 	}
 

@@ -69,7 +69,11 @@ public class FacultyProjectManager implements IFacultyProjectManager{
 	@Override
 	public void viewActiveProjects(Faculty user) {
 		ArrayList<Project>projects = user.getProjects();
-		projects.forEach((p)-> p.printProject());
+		for (Project p : projects) {
+			if (p.getStatus().equals(ProjectStatus.Allocated)) {
+				p.printProject();
+			}
+		}
 	}
 
 	

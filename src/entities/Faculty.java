@@ -14,12 +14,12 @@ public class Faculty extends User{
 	}
 	
 	/** 
-	 * @return int
+	 * @return Integer
 	 */
-	public int getActiveProjects() {
+	public Integer getActiveProjects() {
 		int num = 0;
 		for (Project p : this.projects) {
-			if (p.getStatus().equals("Allocated")) {
+			if (p.getStatus().equals(ProjectStatus.Allocated)) {
 				num++;
 			}
 		}
