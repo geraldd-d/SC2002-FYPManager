@@ -1,5 +1,7 @@
 package entities;
 
+import controllers.StudentController;
+
 /*
  * This class represents a FYP of the system.
  */
@@ -109,10 +111,15 @@ public class Project {
     }
 
 	public void printProject() {
+		StudentController sc = StudentController.getInstance();
+		Student s = sc.getStudentbyID(this.getStudentID());
 		System.out.println("Project ID: "+this.projectID);
 		System.out.println("Project Name: "+ this.title);
 		System.out.println("Supervisor: "+this.supervisorName);
 		System.out.println("Status: "+this.status);
+		if (s != null) {
+			System.out.println("Student Name: "+s.getName());
+		}
 		System.out.println();
 	}
 }

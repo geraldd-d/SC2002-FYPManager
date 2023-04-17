@@ -158,17 +158,18 @@ public class StudentMenu{
 							System.err.println("You are not registered for any project yet.");
 							break;
 						}
-						validRequest = false;
-						System.out.println("The details of your registered project: ");
-						p = user.getRegisteredProject();
-						p.printProject();
 						if (srm.checkPending(user, RequestType.Title)){
 							System.err.println("You already have a pending title change request.");
 							break;
 						}
+						validRequest = false;
+						System.out.println("The details of your registered project: ");
+						p = user.getRegisteredProject();
+						p.printProject();
+			
+						sc.nextLine();
 						while(!validRequest){
 							String newTitle;
-							sc.nextLine();
 							try {
 								System.out.println("Enter the new title for your project: ");
 								newTitle = sc.nextLine();
@@ -178,7 +179,7 @@ public class StudentMenu{
 								continue;
 							}
 							if(newTitle.equals(p.getTitle()) || newTitle.length() < 5){
-								System.err.println("Please enter a different/longer title.");
+								System.out.println("Please enter a different/longer title.");
 								continue;
 							}
 							else{
