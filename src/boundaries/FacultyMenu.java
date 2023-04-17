@@ -64,6 +64,7 @@ public class FacultyMenu{
                     // change the title
                 	String title;
                 	do {
+                		input.nextLine();
                         System.out.println("Enter Project ID to change title or enter 0 to return:");
                         try {
                         	id = input.nextInt();
@@ -97,6 +98,7 @@ public class FacultyMenu{
                     // request to transfer student
                 	do {
                     	String replacement;
+                    	input.nextLine();
                         System.out.println("Enter Project ID to change title or enter 0 to return:");
                         try {
                         	id = input.nextInt();

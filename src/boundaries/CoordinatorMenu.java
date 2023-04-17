@@ -99,6 +99,7 @@ public class CoordinatorMenu {
                     // change the title
                 	
                 	do {
+                		sc.nextLine();
                         System.out.println("Enter Project ID to change title or enter 0 to return:");
                         try {
                         	id = sc.nextInt();
