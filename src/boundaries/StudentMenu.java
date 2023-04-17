@@ -106,6 +106,10 @@ public class StudentMenu{
 	                		System.err.println("You already have a pending allocation request for " + applied.getTitle());
 	                		break;
 	                	}
+	                	if (srm.checkDeregister(user)) {
+	                		System.err.println("You cannot make a selection again as you have deregistered your FYP.");
+	                		break;
+	                	}
 	                	boolean validRequest = false;
 	                	while (!validRequest) {
 	                		System.out.println("\u001b[21mAll Available Projects\u001b[0m");
@@ -161,22 +165,22 @@ public class StudentMenu{
 							break;
 						}
 						while(!validRequest){
-							String proj;
+							String newTitle;
 							input.nextLine();
 							try {
 								System.out.println("Enter the new title for your project: ");
-								proj = input.nextLine();
+								newTitle = input.nextLine();
 							} catch (InputMismatchException e){
 								System.err.println("Invalid choice");
 								input.nextLine();
 								continue;
 							}
-							if(proj.equals(p.getTitle()) || proj.length() < 5){
+							if(newTitle.equals(p.getTitle()) || newTitle.length() < 5){
 								System.err.println("Please enter a different/longer title.");
 								continue;
 							}
 							else{
-								validRequest = stc.requestNewTitle(user);
+								validRequest = stc.requestNewTitle(user,newTitle);
 							}
 						}
 						System.out.println("Title Change Request sent.");
