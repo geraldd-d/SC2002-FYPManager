@@ -8,7 +8,9 @@ import entities.Faculty;
 import entities.Project;
 import entities.Request;
 import entities.RequestType;
-
+	/*
+	 * This class is the controller for the Faculty class.
+	 */
 public class CoordinatorController {
 	private static CoordinatorController cc = null;
 	private CoordinatorController() {};
@@ -24,6 +26,7 @@ public class CoordinatorController {
 	}
 	
 	/** 
+	 * view pending requests to coordinator
 	 * @param coordinator
 	 */
 	public void viewPending(Coordinator coordinator) {
@@ -39,6 +42,7 @@ public class CoordinatorController {
 	}
 	
 	/** 
+	 * view coordinator inbox
 	 * @param coordinator
 	 * @param page
 	 */
@@ -48,6 +52,7 @@ public class CoordinatorController {
 	}
 	
 	/** 
+	 * view all requests
 	 * @param coordinator
 	 * @param page
 	 */
@@ -56,7 +61,8 @@ public class CoordinatorController {
 		crm.viewAllRequests(page);
 	}
 	
-	/** 
+	/**
+	 * view available projects
 	 * @param c
 	 */
 	public void viewAllAvailableProjects(Coordinator c) {
@@ -70,6 +76,7 @@ public class CoordinatorController {
 	}
 	
 	/** 
+	 * view unavailable projects
 	 * @param c
 	 */
 	public void viewAllUnavailableProjects(Coordinator c) {
@@ -83,6 +90,7 @@ public class CoordinatorController {
 	}
 	
 	/** 
+	 * view reserved projects
 	 * @param c
 	 */
 	public void viewAllReservedProjects(Coordinator c) {
@@ -96,6 +104,7 @@ public class CoordinatorController {
 	}
 	
 	/** 
+	 * view allocated projects
 	 * @param c
 	 */
 	public void viewAllAllocatedProjects(Coordinator c) {
@@ -109,6 +118,7 @@ public class CoordinatorController {
 	}
 	
 	/** 
+	 * view coordinator projects
 	 * @param c
 	 */
 	public void viewOwnProjects(Coordinator c) {
@@ -122,6 +132,7 @@ public class CoordinatorController {
 	}
 	
 	/** 
+	 * approve request by coordinator
 	 * @param c
 	 * @param r
 	 */
@@ -145,6 +156,7 @@ public class CoordinatorController {
 	}
 	
 	/** 
+	 * reject request
 	 * @param coordinator
 	 * @param r
 	 */
@@ -154,6 +166,7 @@ public class CoordinatorController {
 	}
 	
 	/** 
+	 * request transfer of project p from coordinator to replacement
 	 * @param coordinator
 	 * @param p
 	 * @param replacementID
@@ -170,6 +183,7 @@ public class CoordinatorController {
 	}
 	
 	/** 
+	 * get pending request by its id
 	 * @param c
 	 * @param id
 	 * @return Request
@@ -179,6 +193,11 @@ public class CoordinatorController {
 		return crm.getPendingRequestbyID(c,id);
 	}
 
+	/** 
+	 * view coordinator history
+	 * @param c
+	 * @return Request
+	 */
 	public void viewHist(Coordinator coordinator) {
 		ArrayList<Request> hist = coordinator.getHistory();
 		if (hist.size() == 0) {
