@@ -82,7 +82,8 @@ public class RequestController {
 				case Title:
 					supervisor = fc.getFacultybyID(requestee);
 					student = sc.getStudentbyID(requestor);
-					TitleRequest tr = new TitleRequest(requestID, student, supervisor, status, pm.getProjectByID(Integer.parseInt(projectID)), projectID);
+					String title = fields[5];
+					TitleRequest tr = new TitleRequest(requestID, student, supervisor, status, pm.getProjectByID(Integer.parseInt(projectID)), title);
 					requests.add(tr);
 					supervisor.addInbox(tr);
 					student.addHistory(tr);
