@@ -84,8 +84,11 @@ public class CoordinatorMenu {
                 case 2:
                 	String title;
                 	sc.nextLine();
-                    System.out.println("Enter Project title:");
+                    System.out.println("Enter Project title or leave empty to return:");
                     title = sc.nextLine();
+                    if (title.equals("")) {
+                    	break;
+                    }
                     while (title.length() < 5) {
                     	sc.nextLine();
                         System.out.println("New title is too short.");

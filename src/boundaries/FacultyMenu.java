@@ -69,11 +69,10 @@ public class FacultyMenu{
             System.out.println("\u2551 2. Modify the title of FYP             \u2551");
             System.out.println("\u2551 3. Request to transfer student         \u2551");
             if (alert) {
-                System.out.println("\u2551 4. View pending requests \u001b[33mNEW\u001b[0m      \u2551");
+                System.out.println("\u2551 4. View pending requests \u001b[33mNEW\u001b[0m           \u2551");
             } else {
             	System.out.println("\u2551 4. View pending requests               \u2551");
             }
-            System.out.println("\u2551 4. View pending requests               \u2551");
             System.out.println("\u2551 5. View request history                \u2551");
             System.out.println("\u2551 6. View request inbox                  \u2551");
             System.out.println("\u2551 7. Change your password                \u2551");

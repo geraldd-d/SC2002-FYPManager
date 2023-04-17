@@ -2,6 +2,7 @@ package controllers;
 
 import java.util.ArrayList;
 
+import boundaries.CoordinatorMenu;
 import entities.Coordinator;
 import entities.Faculty;
 import entities.Project;
@@ -27,11 +28,13 @@ public class CoordinatorController {
 	 */
 	public void viewPending(Coordinator coordinator) {
 		CoordRequestManager crm = CoordRequestManager.getInstance();
+		CoordinatorMenu cm = CoordinatorMenu.getInstance();
 		ArrayList<Request> pending = crm.getPendingReqs(coordinator);
 		if (pending.size() == 0) {
 			System.out.println("You have no pending requests.");
 		}
 		else {
+			System.out.println("Which request would you like to address?");
 			crm.viewPending(coordinator);
 		}
 	}

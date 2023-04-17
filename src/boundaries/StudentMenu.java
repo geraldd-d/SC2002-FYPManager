@@ -30,6 +30,7 @@ public class StudentMenu{
 	 */
 	public void display(Student user) {
 		{
+        	StudentRequestManager srm = StudentRequestManager.getInstance();
         	StudentProjectManager spm = StudentProjectManager.getInstance();
 	        Scanner input = new Scanner(System.in);
 	        StudentController stc = StudentController.getInstance();
@@ -37,14 +38,6 @@ public class StudentMenu{
 			Project applied = new Project();
 	        int choice = 0;
 	        do {
-				ArrayList <Request> hist = user.getHistory();
-				boolean eligible = true;
-				for (Request r : hist) {
-					if (r.getStatus().equals(RequestStatus.Pending) && (r instanceof AllocRequest)) {
-						eligible = false;
-						applied = r.getProject();
-					}
-				}
 	        	// Define the dimensions of the box
 	            int width = 42;
 	            // Create the top border of the box
@@ -93,7 +86,7 @@ public class StudentMenu{
 	            }
 	            switch (choice) {
 	                case 1:
-	                	if (!user.getisAllocated() && eligible) {
+	                	if (!user.getisAllocated() && !srm.checkPending(user, RequestType.Allocation)) {
 	                		ProjectMenu pm = ProjectMenu.getInstance();
 	                		pm.display();
 	                	} else if (user.getisAllocated()){
@@ -107,7 +100,7 @@ public class StudentMenu{
 	                		System.out.println("You are already registered for " + user.getRegisteredProject().getTitle());
 	                		break;
 	                	}
-	                	if (!eligible) {
+	                	if (srm.checkPending(user, RequestType.Allocation)) {
 	                		System.out.println("You already have a pending allocation request for " + applied.getTitle());
 	                		break;
 	                	}
@@ -148,7 +141,12 @@ public class StudentMenu{
 						}
 						validRequest = false;
 						System.out.println("The details of your registered project: ");
+						p = user.getRegisteredProject();
 						p.printProject();
+						if (srm.checkPending(user, RequestType.Title)){
+							System.out.println("You already have a pending title change request.");
+							break;
+						}
 						while(!validRequest){
 							String proj;
 							input.nextLine();
@@ -200,7 +198,6 @@ public class StudentMenu{
 						pm.display(user);
 						break;
 	                case 8:
-	                	StudentRequestManager srm = StudentRequestManager.getInstance();
 	                	spm.saveChanges();
 	                	srm.saveChanges();
 	                    System.out.println("Thank you for using FYP Management System.");

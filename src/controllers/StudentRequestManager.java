@@ -10,6 +10,7 @@ import entities.Faculty;
 import entities.Project;
 import entities.Request;
 import entities.RequestStatus;
+import entities.RequestType;
 import entities.Student;
 import entities.TitleRequest;
 
@@ -73,10 +74,6 @@ public class StudentRequestManager implements IStudentRequestManager{
 		Integer id = rc.getNewID();
 		Coordinator c = fc.getCoord();
 		AllocRequest ar = new AllocRequest(id, s, c, RequestStatus.Pending, p);
-		if (checkPending(s,ar)) {
-			System.out.println("You already have a pending allocation request.");
-			return;
-		}
 		requests.add(ar);
 		s.addHistory(ar);
 		c.addInbox(ar);
@@ -94,10 +91,6 @@ public class StudentRequestManager implements IStudentRequestManager{
 		Coordinator c = fc.getCoord();
 		Integer id = rc.getNewID();
 		DeregRequest dr = new DeregRequest(id, s, c, RequestStatus.Pending, p);
-		if (checkPending(s,dr)) {
-			System.out.println("You already have a pending allocation request.");
-			return;
-		}
 		requests.add(dr);
 		s.addHistory(dr);
 		c.addInbox(dr);
@@ -116,10 +109,6 @@ public class StudentRequestManager implements IStudentRequestManager{
 		Faculty supervisor = fc.getFacultybyID(p.getSupervisorID());
 		Integer id = rc.getNewID();
 		TitleRequest tr = new TitleRequest(id, s, supervisor, RequestStatus.Pending, p, title);
-		if (checkPending(s,tr)) {
-			System.out.println("You already have a pending allocation request.");
-			return;
-		}
 		requests.add(tr);
 		s.addHistory(tr);
 		supervisor.addInbox(tr);
@@ -130,10 +119,10 @@ public class StudentRequestManager implements IStudentRequestManager{
 	 * @param r
 	 * @return boolean
 	 */
-	private boolean checkPending(Student s, Request r) {
+	public boolean checkPending(Student s, RequestType rt) {
 		ArrayList<Request> requests = s.getHistory();
 		for (Request req : requests) {
-			if (req.getType().equals(r.getType()) && req.getStatus().equals(RequestStatus.Pending)) {
+			if (req.getType().equals(rt) && req.getStatus().equals(RequestStatus.Pending)) {
 				return true;
 			}
 		}

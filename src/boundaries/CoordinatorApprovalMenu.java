@@ -36,8 +36,7 @@ public class CoordinatorApprovalMenu {
     	int requestID = -1;
         do {
             cc.viewPending(coordinator);
-        	System.out.println("Which request would you like to address?");
-        	try {
+            try {
         		System.out.println("Enter request ID or 0 to return: ");
             	requestID = sc.nextInt();
             } catch (InputMismatchException e) {
@@ -55,22 +54,23 @@ public class CoordinatorApprovalMenu {
         		Request r = cc.getPendingRequestbyID(coordinator, requestID);
         		String approval;
         		boolean valid = false;
+        		sc.nextLine();
         		do {
-        			sc.nextLine();
         			try {
         				System.out.println("Enter APPROVE or REJECT: ");
         				approval = sc.nextLine();
             		    ApprovalType apt = ApprovalType.valueOf(approval);
             		} catch ( IllegalArgumentException e ) {
-            		    System.err.println( "Invalid option.");
-            		    sc.nextLine();
+            		    System.err.println("Invalid option.");
             		    continue;
             		}
         			valid = true;
         			if (ApprovalType.valueOf(approval).equals(ApprovalType.APPROVE)){
         				cc.approveRequest(coordinator, r);
+        				System.out.println("Request " + r.getRequestID() + " approved.");
         			} else {
         				cc.rejectRequest(coordinator, r);
+        				System.out.println("Request " + r.getRequestID() + " rejected.");
         			}
         		} while (!valid);
         	}
