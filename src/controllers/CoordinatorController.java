@@ -9,14 +9,15 @@ import entities.Project;
 import entities.Request;
 import entities.RequestType;
 	/*
-	 * This class is the controller for the Faculty class.
+	 * This class is the controller for the Coordinator class.
 	 */
 public class CoordinatorController {
 	private static CoordinatorController cc = null;
 	private CoordinatorController() {};
 	
 	/** 
-	 * @return CoordinatorController
+	 * This method returns Instance for CoordinatorController Class.
+	 * @return The instance for CoordinatorController 
 	 */
 	public static CoordinatorController getInstance() {
 		if (cc == null) {
@@ -26,8 +27,8 @@ public class CoordinatorController {
 	}
 	
 	/** 
-	 * view pending requests to coordinator
-	 * @param coordinator
+	 * This method views pending requests to coordinator menu.
+	 * @param coordinator The coordinator who will view the pendig request.
 	 */
 	public void viewPending(Coordinator coordinator) {
 		CoordRequestManager crm = CoordRequestManager.getInstance();
@@ -42,7 +43,7 @@ public class CoordinatorController {
 	}
 	
 	/** 
-	 * view coordinator inbox
+	 * The method allows to view the inbox.
 	 * @param coordinator
 	 * @param page
 	 */
@@ -52,9 +53,9 @@ public class CoordinatorController {
 	}
 	
 	/** 
-	 * view all requests
-	 * @param coordinator
-	 * @param page
+	 * The method allows to view all requests.
+	 * @param coordinator The coordinator who will view all the requests.
+	 * @param page The page containing the requests.
 	 */
 	public void viewAllRequests(Coordinator coordinator, int page) {
 		CoordRequestManager crm = CoordRequestManager.getInstance();
@@ -62,8 +63,8 @@ public class CoordinatorController {
 	}
 	
 	/**
-	 * view available projects
-	 * @param c
+	 * The methods enables to view available projects
+	 * @param c The coordinator who will view them.
 	 */
 	public void viewAllAvailableProjects(Coordinator c) {
 		CoordProjectManager cpm = CoordProjectManager.getInstance();
@@ -76,8 +77,8 @@ public class CoordinatorController {
 	}
 	
 	/** 
-	 * view unavailable projects
-	 * @param c
+	 * the method allows to view unavailable projects.
+	 * @param c The coordinator who will view the projects.
 	 */
 	public void viewAllUnavailableProjects(Coordinator c) {
 		CoordProjectManager cpm = CoordProjectManager.getInstance();
@@ -90,8 +91,8 @@ public class CoordinatorController {
 	}
 	
 	/** 
-	 * view reserved projects
-	 * @param c
+	 * The method allows to view reserved projects.
+	 * @param c The coordinator who views the projects.
 	 */
 	public void viewAllReservedProjects(Coordinator c) {
 		CoordProjectManager cpm = CoordProjectManager.getInstance();
@@ -104,7 +105,7 @@ public class CoordinatorController {
 	}
 	
 	/** 
-	 * view allocated projects
+	 * The method allows to view allocated projects.
 	 * @param c
 	 */
 	public void viewAllAllocatedProjects(Coordinator c) {
@@ -118,7 +119,7 @@ public class CoordinatorController {
 	}
 	
 	/** 
-	 * view coordinator projects
+	 * The method allows to view coordinator projects
 	 * @param c
 	 */
 	public void viewOwnProjects(Coordinator c) {
@@ -132,7 +133,7 @@ public class CoordinatorController {
 	}
 	
 	/** 
-	 * approve request by coordinator
+	 * The method allows approve request by coordinator
 	 * @param c
 	 * @param r
 	 */
@@ -156,7 +157,7 @@ public class CoordinatorController {
 	}
 	
 	/** 
-	 * reject request
+	 * The methods is used to reject request
 	 * @param coordinator
 	 * @param r
 	 */
@@ -166,7 +167,7 @@ public class CoordinatorController {
 	}
 	
 	/** 
-	 * request transfer of project p from coordinator to replacement
+	 * The method used to request transfer of project p from coordinator to replacement.
 	 * @param coordinator
 	 * @param p
 	 * @param replacementID
@@ -183,7 +184,7 @@ public class CoordinatorController {
 	}
 	
 	/** 
-	 * get pending request by its id
+	 * The method allows to get pending request by its id
 	 * @param c
 	 * @param id
 	 * @return Request
@@ -194,7 +195,7 @@ public class CoordinatorController {
 	}
 
 	/** 
-	 * view coordinator history
+	 * The method allows view coordinator history
 	 * @param c
 	 * @return Request
 	 */

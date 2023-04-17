@@ -25,6 +25,7 @@ public class Project {
 
 	
 	/** 
+	 * This returns the ID.
 	 * @return Integer
 	 */
 	// getter 
@@ -33,6 +34,7 @@ public class Project {
     }
 	
 	/** 
+	 * This returns the title.
 	 * @return String
 	 */
 	public String getTitle() {
@@ -40,6 +42,7 @@ public class Project {
     }
     
 	/** 
+	 * This returns the supervisorID.
 	 * @return String
 	 */
 	public String getSupervisorID() {
@@ -47,13 +50,15 @@ public class Project {
     }
 	
 	/** 
+	 * This returns the supervisorName.
 	 * @return String
 	 */
 	public String getSupervisorName() {
         return this.supervisorName;
     }
 	
-	/** 
+	/**
+	 * This returns the project status.
 	 * @return ProjectStatus
 	 */
 	public ProjectStatus getStatus() {
@@ -61,6 +66,7 @@ public class Project {
 	}
 	
 	/** 
+	 * This returns the StudentID.
 	 * @return String
 	 */
 	public String getStudentID(){
@@ -68,6 +74,7 @@ public class Project {
 	}
 	
 	/** 
+	 * This method allows to set the ID as current ID.
 	 * @param id
 	 */
 	// setter
@@ -76,6 +83,7 @@ public class Project {
     }
 	
 	/** 
+	 * This method allows to set the title as current title.
 	 * @param title
 	 */
 	public void setTitle(String title) {
@@ -83,6 +91,7 @@ public class Project {
     }
 	
 	/** 
+	 * This method allows to set the ID as current ID.
 	 * @param supervisorID
 	 */
 	public void setSupervisorID(String supervisorID) {
@@ -90,6 +99,7 @@ public class Project {
     }
 	
 	/** 
+	 * This method allows to set the supervisorName as current supervisorName.
 	 * @param supervisorName
 	 */
 	public void setSupervisorName(String supervisorName) {
@@ -97,6 +107,7 @@ public class Project {
     }
 	
 	/** 
+	 * This method allows to set the status as current status.
 	 * @param status
 	 */
 	public void setStatus(ProjectStatus status) {
@@ -104,12 +115,16 @@ public class Project {
     }
 	
 	/** 
+	 * This method allows to set the studentID as current stduentID.
 	 * @param studentID
 	 */
 	public void setStudentID(String studentID) {
         this.studentID = studentID;
     }
 
+	/**
+	 * This method allows us to print project and its details.
+	 */
 	public void printProject() {
 		StudentController sc = StudentController.getInstance();
 		Student s = sc.getStudentbyID(this.getStudentID());
