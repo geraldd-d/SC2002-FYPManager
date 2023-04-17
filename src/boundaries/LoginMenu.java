@@ -8,11 +8,12 @@ import controllers.*;
 /**
  * This class is the boundary for the LoginMenu class.
  */
-public class LoginMenu implements BaseMenu{
+public class LoginMenu{
 	private LoginMenu() {};
 	private static LoginMenu lm = null;
 	
     /** 
+     * This method is used to get the instance of the LoginMenu class. It is a singleton class.
      * @return LoginMenu
      */
     public static LoginMenu getInstance() {
@@ -21,14 +22,15 @@ public class LoginMenu implements BaseMenu{
 		}
 		return lm;
 	}
+    /*
+     * displays login menu
+     */
 	public void display(){
 		Scanner sc = new Scanner(System.in);
         int choice = 0;
         LoginController lc = LoginController.getInstance();
         do {
         	int width = 42;
-            int height = 6;
-
             // Create the top border of the box
             System.out.print("\u2554"); // top-left corner
             for (int i = 0; i < width - 2; i++) {

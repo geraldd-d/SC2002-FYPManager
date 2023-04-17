@@ -1,10 +1,4 @@
 sep=;
 ID;From;To;Status;RequestType;Changes;ProjectID
-1;koh1;asfli;Approved;Allocation;;1
-2;eli34;asfli;Approved;Allocation;;5
-3;sl22;asfli;Approved;Allocation;;6
-4;koh1;asmadhukumar;Rejected;Title;1;1
-5;koh1;asfli;Approved;Deregister;;1
-6;sl22;boan;Pending;Title;6;6
-7;le51;asfli;Pending;Allocation;;2
-8;eli34;boan;Pending;Title;testing;5
+1;eli34;asfli;Approved;Allocation;;5
+2;eli34;boan;Rejected;Title;testing name;5

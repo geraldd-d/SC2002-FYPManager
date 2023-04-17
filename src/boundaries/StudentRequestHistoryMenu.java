@@ -17,7 +17,8 @@ public class StudentRequestHistoryMenu{
 	private static StudentRequestHistoryMenu rhm = null;
 	
 	/** 
-	 * @return RequestHistoryMenu
+	 * This method is used to get the instance of the StudentRequestHistoryMenu class. It is a singleton class.
+	 * @return StudentRequestHistoryMenu
 	 */
 	public static StudentRequestHistoryMenu getInstance() {
 		if (rhm == null) {
@@ -27,6 +28,7 @@ public class StudentRequestHistoryMenu{
 	}
 	
 	/** 
+	 * displays student request history menu
 	 * @param user
 	 * @param reqHist
 	 */
@@ -50,7 +52,7 @@ public class StudentRequestHistoryMenu{
             	System.out.println("Enter 0 to return or a valid page number.");
             	page = sc.nextInt();
             } catch (InputMismatchException e) {
-                System.out.println("Invalid choice. Enter 0 to return or a valid page number");
+                System.err.println("Invalid choice.");
                 sc.nextLine();
                 continue;
             }

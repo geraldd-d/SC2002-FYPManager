@@ -16,6 +16,7 @@ public class StudentMenu{
 	private StudentMenu() {};
 	
 	/** 
+	 * This method is used to get the instance of the StudentMenu class. It is a singleton class.
 	 * @return StudentMenu
 	 */
 	public static StudentMenu getInstance() {
@@ -26,13 +27,14 @@ public class StudentMenu{
 	}
 	
 	/** 
+	 * displays student menu
 	 * @param user
 	 */
 	public void display(Student user) {
 		{
         	StudentRequestManager srm = StudentRequestManager.getInstance();
         	StudentProjectManager spm = StudentProjectManager.getInstance();
-	        Scanner input = new Scanner(System.in);
+	        Scanner sc = new Scanner(System.in);
 	        StudentController stc = StudentController.getInstance();
 			Project p = new Project();
 			Project applied = new Project();
@@ -78,10 +80,10 @@ public class StudentMenu{
 	            System.out.println("\u255D"); // bottom-right corner
 	            System.out.print("Enter your choice: ");
 	            try {
-	            	choice = input.nextInt();
+	            	choice = sc.nextInt();
 	            } catch (InputMismatchException e) {
 	                System.out.println("Invalid choice. Please enter an integer from 1 - 8.");
-	                input.nextLine();
+	                sc.nextLine();
 	                continue;
 	            }
 	            switch (choice) {
@@ -115,17 +117,17 @@ public class StudentMenu{
 	                		System.out.println("\u001b[21mAll Available Projects\u001b[0m");
 	                		System.out.println();
 	                		spm.viewAvailable();
-	                		input.nextLine();
+	                		sc.nextLine();
 	                		int proj = 0;
 	                		try {
 	    	                	System.out.println("Enter project ID that you wish to be allocated for: ");
-	                            proj = input.nextInt();
+	                            proj = sc.nextInt();
 	                            if (proj == 0) {
 	                            	break;
 	                            }
 	                        } catch (InputMismatchException e) {
 	                            System.err.println("Invalid choice. Enter a valid project ID.");
-	                            input.nextLine();
+	                            sc.nextLine();
 	                            continue;
 	                        }
 	                		validRequest = stc.requestAlloc(user, proj);
@@ -166,13 +168,13 @@ public class StudentMenu{
 						}
 						while(!validRequest){
 							String newTitle;
-							input.nextLine();
+							sc.nextLine();
 							try {
 								System.out.println("Enter the new title for your project: ");
-								newTitle = input.nextLine();
+								newTitle = sc.nextLine();
 							} catch (InputMismatchException e){
 								System.err.println("Invalid choice");
-								input.nextLine();
+								sc.nextLine();
 								continue;
 							}
 							if(newTitle.equals(p.getTitle()) || newTitle.length() < 5){
@@ -191,11 +193,11 @@ public class StudentMenu{
 							break;
 						}
 						else{
-							input.nextLine();
+							sc.nextLine();
 							System.out.println("Please confirm your decision (y/n): ");
 							String d = "";
 							while (!d.equals("y")) {
-								d = input.nextLine();
+								d = sc.nextLine();
 								if (d.equals("n")) {
 									break;
 								}

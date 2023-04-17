@@ -16,7 +16,6 @@ import entities.Project;
  */
 public class CoordinatorProjectsMenu {
 	private CoordinatorProjectsMenu() {
-		CoordinatorController cc = CoordinatorController.getInstance();
 	};
 	private static CoordinatorProjectsMenu cpm = null;
 	

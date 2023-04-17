@@ -59,7 +59,7 @@ public class CoordinatorApprovalMenu {
                 System.out.println("Pending request not found in the database.");
         		continue;
         	} else {
-        		Request r = cc.getPendingRequestbyID(coordinator, requestID);
+        		Request request = cc.getPendingRequestbyID(coordinator, requestID);
         		String approval;
         		boolean valid = false;
         		sc.nextLine();
@@ -74,11 +74,11 @@ public class CoordinatorApprovalMenu {
             		}
         			valid = true;
         			if (ApprovalType.valueOf(approval).equals(ApprovalType.APPROVE)){
-        				cc.approveRequest(coordinator, r);
-        				System.out.println("Request " + r.getRequestID() + " approved.");
+        				cc.approveRequest(coordinator, request);
+        				System.out.println("Request " + request.getRequestID() + " approved.");
         			} else {
-        				cc.rejectRequest(coordinator, r);
-        				System.out.println("Request " + r.getRequestID() + " rejected.");
+        				cc.rejectRequest(coordinator, request);
+        				System.out.println("Request " + request.getRequestID() + " rejected.");
         			}
         		} while (!valid);
         	}

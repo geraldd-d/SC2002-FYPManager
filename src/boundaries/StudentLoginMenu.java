@@ -14,6 +14,7 @@ public class StudentLoginMenu {
 	private StudentLoginMenu() {};
 	
 	/** 
+	 * This method is used to get the instance of the StudentLoginMenu class. It is a singleton class.
 	 * @return StudentLoginMenu
 	 */
 	public static StudentLoginMenu getInstance() {
@@ -22,6 +23,9 @@ public class StudentLoginMenu {
 		}
 		return slm;
 	}
+	/*
+	 * displays student menu
+	 */
 	public void display() {
 		LoginMenu lm = LoginMenu.getInstance();
 		LoginController lc = LoginController.getInstance();

@@ -56,8 +56,8 @@ public class FacultyApprovalMenu {
         	if (requestID == 0) {
         		break;
         	}
-        	Request r = frm.getPendingRequestbyID(user,requestID);
-        	if (r == null) {
+        	Request request = frm.getPendingRequestbyID(user,requestID);
+        	if (request == null) {
                 System.out.println("Pending request not found in the database.");
         		continue;
         	} else {
@@ -75,11 +75,11 @@ public class FacultyApprovalMenu {
             		}
         			valid = true;
         			if (ApprovalType.valueOf(approval).equals(ApprovalType.APPROVE)){
-        				frm.approveTitleChange(r);
-        				System.out.println("Request " + r.getRequestID() + " approved.");
+        				frm.approveTitleChange(request);
+        				System.out.println("Request " + request.getRequestID() + " approved.");
         			} else {
-        				frm.rejectRequest((TitleRequest)r);
-        				System.out.println("Request " + r.getRequestID() + " rejected.");
+        				frm.rejectRequest((TitleRequest)request);
+        				System.out.println("Request " + request.getRequestID() + " rejected.");
         			}
         		} while (!valid);
         	}

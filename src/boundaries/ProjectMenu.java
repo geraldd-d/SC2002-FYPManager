@@ -9,12 +9,13 @@ import entities.*;
 /**
  * This class is the boundary for the ProjectMenu class.
  */
-public class ProjectMenu implements BaseMenu{
+public class ProjectMenu{
 	private ProjectMenu() {
 	};
 	private static ProjectMenu pm = null;
 	
 	/** 
+	 * This method is used to get the instance of the ProjectMenu class. It is a singleton class.
 	 * @return ProjectMenu
 	 */
 	public static ProjectMenu getInstance() {
@@ -23,6 +24,10 @@ public class ProjectMenu implements BaseMenu{
 		}
 		return pm;
 	}
+	/*
+	 * displays available project menu
+	 * 
+	 */
 	public void display(){
 		Scanner sc = new Scanner(System.in);
         int page = 1;

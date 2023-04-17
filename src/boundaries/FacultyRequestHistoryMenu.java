@@ -7,7 +7,7 @@ import java.util.Scanner;
 import controllers.FacultyRequestManager;
 import entities.Faculty;
 import entities.Request;
-import entities.User;
+
 
 /**
  * This class is the boundary for the FacultyRequestHistoryMenu class.
@@ -17,7 +17,8 @@ public class FacultyRequestHistoryMenu{
 	private static FacultyRequestHistoryMenu rhm = null;
 	
 	/** 
-	 * @return RequestHistoryMenu
+	 * This method is used to get the instance of the FacultyRequestHistoryMenu class. It is a singleton class.
+	 * @return FacultyRequestHistoryMenu
 	 */
 	public static FacultyRequestHistoryMenu getInstance() {
 		if (rhm == null) {
@@ -27,6 +28,7 @@ public class FacultyRequestHistoryMenu{
 	}
 	
 	/** 
+	 * displays faculty request history menu
 	 * @param user
 	 * @param reqHist
 	 */
@@ -47,10 +49,10 @@ public class FacultyRequestHistoryMenu{
             	System.out.println("\u001b[7mPage " + page + " of " + numPages + "\u001b[0m");
         	}
             try {
-            	System.out.println("Enter 0 to return or a valid integer from 1 -" + numPages);
+            	System.out.println("Enter 0 to return or a valid page number");
             	page = sc.nextInt();
             } catch (InputMismatchException e) {
-                System.out.println("Invalid choice. Enter 0 to return or a valid integer from 1 -" + numPages);
+                System.err.println("Invalid choice.");
                 sc.nextLine();
                 continue;
             }

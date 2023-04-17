@@ -33,8 +33,6 @@ public class CoordinatorRequestInboxMenu {
 		CoordinatorController cc = CoordinatorController.getInstance();
         int choice = 0;
         do {
-        	boolean valid = false;
-        	int id = -1;
             System.out.println("View Request Inbox:");
             System.out.println("---------------------");
             System.out.println("1. All Incoming Requests");

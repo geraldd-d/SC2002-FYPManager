@@ -17,6 +17,7 @@ public class RequestInboxMenu{
 	private static RequestInboxMenu rim = null;
 	
 	/** 
+	 * This method is used to get the instance of the ReqestInboxMenu class. It is a singleton class.
 	 * @return RequestInboxMenu
 	 */
 	public static RequestInboxMenu getInstance() {
@@ -27,6 +28,7 @@ public class RequestInboxMenu{
 	}
 	
 	/** 
+	 * displays request inbox menu for faculty
 	 * @param user
 	 * @param reqInbox
 	 */

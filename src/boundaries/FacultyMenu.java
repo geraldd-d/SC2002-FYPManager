@@ -29,7 +29,7 @@ public class FacultyMenu{
      */
     public void display(Faculty user) {
 
-        Scanner input = new Scanner(System.in);
+        Scanner sc = new Scanner(System.in);
     	FacultyRequestManager frm = FacultyRequestManager.getInstance();
         FacultyProjectManager fpm = FacultyProjectManager.getInstance();
         FacultyController fc = FacultyController.getInstance();
@@ -45,26 +45,25 @@ public class FacultyMenu{
         	boolean valid = false;
         	int id = -1;
         	int width = 42;
-        	// Create the top border of the box
-            System.out.print("\u2554"); // top-left corner
+            System.out.print("\u2554"); 
             for (int i = 0; i < width - 2; i++) {
-                System.out.print("\u2550"); // horizontal line
+                System.out.print("\u2550");
             }
-            System.out.println("\u2557"); // top-right corner
+            System.out.println("\u2557"); 
 
-            // Create the sides of the box
-            System.out.print("\u2551"); // left vertical line
+        
+            System.out.print("\u2551"); 
             System.out.print("     FYP Matters     ");
             for (int i = 0; i < width - "     FYP Matters     ".length() - 2; i++) {
                 System.out.print(" ");
             }
-            System.out.println("\u2551"); // right vertical line
+            System.out.println("\u2551"); 
 
-            System.out.print("\u2551"); // left vertical line
+            System.out.print("\u2551");
             for (int i = 0; i < width - 2; i++) {
-                System.out.print("\u2500"); // horizontal line
+                System.out.print("\u2500");
             }
-            System.out.println("\u2551"); // right vertical line
+            System.out.println("\u2551"); 
 
             System.out.println("\u2551 1. View your projects                  \u2551"); // menu options
             System.out.println("\u2551 2. Modify the title of FYP             \u2551");
@@ -80,18 +79,18 @@ public class FacultyMenu{
             System.out.println("\u2551 8. Change your password                \u2551");
             System.out.println("\u2551 9. Exit                                \u2551");
 
-            // Create the bottom border of the box
-            System.out.print("\u255A"); // bottom-left corner
+            
+            System.out.print("\u255A"); 
             for (int i = 0; i < width - 2; i++) {
-                System.out.print("\u2550"); // horizontal line
+                System.out.print("\u2550"); 
             }
-            System.out.println("\u255D"); // bottom-right corner
+            System.out.println("\u255D");
             System.out.println("Enter your choice:");
             try {
-            	choice = input.nextInt();
+            	choice = sc.nextInt();
             } catch (InputMismatchException e) {
                 System.out.println("Invalid choice. Please enter an integer from 1-8.");
-                input.nextLine();
+                sc.nextLine();
                 continue;
             }
 
@@ -104,14 +103,14 @@ public class FacultyMenu{
                     // change the title
                 	String title;
                 	do {
-                		input.nextLine();
+                		sc.nextLine();
                         fc.viewOwnProjects(user);
                         System.out.println("Enter Project ID to change title or enter 0 to return:");
                         try {
-                        	id = input.nextInt();
+                        	id = sc.nextInt();
                         } catch (InputMismatchException e) {
                             System.err.println("Enter valid integer.");
-                            input.nextLine();
+                            sc.nextLine();
                             continue;
                         }
                         if (id == 0) {
@@ -120,9 +119,9 @@ public class FacultyMenu{
                         if (user.getProjects().contains(fpm.getProjectByID(id))) {
                         	Project p = fpm.getProjectByID(id);
                         	valid = true;
-                        	input.nextLine();
+                        	sc.nextLine();
                         	System.out.println("Enter new title:");
-                        	title = input.nextLine();
+                        	title = sc.nextLine();
                         	while (title.length() < 5 || title.equals(p.getTitle())) {
                         		if (title.equals(p.getTitle())) {
                             		System.out.println("You cannot rename a project with the same name.");
@@ -130,7 +129,7 @@ public class FacultyMenu{
                                 	System.out.println("New title is too short.");
                             	}
                         		System.out.println("Enter new title:");
-                            	title = input.nextLine();
+                            	title = sc.nextLine();
                         	}
                         	fc.changeTitle(p, title);
                         }
@@ -148,14 +147,14 @@ public class FacultyMenu{
                 	}
                 	do {
                     	String replacement;
-                    	input.nextLine();
+                    	sc.nextLine();
                     	fc.viewActiveProjects(user);
                         try {
                             System.out.println("Enter Project ID to transfer student or 0 to return:");
-                        	id = input.nextInt();
+                        	id = sc.nextInt();
                         } catch (InputMismatchException e) {
                             System.err.println("Enter valid integer.");
-                            input.nextLine();
+                            sc.nextLine();
                             continue;
                         }
                         if (id == 0) {
@@ -169,10 +168,10 @@ public class FacultyMenu{
                         	}
                         	valid = true;
                         	boolean matched = false;
-                        	input.nextLine();
+                        	sc.nextLine();
                         	while (!matched) {
                         		System.out.println("Enter replacement supervisor ID:");
-                            	replacement = input.nextLine();
+                            	replacement = sc.nextLine();
                             	Faculty f = fc.getFacultybyID(replacement);
                             	if (f != null && f.getActiveProjects() < 2 && !f.getUserID().equals(user.getUserID())) {
                             		matched = true;
@@ -197,20 +196,20 @@ public class FacultyMenu{
                     break;
                 case 4:
                 	// create new project
-                	String projecttitle;
-                	input.nextLine();
+                	String projectTitle;
+                	sc.nextLine();
                     System.out.println("Enter title of new project or leave empty to return: ");
-                    projecttitle = input.nextLine();
-                    if (projecttitle.equals("")) {
+                    projectTitle = sc.nextLine();
+                    if (projectTitle.equals("")) {
                     	break;
                     }
-                    while (projecttitle.length() < 5) {
+                    while (projectTitle.length() < 5) {
                         System.out.println("New title is too short.");
                         System.out.println("Enter Project title:");
-                        title = input.nextLine();
+                        title = sc.nextLine();
                         }
-                    fpm.addProject(user, projecttitle);
-                    System.out.println("New project " + projecttitle + " created.");
+                    fpm.addProject(user, projectTitle);
+                    System.out.println("New project " + projectTitle + " created.");
                     break;
                 case 5: 
                     // view pending requests
@@ -225,10 +224,10 @@ public class FacultyMenu{
                         System.out.println("3. Back");
                         System.out.println("Enter your choice: ");
                     	try {
-                        	option = input.nextInt();
+                        	option = sc.nextInt();
                         } catch (InputMismatchException e) {
                             System.err.println("Enter valid integer.");
-                            input.nextLine();
+                            sc.nextLine();
                             continue;
                         }
                     	switch (option) {
@@ -252,6 +251,7 @@ public class FacultyMenu{
                 	
                 	break;
                 case 7:
+                	// address requests
                 	FacultyApprovalMenu fam = FacultyApprovalMenu.getInstance();
                 	fam.display(user);
                 	break;
@@ -261,6 +261,7 @@ public class FacultyMenu{
 					pwm.display(user);
                     break;
                 case 9:
+                	// logout and save changes
                 	fpm.saveChanges();
                 	frm.saveChanges();
                 	System.out.println("Logging out...");

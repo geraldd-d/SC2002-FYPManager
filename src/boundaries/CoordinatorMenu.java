@@ -19,7 +19,6 @@ import entities.RequestStatus;
  */
 public class CoordinatorMenu {
 	private CoordinatorMenu() {
-		CoordinatorController cc = CoordinatorController.getInstance();
 	};
 	private static CoordinatorMenu cm = null;
 	
@@ -44,34 +43,33 @@ public class CoordinatorMenu {
         int choice = 0;
         do {
         	boolean alert = false;
-            for (Request r: coordinator.getInbox()) {
-            	if (r.getStatus().equals(RequestStatus.Pending)) {
+            for (Request request: coordinator.getInbox()) {
+            	if (request.getStatus().equals(RequestStatus.Pending)) {
             		alert = true;
             	}
             }
         	boolean valid = false;
         	int id = -1;
         	int width = 42;
-        	// Create the top border of the box
-        	System.out.print("\u2554"); // top-left corner
+        	System.out.print("\u2554");
         	for (int i = 0; i < width - 2; i++) {
-        	    System.out.print("\u2550"); // horizontal line
+        	    System.out.print("\u2550"); 
         	}
-        	System.out.println("\u2557"); // top-right corner
+        	System.out.println("\u2557"); 
 
-        	// Create the sides of the box
-        	System.out.print("\u2551"); // left vertical line
+       
+        	System.out.print("\u2551");
         	System.out.print("   Coordinator Menu");
         	for (int i = 0; i < width - "Coordinator Menu".length() - 5; i++) {
         	    System.out.print(" ");
         	}
-        	System.out.println("\u2551"); // right vertical line
+        	System.out.println("\u2551");
 
-        	System.out.print("\u2551"); // left vertical line
+        	System.out.print("\u2551"); 
         	for (int i = 0; i < width - 2; i++) {
-        	    System.out.print("\u2500"); // horizontal line
+        	    System.out.print("\u2500"); 
         	}
-        	System.out.println("\u2551"); // right vertical line
+        	System.out.println("\u2551");
 
         	System.out.println("\u2551 1. View projects                       \u2551"); // menu options
         	System.out.println("\u2551 2. Create a new project                \u2551");
@@ -88,12 +86,12 @@ public class CoordinatorMenu {
         	System.out.println("\u2551 8. Change your password                \u2551");
         	System.out.println("\u2551 9. Exit                                \u2551");
 
-        	// Create the bottom border of the box
-        	System.out.print("\u255A"); // bottom-left corner
+        
+        	System.out.print("\u255A");
         	for (int i = 0; i < width - 2; i++) {
-        	    System.out.print("\u2550"); // horizontal line
+        	    System.out.print("\u2550");
         	}
-        	System.out.println("\u255D"); // bottom-right corner
+        	System.out.println("\u255D");
             System.out.print("Enter your choice: ");
             try {
             	choice = sc.nextInt();
@@ -149,13 +147,13 @@ public class CoordinatorMenu {
                         	break;
                         }
                         if (coordinator.getProjects().contains(cprm.getProjectByID(id))) {
-                        	Project p = cprm.getProjectByID(id);
+                        	Project project = cprm.getProjectByID(id);
                         	valid = true;
                         	sc.nextLine();
                         	System.out.println("Enter new title:");
                         	newtitle = sc.nextLine();
-                        	while (newtitle.length() < 5 || newtitle.equals(p.getTitle())) {
-                        		if (newtitle.equals(p.getTitle())) {
+                        	while (newtitle.length() < 5 || newtitle.equals(project.getTitle())) {
+                        		if (newtitle.equals(project.getTitle())) {
                             		System.out.println("You cannot rename a project with the same name.");
                             	} else {
                                 	System.out.println("New title is too short.");
@@ -163,7 +161,7 @@ public class CoordinatorMenu {
                         		System.out.println("Enter new title:");
                         		newtitle = sc.nextLine();
                         	}
-                        	fc.changeTitle(p, newtitle);
+                        	fc.changeTitle(project, newtitle);
                         	System.out.println("Title Changed.");
                         }
                         else {
@@ -189,7 +187,7 @@ public class CoordinatorMenu {
                         	break;
                         }
                         if (projects.contains(cprm.getProjectByID(id))) {
-                        	Project p = cprm.getProjectByID(id);
+                        	Project project = cprm.getProjectByID(id);
                         	valid = true;
                         	boolean matched = false;
                         	while (!matched) {
@@ -199,7 +197,7 @@ public class CoordinatorMenu {
                             	Faculty f = fc.getFacultybyID(replacement);
                             	if (f != null && f.getActiveProjects() < 2 && !f.getUserID().equals(coordinator.getUserID())) {
                             		matched = true;
-                                	cc.requestTransfer(coordinator, p, replacement);
+                                	cc.requestTransfer(coordinator, project, replacement);
                             	}
                             	else {
                             		if (f == null) {

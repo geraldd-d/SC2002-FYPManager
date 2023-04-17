@@ -13,11 +13,8 @@ import entities.Request;
  */
 public class CoordinatorInboxMenu {
 	private CoordinatorInboxMenu() {
-		CoordinatorController cc = CoordinatorController.getInstance();
-
 	};
 	private static CoordinatorInboxMenu crm = null;
-	
 	
 	/** 
 	 * @return CoordinatorInboxMenu
