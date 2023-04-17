@@ -22,6 +22,7 @@ public class TitleRequest extends Request {
 		System.out.println("Requestor: "+ this.getRequestor().getName());
 		System.out.println("Requestee: "+ this.getRequestee().getName());
 		System.out.println("ProjectID: "+ this.getProject().getID());
+		System.out.println("Current Title: " + this.getProject().getTitle());
 		System.out.println("New Title: "+ this.getTitle());
 		System.out.println("Status: "+ this.getStatus());
 		System.out.println("Request ID: " + this.getRequestID());

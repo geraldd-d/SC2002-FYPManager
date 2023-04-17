@@ -90,7 +90,7 @@ public class StudentMenu{
 	                		ProjectMenu pm = ProjectMenu.getInstance();
 	                		pm.display();
 	                	} else if (user.getisAllocated()){
-	                		System.out.println("You are already registered for " + user.getRegisteredProject().getTitle());
+	                		System.err.println("You are already registered for " + user.getRegisteredProject().getTitle());
 	                	} else {
 	                		applied = srm.getPending(user, RequestType.Allocation).getProject();
 	                		System.err.println("You already have a pending allocation request for " + applied.getTitle());

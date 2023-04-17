@@ -34,13 +34,14 @@ public class FacultyMenu{
         FacultyProjectManager fpm = FacultyProjectManager.getInstance();
         FacultyController fc = FacultyController.getInstance();
         int choice = 0;
-        boolean alert = false;
-        for (Request r: user.getInbox()) {
-        	if (r.getStatus().equals(RequestStatus.Pending)) {
-        		alert = true;
-        	}
-        }
+        
         do {
+        	boolean alert = false;
+            for (Request r: user.getInbox()) {
+            	if (r.getStatus().equals(RequestStatus.Pending)) {
+            		alert = true;
+            	}
+            }
         	boolean valid = false;
         	int id = -1;
         	int width = 42;

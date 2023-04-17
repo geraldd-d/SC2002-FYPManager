@@ -42,13 +42,13 @@ public class CoordinatorMenu {
 		CoordProjectManager cprm = CoordProjectManager.getInstance();
 		CoordinatorController cc = CoordinatorController.getInstance();
         int choice = 0;
-        boolean alert = false;
-        for (Request r: coordinator.getInbox()) {
-        	if (r.getStatus().equals(RequestStatus.Pending)) {
-        		alert = true;
-        	}
-        }
         do {
+        	boolean alert = false;
+            for (Request r: coordinator.getInbox()) {
+            	if (r.getStatus().equals(RequestStatus.Pending)) {
+            		alert = true;
+            	}
+            }
         	boolean valid = false;
         	int id = -1;
         	int width = 42;
@@ -79,7 +79,7 @@ public class CoordinatorMenu {
         	System.out.println("\u2551 4. Transfer student to replacement     \u2551");
         	System.out.println("\u2551    supervisor                          \u2551");
         	if (alert) {
-        	    System.out.println("\u2551 5. View your request inbox (NEW)       \u2551");
+        	    System.out.println("\u2551 5. View your request inbox \u001b[33mNEW\u001b[0m         \u2551");
         	} else {
         	    System.out.println("\u2551 5. View your request inbox             \u2551");
         	}
@@ -112,7 +112,7 @@ public class CoordinatorMenu {
                 case 2:
                 	String title;
                 	sc.nextLine();
-                    System.out.println("Enter Project title or leave empty to return:");
+                    System.out.println("Enter title of new project or leave empty to return: ");
                     title = sc.nextLine();
                     if (title.equals("")) {
                     	break;
@@ -134,6 +134,9 @@ public class CoordinatorMenu {
                 	do {
                 		sc.nextLine();
                         fc.viewOwnProjects(coordinator);
+                        if (coordinator.getProjects().size() == 0 ) {
+                        	break;
+                        }
                         try {
                             System.out.println("Enter Project ID to change title or enter 0 to return:");
                         	id = sc.nextInt();
@@ -161,6 +164,7 @@ public class CoordinatorMenu {
                         		newtitle = sc.nextLine();
                         	}
                         	fc.changeTitle(p, newtitle);
+                        	System.out.println("Title Changed.");
                         }
                         else {
                         	System.out.println("Project not found.");

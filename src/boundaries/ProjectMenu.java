@@ -38,7 +38,7 @@ public class ProjectMenu implements BaseMenu{
         		System.out.println("Invalid page number.");
         	}
             try {
-            	System.out.println("Enter 0 to return or a valid page number");
+            	System.out.println("Enter 0 to return or a valid page number:");
             	page = sc.nextInt();
             } catch (InputMismatchException e) {
                 System.out.println("Invalid choice.");
