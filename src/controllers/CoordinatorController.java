@@ -114,7 +114,12 @@ public class CoordinatorController {
 	 */
 	public void viewOwnProjects(Coordinator c) {
 		CoordProjectManager cpm = CoordProjectManager.getInstance();
-		cpm.viewOwnProjects(c);
+		if (c.getProjects().size() == 0) {
+			System.out.println("You do not have any projects.");
+		}
+		else {
+			cpm.viewOwnProjects(c);
+		}
 	}
 	
 	/** 

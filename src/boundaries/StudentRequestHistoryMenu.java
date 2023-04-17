@@ -47,7 +47,7 @@ public class StudentRequestHistoryMenu{
             	System.out.println("\u001b[7mPage " + page + " of " + numPages + "\u001b[0m");
         	}
             try {
-            	System.out.println("Enter 0 to return or a valid integer from 1 -" + numPages);
+            	System.out.println("Enter 0 to return or a valid page number.");
             	page = sc.nextInt();
             } catch (InputMismatchException e) {
                 System.out.println("Invalid choice. Enter 0 to return or a valid page number");

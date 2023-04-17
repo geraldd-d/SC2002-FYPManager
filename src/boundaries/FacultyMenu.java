@@ -109,7 +109,7 @@ public class FacultyMenu{
                         try {
                         	id = input.nextInt();
                         } catch (InputMismatchException e) {
-                            System.out.println("Enter valid integer.");
+                            System.err.println("Enter valid integer.");
                             input.nextLine();
                             continue;
                         }
@@ -143,7 +143,6 @@ public class FacultyMenu{
                     // request to transfer student
                 	if (user.getActiveProjects() == 0) {
                 		System.err.println("You do not have any projects to transfer");
-                		System.out.println();
                 		break;
                 	}
                 	do {
@@ -154,7 +153,7 @@ public class FacultyMenu{
                         try {
                         	id = input.nextInt();
                         } catch (InputMismatchException e) {
-                            System.out.println("Enter valid integer.");
+                            System.err.println("Enter valid integer.");
                             input.nextLine();
                             continue;
                         }
@@ -164,7 +163,7 @@ public class FacultyMenu{
                         Project p = fpm.getProjectByID(id);
                         if (p != null) {
                         	if (p.getStatus() != ProjectStatus.Allocated) {
-                        		System.out.println("You may only transfer allocated projects.");
+                        		System.err.println("You may only transfer allocated projects.");
                         		continue;
                         	}
                         	valid = true;
@@ -181,15 +180,15 @@ public class FacultyMenu{
                             	}
                             	else {
                             		if (f == null) {
-                            			System.out.println("Supervisor not found.");
+                            			System.err.println("Supervisor not found.");
                             		} else {
-                            			System.out.println("Supervisor has too many active projects.");
+                            			System.err.println("Supervisor has too many active projects.");
                             		}
                             	}
                         	}
                         }
                         else {
-                        	System.out.println("Project not found.");
+                        	System.err.println("Project not found.");
                         }
                 	} while(!valid);
                     break;
@@ -222,12 +221,13 @@ public class FacultyMenu{
                 	frm.saveChanges();
                 	System.out.println("Logging out...");
                     LoginMenu lm = LoginMenu.getInstance();
+                    lm.display();
                     break;
                 default:
                     System.out.println("Invalid choice. Please enter a valid option.");
                     break;
             }
-        } while (choice != 8);
+        } while (choice != 9);
 	}
 
 }

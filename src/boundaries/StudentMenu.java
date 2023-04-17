@@ -102,6 +102,7 @@ public class StudentMenu{
 	                		break;
 	                	}
 	                	if (srm.checkPending(user, RequestType.Allocation)) {
+	                		applied = srm.getPending(user, RequestType.Allocation).getProject();
 	                		System.err.println("You already have a pending allocation request for " + applied.getTitle());
 	                		break;
 	                	}
