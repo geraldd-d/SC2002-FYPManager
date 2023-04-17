@@ -1,8 +1,10 @@
 package boundaries;
 
+import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+import controllers.CoordRequestManager;
 import controllers.CoordinatorController;
 import entities.ApprovalType;
 import entities.Coordinator;
@@ -33,8 +35,14 @@ public class CoordinatorApprovalMenu {
 	public void display(Coordinator coordinator){
 		Scanner sc = new Scanner(System.in);
 		CoordinatorController cc = CoordinatorController.getInstance();
+		CoordRequestManager crm = CoordRequestManager.getInstance();
     	int requestID = -1;
         do {
+        	ArrayList<Request> pendingRequests = crm.getPendingReqs(coordinator);
+        	if (pendingRequests.size() == 0) {
+        		System.out.println("You have no pending requests.");
+        		break;
+        	}
             cc.viewPending(coordinator);
             try {
         		System.out.println("Enter request ID or 0 to return: ");

@@ -34,7 +34,6 @@ public class CoordinatorController {
 			System.out.println("You have no pending requests.");
 		}
 		else {
-			System.out.println("Which request would you like to address?");
 			crm.viewPending(coordinator);
 		}
 	}
@@ -178,5 +177,16 @@ public class CoordinatorController {
 	public Request getPendingRequestbyID(Coordinator c, int id) {
 		CoordRequestManager crm = CoordRequestManager.getInstance();
 		return crm.getPendingRequestbyID(c,id);
+	}
+
+	public void viewHist(Coordinator coordinator) {
+		ArrayList<Request> hist = coordinator.getHistory();
+		if (hist.size() == 0) {
+			System.out.println("You have not sent any requests.");
+		} else {
+			for (Request r : hist) {
+				r.printRequest();
+			}
+		}
 	}
 }

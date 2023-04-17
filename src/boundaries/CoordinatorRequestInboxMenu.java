@@ -39,12 +39,13 @@ public class CoordinatorRequestInboxMenu {
             System.out.println("---------------------");
             System.out.println("1. All Incoming Requests");
             System.out.println("2. Pending Requests");
-            System.out.println("3. Back");
+            System.out.println("3. Outgoing Requests");
+            System.out.println("4. Back");
             System.out.print("Enter your choice: ");
             try {
             	choice = sc.nextInt();
             } catch (InputMismatchException e) {
-                System.out.println("Invalid choice. Please enter an integer from 1-3.");
+                System.out.println("Invalid choice. Please enter an integer from 1-4.");
                 sc.nextLine();
                 continue;
             }
@@ -56,12 +57,15 @@ public class CoordinatorRequestInboxMenu {
             	case 2:
             		cc.viewPending(coordinator);
             		break;
-                case 3:
+            	case 3:
+            		cc.viewHist(coordinator);
+            		break;
+                case 4:
                 	return;
                 default:
                     System.out.println("Invalid choice. Please enter a valid option.");
                     break;
             }
-        } while (choice != 3);
+        } while (choice != 4);
 	}
 }
