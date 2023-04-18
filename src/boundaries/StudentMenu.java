@@ -193,19 +193,27 @@ public class StudentMenu{
 							System.err.println("You are not registered for any project yet.");
 							break;
 						}
+						if (srm.checkPending(user, RequestType.Deregister)){
+							System.err.println("You already have a pending deregistration request.");
+							break;
+						}
 						else{
 							sc.nextLine();
 							System.out.println("Please confirm your decision (y/n): ");
 							String d = "";
-							while (!d.equals("y")) {
+							while (!d.equals("y") && !d.equals("n")) {
 								d = sc.nextLine();
-								if (d.equals("n")) {
+								if (d.equals("n") || d.equals("y")) {
 									break;
 								}
+								System.err.println("Enter valid decision");
 							}
 							if (d.equals("y")) {
 								stc.DeregisterProject(user);
 								System.out.println("Deregister Request sent.");
+							} else if (d.equals("n")) {
+								System.out.println("Returning...");
+								break;
 							}
 						}
 	                    break;

@@ -15,6 +15,7 @@ public class DeregRequest extends Request {
 		System.out.println("ProjectID: "+ this.getProject().getID());
 		System.out.println("Status: "+ this.getStatus());
 		System.out.println("Request ID: " + this.getRequestID());
+		System.out.println();
 	}
 	
 	/** 

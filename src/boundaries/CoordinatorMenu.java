@@ -220,10 +220,15 @@ public class CoordinatorMenu {
                 	break;
                 case 2:
                     // request to transfer student
+                	if (coordinator.getActiveProjects() == 0) {
+                		System.err.println("You do not have any projects to transfer");
+                		break;
+                	}
                 	do {
                     	String replacement;
                     	sc.nextLine();
-                        System.out.println("Enter Project ID to change title or enter 0 to return:");
+                    	cc.viewOwnProjects(coordinator);
+                        System.out.println("Enter Project ID to transfer or enter 0 to return:");
                         try {
                         	id = sc.nextInt();
                         } catch (InputMismatchException e) {

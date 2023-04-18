@@ -30,6 +30,7 @@ public class TitleRequest extends Request {
 		System.out.println("New Title: "+ this.getTitle());
 		System.out.println("Status: "+ this.getStatus());
 		System.out.println("Request ID: " + this.getRequestID());
+		System.out.println();
 	}
 	
 	/** 

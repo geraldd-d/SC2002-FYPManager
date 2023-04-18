@@ -37,8 +37,6 @@ public class CoordinatorProjectsMenu {
 		CoordinatorController cc = CoordinatorController.getInstance();
         int choice = 0;
         do {
-        	boolean valid = false;
-        	int id = -1;
             System.out.println("View Projects:");
             System.out.println("---------------------");
             System.out.println("1. Available");

@@ -37,6 +37,7 @@ public class TransferRequest extends Request {
 		System.out.println("Replacement: "+ this.getReplacementID());
 		System.out.println("Status: "+ this.getStatus());
 		System.out.println("Request ID: " + this.getRequestID());
+		System.out.println();
 	}
 	
 	/** 
